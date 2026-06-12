@@ -1,6 +1,8 @@
 import os, re, shutil, subprocess, sqlite3, time, logging
 from pathlib import Path
 from typing import Optional, List, Tuple, Dict
+from collections import defaultdict
+
 
 import requests
 
@@ -224,6 +226,32 @@ def find_instantiations(files):
 
     return instantiated
 
+def expand_cluster(cluster_files: List[Path]) -> List[Path]:
+    # Build proper module -> file map
+    module_map = {}
+    for f in cluster_files:
+        txt = _read(f)
+        for m in MODULE_RE.findall(txt):
+            module_map[m] = f
+    
+    expanded = set(cluster_files)
+
+    changed = True
+    while changed:
+        changed = False
+
+        for f in list(expanded):
+            txt = strip_comments(_read(f))
+
+            for inst in find_instantiations([f]):
+                if inst in module_map:
+                    target = module_map[inst]
+                    if target not in expanded:
+                        expanded.add(target)
+                        changed = True
+
+    return list(expanded)
+
 def collect_files(repo_dir: Path) -> List[Path]:
     found = []
     for p in repo_dir.rglob("*"):
@@ -251,6 +279,7 @@ def is_valid(files: List[Path]) -> bool:
 
 # finding packages for jasper analysis
 
+"""
 def sort_pkg_files(pkg_files):
 
     pkg_name_to_file = {}
@@ -319,6 +348,7 @@ def sort_pkg_files(pkg_files):
             break
 
     return ordered
+"""
 
 def find_pkg_files(files: List[Path]) -> List[Path]:
     pkg_map: Dict[str, Path] = {}
@@ -331,6 +361,23 @@ def find_pkg_files(files: List[Path]) -> List[Path]:
             pkg_map[m.group(1)] = f
 
     return list(pkg_map.values())
+
+def find_header_files(files: List[Path]) -> List[Path]:
+    """Find .vh and .svh header files that define macros."""
+    headers = []
+    for f in files:
+        if f.suffix in (".vh", ".svh"):
+            headers.append(f)
+    return headers
+
+def find_macro_files(files: List[Path]) -> List[Path]:
+    """Find files that define macros with `define directive."""
+    macro_files = []
+    for f in files:
+        txt = _read(f)
+        if DEFINE_RE.search(txt):
+            macro_files.append(f)
+    return macro_files
 
 # thus builds include directories
 
@@ -491,6 +538,7 @@ def is_standalone_sva_file(p: Path) -> bool:
 
 # top module selection
 
+"""
 def pick_top(sva_files, all_files):
 
     modules = {}
@@ -522,101 +570,108 @@ def pick_top(sva_files, all_files):
         )
 
     return next(iter(modules))
+"""
+
+# module hierarchy graph
+""""
+def build_module_graph(files):
+    module_to_file = defaultdict(set)
+    edges = defaultdict(set)
+
+    for f in files:
+        txt = strip_comments(_read(f))
+
+        mods = MODULE_RE.findall(txt)
+        insts = find_instantiations([f])
+
+        for m in mods:
+            module_to_file[m].add(f)
+
+        for m in mods:
+            for i in insts:
+                edges[m].add(i)
+
+    return module_to_file, edges
+"""
 
 # generate tcl
 
-def build_tcl(run_dir: Path, repo_dir: Path,
-              all_files: List[Path], sva_files: List[Path],
-              top: Optional[str], idirs: List[str],
-              pkg_files: List[Path]) -> Path:
-    
-    tb_set   = set(f for f in all_files if is_tb(f))
-    sva_set  = set(sva_files)
-    pkg_set  = set(pkg_files)
+def build_tcl(
+    run_dir: Path,
+    repo_dir: Path,
+    cluster_files: List[Path],
+    sva_files: List[Path],
+    top: Optional[str],
+    idirs: List[str],
+) -> Path:
 
-    rtl_only = [
-    f for f in all_files
-    if f.suffix in (".sv", ".v")
-    if f not in tb_set
-    and f not in pkg_set
-    and f not in sva_set
+    tb_set = set(f for f in cluster_files if is_tb(f))
+
+    rtl_files = [
+        f for f in cluster_files
+        if not is_tb(f) and is_rtl(f)
     ]
 
-    ordered: List[Path] = []
-    seen: set = set()
-    for f in pkg_files + rtl_only + sva_files:
-        if f not in seen:
-            seen.add(f)
-            ordered.append(f)
-
     inc_flag = " ".join(f"-incdir {Path(d).resolve()}" for d in idirs)
-    lines = ["clear -all\n\n"]
 
     lines = ["clear -all\n\n"]
 
-    for f in pkg_files:
-        rel = str(f.resolve())
-        lines.append(
-            f'catch {{ analyze -sv {inc_flag} {rel} }}\n'
-        )
-    lines.append("\n")
-
-    for f in rtl_only:
-        rel = str(f.resolve())
-        lines.append(
-            f'catch {{ analyze -sv {inc_flag} {rel} }}\n'
-        )
-
-    lines.append("\n")
-
-    for f in sva_files:
-        rel = str(f.resolve())         
-        lines.append(
-            f'catch {{ analyze -sv {inc_flag} {rel} }}\n'
-        )
-
-    lines.append("\n")
+    # FIRST: Analyze header files (.vh, .svh) with macro definitions
+    header_files = find_header_files(cluster_files)
+    for f in header_files:
+        lines.append(f'catch {{ analyze -sv {inc_flag} {f.resolve()} }}\n')
     
+    if header_files:
+        lines.append("\n")
 
-    # elaborate -bbox_a: blackbox every module instance that wasn't analyzed.
-    # catch {}: if elab fails (e.g. top not found), JG exits gracefully
-    # instead of erroring out before prove runs.
+    # SECOND: Analyze package files
+    pkg_files = find_pkg_files(cluster_files)
+    for f in pkg_files:
+        lines.append(f'catch {{ analyze -sv {inc_flag} {f.resolve()} }}\n')
+    
+    if pkg_files:
+        lines.append("\n")
+
+    # THIRD: Analyze macro-defining files
+    macro_files = [f for f in find_macro_files(cluster_files) if f not in header_files and f not in pkg_files]
+    for f in macro_files:
+        lines.append(f'catch {{ analyze -sv {inc_flag} {f.resolve()} }}\n')
+    
+    if macro_files:
+        lines.append("\n")
+
+    # FOURTH: Analyze remaining RTL files
+    analyzed_set = set(header_files) | set(pkg_files) | set(macro_files)
+    remaining_rtl = [f for f in rtl_files if f not in analyzed_set]
+    for f in remaining_rtl:
+        lines.append(f'catch {{ analyze -sv {inc_flag} {f.resolve()} }}\n')
+
+    lines.append("\n")
+
+    # FIFTH: Analyze SVA files (may reference packages/macros analyzed above)
+    for f in sva_files:
+        lines.append(f'catch {{ analyze -sv {inc_flag} {f.resolve()} }}\n')
+
+    lines.append("\n")
+
     if top:
-            lines.append(f"""
-        if {{[catch {{elaborate -bbox_a -top {top}}} err]}} {{
-            puts "ELAB ERROR: $err"
-        }}
-        """)
+        lines.append(f"""
+if {{[catch {{elaborate -top {top}}} err]}} {{
+    puts "ELAB ERROR: $err"
+}}
+""")
     else:
-        lines.append("\ncatch {{elaborate -bbox_a}}\n")
-
-    lines.append("\nclock -list\n")
-    lines.append("reset -list\n")
-
-    # prove -all: runs formal proof on every property in the design
-    lines.append("\nprove -all -time_limit 30s\n")
+        lines.append("catch {elaborate}\n")
 
     lines.append("""
-    set fp [open properties.txt w]
+clock -list
+reset -list
+prove -all -time_limit 30s
+""")
 
-    foreach p [get_property_list] {
-        puts $fp $p
-    }
-
-    close $fp
-    """)
-
-    lines.append(
-        "check_vacuity -property "
-        "[get_property_list -include {proven}]\n"
-    )
-
-    lines.append(
-        f"\nreport -all -out {run_dir}/results.rpt\n"
-    )
+    lines.append(f"report -all -out {run_dir}/results.rpt\n")
     lines.append(f"report_vacuity -out {run_dir}/vacuity.rpt\n")
-
-    lines.append("\nexit\n")
+    lines.append("exit\n")
 
     tcl_path = run_dir / "run.tcl"
     tcl_path.write_text("".join(lines))
@@ -639,21 +694,26 @@ def run_jasper(run_dir: Path, repo_dir: Path, tcl_path: Path) -> Path:
         str(tcl_path.resolve())
     ]
 
+    log.info("Running Jasper: %s", " ".join(cmd))
+    
     try:
         with open(log_path, "w") as logf:
-            subprocess.run(
+            result = subprocess.run(
                 cmd,
                 cwd=repo_dir,
                 stdout=logf,
                 stderr=subprocess.STDOUT,
                 timeout=JASPER_TIMEOUT_SEC,
             )
+            log.info("Jasper exited with code %d", result.returncode)
 
     except subprocess.TimeoutExpired:
         log.warning(
             "Jasper timed out after %ds",
             JASPER_TIMEOUT_SEC
         )
+    except Exception as e:
+        log.error("Error running Jasper: %s", e)
 
     return log_path
 
@@ -787,6 +847,88 @@ def try_elaborate(log_path: Path) -> bool:
 
     return True
 
+def cluster_repo_files(files: List[Path]):
+    # First pass: separate header files upfront
+    header_files = [f for f in files if f.suffix in (".vh", ".svh")]
+    non_header_files = [f for f in files if f.suffix not in (".vh", ".svh")]
+    
+    clusters = defaultdict(list)
+    
+    # Build module -> file map to find top modules (not instantiated)
+    module_map = {}
+    instantiated = set()
+    
+    for f in non_header_files:
+        txt = _read(f)
+        mods = MODULE_RE.findall(txt)
+        for m in mods:
+            module_map[m] = f
+        instantiated.update(find_instantiations([f]))
+    
+    # Find uninstantiated modules (top-level candidates)
+    top_candidates = set(module_map.keys()) - instantiated
+
+    for f in non_header_files:
+        txt = _read(f)
+        mods = MODULE_RE.findall(txt)
+        pkgs = PACKAGE_DEF_RE.findall(txt)
+        asserts = len(ASSERT_RE.findall(txt))
+
+        if pkgs:
+            # Packages go in their own cluster
+            key = f"pkg_{pkgs[0]}"
+        elif mods:
+            # Group by top-level (non-instantiated) modules
+            top_mod = next((m for m in mods if m in top_candidates), None)
+            if top_mod:
+                key = f"proj_{top_mod}"
+            else:
+                # If no top-level, use largest module
+                key = f"proj_{max(mods, key=lambda m: len(_read(module_map[m])))}"
+        elif asserts:
+            key = f"sva_{f.stem}"
+        else:
+            key = "misc"
+
+        clusters[key].append(f)
+
+    # ADD HEADER FILES TO ALL NON-MISC CLUSTERS
+    for cluster_id in list(clusters.keys()):
+        if cluster_id != "misc":
+            clusters[cluster_id].extend(header_files)
+
+    return clusters
+
+def enforce_project_closure(cluster_files: List[Path]) -> List[Path]:
+
+    # build module -> file map inside this cluster only
+    module_map = {}
+
+    for f in cluster_files:
+        txt = _read(f)
+        for m in MODULE_RE.findall(txt):
+            module_map[m] = f
+
+    # expand using instantiation graph until stable
+    expanded = set(cluster_files)
+
+    changed = True
+    while changed:
+        changed = False
+
+        for f in list(expanded):
+            txt = strip_comments(_read(f))
+            insts = find_instantiations([f])
+
+            for inst in insts:
+                if inst in module_map:
+                    target = module_map[inst]
+                    if target not in expanded:
+                        expanded.add(target)
+                        changed = True
+
+    return list(expanded)
+
 def process_repo(repo: str, conn: sqlite3.Connection) -> None:
     log.info("== %s", repo)
 
@@ -796,149 +938,96 @@ def process_repo(repo: str, conn: sqlite3.Connection) -> None:
 
     try:
         files = collect_files(repo_dir)
-        rtl_candidates = [f for f in files if MODULE_RE.search(_read(f))]
 
-        if not rtl_candidates:
-            log.info("  skip: no modules found at all")
-            return
         if not files:
-            log.info("  skip: no HDL files")
+            log.info("skip: no HDL files")
             return
 
-        if not is_valid(files):
-            log.info("  skip: no RTL+SVA")
-            return
-
-        # Classify files
-        non_tb    = [f for f in files if not is_tb(f)]
-        sva_files = [f for f in non_tb if has_sva(f)]
-
-        if not sva_files:
-            log.info("  skip: SVA only in TB files")
-            return
-
-        # Separate standalone property files from RTL-embedded assertions
-        standalone_sva = [
-            f for f in sva_files
-            if is_standalone_sva_file(f)
-        ]
-
-        embedded_sva = [
-            f for f in sva_files
-            if not is_standalone_sva_file(f)
-        ]
-
-        log.info("  standalone SVA files : %s", [f.name for f in standalone_sva])
-        log.info("  RTL with embedded SVA: %s", [f.name for f in embedded_sva])
-
-        pkg_files = sort_pkg_files(find_pkg_files(non_tb))
-        idirs     = inc_dirs(repo_dir, files)
-
-        # defining top module
-        candidate_tops = []
-
-        candidate_tops = []
-
-        for f in non_tb:
-            mods = MODULE_RE.findall(_read(f))
-            candidate_tops.extend(mods)
-
-        candidate_tops = list(dict.fromkeys(candidate_tops))
-
-        candidate_tops = [
-            t for t in candidate_tops
-            if "sva" not in t.lower()
-        ]
-
-        preferred = []
-
-        for top in candidate_tops:
-            score = 0
-
-            name = top.lower()
-
-            if "top" in name:
-                score += 10
-
-            if "core" in name:
-                score += 8
-
-            if "tb" in name:
-                score -= 20
-
-            if any(x in name for x in [
-                "fifo", "ram", "mem",
-                "aligner", "decoder",
-                "encoder", "mux"
-            ]):
-                score -= 5
-
-            preferred.append((score, top))
-
-        candidate_tops = [
-            t for score, t in sorted(preferred, reverse=True)
-        ]
-        # Extract all assertions (from both standalone + embedded files)
-        assertions = extract_assertions(standalone_sva + embedded_sva)
-        log.info(
-            "  candidate_tops=%s assertions=%d pkgs=%s",
-            candidate_tops,
-            len(assertions),
-            [p.name for p in pkg_files]
-        )
+        clusters = cluster_repo_files(files)
 
         run_dir = BASE_DIR / repo.replace("/", "_")
         run_dir.mkdir(parents=True, exist_ok=True)
 
-        # For RTL files with embedded assertions, auto-generate bind files
-        # so JasperGold can report each property individually
-        #bind_files: List[Path] = []
-        #for rtl_f in embedded_sva:
-            #mods = MODULE_RE.findall(_read(rtl_f))
-            #if not mods:
-                #continue
-            #mod_name  = mods[0]
-            #mod_asserts = [a for a in assertions if rtl_f.name in a["file"]]            
-            #bf = make_bind_file(repo_dir, run_dir, rtl_f, mod_name, mod_asserts)
-            #if bf:
-                #bind_files.append(bf)
-                #log.info("  generated bind file: %s", bf.name)
+        for cluster_id, cluster_files in clusters.items():
 
-        # run for multiple potential tops???
-        successful_top = None
-        last_log_path = None
+            cluster_files = expand_cluster(cluster_files)
+            
+            non_tb = [f for f in cluster_files if not is_tb(f)]
+            
+            # Separate headers from RTL/SVA for analysis purposes
+            header_files = [f for f in non_tb if f.suffix in (".vh", ".svh")]
+            rtl_sva_files = [f for f in non_tb if f.suffix not in (".vh", ".svh")]
+            
+            rtl_files = [f for f in rtl_sva_files if is_rtl(f)]
+            sva_files = [f for f in rtl_sva_files if has_sva(f)]
 
-        for top in candidate_tops:
+            log.info("cluster=%s: %d files (%d headers), %d rtl, %d sva", cluster_id, len(cluster_files), len(header_files), len(rtl_files), len(sva_files))
 
-            log.info("trying top=%s", top)
+            if not rtl_files or not sva_files:
+                log.info("cluster=%s: skipped (no rtl=%s or no sva=%s)", cluster_id, not rtl_files, not sva_files)
+                continue
 
-            tcl_path = build_tcl(
-                run_dir,
-                repo_dir,
-                non_tb,
-                sva_files,
-                top,
-                idirs,
-                pkg_files
-            )
+            standalone_sva = [
+                f for f in sva_files
+                if is_standalone_sva_file(f)
+            ]
 
-            log_path = run_jasper(
-                run_dir,
-                repo_dir,
-                tcl_path
-            )
+            embedded_sva = [
+                f for f in sva_files
+                if not is_standalone_sva_file(f)
+            ]
 
-            last_log_path = log_path
+            all_sva = standalone_sva + embedded_sva
 
-            if try_elaborate(log_path):
-                successful_top = top
-                break
+            assertions = extract_assertions(all_sva)
 
-        
+            idirs = inc_dirs(repo_dir, cluster_files)
+
+            # TOP SELECTION (cluster-local)
+            candidate_tops = []
+            for f in rtl_files:
+                candidate_tops.extend(MODULE_RE.findall(_read(f)))
+
+            candidate_tops = list(dict.fromkeys(candidate_tops))
+
+            preferred = []
+            for t in candidate_tops:
+                score = 0
+                name = t.lower()
+
+                if "top" in name: score += 10
+                if "core" in name: score += 8
+                if "tb" in name: score -= 20
+                if any(x in name for x in ["fifo", "ram", "mem", "mux"]):
+                    score -= 5
+
+                preferred.append((score, t))
+
+            candidate_tops = [t for _, t in sorted(preferred, reverse=True)]
+
+            successful_top = None
+
+            for top in candidate_tops:
+
+                log.info("cluster=%s trying top=%s", cluster_id, top)
+
+                tcl_path = build_tcl(
+                    run_dir,
+                    repo_dir,
+                    cluster_files,
+                    all_sva,
+                    top,
+                    idirs
+                )
+
+                log_path = run_jasper(run_dir, repo_dir, tcl_path)
+
+                if try_elaborate(log_path):
+                    successful_top = top
+                    break
 
     finally:
-        if repo_dir and repo_dir.exists():
-            shutil.rmtree(repo_dir, ignore_errors=True)
+        shutil.rmtree(repo_dir, ignore_errors=True)
 
 
 
