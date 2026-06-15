@@ -1,4 +1,4 @@
-import os, re, shutil, subprocess, sqlite3, time, logging
+import os, re, shutil, subprocess, sqlite3, time, logging, traceback
 from pathlib import Path
 from typing import Optional, List, Tuple, Dict
 from collections import defaultdict
@@ -11,8 +11,8 @@ import requests
 
 GITHUB_TOKEN       = os.getenv("GITHUB_TOKEN")
 HEADERS            = {"Authorization": f"Bearer {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
-BASE_DIR           = Path("jasper_runs_6.11")   # TCL + logs only
-REPOS_DIR          = Path("repos_6.11")         # deleted after processing
+BASE_DIR           = Path("jasper_runs_6.15")   # TCL + logs only
+REPOS_DIR          = Path("repos_6.15")         # deleted after processing
 DB_PATH            = Path("results.db").resolve()
 MAX_FILES          = 80
 JASPER_TIMEOUT_SEC = 360
@@ -664,6 +664,7 @@ if {{[catch {{elaborate -top {top}}} err]}} {{
         lines.append("catch {elaborate}\n")
 
     lines.append("""
+clock -infer
 clock -list
 reset -list
 prove -all -time_limit 30s
@@ -695,24 +696,44 @@ def run_jasper(run_dir: Path, repo_dir: Path, tcl_path: Path) -> Path:
     ]
 
     log.info("Running Jasper: %s", " ".join(cmd))
-    
-    try:
-        with open(log_path, "w") as logf:
-            result = subprocess.run(
-                cmd,
-                cwd=repo_dir,
-                stdout=logf,
-                stderr=subprocess.STDOUT,
-                timeout=JASPER_TIMEOUT_SEC,
-            )
-            log.info("Jasper exited with code %d", result.returncode)
 
-    except subprocess.TimeoutExpired:
+    try:
+        # Capture output so it can be inspected and logged
+        result = subprocess.run(
+            cmd,
+            cwd=repo_dir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            timeout=JASPER_TIMEOUT_SEC,
+        )
+        out = result.stdout or ""
+        try:
+            with open(log_path, "w") as logf:
+                logf.write(out)
+        except Exception:
+            pass
+        log.info("Jasper exited with code %d; log size=%d", result.returncode, len(out))
+
+    except subprocess.TimeoutExpired as e:
+        # write any partial output
+        out = getattr(e, 'stdout', '') or ''
+        try:
+            with open(log_path, "w") as logf:
+                logf.write(out + "\n[TIMEOUT]\n")
+        except Exception:
+            pass
         log.warning(
             "Jasper timed out after %ds",
             JASPER_TIMEOUT_SEC
         )
     except Exception as e:
+        tb = traceback.format_exc()
+        try:
+            with open(log_path, "w") as logf:
+                logf.write(f"Exception running jg: {e}\n\n{tb}")
+        except Exception:
+            pass
         log.error("Error running Jasper: %s", e)
 
     return log_path
@@ -899,12 +920,16 @@ def cluster_repo_files(files: List[Path]):
 
     return clusters
 
-def enforce_project_closure(cluster_files: List[Path]) -> List[Path]:
-
-    # build module -> file map inside this cluster only
+def enforce_project_closure(cluster_files: List[Path], repo_files: Optional[List[Path]] = None) -> List[Path]:
+    """
+    Expand cluster by including module-definition files found in repo_files (if provided),
+    otherwise only within the cluster. This helps include modules defined elsewhere in the repo.
+    """
+    # build module -> file map using repo_files if given else cluster_files
     module_map = {}
+    source_files = repo_files if repo_files is not None else cluster_files
 
-    for f in cluster_files:
+    for f in source_files:
         txt = _read(f)
         for m in MODULE_RE.findall(txt):
             module_map[m] = f
@@ -951,6 +976,8 @@ def process_repo(repo: str, conn: sqlite3.Connection) -> None:
         for cluster_id, cluster_files in clusters.items():
 
             cluster_files = expand_cluster(cluster_files)
+            # ensure cluster closure across entire repo (include files defining instantiated modules elsewhere)
+            cluster_files = enforce_project_closure(cluster_files, files)
             
             non_tb = [f for f in cluster_files if not is_tb(f)]
             
