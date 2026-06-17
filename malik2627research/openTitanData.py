@@ -1,10 +1,13 @@
 import os
 import re
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as bs
 from pathlib import Path
 import subprocess
 import random
+import hjson
+import pyslang
+import networkx as nx
 
 # global config
 OPENTITAN_REPO = "https://github.com/lowRISC/opentitan.git"
@@ -29,13 +32,14 @@ def classify_sv_file(path: Path):
     if "reg_pkg" in name:
         return "reg_pkg"
     if "pkg" in name:
-        return "package"
+        return "packages"
     if name.endswith("_tb.sv") or "/dv/" in str(path):
         return "dv"
     if "/rtl/" in str(path):
         return "rtl"
     return "other"
 
+"""
 def extract_design_intent(text):
 
     intent = {
@@ -65,32 +69,43 @@ def extract_design_intent(text):
             intent[mode].append(line.strip())
 
     return intent
+"""
 
 def get_ip_root(opentitan_root, ip_name):
     return Path(opentitan_root) / "hw" / "ip" / ip_name
 
-def build_ip_dataset(ip_name, opentitan_root):
+# thin AST layer for ports
+def extract_ports(sv_path):
+    tree = pyslang.SyntaxTree.fromFile(str(sv_path))
+    comp = pyslang.Compilation()
+    comp.addSyntaxTree(tree)
+    ports = []
+    for inst in comp.getRoot().topInstances:
+        for port in inst.body.portList:
+            ports.append({"name": port.name, "direction": str(port.direction)})
+    return ports
 
-    ip_dir = get_ip_root(opentitan_root, ip_name)
-
-    rtl_data = collect_ip_correct(ip_dir)
-    docs_text = fetch_datasheet(ip_name)
-
-    if docs_text:
-        intent = extract_design_intent(docs_text)
-    else:
-        intent = {}
-
+# must handle cases for multireg/window entries later
+def load_ip_intent(ip_dir, ip_name):
+    data = hjson.loads((Path(ip_dir) / "data" / f"{ip_name}.hjson").read_text())
     return {
         "ip_name": ip_name,
-
-        # implementation layer
-        "rtl_structure": rtl_data,
-
-        # design intent layer (NEW IMPORTANT PART)
-        "design_intent": intent
+        "interrupts": [{"name": i["name"], "desc": i.get("desc", "")} for i in data.get("interrupt_list", [])],
+        "alerts": [{"name": a["name"], "desc": a.get("desc", "")} for a in data.get("alert_list", [])],
+        "registers": [
+            {"name": r["name"], "desc": r.get("desc", ""),
+             "fields": [{"name": f.get("name"), "desc": f.get("desc", ""), "bits": f.get("bits")} for f in r.get("fields", [])]}
+            for r in data.get("registers", []) if isinstance(r, dict) and "name" in r
+        ],
     }
 
+def build_ip_dataset(ip_name, opentitan_root):
+    ip_dir = get_ip_root(opentitan_root, ip_name)
+    rtl_data = collect_ip(ip_dir)
+    intent = load_ip_intent(ip_dir, ip_name)
+    return {"ip_name": ip_name, "rtl_structure": rtl_data, "design_intent": intent}
+
+"""
 def fetch_datasheet(ip_name, top="top_earlgrey"):
     url = f"https://opentitan.org/book/hw/{top}/ip/{ip_name}/data/{ip_name}.html"
 
@@ -98,19 +113,21 @@ def fetch_datasheet(ip_name, top="top_earlgrey"):
     if r.status_code != 200:
         return None
 
-    soup = BeautifulSoup(r.text, "html.parser")
+    soup = bs(r.text, "html.parser")
 
     text = soup.get_text("\n")
     return text
+"""
 
-def collect_ip_correct(ip_dir):
+def collect_ip(ip_dir):
 
     ip_dir = Path(ip_dir)
 
     structure = {
         "rtl": [],
         "packages": [],
-        "reg": [],
+        "reg_top": [],
+        "reg_pkg": [],
         "dv": [],
         "other": []
     }
@@ -126,54 +143,6 @@ def collect_ip_correct(ip_dir):
         "structure": structure
     }
 
-    def compress(paths):
-        paths = [str(p.relative_to(ip_dir)) for p in paths]
-
-        # deterministic + small footprint
-        paths = sorted(paths)
-
-        if len(paths) <= max_files_per_category:
-            return paths
-
-        # smart sampling: keep first + random spread
-        keep = set()
-        keep.add(paths[0])  # often top module / entry point
-        keep.add(paths[-1]) # sometimes wrapper / top-level
-
-        while len(keep) < max_files_per_category:
-            keep.add(random.choice(paths))
-
-        return sorted(list(keep))
-
-    def root_prefix(paths):
-        if not paths:
-            return None
-        common = Path(paths[0]).parts[:-1]
-        return "/".join(common)
-
-    rtl_rel = [p for p in rtl]
-    sva_rel = [p for p in sva]
-    docs_rel = [p for p in docs]
-
-    return {
-        "ip_name": ip_dir.name,
-
-        # compressed file views
-        "rtl_files": compress(rtl_rel),
-        "sva_files": compress(sva_rel),
-        "doc_files": compress(docs_rel),
-
-        # metadata (cheap + useful) how
-        "rtl_count": len(rtl),
-        "sva_count": len(sva),
-        "doc_count": len(docs),
-
-        "rtl_root_prefix": root_prefix(rtl),
-        "sva_root_prefix": root_prefix(sva),
-        "doc_root_prefix": root_prefix(docs),
-    }
-
-
 def main():
     opentitan_root = ensure_opentitan()
 
@@ -182,3 +151,5 @@ def main():
     dataset = collect_ip(usbdev_dir)
     print(dataset)  
 
+if __name__ == "__main__":
+    main()
