@@ -2,6 +2,7 @@ import os, re, shutil, subprocess, sqlite3, time, logging, traceback
 from pathlib import Path
 from typing import Optional, List, Tuple, Dict
 from collections import defaultdict
+import networkx as nx
 
 
 import requests
@@ -16,6 +17,8 @@ REPOS_DIR          = Path("repos_6.15")         # deleted after processing
 DB_PATH            = Path("results.db").resolve()
 MAX_FILES          = 80
 JASPER_TIMEOUT_SEC = 360
+MAX_TOP_TRIES      = 3
+CLEAN_CLONES       = True
 #KEEP_REPOS         = False                 # flip to True for debugging
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -176,7 +179,10 @@ def search_repos(max_pages: int = 2) -> List[str]:
 def clone(repo: str) -> Optional[Path]:
     dest = REPOS_DIR / repo.replace("/", "_")
     if dest.exists():
-        return dest
+        if CLEAN_CLONES:
+            shutil.rmtree(dest, ignore_errors=True)
+        else:
+            return dest
     r = subprocess.run(
         ["git", "clone", "--depth", "1",
          f"https://github.com/{repo}.git", str(dest)],
@@ -226,32 +232,6 @@ def find_instantiations(files):
 
     return instantiated
 
-def expand_cluster(cluster_files: List[Path]) -> List[Path]:
-    # Build proper module -> file map
-    module_map = {}
-    for f in cluster_files:
-        txt = _read(f)
-        for m in MODULE_RE.findall(txt):
-            module_map[m] = f
-    
-    expanded = set(cluster_files)
-
-    changed = True
-    while changed:
-        changed = False
-
-        for f in list(expanded):
-            txt = strip_comments(_read(f))
-
-            for inst in find_instantiations([f]):
-                if inst in module_map:
-                    target = module_map[inst]
-                    if target not in expanded:
-                        expanded.add(target)
-                        changed = True
-
-    return list(expanded)
-
 def collect_files(repo_dir: Path) -> List[Path]:
     found = []
     for p in repo_dir.rglob("*"):
@@ -279,76 +259,6 @@ def is_valid(files: List[Path]) -> bool:
 
 # finding packages for jasper analysis
 
-"""
-def sort_pkg_files(pkg_files):
-
-    pkg_name_to_file = {}
-    deps = {}
-
-    for f in pkg_files:
-
-        txt = _read(f)
-
-        m = PACKAGE_DEF_RE.search(txt)
-
-        if not m:
-            continue
-
-        pkg_name = m.group(1)
-
-        pkg_name_to_file[pkg_name] = f
-        deps[f] = set()
-
-    for f in pkg_files:
-
-        txt = _read(f)
-
-        used_pkgs = set()
-
-        for m in PACKAGE_USE_RE.findall(txt):
-
-            used_pkgs.add(m.split("::")[0])
-
-        for m in PACKAGE_SCOPE_RE.findall(txt):
-
-            used_pkgs.add(m)
-
-        for pkg in used_pkgs:
-
-            if pkg in pkg_name_to_file:
-
-                dep_file = pkg_name_to_file[pkg]
-
-                if dep_file != f:
-                    deps[f].add(dep_file)
-
-    ordered = []
-    remaining = set(deps.keys())
-
-    while remaining:
-
-        progress = False
-
-        for f in list(remaining):
-
-            if deps[f].issubset(set(ordered)):
-
-                ordered.append(f)
-                remaining.remove(f)
-                progress = True
-
-        if not progress:
-
-            log.warning(
-                "Package dependency cycle detected: %s",
-                [x.name for x in remaining]
-            )
-
-            ordered.extend(sorted(remaining))
-            break
-
-    return ordered
-"""
 
 def find_pkg_files(files: List[Path]) -> List[Path]:
     pkg_map: Dict[str, Path] = {}
@@ -361,14 +271,6 @@ def find_pkg_files(files: List[Path]) -> List[Path]:
             pkg_map[m.group(1)] = f
 
     return list(pkg_map.values())
-
-def find_header_files(files: List[Path]) -> List[Path]:
-    """Find .vh and .svh header files that define macros."""
-    headers = []
-    for f in files:
-        if f.suffix in (".vh", ".svh"):
-            headers.append(f)
-    return headers
 
 def find_macro_files(files: List[Path]) -> List[Path]:
     """Find files that define macros with `define directive."""
@@ -508,92 +410,6 @@ def is_standalone_sva_file(p: Path) -> bool:
     has_assert = bool(ASSERT_RE.search(clean) or ASSUME_RE.search(clean))
     has_always = bool(ALWAYS_RE.search(clean))
     return has_assert and not has_always
-
-#def make_bind_file(repo_dir: Path, run_dir: Path, rtl_file: Path,
-                   #module_name: str, assertions: List[dict]) -> Optional[Path]:
-
-    #if not assertions:
-        #return None
-
-    #checker = f"{module_name}_jg_checker"
-
-    #lines = []
-    #lines.append(f"module {checker}(dut);\n")
-
-    #for i, a in enumerate(assertions):
-        #label = a["label"] if a["label"] else f"prop_{i}"
-        #body = a["body"]
-
-        #lines.append(
-            #f"  {label}: assert property ({body});\n"
-        #)
-
-    #lines.append("endmodule\n")
-    #lines.append(f"bind {module_name} {checker} jg_bind_inst({module_name});\n")
-
-    #path = run_dir / "generated_bindings" / f"{module_name}_bind.sv"
-    #path.parent.mkdir(parents=True, exist_ok=True)
-    #path.write_text("".join(lines))
-    #return path
-
-# top module selection
-
-"""
-def pick_top(sva_files, all_files):
-
-    modules = {}
-
-    for f in all_files:
-        if is_tb(f):
-            continue
-
-        for mod in MODULE_RE.findall(_read(f)):
-            modules[mod] = f
-
-    if not modules:
-        return None
-
-    instantiated = find_instantiations(all_files)
-
-    candidates = [
-        m for m in modules
-        if m not in instantiated
-    ]
-
-    # debug
-    log.info("top candidates: %s", candidates)
-
-    if candidates:
-        return max(
-            candidates,
-            key=lambda m: len(_read(modules[m]))
-        )
-
-    return next(iter(modules))
-"""
-
-# module hierarchy graph
-""""
-def build_module_graph(files):
-    module_to_file = defaultdict(set)
-    edges = defaultdict(set)
-
-    for f in files:
-        txt = strip_comments(_read(f))
-
-        mods = MODULE_RE.findall(txt)
-        insts = find_instantiations([f])
-
-        for m in mods:
-            module_to_file[m].add(f)
-
-        for m in mods:
-            for i in insts:
-                edges[m].add(i)
-
-    return module_to_file, edges
-"""
-
 # generate tcl
 
 def build_tcl(
@@ -604,6 +420,19 @@ def build_tcl(
     top: Optional[str],
     idirs: List[str],
 ) -> Path:
+
+    # Dedupe cluster files by resolved absolute path to avoid re-analyzing same headers
+    seen_paths = set()
+    uniq_cluster_files = []
+    for _f in cluster_files:
+        try:
+            rp = str(_f.resolve())
+        except Exception:
+            rp = str(_f)
+        if rp not in seen_paths:
+            seen_paths.add(rp)
+            uniq_cluster_files.append(_f)
+    cluster_files = uniq_cluster_files
 
     tb_set = set(f for f in cluster_files if is_tb(f))
 
@@ -616,13 +445,16 @@ def build_tcl(
 
     lines = ["clear -all\n\n"]
 
+    '''
     # FIRST: Analyze header files (.vh, .svh) with macro definitions
     header_files = find_header_files(cluster_files)
     for f in header_files:
         lines.append(f'catch {{ analyze -sv {inc_flag} {f.resolve()} }}\n')
     
+
     if header_files:
         lines.append("\n")
+    '''
 
     # SECOND: Analyze package files
     pkg_files = find_pkg_files(cluster_files)
@@ -633,7 +465,10 @@ def build_tcl(
         lines.append("\n")
 
     # THIRD: Analyze macro-defining files
-    macro_files = [f for f in find_macro_files(cluster_files) if f not in header_files and f not in pkg_files]
+    macro_files = [
+        f for f in find_macro_files(cluster_files)
+        if f not in pkg_files
+        ]    
     for f in macro_files:
         lines.append(f'catch {{ analyze -sv {inc_flag} {f.resolve()} }}\n')
     
@@ -641,7 +476,7 @@ def build_tcl(
         lines.append("\n")
 
     # FOURTH: Analyze remaining RTL files
-    analyzed_set = set(header_files) | set(pkg_files) | set(macro_files)
+    analyzed_set = set(pkg_files) | set(macro_files)
     remaining_rtl = [f for f in rtl_files if f not in analyzed_set]
     for f in remaining_rtl:
         lines.append(f'catch {{ analyze -sv {inc_flag} {f.resolve()} }}\n')
@@ -656,19 +491,20 @@ def build_tcl(
 
     if top:
         lines.append(f"""
-if {{[catch {{elaborate -top {top}}} err]}} {{
-    puts "ELAB ERROR: $err"
-}}
-""")
+            if {{[catch {{elaborate -top {top}}} err]}} {{
+            puts "ELAB ERROR: $err"
+            exit
+            }}
+        """)
     else:
         lines.append("catch {elaborate}\n")
 
     lines.append("""
-clock -infer
-clock -list
-reset -list
-prove -all -time_limit 30s
-""")
+        clock -infer
+        clock -list
+        reset -list
+        prove -all -time_limit 30s
+        """)
 
     lines.append(f"report -all -out {run_dir}/results.rpt\n")
     lines.append(f"report_vacuity -out {run_dir}/vacuity.rpt\n")
@@ -681,6 +517,7 @@ prove -all -time_limit 30s
 
  # running jasper
 def run_jasper(run_dir: Path, repo_dir: Path, tcl_path: Path) -> Path:
+    # create a timestamped log file for each run to avoid reusing/overwriting
     log_path = run_dir / "jasper.log"
 
     # Clean up stale Jasper project directory
@@ -707,40 +544,52 @@ def run_jasper(run_dir: Path, repo_dir: Path, tcl_path: Path) -> Path:
             text=True,
             timeout=JASPER_TIMEOUT_SEC,
         )
+
         out = result.stdout or ""
+
+        # ----------------------------
+        # FIXED: single clean write
+        # ----------------------------
         try:
-            with open(log_path, "w") as logf:
-                logf.write(out)
-        except Exception:
-            pass
-        log.info("Jasper exited with code %d; log size=%d", result.returncode, len(out))
+            log_path.write_text(out)
+        except Exception as e:
+            log.warning("Failed writing jasper log: %s", e)
+
+        # optional: debug signal for empty runs
+        if result.returncode == 0 and not out.strip():
+            log.warning("Jasper produced EMPTY LOG for %s", repo_dir)
+
+        log.info(
+            "Jasper exited with code %d; log size=%d",
+            result.returncode,
+            len(out)
+        )
 
     except subprocess.TimeoutExpired as e:
-        # write any partial output
-        out = getattr(e, 'stdout', '') or ''
+        out = getattr(e, "stdout", "") or ""
+
         try:
-            with open(log_path, "w") as logf:
-                logf.write(out + "\n[TIMEOUT]\n")
-        except Exception:
-            pass
-        log.warning(
-            "Jasper timed out after %ds",
-            JASPER_TIMEOUT_SEC
-        )
+            log_path.write_text(out + "\n[TIMEOUT]\n")
+        except Exception as ex:
+            log.warning("Failed writing timeout log: %s", ex)
+
+        log.warning("Jasper timed out after %ds", JASPER_TIMEOUT_SEC)
+
     except Exception as e:
         tb = traceback.format_exc()
+
         try:
-            with open(log_path, "w") as logf:
-                logf.write(f"Exception running jg: {e}\n\n{tb}")
-        except Exception:
-            pass
+            log_path.write_text(f"Exception running jg: {e}\n\n{tb}")
+        except Exception as ex:
+            log.error("Failed writing exception log: %s", ex)
+
         log.error("Error running Jasper: %s", e)
 
     return log_path
 
-# =========================================================
+
 # RESULT PARSING  — per-property AND repo-level
-# =========================================================
+
 
 def parse_results(run_dir: Path, assertions: List[dict]) -> Tuple[str, List[dict]]:
     """
@@ -865,89 +714,122 @@ def try_elaborate(log_path: Path) -> bool:
 
     if "ELAB ERROR" in txt:
         return False
+    
+    if "could not be elaborated" in txt:
+        return False
 
     return True
 
 def cluster_repo_files(files: List[Path]):
-    # First pass: separate header files upfront
+
     header_files = [f for f in files if f.suffix in (".vh", ".svh")]
-    non_header_files = [f for f in files if f.suffix not in (".vh", ".svh")]
-    
-    clusters = defaultdict(list)
-    
-    # Build module -> file map to find top modules (not instantiated)
-    module_map = {}
-    instantiated = set()
-    
-    for f in non_header_files:
+    body_files = [f for f in files if f.suffix not in (".vh", ".svh")]
+
+    # ---------------------------
+    # 1. Build module → file map
+    # ---------------------------
+    module_to_file = {}
+    file_to_modules = defaultdict(set)
+
+    for f in body_files:
         txt = _read(f)
         mods = MODULE_RE.findall(txt)
+
         for m in mods:
-            module_map[m] = f
-        instantiated.update(find_instantiations([f]))
-    
-    # Find uninstantiated modules (top-level candidates)
-    top_candidates = set(module_map.keys()) - instantiated
+            module_to_file[m] = f
+            file_to_modules[f].add(m)
 
-    for f in non_header_files:
-        txt = _read(f)
-        mods = MODULE_RE.findall(txt)
-        pkgs = PACKAGE_DEF_RE.findall(txt)
-        asserts = len(ASSERT_RE.findall(txt))
+    # ---------------------------
+    # 2. Build dependency graph
+    # ---------------------------
+    G = nx.DiGraph()
 
-        if pkgs:
-            # Packages go in their own cluster
-            key = f"pkg_{pkgs[0]}"
-        elif mods:
-            # Group by top-level (non-instantiated) modules
-            top_mod = next((m for m in mods if m in top_candidates), None)
-            if top_mod:
-                key = f"proj_{top_mod}"
-            else:
-                # If no top-level, use largest module
-                key = f"proj_{max(mods, key=lambda m: len(_read(module_map[m])))}"
-        elif asserts:
-            key = f"sva_{f.stem}"
-        else:
-            key = "misc"
+    for f in body_files:
+        insts = find_instantiations([f])
+        mods = file_to_modules[f]
 
-        clusters[key].append(f)
+        for m in mods:
+            G.add_node(m)
 
-    # ADD HEADER FILES TO ALL NON-MISC CLUSTERS
-    for cluster_id in list(clusters.keys()):
-        if cluster_id != "misc":
-            clusters[cluster_id].extend(header_files)
+        for inst in insts:
+            for m in mods:
+                G.add_edge(m, inst)
+
+    # ---------------------------
+    # 3. Convert to undirected for clustering
+    # ---------------------------
+    UG = G.to_undirected()
+
+    clusters = defaultdict(list)
+
+    for i, comp in enumerate(nx.connected_components(UG)):
+        cluster_id = f"proj_{i}"
+
+        for module in comp:
+            if module in module_to_file:
+                clusters[cluster_id].append(module_to_file[module])
+
+    # ---------------------------
+    # 4. Add orphan / unconnected files
+    # ---------------------------
+    used = set()
+    for lst in clusters.values():
+        used.update(lst)
+
+    orphan = [f for f in body_files if f not in used]
+
+    if orphan:
+        clusters["misc"] = orphan
+
+    # ---------------------------
+    # 5. (optional) add headers globally
+    # ---------------------------
+    for k in clusters:
+        clusters[k].extend(header_files)
 
     return clusters
 
-def enforce_project_closure(cluster_files: List[Path], repo_files: Optional[List[Path]] = None) -> List[Path]:
+def enforce_project_closure(
+    cluster_files: List[Path],
+    repo_files: Optional[List[Path]] = None
+) -> List[Path]:
+
     """
-    Expand cluster by including module-definition files found in repo_files (if provided),
-    otherwise only within the cluster. This helps include modules defined elsewhere in the repo.
+    Expand cluster by including module-definition files found in repo_files
+    (if provided), otherwise only within the cluster.
     """
-    # build module -> file map using repo_files if given else cluster_files
+
     module_map = {}
-    source_files = repo_files if repo_files is not None else cluster_files
+
+    source_files = (
+        repo_files
+        if repo_files is not None
+        else cluster_files
+    )
 
     for f in source_files:
         txt = _read(f)
+
         for m in MODULE_RE.findall(txt):
             module_map[m] = f
 
-    # expand using instantiation graph until stable
     expanded = set(cluster_files)
 
     changed = True
+
     while changed:
         changed = False
 
         for f in list(expanded):
-            txt = strip_comments(_read(f))
+
             insts = find_instantiations([f])
 
             for inst in insts:
+
                 if inst in module_map:
+
                     target = module_map[inst]
+
                     if target not in expanded:
                         expanded.add(target)
                         changed = True
@@ -970,15 +852,42 @@ def process_repo(repo: str, conn: sqlite3.Connection) -> None:
 
         clusters = cluster_repo_files(files)
 
+        '''
         run_dir = BASE_DIR / repo.replace("/", "_")
         run_dir.mkdir(parents=True, exist_ok=True)
+        '''
+        repo_successful = False
 
         for cluster_id, cluster_files in clusters.items():
-
-            cluster_files = expand_cluster(cluster_files)
-            # ensure cluster closure across entire repo (include files defining instantiated modules elsewhere)
-            cluster_files = enforce_project_closure(cluster_files, files)
             
+            run_dir = (
+                BASE_DIR
+                / repo.replace("/", "_")
+                / cluster_id
+            )
+
+            run_dir.mkdir(
+                parents=True,
+                exist_ok=True
+            )
+
+            #cluster_files = expand_cluster(cluster_files)
+            # ensure cluster closure across entire repo (include files defining instantiated modules elsewhere)
+            before = len(cluster_files)
+
+            cluster_files = enforce_project_closure(
+                cluster_files,
+                files
+            )
+
+            after = len(cluster_files)
+
+            log.info(
+                "cluster=%s expanded %d -> %d files",
+                cluster_id,
+                before,
+                after
+            )            
             non_tb = [f for f in cluster_files if not is_tb(f)]
             
             # Separate headers from RTL/SVA for analysis purposes
@@ -1034,9 +943,14 @@ def process_repo(repo: str, conn: sqlite3.Connection) -> None:
 
             successful_top = None
 
+            tries = 0
             for top in candidate_tops:
+                if tries >= MAX_TOP_TRIES:
+                    log.info("cluster=%s: reached max top tries (%d), skipping remaining tops", cluster_id, MAX_TOP_TRIES)
+                    break
+                tries += 1
 
-                log.info("cluster=%s trying top=%s", cluster_id, top)
+                log.info("cluster=%s trying top=%s (try %d/%d)", cluster_id, top, tries, MAX_TOP_TRIES)
 
                 tcl_path = build_tcl(
                     run_dir,
@@ -1051,7 +965,14 @@ def process_repo(repo: str, conn: sqlite3.Connection) -> None:
 
                 if try_elaborate(log_path):
                     successful_top = top
+                    repo_successful = True
                     break
+
+        # repo-level DB save
+        if repo_successful:
+            db_save_repo(conn, repo, None, "PROCESSED")
+        else:
+            db_save_repo(conn, repo, None, "COMPILE_FAIL")
 
     finally:
         shutil.rmtree(repo_dir, ignore_errors=True)
