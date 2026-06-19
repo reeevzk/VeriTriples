@@ -6,77 +6,130 @@ from pathlib import Path
 import subprocess
 import random
 import hjson
-import pyslang
+import pyslang # specifically for parsing SystemVerilog
 import networkx as nx
 
 # global config
 OPENTITAN_REPO = "https://github.com/lowRISC/opentitan.git"
 
+#regex
+MODULE_RE = re.compile(r"module\s+([a-zA-Z0-9_]+)")
+ASSERT_RE = re.compile(
+    r"`ASSERT[A-Z_]*\s*\("
+)
+
 def ensure_opentitan(repo_dir="data/opentitan"):
+
     repo_dir = Path(repo_dir)
 
     if not repo_dir.exists():
-        print("Cloning OpenTitan...")
+
+        subprocess.run([
+            "git",
+            "clone",
+            "--depth", "1",
+            "--filter=blob:none",
+            OPENTITAN_REPO,
+            str(repo_dir)
+        ], check=True)
+
+    else:
+
         subprocess.run(
-            ["git", "clone", "--depth", "1", OPENTITAN_REPO, str(repo_dir)],
+            ["git", "-C", str(repo_dir), "pull"],
             check=True
         )
 
     return repo_dir
 
-def classify_sv_file(path: Path):
-    name = path.name.lower()
+def classify_sv_file(path):
 
-    if "reg_top" in name:
-        return "reg_top"
-    if "reg_pkg" in name:
-        return "reg_pkg"
-    if "pkg" in name:
-        return "packages"
-    if name.endswith("_tb.sv") or "/dv/" in str(path):
-        return "dv"
-    if "/rtl/" in str(path):
+    s = str(path)
+
+    if "/dv/sva/" in s:
+        return "sva"
+
+    if "/rtl/" in s:
+
+        name = path.name.lower()
+
+        if "reg_top" in name:
+            return "reg_top"
+
+        if "reg_pkg" in name:
+            return "reg_pkg"
+
+        if "pkg" in name:
+            return "packages"
+
         return "rtl"
+
     return "other"
-
-"""
-def extract_design_intent(text):
-
-    intent = {
-        "ports": [],
-        "interrupts": [],
-        "alerts": [],
-        "registers": []
-    }
-
-    lines = text.split("\n")
-
-    mode = None
-
-    for line in lines:
-        l = line.lower()
-
-        if "interrupt" in l:
-            mode = "interrupts"
-        elif "alert" in l:
-            mode = "alerts"
-        elif "register" in l:
-            mode = "registers"
-        elif "port" in l:
-            mode = "ports"
-
-        if mode and "|" in line:
-            intent[mode].append(line.strip())
-
-    return intent
-"""
 
 def get_ip_root(opentitan_root, ip_name):
     return Path(opentitan_root) / "hw" / "ip" / ip_name
 
+def discover_ips(opentitan_root):
+
+    ip_root = Path(opentitan_root) / "hw" / "ip"
+
+    return sorted(
+        p.name
+        for p in ip_root.iterdir()
+        if p.is_dir()
+    )
+
+def collect_assertions(sv_file):
+    try:
+        tree = pyslang.driver.Driver(str(sv_file))
+        compilation = pyslang.Compilation()
+        compilation.addSyntaxTree(tree)
+
+        root = compilation.getRoot()
+
+        assertions = []
+
+        # Walk AST
+        def visit(node):
+            if isinstance(node, pyslang.ast.ConcurrentAssertionStatement):
+                assertions.append(str(node))
+
+            if isinstance(node, pyslang.ast.ImmediateAssertionStatement):
+                assertions.append(str(node))
+
+            # recursive traversal (generic)
+            for child in getattr(node, "children", []):
+                visit(child)
+
+        visit(root)
+
+        return assertions
+
+    except Exception:
+        return []
+
+def collect_docs(ip_dir):
+
+    docs = []
+
+    for p in ip_dir.rglob("*.md"):
+
+        docs.append({
+            "file": str(p.relative_to(ip_dir)),
+            "text": p.read_text(
+                errors="ignore"
+            )
+        })
+
+    return docs
+
+def extract_modules(sv_file):
+    text = sv_file.read_text(errors="ignore")
+    return MODULE_RE.findall(text)
+
 # thin AST layer for ports
 def extract_ports(sv_path):
-    tree = pyslang.SyntaxTree.fromFile(str(sv_path))
+    tree = pyslang.driver.Driver(str(sv_path))
     comp = pyslang.Compilation()
     comp.addSyntaxTree(tree)
     ports = []
@@ -100,37 +153,45 @@ def load_ip_intent(ip_dir, ip_name):
     }
 
 def build_ip_dataset(ip_name, opentitan_root):
-    ip_dir = get_ip_root(opentitan_root, ip_name)
-    rtl_data = collect_ip(ip_dir)
-    intent = load_ip_intent(ip_dir, ip_name)
-    return {"ip_name": ip_name, "rtl_structure": rtl_data, "design_intent": intent}
+    ip_dir = get_ip_root(
+        opentitan_root,
+        ip_name
+    )
 
-"""
-def fetch_datasheet(ip_name, top="top_earlgrey"):
-    url = f"https://opentitan.org/book/hw/{top}/ip/{ip_name}/data/{ip_name}.html"
+    structure = collect_ip(ip_dir)
 
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
+    docs = collect_docs(ip_dir)
 
-    soup = bs(r.text, "html.parser")
+    intent = load_ip_intent(
+        ip_dir,
+        ip_name
+    )
 
-    text = soup.get_text("\n")
-    return text
-"""
+    return {
+        "ip_name": ip_name,
+        "structure": structure,
+        "docs": docs,
+        "intent": intent
+    }
 
 def collect_ip(ip_dir):
 
     ip_dir = Path(ip_dir)
 
+    """
     structure = {
         "rtl": [],
+        "sva": [],
         "packages": [],
         "reg_top": [],
         "reg_pkg": [],
         "dv": [],
         "other": []
     }
+    """
+    structure = defaultdict(list)
+
+    module_map = {}
 
     for p in ip_dir.rglob("*.sv"):
 
@@ -138,17 +199,39 @@ def collect_ip(ip_dir):
 
         structure[category].append(str(p.relative_to(ip_dir)))
 
+        # only parse actual RTL modules
+        if category == "rtl":
+
+            modules = extract_modules(p)
+            assertions = collect_assertions(p)
+
+            for mod in modules:
+                module_map[mod] = {
+                    "file": str(p.relative_to(ip_dir)),
+                    "assertions": collect_assertions(p)
+                }
+
     return {
         "ip_name": ip_dir.name,
-        "structure": structure
+        "structure": structure,
+        "modules": module_map
     }
 
 def main():
     opentitan_root = ensure_opentitan()
 
-    usbdev_dir = get_ip_root(opentitan_root, "usbdev")
+    ips = discover_ips(opentitan_root)
+    dataset = {}
 
-    dataset = collect_ip(usbdev_dir)
+    # filling dataset
+    for ip_name in ips:
+        ip_dir = get_ip_root(opentitan_root, ip_name)
+
+        if not ip_dir.exists():
+            continue
+        
+        print(f"Processing IP: {ip_name}")
+        dataset[ip_name] = collect_ip(ip_dir)
     print(dataset)  
 
 if __name__ == "__main__":
