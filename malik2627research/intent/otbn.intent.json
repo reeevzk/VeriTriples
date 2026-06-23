@@ -1,0 +1,886 @@
+{
+  "ip_name": "otbn",
+  "ip_intent": {
+    "ip_name": "otbn",
+    "one_line_desc": "Programmable coprocessor for asymmetric cryptography with SCA and FI countermeasures",
+    "one_paragraph_desc": "OpenTitan Big Number Accelerator (OTBN) is a programmable coprocessor for asymmetric cryptographic algorithms such as RSA or elliptic curve cryptography (ECC).\nSuch algorithms are dominated by wide integer arithmetic, which are executed on OTBN's 256-bit-wide data path.\nThe data OTBN processes is often security sensitive, and OTBN is designed to reduce the attack surface by\n(1) keeping the instruction set and the processor design as simple as possible to aid verification,\n(2) minimizing control flow and clearly separating it from data flow,\n(3) limiting OTBN's instruction fetch and data memory accesses to separate, dedicated on-chip memories,\n(4) giving OTBN software direct access to cryptographically secure random numbers,\nand (5) implementing various hardware countermeasures to deter side-channel analysis (SCA) and fault injection (FI) attacks.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_edn_i",
+        "reset": "rst_edn_ni",
+        "primary": false
+      },
+      {
+        "clock": "clk_otp_i",
+        "reset": "rst_otp_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "Stub",
+        "desc": "Stub out the core of Otbn logic",
+        "default": "0"
+      },
+      {
+        "name": "RegFile",
+        "desc": "Selection of the register file implementation. See otbn_pkg.sv.",
+        "default": "otbn_pkg::RegFileFF"
+      },
+      {
+        "name": "RndCnstUrndPrngSeed",
+        "desc": "Default seed of the PRNG used for URND.",
+        "default": null
+      },
+      {
+        "name": "SecMuteUrnd",
+        "desc": "If enabled (1), URND is advanced only when data is needed.\nDisabled (0) by default.\nUseful for SCA measurements only.",
+        "default": "0"
+      },
+      {
+        "name": "SecFixMaiOpSeq",
+        "desc": "If enabled (1), masking accelerator interface will not randomize operand start indexes.\nDisabled (0) by default.\nUseful for SCA measurements only.",
+        "default": "0"
+      },
+      {
+        "name": "SecSkipUrndReseedAtStart",
+        "desc": "If enabled (1), URND reseed is skipped at the start of an operation.\nDisabled (0) by default.\nUseful for SCA measurements only.",
+        "default": "0"
+      },
+      {
+        "name": "FeatStubMai",
+        "desc": "If enabled (1), MAI and mask accelerator are not preset in the design.\nDisabled (0) by default.\nUseful for resource-bound targets only. Can break software setups and DV.",
+        "default": "0"
+      },
+      {
+        "name": "RndCnstBnMacUrndPerm",
+        "desc": "Compile-time random permutation for URND permutation in BN MAC.",
+        "default": null
+      },
+      {
+        "name": "RndCnstOtbnKey",
+        "desc": "Compile-time random reset value for IMem/DMem scrambling key.",
+        "default": null
+      },
+      {
+        "name": "RndCnstOtbnNonce",
+        "desc": "Compile-time random reset value for IMem/DMem scrambling nonce.",
+        "default": null
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "otbn.interrupt.done",
+        "name": "done",
+        "desc": "OTBN has completed the operation."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "otbn.alert.fatal",
+        "name": "fatal",
+        "desc": "A fatal error. Fatal alerts are non-recoverable and will be asserted until a hard reset."
+      },
+      {
+        "intent_id": "otbn.alert.recov",
+        "name": "recov",
+        "desc": "A recoverable error. Just sent once (as the processor stops)."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "otbn.reg.CMD",
+        "name": "CMD",
+        "desc": "Command Register\n\nA command initiates an OTBN operation. While performing the operation,\nOTBN is busy; the !!STATUS register reflects that.\n\nAll operations signal their completion by raising the done\ninterrupt; alternatively, software may poll the !!STATUS register.\n\nWrites are ignored if OTBN is not idle.\nUnrecognized commands are ignored.",
+        "fields": [
+          {
+            "intent_id": "otbn.reg.CMD.cmd",
+            "name": "cmd",
+            "desc": "The operation to perform.\n\n| Value | Name          | Description |\n|:------|:--------------|:------------|\n| 0xd8  | EXECUTE       | Starts the execution of the program stored in the instruction memory, starting at address zero. |\n| 0xc3  | SEC_WIPE_DMEM | Securely removes all contents from the data memory. |\n| 0x1e  | SEC_WIPE_IMEM | Securely removes all contents from the instruction  memory. |",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "otbn.reg.CTRL",
+        "name": "CTRL",
+        "desc": "Control Register",
+        "fields": [
+          {
+            "intent_id": "otbn.reg.CTRL.software_errs_fatal",
+            "name": "software_errs_fatal",
+            "desc": "Controls the reaction to software errors.\n\nWhen set software errors produce fatal errors, rather than\nrecoverable errors.\n\nWrites are ignored if OTBN is not idle.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "otbn.reg.STATUS",
+        "name": "STATUS",
+        "desc": "Status Register",
+        "fields": [
+          {
+            "intent_id": "otbn.reg.STATUS.status",
+            "name": "status",
+            "desc": "Indicates the current operational state OTBN is in.\n\nAll BUSY values represent an operation started by a write to the\n!!CMD register.\n\n| Value | Name               | Description                                           |\n|:------|:-------------------|:------------------------------------------------------|\n| 0x00  | IDLE               | OTBN is idle: it is not performing any action.        |\n| 0x01  | BUSY_EXECUTE       | OTBN is busy executing software.                      |\n| 0x02  | BUSY_SEC_WIPE_DMEM | OTBN is busy securely wiping the data memory.         |\n| 0x03  | BUSY_SEC_WIPE_IMEM | OTBN is busy securely wiping the instruction memory.  |\n| 0x04  | BUSY_SEC_WIPE_INT  | OTBN is busy securely wiping the internal state.      |\n| 0xFF  | LOCKED             | OTBN is locked as reaction to a fatal error, and must be reset to unlock it again. See also the section \"Reaction to Fatal Errors\". |\n",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "otbn.reg.ERR_BITS",
+        "name": "ERR_BITS",
+        "desc": "Operation Result Register\n\nDescribes the errors detected during an operation.\n\nRefer to the \"List of Errors\" section for a detailed description of the\nerrors.\n\nThe host CPU can clear this register when OTBN is not running,\nby writing any value. Write attempts while OTBN is running are ignored.",
+        "fields": [
+          {
+            "intent_id": "otbn.reg.ERR_BITS.bad_data_addr",
+            "name": "bad_data_addr",
+            "desc": "A `BAD_DATA_ADDR` error was observed.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.bad_insn_addr",
+            "name": "bad_insn_addr",
+            "desc": "A `BAD_INSN_ADDR` error was observed.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.call_stack",
+            "name": "call_stack",
+            "desc": "A `CALL_STACK` error was observed.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.illegal_insn",
+            "name": "illegal_insn",
+            "desc": "An `ILLEGAL_INSN` error was observed.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.loop",
+            "name": "loop",
+            "desc": "A `LOOP` error was observed.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.key_invalid",
+            "name": "key_invalid",
+            "desc": "A `KEY_INVALID` error was observed.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.rnd_rep_chk_fail",
+            "name": "rnd_rep_chk_fail",
+            "desc": "An `RND_REP_CHK_FAIL` error was observed.",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.rnd_fips_chk_fail",
+            "name": "rnd_fips_chk_fail",
+            "desc": "An `RND_FIPS_CHK_FAIL` error was observed.",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.mai_software_error",
+            "name": "mai_software_error",
+            "desc": "An `MAI_SOFTWARE_ERROR` error was observed.",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.imem_intg_violation",
+            "name": "imem_intg_violation",
+            "desc": "A `IMEM_INTG_VIOLATION` error was observed.",
+            "bits": "16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.dmem_intg_violation",
+            "name": "dmem_intg_violation",
+            "desc": "A `DMEM_INTG_VIOLATION` error was observed.",
+            "bits": "17",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.reg_intg_violation",
+            "name": "reg_intg_violation",
+            "desc": "A `REG_INTG_VIOLATION` error was observed.",
+            "bits": "18",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.bus_intg_violation",
+            "name": "bus_intg_violation",
+            "desc": "A `BUS_INTG_VIOLATION` error was observed.",
+            "bits": "19",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.bad_internal_state",
+            "name": "bad_internal_state",
+            "desc": "A `BAD_INTERNAL_STATE` error was observed.",
+            "bits": "20",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.illegal_bus_access",
+            "name": "illegal_bus_access",
+            "desc": "An `ILLEGAL_BUS_ACCESS` error was observed.",
+            "bits": "21",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.lifecycle_escalation",
+            "name": "lifecycle_escalation",
+            "desc": "A `LIFECYCLE_ESCALATION` error was observed.",
+            "bits": "22",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.ERR_BITS.fatal_software",
+            "name": "fatal_software",
+            "desc": "A `FATAL_SOFTWARE` error was observed.",
+            "bits": "23",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "otbn.reg.FATAL_ALERT_CAUSE",
+        "name": "FATAL_ALERT_CAUSE",
+        "desc": "Fatal Alert Cause Register\n\nDescribes any errors that led to a fatal alert.\nA fatal error puts OTBN in locked state; the value of this register\ndoes not change until OTBN is reset.\n\nRefer to the \"List of Errors\" section for a detailed description of the\nerrors.",
+        "fields": [
+          {
+            "intent_id": "otbn.reg.FATAL_ALERT_CAUSE.imem_intg_violation",
+            "name": "imem_intg_violation",
+            "desc": "A `IMEM_INTG_VIOLATION` error was observed.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.FATAL_ALERT_CAUSE.dmem_intg_violation",
+            "name": "dmem_intg_violation",
+            "desc": "A `DMEM_INTG_VIOLATION` error was observed.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.FATAL_ALERT_CAUSE.reg_intg_violation",
+            "name": "reg_intg_violation",
+            "desc": "A `REG_INTG_VIOLATION` error was observed.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.FATAL_ALERT_CAUSE.bus_intg_violation",
+            "name": "bus_intg_violation",
+            "desc": "A `BUS_INTG_VIOLATION` error was observed.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.FATAL_ALERT_CAUSE.bad_internal_state",
+            "name": "bad_internal_state",
+            "desc": "A `BAD_INTERNAL_STATE` error was observed.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.FATAL_ALERT_CAUSE.illegal_bus_access",
+            "name": "illegal_bus_access",
+            "desc": "A `ILLEGAL_BUS_ACCESS` error was observed.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.FATAL_ALERT_CAUSE.lifecycle_escalation",
+            "name": "lifecycle_escalation",
+            "desc": "A `LIFECYCLE_ESCALATION` error was observed.",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "otbn.reg.FATAL_ALERT_CAUSE.fatal_software",
+            "name": "fatal_software",
+            "desc": "A `FATAL_SOFTWARE` error was observed.",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "otbn.reg.INSN_CNT",
+        "name": "INSN_CNT",
+        "desc": "Instruction Count Register\n\nReturns the number of instructions executed in the current or last\noperation. The counter saturates at 2^32-1 and is reset to 0 at the\nstart of a new operation.\n\nOnly the EXECUTE operation counts instructions; for all other operations\nthis register remains at 0. Instructions triggering an error do not\ncount towards the total.\n\nAlways reads as 0 if OTBN is locked.\n\nThe host CPU can clear this register when OTBN is not running,\nby writing any value. Write attempts while OTBN is running are ignored.",
+        "fields": [
+          {
+            "intent_id": "otbn.reg.INSN_CNT.insn_cnt",
+            "name": "insn_cnt",
+            "desc": "The number of executed instructions.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "otbn.reg.LOAD_CHECKSUM",
+        "name": "LOAD_CHECKSUM",
+        "desc": "A 32-bit CRC checksum of data written to memory\n\nSee the \"Memory Load Integrity\" section of the manual for full details.",
+        "fields": [
+          {
+            "intent_id": "otbn.reg.LOAD_CHECKSUM.checksum",
+            "name": "checksum",
+            "desc": "Checksum accumulator",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "dv/tracer/rtl/otbn_trace_if.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "ImemAddrWidth",
+          "default": "14",
+          "desc": ""
+        },
+        {
+          "name": "DmemAddrWidth",
+          "default": "15",
+          "desc": ""
+        },
+        {
+          "name": "RegFile",
+          "default": "otbn_pkg::RegFileFF",
+          "desc": ""
+        }
+      ]
+    },
+    "dv/tracer/rtl/otbn_tracer.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "InsnExecutePrefix",
+          "default": "\"E\"",
+          "desc": ""
+        },
+        {
+          "name": "InsnStallPrefix",
+          "default": "\"S\"",
+          "desc": ""
+        },
+        {
+          "name": "WipeInProgressPrefix",
+          "default": "\"U\"",
+          "desc": ""
+        },
+        {
+          "name": "WipeCompletePrefix",
+          "default": "\"V\"",
+          "desc": ""
+        },
+        {
+          "name": "StrayChangePrefix",
+          "default": "\"Z\"",
+          "desc": ""
+        },
+        {
+          "name": "RegReadPrefix",
+          "default": "\"<\"",
+          "desc": ""
+        },
+        {
+          "name": "RegWritePrefix",
+          "default": "\">\"",
+          "desc": ""
+        },
+        {
+          "name": "MemWritePrefix",
+          "default": "\"W\"",
+          "desc": ""
+        },
+        {
+          "name": "MemReadPrefix",
+          "default": "\"R\"",
+          "desc": ""
+        }
+      ]
+    },
+    "pre_sca/rtl/otbn_sec_add_sca_wrapper.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "Width",
+          "default": "32",
+          "desc": ""
+        }
+      ]
+    },
+    "pre_sca/rtl/prim_hpc2_sca_wrapper.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nWrapper around the HPC2 AND gadget (prim_hpc2 with EnW=0) for side-channel\nanalysis. Exposes a 2-bit combined input interface: bit 0 carries input A,",
+      "params": []
+    },
+    "pre_sca/rtl/prim_hpc2o_sca_wrapper.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nWrapper around the HPC2o gadget (prim_hpc2 with EnW=1) for side-channel\nanalysis. Exposes a 3-bit combined input interface: bit 0 carries input A,",
+      "params": []
+    },
+    "pre_sca/rtl/prim_hpc3_sca_wrapper.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nWrapper around the HPC3 AND gadget (prim_hpc3 with EnW=0) for side-channel\nanalysis. Exposes a 2-bit combined input interface: bit 0 carries input A,\nbit 1 carries input B. Uses 2-bit randomness (r and rp). Used as the",
+      "params": []
+    },
+    "pre_sca/rtl/prim_hpc3o_sca_wrapper.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nWrapper around the HPC3o gadget (prim_hpc3 with EnW=1) for side-channel\nanalysis. Exposes a 3-bit combined input interface: bit 0 carries input A,\nbit 1 carries input B, bit 2 carries input W. Uses 2-bit randomness (r and",
+      "params": []
+    },
+    "rtl/otbn.sv": {
+      "doc_comment": "OpenTitan Big Number Accelerator (OTBN)",
+      "params": [
+        {
+          "name": "Stub",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RegFile",
+          "default": "RegFileFF",
+          "desc": ""
+        },
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstUrndPrngSeed",
+          "default": "RndCnstUrndPrngSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "SecMuteUrnd",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "SecSkipUrndReseedAtStart",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "SecFixMaiOpSeq",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "FeatStubMai",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstBnMacUrndPerm",
+          "default": "RndCnstBnMacUrndPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstOtbnKey",
+          "default": "RndCnstOtbnKeyDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstOtbnNonce",
+          "default": "RndCnstOtbnNonceDefault",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_alu_base.sv": {
+      "doc_comment": "OTBN execute block for the base instruction subset\n\n This ALU supports the execution of all of OTBN's base instruction subset.",
+      "params": []
+    },
+    "rtl/otbn_alu_bignum.sv": {
+      "doc_comment": "OTBN alu block for the bignum instruction subset\n\n This ALU supports all of the 'plain' arithmetic and logic bignum instructions and some\n vectorized arithmetic instructions. BN.MULQACC and its vectorized counterparts are\n implemented in a separate block.\n\n One barrel shifter and two adders (X and Y) are implemented along with the logic operators\n (AND,OR,XOR,NOT), a vector transposer and 24-bit to 32-bit packing and unpacking logic.\n\n The adders have 256-bit operands with a carry_in and optional invert on the second operand. This\n can be used to implement subtraction (a - b == a + ~b + 1). BN.SUBB/BN.ADDC are implemented by\n feeding in the carry flag as carry in rather than a fixed 0 or 1. These 256-bit operands can\n also be interpreted as vectors with 32-bit elements.\n\n The shifter takes a 512-bit input (to implement BN.RSHI, concatenate and right shift) and shifts\n right by up to 256-bits. The lower (256-bit) half of the input and output can be reversed to\n allow left shift implementation. There is no concatenate and left shift instruction so reversing\n isn't required over the full width.\n\n The dataflow between the adders and shifter is in the diagram below. This arrangement allows the\n implementation of the pseudo-mod (BN.ADDM(V)/BN.SUBM(V)) instructions in a single cycle whilst\n minimising the critical path. The pseudo-mod instructions do not have a shifted input so X can\n compute the initial add/sub and Y computes the pseudo-mod result. The result is selected based\n on the carries of adder X and Y. This selection logic is implemented in the modulo result\n selector. For all other add/sub operations, Y computes the operation with one of the inputs\n supplied by the shifter and the other from operand_a. The result is then pushed through the\n modulo result selector. This allows to save one input to the final result selection mux.\n\n The shifter gets supplied with either operand_a and operand_b or a dense representation thereof\n to implement the packing functionality. In addition, the shifter gets a shift amount (shift_amt)\n and can use 0 instead of operand_a / its dense representation. The shifter concatenates both\n inputs together before shifting with operand_a in the upper (256-bit) half {A/0, B}. This\n allows the shifter to pass through operand_b simply by not performing a shift.\n\n The shifter result has no direct connection to the final result MUX but the result is pushed\n through the logic block with operand_a set to 0 and the logic operation set to OR. This saves\n one input to the result selection mux.\n\n The vector packing and unpacking is implemented using the shifter's concatenation feature and\n some wiring.\n\n Blanking is employed on the ALU data paths. This holds unused data paths to 0 to reduce side\n channel leakage. The lower-case 'b' on the diagram below indicates points in the data path that\n get blanked. Note that Adder X is never used in isolation, it is always combined with Adder Y so\n there is no need for blanking between Adder X and Adder Y.\n\n Due to this blanking only one of the possible results can be active at the same time. This\n allows to implement the final result selection with one 256-bit OR. This is more area as well\n as timing efficient compared to a regular 256-bit mux.\n\n                          A     B\n                          |     |\n                          b     b\n                          |     |\n                     +----+     +----+\n                     |    |     |    |\n                     |  +---------+  |\n                     |  | Packing |  |\n                     |  +---------+  |\n     A       B       |   |       |   |\n     |       |     \\-------/   \\-------/\n     b       b      \\-----/     \\-----/\n     |       |         |           |\n   +-----------+    +-----------------+\n   |  Adder X  |    |     Shifter     |\n   +-----------+    +-----------------+\n         |                   |\n   +-----+-----+     +-------+-------------+\n   |     |     |     |       |             |\n   |  X result |     |  shifter result     |\n   |           |     |                     |\n   |         A |     |     +-----------+   |\n   |         | |     | +---|  MOD WSR  |   |\n   |         b |     b |   +-----------+   |\n   |         | |     | |                   |\n   |       \\-----/ \\-----/          +------+------+   A         A       B\n   |        \\---/   \\---/           |             |   |         |       |\n   |          |       |             b             b   b         b       b\n   |          |       |             |             |   |         |       |\n   |        +-----------+     +-----------+     +-------+     +-----------+\n   |        |  Adder Y  |     | Unpacking |     | Logic |     | Transpose |\n   |        +-----------+     +-----------+     +-------+     +-----------+\n   |              |                 |               |               |\n   +------+    Y result             |               |               |\n          |       |                 |               |               |\n        +-----------+               |               |               |\n        | Modulo    |               |               |               |\n        | Result    |               |               |               |\n        | Selection |               |               |               |\n        +-----------+               |               |               |\n              |                     |               |               |\n      arithmetic result      unpacked result   logic result  transpose result\n              |                     |               |               |\n            +---------------------------------------------------------+\n            |                            OR                           |\n            +---------------------------------------------------------+\n                                         |\n                                 operation_result_o",
+      "params": []
+    },
+    "rtl/otbn_controller.sv": {
+      "doc_comment": "OTBN Controller",
+      "params": [
+        {
+          "name": "ImemSizeByte",
+          "default": "4096",
+          "desc": ""
+        },
+        {
+          "name": "DmemSizeByte",
+          "default": "4096",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "RegFile",
+          "default": "RegFileFF",
+          "desc": ""
+        },
+        {
+          "name": "ImemSizeByte",
+          "default": "4096",
+          "desc": ""
+        },
+        {
+          "name": "DmemSizeByte",
+          "default": "4096",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstUrndPrngSeed",
+          "default": "RndCnstUrndPrngSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "SecMuteUrnd",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "SecSkipUrndReseedAtStart",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "SecFixMaiOpSeq",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "FeatStubMai",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstBnMacUrndPerm",
+          "default": "RndCnstBnMacUrndPermDefault",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_decoder.sv": {
+      "doc_comment": "OTBN instruction Decoder",
+      "params": []
+    },
+    "rtl/otbn_instruction_fetch.sv": {
+      "doc_comment": "OTBN Instruction Fetch Unit\n\n Fetch an instruction from the instruction memory.",
+      "params": [
+        {
+          "name": "ImemSizeByte",
+          "default": "4096",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_kmac_if.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/otbn_loop_controller.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "ImemAddrWidth",
+          "default": "12",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_lsu.sv": {
+      "doc_comment": "OTBN Load-Store Unit\n\n Read and write data from/to the data memory (DMEM). Used by the base and the BN instruction\n subset; loads and stores are hence either 32b or WLEN bit wide.\n\n The data memory interface makes the following assumptions:\n - All requests are answered in the next cycle; the LSU must have exclusive access to the memory.\n - The write mask supports aligned 32b write accesses.",
+      "params": [
+        {
+          "name": "DmemSizeByte",
+          "default": "4096",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_mac_bignum.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "RndCnstBnMacUrndPerm",
+          "default": "RndCnstBnMacUrndPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "urnd_used_o",
+          "default": "tmp_clear_en || c_clear_en || acc_clear_en",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_mac_bignum_fsm.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "EnableAlertTriggerSVA",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_mai.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nOTBN mask accelerator interface",
+      "params": [
+        {
+          "name": "SecFixMaiOpSeq",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "cnt_load_val",
+          "default": "SecFixMaiOpSeq ? '0 : mai_ma_urnd.cnt",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_mask_accelerator.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\n//////////////////////////////////////////////////////////////////////////////////////////////////\nIMPORTANT NOTE:                                                                                //\n                                  DO NOT USE THIS BLINDLY!                                     //\n                                                                                               //\nThis is an initial non-secure prototype of the masking accelerator in OTBN. Details are still  //\nunder discussion and subject to change. This code shall not be used in any product.            //\n//////////////////////////////////////////////////////////////////////////////////////////////////",
+      "params": []
+    },
+    "rtl/otbn_mod_result_selector.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/otbn_predecode.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "ImemSizeByte",
+          "default": "4096",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_rf_base.sv": {
+      "doc_comment": "32b General Purpose Register File (GPRs) with integrity code detecting triple bit errors.\n\n This wraps two implementations, one for FPGA (otbn_rf_base_fpga)\n implementation the other for ASIC (otbn_rf_base_ff).\n\n Both reads and writes use a 2 signal protocol: An _en signal indicates intent to do\n a read or write operation, a _commit signals the operation should proceed. A _commit without _en\n is permissible and means no operation is performed.\n\n This is used to prevent combinational loops in the error handling logic in the controller.\n\n Integrity protection uses an inverted (39, 32) Hsaio code providing a Hamming distance of 4.\n\n `wr_data_no_intg_i` supplies data that requires integrity calculation and `wr_data_intg_i`\n supplies data that comes with integrity. `wr_data_intg_sel_i` is asserted to select the data with\n integrity for the write, otherwise integrity is calculated separately from `wr_data_i`.\n\n Features:\n - 2 read ports\n - 1 write port\n - special purpose stack on a single register (localparam `CallStackRegIndex`)\n   for use as a call stack\n - triple error detection",
+      "params": [
+        {
+          "name": "RegFile",
+          "default": "RegFileFF",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_rf_base_ff.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "WordZeroVal",
+          "default": "'0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_rf_base_fpga.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "WordZeroVal",
+          "default": "'0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_rf_bignum.sv": {
+      "doc_comment": "256b General Purpose Register File (GPRs) with integrity code detecting triple bit errors on a\n 32-bit granule (312 bits total).\n\n This wraps two implementations, one for FPGA (otbn_rf_base_fpga) implementation the other for\n ASIC (otbn_rf_base_ff).\n\n Integrity protection uses an inverted (39, 32) Hsaio code providing a Hamming distance of 4.\n\n `wr_data_no_intg_i` supplies data that requires integrity calculation and `wr_data_intg_i`\n supplies data that comes with integrity. `wr_data_intg_sel_i` is asserted to select the data with\n integrity for the write, otherwise integrity is calculated separately from `wr_data_i`.\n\n Features:\n - 2 read ports\n - 1 write port\n - triple error detection",
+      "params": [
+        {
+          "name": "RegFile",
+          "default": "RegFileFF",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_rf_bignum_ff.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/otbn_rf_bignum_fpga.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "WordZeroVal",
+          "default": "'0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_rnd.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "RndCnstUrndPrngSeed",
+          "default": "RndCnstUrndPrngSeedDefault",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_scramble_ctrl.sv": {
+      "doc_comment": "Scramble control for OTBN\n\n This provides a key and nonce for scrambling the OTBN IMem and DMem. The OTP\n key interface is used to request a new key and nonce when they are requested.",
+      "params": [
+        {
+          "name": "RndCnstOtbnKey",
+          "default": "otbn_pkg::RndCnstOtbnKeyDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstOtbnNonce",
+          "default": "otbn_pkg::RndCnstOtbnNonceDefault",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_sec_add.sv": {
+      "doc_comment": "Description: First-order masked parallel prefix adder based on HPC3 gadgets.\n\nImplements a masked Sklansky adder operating on two Width-bit Boolean sharings (inp1_i, inp2_i)\nand producing a (Width+1)-bit Boolean sharing (result_o), where the extra bit is the carry out.\nThe masking uses 2 shares throughout and is secure against first-order probing attacks. All AND\ngates are implemented with HPC3 or HPC3o gadgets providing glitch-robust PINI security.\n\nPipeline structure (latency = log2(Width) + 1 cycles, 6 cycles for Width=32):\n  Cycle 0:    Pre-processing: compute generate (g = inp1 & inp2) and propagate (p = inp1 ^ inp2)\n  Cycles 1-5: Prefix tree:    log2(Width) stages of masked generate and propagate operations\n  Cycle 5:    Combinatorial sum generation: result[i] = p_initial[i] ^ g_final[i]\n\nrand_i (RandWidth = 2*(log2(Width)*Width + 1) bits = 322 bits for Width=32) is the random input\nand must be fresh every cycle while data is being processed. Each HPC3 gadget has a dedicated\n2-bit randomness register loaded from rand_i one cycle before the gadget fires (enabled by\nupdate_en[level-1]).\n\nvalid_i qualifies the inputs. It is registered through the pipeline alongside the data.\nstall_i freezes the entire pipeline (all pipeline registers hold their values).\nvalid_o is asserted when a valid result is present at result_o and stall_i is low.\n\nSecurity verification: verified for first order power SCA using Coco Alma and PROLEAD. Setups\nare under {REPO_TOP}/hw/ip/otbn/pre_sca.",
+      "params": [
+        {
+          "name": "Width",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "RandWidth",
+          "default": "2 * (Stages * Width + 1)",
+          "desc": "derived parameter"
+        }
+      ]
+    },
+    "rtl/otbn_sec_add_mod.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nFirst-order masked modular adder: computes inp1 + inp2 mod modulus on two Width-bit Boolean\nsharings, producing a Width-bit Boolean sharing result_o.\n\nWhen enable_mod_i is high, the caller must bake a correction offset into the inputs so that the\ntwo-pass algorithm can recover the true modular result.\n\nConcretely, to compute (a + b) mod modulus, the Boolean-shared inputs must satisfy:\n  (inp1_i[0] ^ inp1_i[1]) + (inp2_i[0] ^ inp2_i[1])  =  a + b + (2^Width - modulus)\n\ni.e. the XOR-sum of the shares equals the true arithmetic sum plus the two's-complement\nnegation of the modulus. The two-pass correction in pass-2 then cancels this offset,\nleaving result_o[0] ^ result_o[1] = (a + b) mod modulus.\n\nWhen enable_mod_i is low the modular reduction is skipped and the raw pass-1 result is returned\ndirectly. Hence, no pre-subtraction of the modulus is needed.\n\nAlgorithm (enable_mod_i = 1, modulus = q):\n  Input:  inp1_i = (inp1_i[0], inp1_i[1]), inp2_i = (inp2_i[0], inp2_i[1]), where\n          (inp1_i[0] ^ inp1_i[1]) + (inp2_i[0] ^ inp2_i[1]) = inp1 + inp2 + (2^Width - q)\n  Output: result_o where result_o[0] ^ result_o[1] = inp1 + inp2 mod q\n\n  sec_add_result = SecAdd(inp1_i, inp2_i)                  // calculate the sum\n  add_mod[s]     = sec_add_result[s][Width]                // carry-out bit per share\n  mod_correction = (add_mod[0] * q, add_mod[1] * q)        // calculate the mod correction term\n  result_o       = SecAdd(sec_add_result, mod_correction)  // perform the correction\n\nTwo-pass implementation:\n  Pass 1: Feed (inp1_i, inp2_i) into otbn_sec_add. The (Width+1)-bit result (data + carry out)\n          is written into a FIFO of depth 2.\n  Pass 2: Once the pass-1 result reaches the FIFO tail, the per-share carry bit (add_mod[s])\n          selects the correction for each share. The otbn_sec_add result and the correction term\n          are re-fed into otbn_sec_add to produce the final modular-reduced output.\n  The correction term is computed as follows:\n    mod_correction[0] = add_mod[0] ? 0         : modulus_i  (share 0: add modulus_i if no carry)\n    mod_correction[1] = add_mod[1] ? modulus_i : 0          (share 1: add modulus_i if carry)\n\nThroughput:\n  enable_mod_i = 0: 1 sample/cycle, latency = 6 cycles.\n  enable_mod_i = 1: 0.5 samples/cycle, VecSize=8 inputs are accepted over 8 cycles,\n                    then pass 2 occupies otbn_sec_add for 8 cycles. Latency = 14 cycles\n                    to the first result of a batch, 21 cycles to the last.\n\nInterface:\n  wvalid_i / wready_o : Input handshake; wready_o deasserted while otbn_sec_add is occupied\n                        during the 8 pass-2 cycles.\n  enable_mod_i        : Must be driven from a register to minimize glitches. It must not change\n                        while a batch is in progress. When low, bypasses modular reduction and\n                        routes pass-1 directly to output. No self-stalling occurs and gaps in",
+      "params": [
+        {
+          "name": "Width",
+          "default": "32",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_stack.sv": {
+      "doc_comment": "Simple stack parameterised on width and depth\n\n When a push and pop occur in the same cycle the pop is ordered before the push (so top_data_o\n reflects what was on top of the stack, which is retrieved by the pop, the push then immediately\n replaces this with a new piece of data). Internal checking is performed for full & empty\n conditions so a push on full/pop on empty is allowable, though meaningless. For a push on full\n the data will be dropped, for a pop no empty there is no valid data to pop. The exception is\n a combined push & pop on full, here the top is popped off and replaced with what is pushed, no\n data is dropped.\n\n The read and write pointers and read and write signals are exposed as `stack_rd_idx_i,\n `stack_wr_idx_o`, `stack_write_o` and `stack_read_o`. `next_top_data_o` and `next_top_valid_o`\n provide the top_data_o and top_valid_o output that will be seen in the following cycle if\n `commit_i` is set. This is to enable users to extend the stack in case where it's not a simple\n matter of adding extra data bits (e.g. where this is a prim_count instance per stack entry).",
+      "params": [
+        {
+          "name": "StackWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "StackDepth",
+          "default": "4",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_start_stop_control.sv": {
+      "doc_comment": "State machine to handle actions that occur around the start and stop of OTBN.\n\n This receives the start signals from the top-level and passes them on to the\n controller to begin execution when pre-start actions have finished.\n\n pre-start actions:\n  - Seed LFSR for URND\n\n post-stop actions:\n  - Internal Secure Wipe\n    -Delete WDRs\n    -Delete Base registers\n    -Delete Accumulator\n    -Delete Modulus\n    -Delete Accelerator ISPRs\n    -Reset stack",
+      "params": [
+        {
+          "name": "SecMuteUrnd",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "SecSkipUrndReseedAtStart",
+          "default": "1'b0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_vec_adder.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "LVLEN",
+          "default": "VLEN",
+          "desc": ""
+        },
+        {
+          "name": "LVChunkLEN",
+          "default": "VChunkLEN",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/otbn_vec_multiplier.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/otbn_vec_shifter.sv": {
+      "doc_comment": "OTBN vectorized shifter\n\n This shifter can perform logical shifts on vectors elementwise as well as concatenate and shift\n 256 bit registers. The shifter takes a 512-bit input (to implement BN.RSHI, concatenate and\n right shift) and shifts right by up to 256-bits. The lower (256-bit) half of the input and\n output can be reversed to enable a left shift operation. There is no concatenate and left shift\n instruction so reversing isn't required over the full width. If there is no concatenation, the\n upper input must be all-zero.\n\n Shifting vectors elementwise is enabled by adding a masking step after the shifting.\n For this an element width dependent mask must be provided which then will clear the bits\n overflowing into the neighboring element.\n\n Example:\n Assume there is a vector with 2 4-bit elements:\n   |0101 1010|\n\n This should be shifted >> by 2. The expected result is:\n   |0001 0010|\n\n The regular shifting process would give:\n   |0001 0110|\n\n so the lower 2 bits of the upper element are shifted into the lower element. To correct this,\n the mask 8'b00110011 must be provided. This mask is then applied and clears the overflowing\n bits.\n\n    |0001 0110|\n  & |0011 0011|\n  = |0001 0010|\n\n This approach natively supports 256-bit elements by setting the mask to all-ones.\n\n in_upper    in_lower\n    |           |\n    |       +---+---+\n    |       |       |\n    |       |    +-----+\n    |       |    | rev |  reverse the input\n    |       |    +-----+\n    |       |       |\n    |       |   +---+\n    |       |   |\n    |     \\-------/ <-- shift_direction\n    |         |\n    |   +-----+\n    |   |\n  +-------+\n  |  >>   | <-- shift_amount\n  +-------+\n      |\n +---------+\n | [255:0] |\n +---------+\n      |\n +---------+\n | mask &  | <-- vector_mask\n +---------+\n   |     |\n   |     |\n   |  +-----+\n   |  | rev | reverse the input back\n   |  +-----+\n   |     |\n   |   +-+\n   |   |\n \\-------/ <-- shift_direction\n     |\n shift_result",
+      "params": []
+    },
+    "rtl/otbn_vec_transposer.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    }
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "ip_name": "adc_ctrl",
+  "ip_intent": {
+    "ip_name": "adc_ctrl",
+    "one_line_desc": "Low-power controller for a dual-channel ADC with filtering and debouncing capability",
+    "one_paragraph_desc": "Analog to Digital Converter (ADC) Controller provides a simple front-end to an analog block that allows filtering and debouncing of the sampled data.\nADC Controller supports 2 ADC channels and 8 filters on the values from the channels.\nIt has debounce timers on the filter output and supports ADCs with 10-bit output.\nTo enable usage while the device is sleeping, it runs on a slow always-on clock.\nIn addition, it has a low power periodic scan mode for monitoring ADC channels.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_aon_i",
+        "reset": "rst_aon_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "NumAdcFilter",
+        "desc": "Number for ADC filters",
+        "default": "8"
+      },
+      {
+        "name": "NumAdcChannel",
+        "desc": "Number for ADC channels",
+        "default": "2"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "adc_ctrl.interrupt.match_pending",
+        "name": "match_pending",
+        "desc": "ADC match or measurement event has occurred"
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "adc_ctrl.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "adc_ctrl.reg.adc_en_ctl",
+        "name": "adc_en_ctl",
+        "desc": "ADC enable control register",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_en_ctl.adc_enable",
+            "name": "adc_enable",
+            "desc": "1'b0: to power down ADC and ADC_CTRL FSM will enter the reset state; 1'b1: to power up ADC and ADC_CTRL FSM will start",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.adc_en_ctl.oneshot_mode",
+            "name": "oneshot_mode",
+            "desc": "Oneshot mode does not care about the filter value. 1'b0: disable; 1'b1: enable",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.adc_pd_ctl",
+        "name": "adc_pd_ctl",
+        "desc": "ADC PowerDown(PD) control register",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_pd_ctl.lp_mode",
+            "name": "lp_mode",
+            "desc": "1'b0: adc_pd is disabled, use adc_sample_ctl. 1'b1: adc_pd is enabled, use both adc_lp_sample_ctl & adc_sample_ctl",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.adc_pd_ctl.pwrup_time",
+            "name": "pwrup_time",
+            "desc": "ADC power up time, measured in always on clock cycles.\nAfter power up time is reached, the ADC controller needs one additional cycle before an ADC channel is selected for access.",
+            "bits": "7:4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.adc_pd_ctl.wakeup_time",
+            "name": "wakeup_time",
+            "desc": "How often FSM wakes up from ADC PD mode to take a sample, measured in always on clock cycles.",
+            "bits": "31:8",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.adc_lp_sample_ctl",
+        "name": "adc_lp_sample_ctl",
+        "desc": "ADC Low-Power(LP) sample control register",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_lp_sample_ctl.lp_sample_cnt",
+            "name": "lp_sample_cnt",
+            "desc": "The number of samples in low-power mode when the low-power mode is enabled.\nAfter the programmed number is met, ADC won't be powered down any more.\nThis value must be 1 or larger.",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.adc_sample_ctl",
+        "name": "adc_sample_ctl",
+        "desc": "ADC sample control register",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_sample_ctl.np_sample_cnt",
+            "name": "np_sample_cnt",
+            "desc": "The number of samples in normal-power mode to meet the debounce spec.\nUsed after the low-power mode condition is met or in the normal power mode.\nThis value must be 1 or larger.",
+            "bits": "15:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.adc_fsm_rst",
+        "name": "adc_fsm_rst",
+        "desc": "ADC FSM reset control",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_fsm_rst.rst_en",
+            "name": "rst_en",
+            "desc": "1'b0: Normal functional mode. 1'b1: SW to reset all the FSMs and timers",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.adc_wakeup_ctl",
+        "name": "adc_wakeup_ctl",
+        "desc": "Enable filter matches as wakeups",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_wakeup_ctl.MATCH_EN",
+            "name": "MATCH_EN",
+            "desc": "Filter wakeup source.\n\n0: filter match will not generate wakeup;\n1: filter match will generate wakeup",
+            "bits": "NumAdcFilter-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.adc_wakeup_ctl.TRANS_EN",
+            "name": "TRANS_EN",
+            "desc": "Wakeup due to FSM transition from low power sampling\nmode to normal sampling mode.\n\nNote that this wakeup source is primarily intended for debug purposes.\nIf enabled all the time, this can lead to many wakeups due to false\npositives that are ruled out automatically by adc_ctrl after\ntransitioning from LP -> NP.\n\n0: transition match will not generate wakeup;\n1: transition match will generate wakeup",
+            "bits": "NumAdcFilter:NumAdcFilter",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.filter_status",
+        "name": "filter_status",
+        "desc": "Adc filter match status\n\nIndicates whether a particular filter has matched on all channels.",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.filter_status.MATCH",
+            "name": "MATCH",
+            "desc": "0: filter condition is not met; 1: filter condition is met",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.filter_status.TRANS",
+            "name": "TRANS",
+            "desc": "0: transition did not occur; 1: transition occurred",
+            "bits": "NumAdcFilter:NumAdcFilter",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.adc_intr_ctl",
+        "name": "adc_intr_ctl",
+        "desc": "Interrupt enable controls.\n\nadc_ctrl sends out only 1 interrupt, so this register controls\nwhich internal sources are actually registered.\n\nThis register uses the same bit enumeration as !!ADC_INTR_STATUS",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_intr_ctl.MATCH_EN",
+            "name": "MATCH_EN",
+            "desc": "Filter interrupt source.\n\n0: interrupt source is not enabled; 1: interrupt source is enabled",
+            "bits": "NumAdcFilter-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.adc_intr_ctl.TRANS_EN",
+            "name": "TRANS_EN",
+            "desc": "Interrupt due to FSM transition from low power sampling\nmode to normal sampling mode. This is mainly intended for debug.\n\nNote that this interrupt is primarily intended for debug purposes.\n\n0: interrupt source is not enabled; 1: interrupt source is enabled",
+            "bits": "NumAdcFilter:NumAdcFilter",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.adc_intr_ctl.ONESHOT_EN",
+            "name": "ONESHOT_EN",
+            "desc": "Interrupt due to oneshot sampling.\n\n0: interrupt source is not enabled; 1: interrupt source is enabled",
+            "bits": "NumAdcFilter+1:NumAdcFilter+1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.adc_intr_status",
+        "name": "adc_intr_status",
+        "desc": "Debug cable internal status",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_intr_status.MATCH",
+            "name": "MATCH",
+            "desc": "0: filter condition is not met; 1: filter condition is met",
+            "bits": "NumAdcFilter-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.adc_intr_status.TRANS",
+            "name": "TRANS",
+            "desc": "0: transition did not occur; 1: transition occurred",
+            "bits": "NumAdcFilter:NumAdcFilter",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "adc_ctrl.reg.adc_intr_status.ONESHOT",
+            "name": "ONESHOT",
+            "desc": "0: oneshot sample is not done ; 1: oneshot sample is done",
+            "bits": "NumAdcFilter+1:NumAdcFilter+1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "adc_ctrl.reg.adc_fsm_state",
+        "name": "adc_fsm_state",
+        "desc": "State of the internal state machine",
+        "fields": [
+          {
+            "intent_id": "adc_ctrl.reg.adc_fsm_state.state",
+            "name": "state",
+            "desc": "Current FSM state (for debug purposes)",
+            "bits": "4:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/adc_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/adc_ctrl_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/adc_ctrl_fsm.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/adc_ctrl_intr.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: adc_ctrl interrupt Module",
+      "params": []
+    }
+  }
+}

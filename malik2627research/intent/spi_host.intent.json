@@ -1,0 +1,643 @@
+{
+  "ip_name": "spi_host",
+  "ip_intent": {
+    "ip_name": "spi_host",
+    "one_line_desc": "Serial peripheral interface for host mode, suitable for interfacing external serial NOR flash devices",
+    "one_paragraph_desc": "SPI Host bridges communications from the TileLink Uncached Light (TL-UL) bus and off-chip devices by acting as a SPI interface bus master, primarily intended for communication with serial NOR flash devices and other low-speed devices.\nWhile SPI is not a formal standard, this implementation aims to be general enough to support a variety of devices by providing a plethora of run-time configurable options.\nCommunication with each device on the bus uses an independent chip select (CS), and each transaction may be individually configured regarding endianness, polarity and phase (CPOL/ CPHA), and full-duplex/half-duplex commands in standard mode.\n32-bit TL-UL registers interface with receive and transmit data FIFOs as well as a command FIFO for encoding multiple sequential 'segments' making up a larger SPI transaction.\nThis allows each segment to have an arbitrary byte-count, Std/Dual/Quad width, and direction, and it allows the CS to be managed automatically across multiple sequential segments.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "ByteOrder",
+        "desc": "Byte order to use when transmitting or receiving data.  If ByteOrder = 0,\n   the IP uses a Big-Endian ordering for the bytes in DATA.\n   The most significant byte (MSB) of DATA is transmitted first, and\n   received data is placed in the MSB location of DATA.  If ByteOrder = 1,\n   a Little-Endian ordering is used for these registers, and the LSB of each\n   gets priority for receiving and transmitting data.",
+        "default": "1"
+      },
+      {
+        "name": "NumCS",
+        "desc": "The number of active-low chip select (cs_n) lines to create.",
+        "default": "1"
+      },
+      {
+        "name": "TxDepth",
+        "desc": "The size of the Tx FIFO (in words)",
+        "default": "72"
+      },
+      {
+        "name": "RxDepth",
+        "desc": "The size of the Rx FIFO (in words)",
+        "default": "64"
+      },
+      {
+        "name": "CmdDepth",
+        "desc": "The size of the Cmd FIFO (one segment descriptor per entry)",
+        "default": "4"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "spi_host.interrupt.error",
+        "name": "error",
+        "desc": "Error-related interrupts, see !!ERROR_ENABLE register for more\n   information."
+      },
+      {
+        "intent_id": "spi_host.interrupt.spi_event",
+        "name": "spi_event",
+        "desc": "Event-related interrupts, see !!EVENT_ENABLE register for more\n   information."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "spi_host.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "spi_host.reg.CONTROL",
+        "name": "CONTROL",
+        "desc": "Control register",
+        "fields": [
+          {
+            "intent_id": "spi_host.reg.CONTROL.SPIEN",
+            "name": "SPIEN",
+            "desc": "Enables the SPI host.  On reset, this field is 0, meaning\n   that no transactions can proceed.",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONTROL.SW_RST",
+            "name": "SW_RST",
+            "desc": "Clears the internal state (not registers) to the reset state when set to 1,\n   including the FIFOs, the CDC's, the core state machine and the shift register.\n   In the current implementation, the CDC FIFOs are drained not reset.\n   Therefore software must confirm that both FIFO's empty before releasing\n   the IP from reset.",
+            "bits": "30",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONTROL.OUTPUT_EN",
+            "name": "OUTPUT_EN",
+            "desc": "Enable the SPI host output buffers for the sck, csb, and sd lines.  This allows\n   the SPI_HOST IP to connect to the same bus as other SPI controllers without\n   interference.",
+            "bits": "29",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONTROL.TX_WATERMARK",
+            "name": "TX_WATERMARK",
+            "desc": "If !!EVENT_ENABLE.TXWM is set, the IP will send\n   an interrupt when the depth of the TX FIFO drops below\n   TX_WATERMARK words (32b each).",
+            "bits": "15:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONTROL.RX_WATERMARK",
+            "name": "RX_WATERMARK",
+            "desc": "If !!EVENT_ENABLE.RXWM is set, the IP will send\n   an interrupt when the depth of the RX FIFO reaches\n   RX_WATERMARK words (32b each).",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_host.reg.STATUS",
+        "name": "STATUS",
+        "desc": "Status register",
+        "fields": [
+          {
+            "intent_id": "spi_host.reg.STATUS.READY",
+            "name": "READY",
+            "desc": "When high, indicates the SPI host is ready to receive\n   commands. Writing to COMMAND when READY is low is\n   an error, and will trigger an interrupt.",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.ACTIVE",
+            "name": "ACTIVE",
+            "desc": "When high, indicates the SPI host is processing a previously\n   issued command.",
+            "bits": "30",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.TXFULL",
+            "name": "TXFULL",
+            "desc": "When high, indicates that the transmit data fifo is full.\n   Any further writes to !!TXDATA will create an error interrupt.",
+            "bits": "29",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.TXEMPTY",
+            "name": "TXEMPTY",
+            "desc": "When high, indicates that the transmit data fifo is empty.",
+            "bits": "28",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.TXSTALL",
+            "name": "TXSTALL",
+            "desc": "If high, signifies that an ongoing transaction has stalled\n   due to lack of data in the TX FIFO",
+            "bits": "27",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.TXWM",
+            "name": "TXWM",
+            "desc": "If high, the amount of data in the TX FIFO has fallen below the\n   level of !!CONTROL.TX_WATERMARK words (32b each).",
+            "bits": "26",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.RXFULL",
+            "name": "RXFULL",
+            "desc": "When high, indicates that the receive fifo is full.  Any\n   ongoing transactions will stall until firmware reads some\n   data from !!RXDATA.",
+            "bits": "25",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.RXEMPTY",
+            "name": "RXEMPTY",
+            "desc": "When high, indicates that the receive fifo is empty.\n   Any reads from RX FIFO will cause an error interrupt.",
+            "bits": "24",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.RXSTALL",
+            "name": "RXSTALL",
+            "desc": "If high, signifies that an ongoing transaction has stalled\n   due to lack of available space in the RX FIFO",
+            "bits": "23",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.BYTEORDER",
+            "name": "BYTEORDER",
+            "desc": "The value of the ByteOrder parameter, provided so that firmware\n   can confirm proper IP configuration.",
+            "bits": "22",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.RXWM",
+            "name": "RXWM",
+            "desc": "If high, the number of 32-bits in the RX FIFO now exceeds the\n   !!CONTROL.RX_WATERMARK entries (32b each).",
+            "bits": "20",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.CMDQD",
+            "name": "CMDQD",
+            "desc": "Command queue depth. Indicates how many unread 32-bit words are\n   currently in the command segment queue.",
+            "bits": "19:16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.RXQD",
+            "name": "RXQD",
+            "desc": "Receive queue depth. Indicates how many unread 32-bit words are\n   currently in the RX FIFO.  When active, this result may an\n   underestimate due to synchronization delays.",
+            "bits": "15:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.STATUS.TXQD",
+            "name": "TXQD",
+            "desc": "Transmit queue depth.\n   Indicates how many unsent 32-bit words are currently in the TX FIFO.\n   When active, this result may be an overestimate due to synchronization delays.",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_host.reg.CONFIGOPTS",
+        "name": "CONFIGOPTS",
+        "desc": "Configuration options register.\n\n   Contains options for controlling the current peripheral.\n   Firmware needs to configure the options before the transfer.",
+        "fields": [
+          {
+            "intent_id": "spi_host.reg.CONFIGOPTS.CPOL",
+            "name": "CPOL",
+            "desc": "The polarity of the sck clock signal.  When CPOL is 0,\n    sck is low when idle, and emits high pulses.   When CPOL\n    is 1, sck is high when idle, and emits a series of low\n    pulses.",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONFIGOPTS.CPHA",
+            "name": "CPHA",
+            "desc": "The phase of the sck clock signal relative to the data. When\n    CPHA = 0, the data changes on the trailing edge of sck\n    and is typically sampled on the leading edge.  Conversely\n    if CPHA = 1 high, data lines change on the leading edge of\n    sck and are typically sampled on the trailing edge.\n    CPHA should be chosen to match the phase of the selected\n    device.  The sampling behavior is modified by the\n    !!CONFIGOPTS.FULLCYC bit.",
+            "bits": "30",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONFIGOPTS.FULLCYC",
+            "name": "FULLCYC",
+            "desc": "Full cycle.  Modifies the CPHA sampling behaviour to allow\n    for longer device logic setup times.  Rather than sampling the SD\n    bus a half cycle after shifting out data, the data is sampled\n    a full cycle after shifting data out.  This means that if\n    CPHA = 0, data is shifted out on the trailing edge, and\n    sampled a full cycle later.  If CPHA = 1, data is shifted and\n    sampled with the trailing edge, also separated by a\n    full cycle.",
+            "bits": "29",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONFIGOPTS.CSNLEAD",
+            "name": "CSNLEAD",
+            "desc": "CS_N Leading Time.  Indicates the number of half sck cycles,\n    CSNLEAD+1, to leave between the falling edge of cs_n and\n    the first edge of sck.  Setting this register to zero\n    corresponds to the minimum delay of one-half sck cycle",
+            "bits": "27:24",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONFIGOPTS.CSNTRAIL",
+            "name": "CSNTRAIL",
+            "desc": "CS_N Trailing Time.  Indicates the number of half sck cycles,\n    CSNTRAIL+1, to leave between last edge of sck and the rising\n    edge of cs_n. Setting this register to zero corresponds\n    to the minimum delay of one-half sck cycle.",
+            "bits": "23:20",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONFIGOPTS.CSNIDLE",
+            "name": "CSNIDLE",
+            "desc": "Minimum idle time between commands. Indicates the minimum\n    number of sck half-cycles to hold cs_n high between commands.\n    Setting this register to zero creates a minimally-wide CS_N-high\n    pulse of one-half sck cycle.",
+            "bits": "19:16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.CONFIGOPTS.CLKDIV",
+            "name": "CLKDIV",
+            "desc": "Core clock divider.  Slows down subsequent SPI transactions by a\n    factor of (CLKDIV+1) relative to the core clock frequency.  The\n    period of sck, T(sck) then becomes `2*(CLK_DIV+1)*T(core)`",
+            "bits": "15:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_host.reg.CSID",
+        "name": "CSID",
+        "desc": "Chip-Select ID\n\n   Controls which device to target with the next command.  This register\n   is passed to the core whenever !!COMMAND is written.  The core then\n   asserts cio_csb_o[!!CSID] during the execution of the command.",
+        "fields": [
+          {
+            "intent_id": "spi_host.reg.CSID.CSID",
+            "name": "CSID",
+            "desc": "Chip Select ID",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_host.reg.COMMAND",
+        "name": "COMMAND",
+        "desc": "Command Register\n\n   Parameters specific to each command segment.  Unlike the !!CONFIGOPTS multi-register,\n   there is only one command register for controlling all attached SPI devices",
+        "fields": [
+          {
+            "intent_id": "spi_host.reg.COMMAND.LEN",
+            "name": "LEN",
+            "desc": "Segment Length.\n\n   For read or write segments, this field controls the\n   number of 1-byte bursts to transmit and or receive in\n   this command segment.  The number of cycles required\n   to send or received a byte will depend on !!COMMAND.SPEED.\n   For dummy segments, (!!COMMAND.DIRECTION == 0), this register\n   controls the number of dummy cycles to issue.\n   The number of bytes (or dummy cycles) in the segment will be\n   equal to !!COMMAND.LEN + 1.",
+            "bits": "24:5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.COMMAND.DIRECTION",
+            "name": "DIRECTION",
+            "desc": "The direction for the following command: \"0\" = Dummy cycles\n   (no TX/RX). \"1\" = Rx only, \"2\" = Tx only, \"3\" = Bidirectional\n   Tx/Rx (Standard SPI mode only).",
+            "bits": "4:3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.COMMAND.SPEED",
+            "name": "SPEED",
+            "desc": "The speed for this command segment: \"0\" = Standard SPI. \"1\" = Dual SPI.\n   \"2\"=Quad SPI,  \"3\": RESERVED.",
+            "bits": "2:1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.COMMAND.CSAAT",
+            "name": "CSAAT",
+            "desc": "**C**hip **S**elect **A**ctive **A**fter **T**ransaction.\n   If !!COMMAND.CSAAT = 0, the chip select line is raised immediately\n   at the end of the command segment.\n   If !!COMMAND.CSAAT = 1, the chip select line is left low at the\n   end of the current transaction segment.\n   This allows the creation of longer, more complete SPI transactions,\n   consisting of several separate segments for issuing instructions,\n   pausing for dummy cycles, and transmitting or receiving data from\n   the device.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_host.reg.ERROR_ENABLE",
+        "name": "ERROR_ENABLE",
+        "desc": "Controls which classes of errors raise an interrupt.",
+        "fields": [
+          {
+            "intent_id": "spi_host.reg.ERROR_ENABLE.CSIDINVAL",
+            "name": "CSIDINVAL",
+            "desc": "Invalid CSID: If this bit is set, the block sends an error interrupt whenever\n   a command is submitted, but CSID exceeds NumCS.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_ENABLE.CMDINVAL",
+            "name": "CMDINVAL",
+            "desc": "Invalid Command Errors: If this bit is set, the block sends an\n   error interrupt whenever a command is sent with invalid values for\n   !!COMMAND.SPEED or !!COMMAND.DIRECTION.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_ENABLE.UNDERFLOW",
+            "name": "UNDERFLOW",
+            "desc": "Underflow Errors: If this bit is set, the block sends an\n   error interrupt whenever there is a read from !!RXDATA\n   but the RX FIFO is empty.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_ENABLE.OVERFLOW",
+            "name": "OVERFLOW",
+            "desc": "Overflow Errors: If this bit is set, the block sends an\n   error interrupt whenever the TX FIFO overflows.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_ENABLE.CMDBUSY",
+            "name": "CMDBUSY",
+            "desc": "Command Error: If this bit is set, the block sends an error\n   interrupt whenever a command is issued while busy (i.e. a 1 is\n   when !!STATUS.READY is not asserted.)",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_host.reg.ERROR_STATUS",
+        "name": "ERROR_STATUS",
+        "desc": "Indicates that any errors that have occurred.\n   When an error\n   occurs, the corresponding bit must be cleared here before\n   issuing any further commands.",
+        "fields": [
+          {
+            "intent_id": "spi_host.reg.ERROR_STATUS.ACCESSINVAL",
+            "name": "ACCESSINVAL",
+            "desc": "Indicates that TLUL attempted to write to TXDATA with no bytes enabled. Such\n   'zero byte' writes are not supported.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_STATUS.CSIDINVAL",
+            "name": "CSIDINVAL",
+            "desc": "Indicates a command was attempted with an invalid value for !!CSID.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_STATUS.CMDINVAL",
+            "name": "CMDINVAL",
+            "desc": "Indicates an invalid command segment, meaning either an invalid value of\n   !!COMMAND.SPEED or a request for bidirectional data transfer at dual or quad\n   speed",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_STATUS.UNDERFLOW",
+            "name": "UNDERFLOW",
+            "desc": "Indicates that firmware has attempted to read from\n   !!RXDATA when the RX FIFO is empty.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_STATUS.OVERFLOW",
+            "name": "OVERFLOW",
+            "desc": "Indicates that firmware has overflowed the TX FIFO",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.ERROR_STATUS.CMDBUSY",
+            "name": "CMDBUSY",
+            "desc": "Indicates a write to !!COMMAND when !!STATUS.READY = 0.\n   ",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_host.reg.EVENT_ENABLE",
+        "name": "EVENT_ENABLE",
+        "desc": "Controls which classes of SPI events raise an interrupt.",
+        "fields": [
+          {
+            "intent_id": "spi_host.reg.EVENT_ENABLE.IDLE",
+            "name": "IDLE",
+            "desc": "Assert to send a spi_event interrupt whenever !!STATUS.ACTIVE\n   goes low",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.EVENT_ENABLE.READY",
+            "name": "READY",
+            "desc": "Assert to send a spi_event interrupt whenever !!STATUS.READY\n   goes high",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.EVENT_ENABLE.TXWM",
+            "name": "TXWM",
+            "desc": "Assert to send a spi_event interrupt whenever the number of 32-bit words in\n   the TX FIFO is less than !!CONTROL.TX_WATERMARK.  To prevent the\n   reassertion of this interrupt add more data to the TX FIFO, or\n   reduce !!CONTROL.TX_WATERMARK.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.EVENT_ENABLE.RXWM",
+            "name": "RXWM",
+            "desc": "Assert to send a spi_event interrupt whenever the number of 32-bit words in\n   the RX FIFO is greater than !!CONTROL.RX_WATERMARK. To prevent the\n   reassertion of this interrupt, read more data from the RX FIFO, or\n   increase !!CONTROL.RX_WATERMARK.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.EVENT_ENABLE.TXEMPTY",
+            "name": "TXEMPTY",
+            "desc": "Assert to send a spi_event interrupt whenever !!STATUS.TXEMPTY\n   goes high",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_host.reg.EVENT_ENABLE.RXFULL",
+            "name": "RXFULL",
+            "desc": "Assert to send a spi_event interrupt whenever !!STATUS.RXFULL\n   goes high",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/spi_host.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "NumCS",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinRXDATA",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinTXDATA",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spi_host_byte_merge.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/spi_host_byte_select.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/spi_host_command_queue.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nQueue for SPI_HOST commands",
+      "params": [
+        {
+          "name": "CmdDepth",
+          "default": "4",
+          "desc": ""
+        },
+        {
+          "name": "NumCS",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spi_host_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "NumCS",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spi_host_data_fifos.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nModule for SPI_HOST RX and TX queues",
+      "params": [
+        {
+          "name": "TxDepth",
+          "default": "72",
+          "desc": ""
+        },
+        {
+          "name": "RxDepth",
+          "default": "64",
+          "desc": ""
+        },
+        {
+          "name": "SwapBytes",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spi_host_fsm.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "NumCS",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spi_host_shift_register.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nShift Register for Serial Peripheral Interface (SPI) Host IP.",
+      "params": []
+    },
+    "rtl/spi_host_window.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nModule to manage TX & RX FIFO windows for Serial Peripheral Interface (SPI) host IP.",
+      "params": [
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinRXDATA",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinTXDATA",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1283 @@
+{
+  "ip_name": "spi_device",
+  "ip_intent": {
+    "ip_name": "spi_device",
+    "one_line_desc": "Serial peripheral interface supporting different device modes, suitable for bulk-load of data into and out of the chip",
+    "one_paragraph_desc": "SPI Device is a configurable, versatile hardware block that implements three modes (SPI Flash emulation mode, SPI passthrough mode, and TPM over SPI mode) to support a variety of different applications.\nTPM over SPI operates in compliance with TPM PC Client Platform, unloading this protocol from a software solution.\nSPI Flash emulation mode supports many JEDEC standard commands such as Read Status, Read JEDEC ID, Read SFDP, EN4B/EX4B, and multiple other read commands, allowing OpenTitan to provide, for example, verified boot firmware to other external devices.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "scan_clk_i",
+        "reset": null,
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "SramType",
+        "desc": "Sram Entries. Word size is 32bit width.",
+        "default": "spi_device_pkg::DefaultSramType"
+      },
+      {
+        "name": "SramDepth",
+        "desc": "Sram Entries. Word size is 32bit width.",
+        "default": "1024"
+      },
+      {
+        "name": "SramEgressDepth",
+        "desc": "Sram Egress Entries. Word size is 32bit width.",
+        "default": "848"
+      },
+      {
+        "name": "SramIngressDepth",
+        "desc": "Sram Ingress Entries. Word size is 32bit width.",
+        "default": "112"
+      },
+      {
+        "name": "SramReadBufferOffset",
+        "desc": "Sram eFlash read buffer offset (from egress buffer start). Word size is 32bit width.",
+        "default": "0"
+      },
+      {
+        "name": "SramReadBufferDepth",
+        "desc": "Sram eFlash read buffer entries. Word size is 32bit width.",
+        "default": "512"
+      },
+      {
+        "name": "SramMailboxOffset",
+        "desc": "Sram mailbox buffer offset (from egress buffer start). Word size is 32bit width.",
+        "default": "512"
+      },
+      {
+        "name": "SramMailboxDepth",
+        "desc": "Sram mailbox entries. Word size is 32bit width.",
+        "default": "256"
+      },
+      {
+        "name": "SramSfdpOffset",
+        "desc": "Sram SFDP buffer offset (from egress buffer start). Word size is 32bit width.",
+        "default": "768"
+      },
+      {
+        "name": "SramSfdpDepth",
+        "desc": "Sram SFDP entries. Word size is 32bit width.",
+        "default": "64"
+      },
+      {
+        "name": "SramTpmRdFifoOffset",
+        "desc": "Sram TPM RdFIFO offset (from egress buffer start). Word size is 32bit width.",
+        "default": "832"
+      },
+      {
+        "name": "SramTpmRdFifoDepth",
+        "desc": "Sram TPM RdFIFO entries. Word size is 32bit width.",
+        "default": "16"
+      },
+      {
+        "name": "SramPayloadOffset",
+        "desc": "Sram payload FIFO offset (from ingress buffer start). Word size is 32bit width.",
+        "default": "0"
+      },
+      {
+        "name": "SramPayloadDepth",
+        "desc": "Sram payload FIFO entries. Word size is 32bit width.",
+        "default": "64"
+      },
+      {
+        "name": "SramCmdFifoOffset",
+        "desc": "Sram command FIFO offset (from ingress buffer start). Word size is 32bit width.",
+        "default": "64"
+      },
+      {
+        "name": "SramCmdFifoDepth",
+        "desc": "Sram command FIFO entries. Word size is 32bit width.",
+        "default": "16"
+      },
+      {
+        "name": "SramAddrFifoOffset",
+        "desc": "Sram address FIFO offset (from ingress buffer start). Word size is 32bit width.",
+        "default": "80"
+      },
+      {
+        "name": "SramAddrFifoDepth",
+        "desc": "Sram address FIFO entries. Word size is 32bit width.",
+        "default": "16"
+      },
+      {
+        "name": "SramTpmWrFifoOffset",
+        "desc": "Sram TPM Write FIFO offset (from ingress buffer start). Word size is 32bit width.",
+        "default": "96"
+      },
+      {
+        "name": "SramTpmWrFifoDepth",
+        "desc": "Sram TPM Write FIFO entries. Word size is 32bit width.",
+        "default": "16"
+      },
+      {
+        "name": "NumCmdInfo",
+        "desc": "Define the number of Command Info slots.",
+        "default": "24"
+      },
+      {
+        "name": "NumLocality",
+        "desc": "The number of locality TPM module supports.",
+        "default": "5"
+      },
+      {
+        "name": "TpmRdFifoPtrW",
+        "desc": "TPM RdFIFO Pointer Bit Width. clog2(Depth(16+1))",
+        "default": "5"
+      },
+      {
+        "name": "TpmRdFifoWidth",
+        "desc": "TPM Read FIFO Data Width. (TpmRdFifoWidth/8) shall be power of two",
+        "default": "32"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "spi_device.interrupt.upload_cmdfifo_not_empty",
+        "name": "upload_cmdfifo_not_empty",
+        "desc": "Upload Command FIFO is not empty"
+      },
+      {
+        "intent_id": "spi_device.interrupt.upload_payload_not_empty",
+        "name": "upload_payload_not_empty",
+        "desc": "Upload payload is not empty.\n\nThe event occurs after SPI transaction completed"
+      },
+      {
+        "intent_id": "spi_device.interrupt.upload_payload_overflow",
+        "name": "upload_payload_overflow",
+        "desc": "Upload payload overflow event.\n\nWhen a SPI Host system issues a command with payload more than 256B,\nthis event is reported. When it happens, SW should read the last\nwritten payload index CSR to figure out the starting address of the\nlast 256B."
+      },
+      {
+        "intent_id": "spi_device.interrupt.readbuf_watermark",
+        "name": "readbuf_watermark",
+        "desc": "Read Buffer Threshold event.\n\nThe host system accesses greater than or equal to the threshold of a\nbuffer."
+      },
+      {
+        "intent_id": "spi_device.interrupt.readbuf_flip",
+        "name": "readbuf_flip",
+        "desc": "Read buffer flipped event.\n\nThe host system accesses other side of buffer."
+      },
+      {
+        "intent_id": "spi_device.interrupt.tpm_header_not_empty",
+        "name": "tpm_header_not_empty",
+        "desc": "TPM Header(Command/Address) buffer available"
+      },
+      {
+        "intent_id": "spi_device.interrupt.tpm_rdfifo_cmd_end",
+        "name": "tpm_rdfifo_cmd_end",
+        "desc": "TPM RdFIFO command ended.\n\nThe TPM Read command targeting the RdFIFO ended.\nCheck TPM_STATUS.rdfifo_aborted to see if the transaction completed."
+      },
+      {
+        "intent_id": "spi_device.interrupt.tpm_rdfifo_drop",
+        "name": "tpm_rdfifo_drop",
+        "desc": "TPM RdFIFO data dropped.\n\nData was dropped from the RdFIFO.\nData was written while a read command was not active, and it was not accepted.\nThis can occur when the host aborts a read command."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "spi_device.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "spi_device.reg.CONTROL",
+        "name": "CONTROL",
+        "desc": "Control register",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.CONTROL.FLASH_STATUS_FIFO_CLR",
+            "name": "FLASH_STATUS_FIFO_CLR",
+            "desc": "Set to clear the flash status FIFO.\n\nWhen set to 1, resets the flash status FIFO used for synchronizing changes from firmware.\nThe reset should only be used when the upstream SPI host is known to be inactive.\nThis function is intended to allow restoring initial values when the upstream SPI host is reset.\n\nThis CSR automatically resets to 0.",
+            "bits": "0",
+            "swaccess": "rw1s",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "spi_device.reg.CONTROL.FLASH_READ_BUFFER_CLR",
+            "name": "FLASH_READ_BUFFER_CLR",
+            "desc": "Set to clear the read buffer state.\n\nWhen set to 1, resets the flash read buffer state that tracks the host read address.\nThe reset should only be used when the upstream SPI host is known to be inactive.\nThis function is intended to allow restoring initial values when the upstream SPI host is reset.\n\nThis CSR automatically resets to 0.",
+            "bits": "1",
+            "swaccess": "rw1s",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "spi_device.reg.CONTROL.MODE",
+            "name": "MODE",
+            "desc": "SPI Device flash operation mode.",
+            "bits": "5:4",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.CFG",
+        "name": "CFG",
+        "desc": "Configuration Register",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.CFG.tx_order",
+            "name": "tx_order",
+            "desc": "TX bit order on SDO. 0 for MSB to LSB, 1 for LSB to MSB",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.CFG.rx_order",
+            "name": "rx_order",
+            "desc": "RX bit order on SDI. Module stores bitstream from MSB to LSB if value is 0.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.CFG.mailbox_en",
+            "name": "mailbox_en",
+            "desc": "Mailbox enable.\n\nIf 1, in the flash and passthrough mode, the IP checks the incoming\naddress and return from the internal Mailbox buffer if the address\nfalls into the MAILBOX range\n(MAILBOX_ADDR:MAILBOX_ADDR+MAILBOX_SIZE)}.",
+            "bits": "24",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.STATUS",
+        "name": "STATUS",
+        "desc": "SPI Device status register",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.STATUS.csb",
+            "name": "csb",
+            "desc": "Direct input of CSb signal",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.STATUS.tpm_csb",
+            "name": "tpm_csb",
+            "desc": "Direct input of TPM CSb",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.INTERCEPT_EN",
+        "name": "INTERCEPT_EN",
+        "desc": "Intercept Passthrough datapath.\n",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.INTERCEPT_EN.status",
+            "name": "status",
+            "desc": "If set, Read Status is processed internally.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.INTERCEPT_EN.jedec",
+            "name": "jedec",
+            "desc": "If set, Read JEDEC ID is processed internally.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.INTERCEPT_EN.sfdp",
+            "name": "sfdp",
+            "desc": "If set, Read SFDP is processed internally.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.INTERCEPT_EN.mbx",
+            "name": "mbx",
+            "desc": "If set, Read Command to Mailbox region is processed internally.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.ADDR_MODE",
+        "name": "ADDR_MODE",
+        "desc": "Flash address mode configuration\n\nThis register shows the current address mode and pending changes.\nIt is updated by the HW when the command phase completes.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.ADDR_MODE.addr_4b_en",
+            "name": "addr_4b_en",
+            "desc": "4B Address Mode enable.\n\nThis field configures the internal module to receive 32 bits of the SPI commands.\nThe affected commands are the SPI read commands except QPI, and program commands.\nIt is expected for SW to configure this field at the configuration stage and release control to HW until the next reset.\n\nEven though Read SFDP command has address fields, the SFDP command is not affected by this field.\nThe command always parse 24 bits on the SPI line 0 following the SPI command as the address field.\n\nThis field has noteworthy read behavior.\nIf a software-initiated change is still `pending` the sync to the SPI domain, this bit will reflect the value to be sent.\nOtherwise, this field will reflect the current value observed in the SPI domain.",
+            "bits": "0",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "spi_device.reg.ADDR_MODE.pending",
+            "name": "pending",
+            "desc": "SW-originated change is pending.\n\nThis bit is 1 whenever the current value of addr_4b_en has yet to sync with the SPI domain.\nIf an EN4B or EX4B command arrives next, the current value in `addr_4b_en` will be ignored,\nand the SPI flash command will take priority, with an update to `addr_4b_en` to match the command's result.",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.LAST_READ_ADDR",
+        "name": "LAST_READ_ADDR",
+        "desc": "Last Read Address\n\nThis register shows the last address accessed by the host system.\nIt is updated by the HW when CSb is de-asserted.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.LAST_READ_ADDR.addr",
+            "name": "addr",
+            "desc": "Last address",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.FLASH_STATUS",
+        "name": "FLASH_STATUS",
+        "desc": "SPI Flash Status register.\n\nThis register emulates the SPI Flash Status 3, 2, 1 registers.\nbit [7:0] is for Status register, bit [15:8] is for Status-2 register,\nand bit [23:16] is for Status-3 register. It is SW responsibility to\nmaintain this register value up to date.\n\nWhen software writes a value here, it is delivered to a staging async FIFO, where it waits for the SPI side to commit it.\nAny updates require at least 8 SPI clocks before they commit on the SPI side, which is the source-of-truth.\nAfter committing on the SPI side, the CSRs will eventually update with the latest value.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.FLASH_STATUS.busy",
+            "name": "busy",
+            "desc": "The BUSY signal. SW should read back the register to confirm the value is cleared.\n\nBit 0 (BUSY) is a SW modifiable and HW modifiable field.\nHW updates the BUSY field for matching uploaded commands in the CMD_INFO table, when the `upload` and `busy` bits are set in the table entry.\n\nNote that the observable state of the BUSY bit updates every 8 SPI clocks.\nThis enables continuous polling of the BUSY bit.\nHowever, the passthrough gate (for passthrough mode) only updates when CSB is de-asserted, not on SPI clocks.",
+            "bits": "0",
+            "swaccess": "rw0c",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "spi_device.reg.FLASH_STATUS.wel",
+            "name": "wel",
+            "desc": "The Write Enable Latch signal.\nSW should read back the register to confirm the value is cleared.\n\nBit 1 (WEL) is a SW modifiable and HW modifiable field.\nHW updates the WEL field when `WRDI` or `WREN` command is received.",
+            "bits": "1",
+            "swaccess": "rw0c",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "spi_device.reg.FLASH_STATUS.status",
+            "name": "status",
+            "desc": "Rest of the status register.\n\nFields other than the bit 0 (BUSY) and bit 1 (WEL) fields are\nSW-maintained fields. HW just reads and returns to the host system.\n\n- [ 2]\\: BP0\n- [ 3]\\: BP1\n- [ 4]\\: BP2\n- [ 5]\\: TB\n- [ 6]\\: SEC\n- [ 7]\\: SRP0\n- [ 8]\\: SRP1\n- [ 9]\\: QE\n- [11]\\: LB1\n- [12]\\: LB2\n- [13]\\: LB3\n- [14]\\: CMP\n- [15]\\: SUS\n- [18]\\: WPS\n- [21]\\: DRV0\n- [22]\\: DRV1\n- [23]\\: HOLD /RST",
+            "bits": "23:2",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.JEDEC_CC",
+        "name": "JEDEC_CC",
+        "desc": "JEDEC Continuation Code configuration register.\n\nRead JEDEC ID must return the continuation code if the manufacturer ID\nis not shown in the first page of JEDEC table. This register controls\nthe Continuation Code.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.JEDEC_CC.num_cc",
+            "name": "num_cc",
+            "desc": "The number that Continuation Code repeats",
+            "bits": "15:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.JEDEC_CC.cc",
+            "name": "cc",
+            "desc": "Continuation Code byte",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.JEDEC_ID",
+        "name": "JEDEC_ID",
+        "desc": "JEDEC ID register.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.JEDEC_ID.mf",
+            "name": "mf",
+            "desc": "Manufacturer ID",
+            "bits": "23:16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.JEDEC_ID.id",
+            "name": "id",
+            "desc": "Device ID",
+            "bits": "15:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.READ_THRESHOLD",
+        "name": "READ_THRESHOLD",
+        "desc": "Read Buffer threshold register.\n",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.READ_THRESHOLD.threshold",
+            "name": "threshold",
+            "desc": "If 0, disable the watermark. If non-zero, when the host\naccess above or equal to the threshold, it reports an interrupt.\nThe value is byte-granularity not SRAM index.",
+            "bits": "9:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.MAILBOX_ADDR",
+        "name": "MAILBOX_ADDR",
+        "desc": "Mailbox Base address register.\n\nThe mailbox size is fixed. In this version of IP, the size is 1kB.\nLower 10 bits of the Mailbox address is tied to 0.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.MAILBOX_ADDR.addr",
+            "name": "addr",
+            "desc": "Mailbox Address. Lower 10 bits are ignored",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.UPLOAD_STATUS",
+        "name": "UPLOAD_STATUS",
+        "desc": "Upload module status register.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.UPLOAD_STATUS.cmdfifo_depth",
+            "name": "cmdfifo_depth",
+            "desc": "Command FIFO Entry",
+            "bits": "4:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.UPLOAD_STATUS.cmdfifo_notempty",
+            "name": "cmdfifo_notempty",
+            "desc": "Upload Command FIFO Not Empty",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.UPLOAD_STATUS.addrfifo_depth",
+            "name": "addrfifo_depth",
+            "desc": "Address FIFO Entry",
+            "bits": "12:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.UPLOAD_STATUS.addrfifo_notempty",
+            "name": "addrfifo_notempty",
+            "desc": "Upload Address FIFO Not Empty",
+            "bits": "15",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.UPLOAD_STATUS2",
+        "name": "UPLOAD_STATUS2",
+        "desc": "Upload module status 2 register.\n\nThis register contains payload related status. payload_depth indicates\nthe payload size (from 0 to 256 bytes).\n\npayload_start_idx indicates the start of the 256B. This stays 0\nusually. However, when the SPI host system issues more than 256B of\npayload in a command, this field may not be 0. For example, if the\nsystem issues 258B payload, the payload_depth is 256 (as the IP only\nholds 256B of payload), the payload_start_idx is 2. SW should read from\n2 to 255 then 0 and 1.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.UPLOAD_STATUS2.payload_depth",
+            "name": "payload_depth",
+            "desc": "Payload buffer depth",
+            "bits": "8:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.UPLOAD_STATUS2.payload_start_idx",
+            "name": "payload_start_idx",
+            "desc": "Payload Start Index",
+            "bits": "23:16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.UPLOAD_CMDFIFO",
+        "name": "UPLOAD_CMDFIFO",
+        "desc": "Command Fifo Read Port.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.UPLOAD_CMDFIFO.data",
+            "name": "data",
+            "desc": "command opcode",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.UPLOAD_CMDFIFO.busy",
+            "name": "busy",
+            "desc": "State of BUSY bit at command time",
+            "bits": "13",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.UPLOAD_CMDFIFO.wel",
+            "name": "wel",
+            "desc": "State of WEL bit at command time",
+            "bits": "14",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.UPLOAD_CMDFIFO.addr4b_mode",
+            "name": "addr4b_mode",
+            "desc": "1 if address mode at command time is 4 Bytes, else 3 Bytes",
+            "bits": "15",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.UPLOAD_ADDRFIFO",
+        "name": "UPLOAD_ADDRFIFO",
+        "desc": "Address Fifo Read Port.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.UPLOAD_ADDRFIFO.data",
+            "name": "data",
+            "desc": "read data",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.ADDR_SWAP_MASK",
+        "name": "ADDR_SWAP_MASK",
+        "desc": "Address Swap Mask register.\n\nThis register is used in the SPI passthrough mode. If any of bits in\nthis register is set, the corresponding address bit in the SPI Read\ncommands is replaced with the data from !!ADDR_SWAP_DATA.\n\nIf 3B address mode is active, upper 8bit [31:24] is ignored.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.ADDR_SWAP_MASK.mask",
+            "name": "mask",
+            "desc": "When a bit is 1, the SPI read address to the downstream SPI\nFlash device is swapped to !!ADDR_SWAP_DATA.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.ADDR_SWAP_DATA",
+        "name": "ADDR_SWAP_DATA",
+        "desc": "The address value for the address swap feature.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.ADDR_SWAP_DATA.data",
+            "name": "data",
+            "desc": "Desired value to be swapped for the SPI read commands.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.PAYLOAD_SWAP_MASK",
+        "name": "PAYLOAD_SWAP_MASK",
+        "desc": "Write Data Swap in the passthrough mode.\n\nPAYLOAD_SWAP_MASK CSR provides the SW to change certain bits in the\nfirst 4 bytes of the write payload in the passthrough mode.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.PAYLOAD_SWAP_MASK.mask",
+            "name": "mask",
+            "desc": "byte mask",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.PAYLOAD_SWAP_DATA",
+        "name": "PAYLOAD_SWAP_DATA",
+        "desc": "Write Data Swap in the passthrough mode.\n\nPAYLOAD_SWAP_DATA combined with PAYLOAD_SWAP_MASK provides the SW to\nchange certain bits in the first 4 bytes of the write payload in the\npassthrough mode.\n\nThe register should be written in Little-Endian order. [7:0] bits are\nprocessed in the first received payload byte. [31:24] bits for the 4th\nbyte.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.PAYLOAD_SWAP_DATA.data",
+            "name": "data",
+            "desc": "replaced data",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.CMD_INFO_EN4B",
+        "name": "CMD_INFO_EN4B",
+        "desc": "Opcode for EN4B.\n\nIf the register is active, it affects in flash / passthrough modes.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.CMD_INFO_EN4B.valid",
+            "name": "valid",
+            "desc": "If 1, Opcode affects",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.CMD_INFO_EN4B.opcode",
+            "name": "opcode",
+            "desc": "EN4B opcode",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.CMD_INFO_EX4B",
+        "name": "CMD_INFO_EX4B",
+        "desc": "Opcode for EX4B",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.CMD_INFO_EX4B.valid",
+            "name": "valid",
+            "desc": "If 1, Opcode affects",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.CMD_INFO_EX4B.opcode",
+            "name": "opcode",
+            "desc": "EX4B opcode",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.CMD_INFO_WREN",
+        "name": "CMD_INFO_WREN",
+        "desc": "Opcode for Write Enable (WREN)",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.CMD_INFO_WREN.valid",
+            "name": "valid",
+            "desc": "If 1, opcode affects",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.CMD_INFO_WREN.opcode",
+            "name": "opcode",
+            "desc": "WREN opcode",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.CMD_INFO_WRDI",
+        "name": "CMD_INFO_WRDI",
+        "desc": "Opcode for Write Disable (WRDI)",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.CMD_INFO_WRDI.valid",
+            "name": "valid",
+            "desc": "If 1, opcode affects",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.CMD_INFO_WRDI.opcode",
+            "name": "opcode",
+            "desc": "WRDI opcode",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_CAP",
+        "name": "TPM_CAP",
+        "desc": "TPM HWIP Capability register.\n\nThis register shows the features the current TPM HWIP supports.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_CAP.rev",
+            "name": "rev",
+            "desc": "Revision of the TPM submodule",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_CAP.locality",
+            "name": "locality",
+            "desc": "If 1, the TPM submodule supports 5 Locality.\nIf 0, only one Locality is provided",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_CAP.max_wr_size",
+            "name": "max_wr_size",
+            "desc": "The maximum write size in bytes the TPM submodule supports.\nThe value is the exponent of the 2.\n\n- 3'b 010: Support up to 4B\n- 3'b 011: Support up to 8B\n- 3'b 100: Support up to 16B\n- 3'b 101: Support up to 32B\n- 3'b 110: Support up to 64B\n\nAll other values are reserved.\n\nIt is not recommended for SW to advertise TPM supporting more than `max_wr_size` to the South Bridge.",
+            "bits": "18:16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_CAP.max_rd_size",
+            "name": "max_rd_size",
+            "desc": "The maximum read size in bytes the TPM submodule supports.\nThe value is the exponent of the 2.\n\n- 3'b 010: Support up to 4B\n- 3'b 011: Support up to 8B\n- 3'b 100: Support up to 16B\n- 3'b 101: Support up to 32B\n- 3'b 110: Support up to 64B\n\nAll other values are reserved.\n\nIt is not recommended for SW to advertise TPM supporting more than `max_rd_size` to the South Bridge.",
+            "bits": "22:20",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_CFG",
+        "name": "TPM_CFG",
+        "desc": "TPM Configuration register.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_CFG.en",
+            "name": "en",
+            "desc": "If 1, TPM submodule accepts the transactions over SPI",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_CFG.tpm_mode",
+            "name": "tpm_mode",
+            "desc": "Configure the TPM mode. 1 for CRB, 0 for FIFO.\n\nIf the SW set this field to 1, the HW logic always pushes the\ncommand/addr and write data to buffers. The logic does not compare\nthe incoming address to the list of managed-by-HW register\naddresses.\n\nThe invalid locality check still runs based on the invalid_locality\nconfiguration.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_CFG.hw_reg_dis",
+            "name": "hw_reg_dis",
+            "desc": "If 0, TPM submodule directly returns the return-by-HW registers for the read requests.\n\nIf 1, TPM submodule uploads the TPM command regardless of the address, and the SW may return the value through the read FIFO.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_CFG.tpm_reg_chk_dis",
+            "name": "tpm_reg_chk_dis",
+            "desc": "If 1, the logic does not compare the upper 8 bit of the\nreceived address with the TpmAddr constant, D4h.\n\nIf this field is 0, the HW uploads the command, address, and write\npayload to the buffers in case of address that is not 0xD4_XXXX.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_CFG.invalid_locality",
+            "name": "invalid_locality",
+            "desc": "If 1, TPM submodule returns the invalid data (0xFF) for the\nout of the max Locality request.\nIf it is a write request, HW still uploads the command and address.\nSW needs to process the incoming invalid command.\n\nIf 0, TPM submodule uploads the TPM command and address. The SW may\nwrite 0xFF to the read FIFO.\n\nNote: The TPM submodule uploads the TPM commands that do not fall\ninto the FIFO registers (0xD4_XXXX) regardless of\n`invalid_locality` bit.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_STATUS",
+        "name": "TPM_STATUS",
+        "desc": "TPM submodule state register.\n\nThe TPM_STATUS CSR provides the current TPM status, mostly the buffer and FIFO status.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_STATUS.cmdaddr_notempty",
+            "name": "cmdaddr_notempty",
+            "desc": "If 1, the TPM_CMD_ADDR has a valid data. This status is reported via the interrupt also.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": "hwo"
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_STATUS.wrfifo_pending",
+            "name": "wrfifo_pending",
+            "desc": "If 1, the Write FIFO is reserved for software processing.\n\nThis bit becomes 1 when a complete write command is received.\nWhile it remains 1, subsequent write commands will block at the wait state until it is cleared.\nWrite 0 to release the Write FIFO back to the TPM module.",
+            "bits": "1",
+            "swaccess": "rw0c",
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_STATUS.rdfifo_aborted",
+            "name": "rdfifo_aborted",
+            "desc": "If 1, the last Read FIFO command was aborted.\n\nThis bit becomes 1 when a Read FIFO command became active, but the transaction did not complete.\nAn aborted transaction occurs when the host de-asserts CSB without clocking all the requested data.\nThis bit remains 1 until reset, or it will clear automatically after the next valid command is read from TPM_CMD_ADDR.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": "hwo"
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_STS",
+        "name": "TPM_STS",
+        "desc": "TPM_STS_x register.\n\nThe register is mirrored to all Localities.\nThe value is returned to the host system only when the activeLocality\nin the TPM_ACCESS_x is matched to the current received Locality.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_STS.sts",
+            "name": "sts",
+            "desc": "TPM_STS_x",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_INTF_CAPABILITY",
+        "name": "TPM_INTF_CAPABILITY",
+        "desc": "TPM_INTF_CAPABILITY",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_INTF_CAPABILITY.intf_capability",
+            "name": "intf_capability",
+            "desc": "TPM_INTF_CAPABILITY",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_INT_ENABLE",
+        "name": "TPM_INT_ENABLE",
+        "desc": "TPM_INT_ENABLE",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_INT_ENABLE.int_enable",
+            "name": "int_enable",
+            "desc": "TPM_INT_ENABLE",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_INT_VECTOR",
+        "name": "TPM_INT_VECTOR",
+        "desc": "TPM_INT_VECTOR",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_INT_VECTOR.int_vector",
+            "name": "int_vector",
+            "desc": "TPM_INT_VECTOR",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_INT_STATUS",
+        "name": "TPM_INT_STATUS",
+        "desc": "TPM_INT_STATUS",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_INT_STATUS.int_status",
+            "name": "int_status",
+            "desc": "TPM_INT_STATUS",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_DID_VID",
+        "name": "TPM_DID_VID",
+        "desc": "TPM_DID/ TPM_VID register",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_DID_VID.vid",
+            "name": "vid",
+            "desc": "TPM_VID",
+            "bits": "15:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_DID_VID.did",
+            "name": "did",
+            "desc": "TPM_DID",
+            "bits": "31:16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_RID",
+        "name": "TPM_RID",
+        "desc": "TPM_RID",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_RID.rid",
+            "name": "rid",
+            "desc": "TPM_RID",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_CMD_ADDR",
+        "name": "TPM_CMD_ADDR",
+        "desc": "TPM Command and Address buffer\n\nThe SW may get the received TPM command and address by reading this CSR.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_CMD_ADDR.addr",
+            "name": "addr",
+            "desc": "received address",
+            "bits": "23:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "spi_device.reg.TPM_CMD_ADDR.cmd",
+            "name": "cmd",
+            "desc": "received command",
+            "bits": "31:24",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "spi_device.reg.TPM_READ_FIFO",
+        "name": "TPM_READ_FIFO",
+        "desc": "TPM Read command return data FIFO.\n\nThe write port of the read command FIFO.",
+        "fields": [
+          {
+            "intent_id": "spi_device.reg.TPM_READ_FIFO.value",
+            "name": "value",
+            "desc": "write port of the read FIFO",
+            "bits": "TpmRdFifoWidth-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/spi_cmdparse.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI Device Flash/ Passthrough mode Command Parser",
+      "params": []
+    },
+    "rtl/spi_device.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "SramType",
+          "default": "spi_device_pkg::DefaultSramType",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinEgressbuffer",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinIngressbuffer",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spi_p2s.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI byte to SPI (Single/ Dual/ Quad)",
+      "params": []
+    },
+    "rtl/spi_passthrough.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/spi_readcmd.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI Flash Read Commands Processing block",
+      "params": [
+        {
+          "name": "ReadBaseAddr",
+          "default": "spi_device_pkg::SramReadBufferIdx",
+          "desc": ""
+        },
+        {
+          "name": "ReadBufferDepth",
+          "default": "spi_device_pkg::SramMsgDepth",
+          "desc": ""
+        },
+        {
+          "name": "MailboxBaseAddr",
+          "default": "spi_device_pkg::SramMailboxIdx",
+          "desc": ""
+        },
+        {
+          "name": "MailboxDepth",
+          "default": "spi_device_pkg::SramMailboxDepth",
+          "desc": ""
+        },
+        {
+          "name": "SfdpBaseAddr",
+          "default": "spi_device_pkg::SramSfdpIdx",
+          "desc": ""
+        },
+        {
+          "name": "SfdpDepth",
+          "default": "spi_device_pkg::SramSfdpDepth",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spi_s2p.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI Serial-to-Parallel interface",
+      "params": []
+    },
+    "rtl/spi_tpm.sv": {
+      "doc_comment": "",
+      "params": [
+        {
+          "name": "CmdAddrFifoDepth",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "EnLocality",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "cmd_type",
+          "default": "=",
+          "desc": "Read)"
+        }
+      ]
+    },
+    "rtl/spid_addr_4b.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/spid_csb_sync.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nspid_csb_sync detects the deassertion edge (positive edge) of CSB for\nspi_device. With a prim_edge_detector alone, CSB would have pulse width\nrequirements relative to clk_i, and these could be restrictive relative to\nthe downstream SPI flash.\n\nInstead, use a CSB-clocked toggle and detect the much slower-changing\ntoggles, making use of CSB's low duty cycle.",
+      "params": []
+    },
+    "rtl/spid_dpram.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI Device dual-port RAM emulation",
+      "params": [
+        {
+          "name": "SramType",
+          "default": "DefaultSramType",
+          "desc": ""
+        },
+        {
+          "name": "EnableECC",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "EnableParity",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "EnableInputPipeline",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "EnableOutputPipeline",
+          "default": "0",
+          "desc": "Adds an output register (read latency +1)"
+        }
+      ]
+    },
+    "rtl/spid_fifo2sram_adapter.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nFIFO interface to SRAM interface",
+      "params": [
+        {
+          "name": "FifoWidth",
+          "default": "8",
+          "desc": ""
+        },
+        {
+          "name": "FifoDepth",
+          "default": "256",
+          "desc": ""
+        },
+        {
+          "name": "SramAw",
+          "default": "10",
+          "desc": ""
+        },
+        {
+          "name": "SramDw",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "SramBaseAddr",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "EnPack",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spid_jedec.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI Flash Read JEDEC ID handler",
+      "params": []
+    },
+    "rtl/spid_readbuffer.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI Flash Read Command: Read Buffer Manager",
+      "params": []
+    },
+    "rtl/spid_readsram.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI Device Flash Read command SRAM request/rsp",
+      "params": [
+        {
+          "name": "ReadBaseAddr",
+          "default": "spi_device_pkg::SramReadBufferIdx",
+          "desc": ""
+        },
+        {
+          "name": "ReadBufferDepth",
+          "default": "spi_device_pkg::SramMsgDepth",
+          "desc": ""
+        },
+        {
+          "name": "MailboxBaseAddr",
+          "default": "spi_device_pkg::SramMailboxIdx",
+          "desc": ""
+        },
+        {
+          "name": "MailboxDepth",
+          "default": "spi_device_pkg::SramMailboxDepth",
+          "desc": ""
+        },
+        {
+          "name": "SfdpBaseAddr",
+          "default": "spi_device_pkg::SramSfdpIdx",
+          "desc": ""
+        },
+        {
+          "name": "SfdpDepth",
+          "default": "spi_device_pkg::SramSfdpDepth",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spid_status.sv": {
+      "doc_comment": "",
+      "params": [
+        {
+          "name": "StatusW",
+          "default": "24",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/spid_upload.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSPI Flash, Command Upload handler",
+      "params": [
+        {
+          "name": "CmdFifoBaseAddr",
+          "default": "spi_device_pkg::SramCmdFifoIdx",
+          "desc": ""
+        },
+        {
+          "name": "CmdFifoDepth",
+          "default": "spi_device_pkg::SramCmdFifoDepth",
+          "desc": ""
+        },
+        {
+          "name": "AddrFifoBaseAddr",
+          "default": "spi_device_pkg::SramAddrFifoIdx",
+          "desc": ""
+        },
+        {
+          "name": "AddrFifoDepth",
+          "default": "spi_device_pkg::SramAddrFifoDepth",
+          "desc": ""
+        },
+        {
+          "name": "PayloadBaseAddr",
+          "default": "spi_device_pkg::SramPayloadIdx",
+          "desc": ""
+        },
+        {
+          "name": "PayloadDepth",
+          "default": "spi_device_pkg::SramPayloadDepth",
+          "desc": ""
+        },
+        {
+          "name": "SpiByte",
+          "default": "$bits(spi_byte_t)",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

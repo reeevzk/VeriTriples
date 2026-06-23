@@ -1,0 +1,780 @@
+{
+  "ip_name": "keymgr",
+  "ip_intent": {
+    "ip_name": "keymgr",
+    "one_line_desc": "Managing identities and root keys; shielding confidential assets from software; providing a key derivation interface for software",
+    "one_paragraph_desc": "Key Manager implements the hardware component of the identities and root keys strategy of OpenTitan.\nIt shields confidential assets from direct software access and provides an interface for software to use derived keys and identity outputs.\nThe key derivation functionality interfaces KMAC Accelerator.\nKey Manager provides AES Accelerator, OTBN, and KMAC Accelerator with confidential keys over sideload interfaces that are not accessible from software.\nIn addition, it supports the [Open Profile for DICE][pigweed-open-dice].\n\n[pigweed-open-dice]: https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#Open-Profile-for-DICE",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_edn_i",
+        "reset": "rst_edn_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "UseOtpSeedsInsteadOfFlash",
+        "desc": "Flag indicating whether to use the creator / owner seeds provided\nvia otp_key_i instead of the ones provided in flash_i. This option\ncan be used in integrations where that do not have an embedded flash\ncontroller (in which case flash_i should just be tied off).",
+        "default": "0"
+      },
+      {
+        "name": "KmacEnMasking",
+        "desc": "Flag indicating with kmac masking is enabled",
+        "default": "1"
+      },
+      {
+        "name": "RndCnstLfsrSeed",
+        "desc": "Compile-time random bits for initial LFSR seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstLfsrPerm",
+        "desc": "Compile-time random permutation for LFSR output",
+        "default": null
+      },
+      {
+        "name": "RndCnstRandPerm",
+        "desc": "Compile-time random permutation for entropy used in share overriding",
+        "default": null
+      },
+      {
+        "name": "RndCnstRevisionSeed",
+        "desc": "Compile-time random bits for revision seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstCreatorIdentitySeed",
+        "desc": "Compile-time random bits for creator identity seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstOwnerIntIdentitySeed",
+        "desc": "Compile-time random bits for owner intermediate identity seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstOwnerIdentitySeed",
+        "desc": "Compile-time random bits for owner identity seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstSoftOutputSeed",
+        "desc": "Compile-time random bits for software generation seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstHardOutputSeed",
+        "desc": "Compile-time random bits for hardware generation seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstAesSeed",
+        "desc": "Compile-time random bits for generation seed when aes destination selected",
+        "default": null
+      },
+      {
+        "name": "RndCnstKmacSeed",
+        "desc": "Compile-time random bits for generation seed when kmac destination selected",
+        "default": null
+      },
+      {
+        "name": "RndCnstOtbnSeed",
+        "desc": "Compile-time random bits for generation seed when otbn destination selected",
+        "default": null
+      },
+      {
+        "name": "RndCnstCdi",
+        "desc": "Compile-time random bits for generation seed when no CDI is selected",
+        "default": null
+      },
+      {
+        "name": "RndCnstNoneSeed",
+        "desc": "Compile-time random bits for generation seed when no destination selected",
+        "default": null
+      },
+      {
+        "name": "NumSaltReg",
+        "desc": "Number of Registers for SW inputs (Salt)",
+        "default": "8"
+      },
+      {
+        "name": "NumSwBindingReg",
+        "desc": "Number of Registers for SW inputs (SW binding)",
+        "default": "8"
+      },
+      {
+        "name": "NumOutReg",
+        "desc": "Number of Registers for SW outputs",
+        "default": "8"
+      },
+      {
+        "name": "NumKeyVersion",
+        "desc": "Number of Registers for key version",
+        "default": "1"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "keymgr.interrupt.op_done",
+        "name": "op_done",
+        "desc": "Operation complete"
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "keymgr.alert.recov_operation_err",
+        "name": "recov_operation_err",
+        "desc": "Alert for key manager operation errors.  These errors could have been caused by\nsoftware"
+      },
+      {
+        "intent_id": "keymgr.alert.fatal_fault_err",
+        "name": "fatal_fault_err",
+        "desc": "Alert for key manager faults.  These errors cannot be caused by software"
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "keymgr.reg.CFG_REGWEN",
+        "name": "CFG_REGWEN",
+        "desc": "Key manager configuration enable",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.CFG_REGWEN.EN",
+            "name": "EN",
+            "desc": "key manager configuration enable.\nWhen key manager operation is started (see CONTROL), registers protected by this EN are no longer\nmodifiable until the operation completes.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.START",
+        "name": "START",
+        "desc": "Key manager operation start",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.START.EN",
+            "name": "EN",
+            "desc": "Start key manager operations",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": "hrw"
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.CONTROL_SHADOWED",
+        "name": "CONTROL_SHADOWED",
+        "desc": "Key manager operation controls",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.CONTROL_SHADOWED.OPERATION",
+            "name": "OPERATION",
+            "desc": "Key manager operation selection. All values not enumerated below behave the same as disable",
+            "bits": "6:4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.CONTROL_SHADOWED.CDI_SEL",
+            "name": "CDI_SEL",
+            "desc": "When the OPERATION field is programmed to generate output, this field selects\nthe appropriate CDI to use.\n\nThis field should be programmed for both hw / sw generation.",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.CONTROL_SHADOWED.DEST_SEL",
+            "name": "DEST_SEL",
+            "desc": "When the OPERATION field is programmed to generate output, this field selects\nthe appropriate crypto cipher target.\n\nThis field should be programmed for both hw / sw generation, as this helps diversifies the output.",
+            "bits": "13:12",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.SIDELOAD_CLEAR",
+        "name": "SIDELOAD_CLEAR",
+        "desc": "sideload key slots clear",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.SIDELOAD_CLEAR.VAL",
+            "name": "VAL",
+            "desc": "Depending on the value programmed, a different sideload key slot is cleared.\nIf the value programmed is not one of the enumerated values below, ALL sideload\nkey slots are continuously cleared. In order to stop continuous clearing, SW should\ntoggle the clear bit again (i.e. disable continuous clearing).",
+            "bits": "2:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.RESEED_INTERVAL_REGWEN",
+        "name": "RESEED_INTERVAL_REGWEN",
+        "desc": "regwen for reseed interval",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.RESEED_INTERVAL_REGWEN.EN",
+            "name": "EN",
+            "desc": "Configuration enable for reseed interval",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.RESEED_INTERVAL_SHADOWED",
+        "name": "RESEED_INTERVAL_SHADOWED",
+        "desc": "Reseed interval for key manager entropy reseed",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.RESEED_INTERVAL_SHADOWED.VAL",
+            "name": "VAL",
+            "desc": "Number of internal PRNG updates before a reseed is requested.",
+            "bits": "15:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.SW_BINDING_REGWEN",
+        "name": "SW_BINDING_REGWEN",
+        "desc": "Register write enable for SOFTWARE_BINDING",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.SW_BINDING_REGWEN.EN",
+            "name": "EN",
+            "desc": "Software binding register write enable.\nThis is locked by software and unlocked by hardware upon a successful advance call.\n\nSoftware binding resets to 1, and its value cannot be altered by software until advancement to Init state.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.MAX_CREATOR_KEY_VER_REGWEN",
+        "name": "MAX_CREATOR_KEY_VER_REGWEN",
+        "desc": "Register write enable for MAX_CREATOR_KEY_VERSION",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.MAX_CREATOR_KEY_VER_REGWEN.EN",
+            "name": "EN",
+            "desc": "MAX_CREATOR_KEY_VERSION configure enable.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.MAX_CREATOR_KEY_VER_SHADOWED",
+        "name": "MAX_CREATOR_KEY_VER_SHADOWED",
+        "desc": "Max creator key version",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.MAX_CREATOR_KEY_VER_SHADOWED.VAL",
+            "name": "VAL",
+            "desc": "Max key version.\n\nAny key version up to the value specified in this register is valid.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.MAX_OWNER_INT_KEY_VER_REGWEN",
+        "name": "MAX_OWNER_INT_KEY_VER_REGWEN",
+        "desc": "Register write enable for MAX_OWNER_INT_KEY_VERSION",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.MAX_OWNER_INT_KEY_VER_REGWEN.EN",
+            "name": "EN",
+            "desc": "MAX_OWNER_INTERMEDIATE_KEY configure enable.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.MAX_OWNER_INT_KEY_VER_SHADOWED",
+        "name": "MAX_OWNER_INT_KEY_VER_SHADOWED",
+        "desc": "Max owner intermediate key version",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.MAX_OWNER_INT_KEY_VER_SHADOWED.VAL",
+            "name": "VAL",
+            "desc": "Max key version.\n\nAny key version up to the value specified in this register is valid.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.MAX_OWNER_KEY_VER_REGWEN",
+        "name": "MAX_OWNER_KEY_VER_REGWEN",
+        "desc": "Register write enable for MAX_OWNER_KEY_VERSION",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.MAX_OWNER_KEY_VER_REGWEN.EN",
+            "name": "EN",
+            "desc": "MAX_OWNER_KEY configure enable.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.MAX_OWNER_KEY_VER_SHADOWED",
+        "name": "MAX_OWNER_KEY_VER_SHADOWED",
+        "desc": "Max owner key version",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.MAX_OWNER_KEY_VER_SHADOWED.VAL",
+            "name": "VAL",
+            "desc": "Max key version.\n\nAny key version up to the value specified in this register is valid.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.WORKING_STATE",
+        "name": "WORKING_STATE",
+        "desc": "Key manager working state.\n\nThis is a readout of the current key manager working state",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.WORKING_STATE.STATE",
+            "name": "STATE",
+            "desc": "Key manager control state",
+            "bits": "2:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.OP_STATUS",
+        "name": "OP_STATUS",
+        "desc": "Key manager status.\n\nHardware sets the status based on software initiated operations.\nThis register must be explicitly cleared by software.\nSoftware clears by writing back whatever it reads.",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.OP_STATUS.STATUS",
+            "name": "STATUS",
+            "desc": "Operation status.",
+            "bits": "1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.ERR_CODE",
+        "name": "ERR_CODE",
+        "desc": "Key manager error code.\nThis register must be explicitly cleared by software.\n\nThis register represents both synchronous and asynchronous recoverable\nerrors.\n\nSynchronous errors refer to those that only happen when a keymgr operation is\ninvoked, while asynchronous refers to errors that can happen at any time.",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.ERR_CODE.INVALID_OP",
+            "name": "INVALID_OP",
+            "desc": "Invalid operation issued to key manager, synchronous error",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.ERR_CODE.INVALID_KMAC_INPUT",
+            "name": "INVALID_KMAC_INPUT",
+            "desc": "Invalid data issued to kmac interface, synchronous error",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.ERR_CODE.INVALID_SHADOW_UPDATE",
+            "name": "INVALID_SHADOW_UPDATE",
+            "desc": "An error observed during shadow register updates, asynchronous error",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.FAULT_STATUS",
+        "name": "FAULT_STATUS",
+        "desc": "This register represents both synchronous and asynchronous fatal faults.\n\nSynchronous faults refer to those that only happen when a keymgr operation is\ninvoked, while asynchronous refers to faults that can happen at any time.\n",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.CMD",
+            "name": "CMD",
+            "desc": "A non-onehot command was seen in kmac, asynchronous fault.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.KMAC_FSM",
+            "name": "KMAC_FSM",
+            "desc": "The kmac transfer interface FSM is in an invalid state, asynchronous fault.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.KMAC_DONE",
+            "name": "KMAC_DONE",
+            "desc": "The kmac transfer interface encountered an unexpected done, asynchronous fault.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.KMAC_OP",
+            "name": "KMAC_OP",
+            "desc": "KMAC reported an error during keymgr usage, this should never happen - synchronous fault.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.KMAC_OUT",
+            "name": "KMAC_OUT",
+            "desc": "KMAC data returned as all 0's or all 1's - synchronous fault",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.REGFILE_INTG",
+            "name": "REGFILE_INTG",
+            "desc": "Register file integrity error, asynchronous fault",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.SHADOW",
+            "name": "SHADOW",
+            "desc": "Shadow copy storage error, asynchronous fault",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.CTRL_FSM_INTG",
+            "name": "CTRL_FSM_INTG",
+            "desc": "Control FSM integrity error, asynchronous fault",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.CTRL_FSM_CHK",
+            "name": "CTRL_FSM_CHK",
+            "desc": "Control FSM cross check error, asynchronous fault",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.CTRL_FSM_CNT",
+            "name": "CTRL_FSM_CNT",
+            "desc": "Control FSM counter integrity error, asynchronous fault",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.RESEED_CNT",
+            "name": "RESEED_CNT",
+            "desc": "Reseed counter integrity error, asynchronous fault",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.SIDE_CTRL_FSM",
+            "name": "SIDE_CTRL_FSM",
+            "desc": "Sideload control FSM integrity error, asynchronous fault",
+            "bits": "11",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.SIDE_CTRL_SEL",
+            "name": "SIDE_CTRL_SEL",
+            "desc": "Sideload control key select error, synchronous fault",
+            "bits": "12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.FAULT_STATUS.KEY_ECC",
+            "name": "KEY_ECC",
+            "desc": "Secret key ecc error, asynchronous fault",
+            "bits": "13",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr.reg.DEBUG",
+        "name": "DEBUG",
+        "desc": "The register holds some debug information that may be convenient if keymgr\nmisbehaves.",
+        "fields": [
+          {
+            "intent_id": "keymgr.reg.DEBUG.INVALID_CREATOR_SEED",
+            "name": "INVALID_CREATOR_SEED",
+            "desc": "Creator seed failed input checks during operation",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.DEBUG.INVALID_OWNER_SEED",
+            "name": "INVALID_OWNER_SEED",
+            "desc": "Owner seed failed input checks during operation",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.DEBUG.INVALID_DEV_ID",
+            "name": "INVALID_DEV_ID",
+            "desc": "Device ID failed input checks during operation",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.DEBUG.INVALID_HEALTH_STATE",
+            "name": "INVALID_HEALTH_STATE",
+            "desc": "Health state failed input checks during operation",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.DEBUG.INVALID_KEY_VERSION",
+            "name": "INVALID_KEY_VERSION",
+            "desc": "Key version failed input checks during operation",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.DEBUG.INVALID_KEY",
+            "name": "INVALID_KEY",
+            "desc": "Key fed to kmac failed input checks during operation",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr.reg.DEBUG.INVALID_DIGEST",
+            "name": "INVALID_DIGEST",
+            "desc": "ROM digest failed input checks during operation",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/keymgr.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager top level",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "UseOtpSeedsInsteadOfFlash",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "KmacEnMasking",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrSeed",
+          "default": "RndCnstLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrPerm",
+          "default": "RndCnstLfsrPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstRandPerm",
+          "default": "RndCnstRandPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstRevisionSeed",
+          "default": "RndCnstRevisionSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstCreatorIdentitySeed",
+          "default": "RndCnstCreatorIdentitySeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstOwnerIntIdentitySeed",
+          "default": "RndCnstOwnerIntIdentitySeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstOwnerIdentitySeed",
+          "default": "RndCnstOwnerIdentitySeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstSoftOutputSeed",
+          "default": "RndCnstSoftOutputSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstHardOutputSeed",
+          "default": "RndCnstHardOutputSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstNoneSeed",
+          "default": "RndCnstNoneSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstAesSeed",
+          "default": "RndCnstAesSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstOtbnSeed",
+          "default": "RndCnstOtbnSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstKmacSeed",
+          "default": "RndCnstKmacSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstCdi",
+          "default": "RndCnstCdiDefault",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/keymgr_cfg_en.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager CFGEN\nTBD This should be enhanced in the future to contain a shadow copy",
+      "params": [
+        {
+          "name": "NonInitClr",
+          "default": "1'b1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/keymgr_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager top level",
+      "params": [
+        {
+          "name": "KmacEnMasking",
+          "default": "1'b1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/keymgr_data_en_state.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager date enable generation\nThis is a redundant alternative to data_valid",
+      "params": []
+    },
+    "rtl/keymgr_err.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager error and fault collection",
+      "params": []
+    },
+    "rtl/keymgr_input_checks.sv": {
+      "doc_comment": "We should also check for input validity",
+      "params": [
+        {
+          "name": "KmacEnMasking",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "NumRomDigestInputs",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/keymgr_kmac_if.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager interface to kmac",
+      "params": [
+        {
+          "name": "RndCnstRandPerm",
+          "default": "RndCnstRandPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "MaxAdvDataWidth",
+          "default": "AdvDataWidth",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/keymgr_op_state_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager operation state control",
+      "params": []
+    },
+    "rtl/keymgr_reseed_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager entropy reseed controls",
+      "params": []
+    },
+    "rtl/keymgr_sideload_key.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager sideload key",
+      "params": [
+        {
+          "name": "Width",
+          "default": "KeyWidth",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/keymgr_sideload_key_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nManage all sideload keys",
+      "params": []
+    }
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "ip_name": "rv_timer",
+  "ip_intent": {
+    "ip_name": "rv_timer",
+    "one_line_desc": "Memory-mapped timer unit implementing RISC-V mtime and mtimecmp registers",
+    "one_paragraph_desc": "RISC-V Timer provides TileLink Uncached Light (TL-UL) memory-mapped registers `mtime` and `mtimecmp` which can be used as the machine-mode timer registers as defined in the RISC-V privileged spec v1.12.\nAdditional parameters can be used to add optional features, such as prescaler, step increment size, threshold-triggered interrupts, additional 64-bit timers, and support for multiple independent harts.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "N_HARTS",
+        "desc": "Number of harts",
+        "default": "1"
+      },
+      {
+        "name": "N_TIMERS",
+        "desc": "Number of timers per Hart",
+        "default": "1"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "rv_timer.interrupt.timer_expired_hart0_timer0",
+        "name": "timer_expired_hart0_timer0",
+        "desc": "raised if hart0's timer0 expired (mtimecmp >= mtime)"
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "rv_timer.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected inside the RV_TIMER unit."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "rv_timer.reg.CFG0",
+        "name": "CFG0",
+        "desc": "Configuration for Hart 0",
+        "fields": [
+          {
+            "intent_id": "rv_timer.reg.CFG0.prescale",
+            "name": "prescale",
+            "desc": "Prescaler to generate tick",
+            "bits": "11:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "rv_timer.reg.CFG0.step",
+            "name": "step",
+            "desc": "Incremental value for each tick",
+            "bits": "23:16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "rv_timer.reg.TIMER_V_LOWER0",
+        "name": "TIMER_V_LOWER0",
+        "desc": "Timer value Lower",
+        "fields": [
+          {
+            "intent_id": "rv_timer.reg.TIMER_V_LOWER0.v",
+            "name": "v",
+            "desc": "Timer value [31:0]",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "rv_timer.reg.TIMER_V_UPPER0",
+        "name": "TIMER_V_UPPER0",
+        "desc": "Timer value Upper",
+        "fields": [
+          {
+            "intent_id": "rv_timer.reg.TIMER_V_UPPER0.v",
+            "name": "v",
+            "desc": "Timer value [63:32]",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "rv_timer.reg.COMPARE_LOWER0_0",
+        "name": "COMPARE_LOWER0_0",
+        "desc": "Timer value Lower",
+        "fields": [
+          {
+            "intent_id": "rv_timer.reg.COMPARE_LOWER0_0.v",
+            "name": "v",
+            "desc": "Timer compare value [31:0]",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "rv_timer.reg.COMPARE_UPPER0_0",
+        "name": "COMPARE_UPPER0_0",
+        "desc": "Timer value Upper",
+        "fields": [
+          {
+            "intent_id": "rv_timer.reg.COMPARE_UPPER0_0.v",
+            "name": "v",
+            "desc": "Timer compare value [63:32]",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/rv_timer.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/timer_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "N",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

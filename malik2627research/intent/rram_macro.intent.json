@@ -1,0 +1,83 @@
+{
+  "ip_name": "rram_macro",
+  "ip_intent": {
+    "ip_name": "rram_macro",
+    "one_line_desc": "Open-source emulation model of the RRAM macro",
+    "one_paragraph_desc": "Open-source emulation model of the RRAM macro.\nIt supports a large data array and a small info array that are both emulated with prim_ram_1p.\nIt supports read and write commands.\nEach read command returns 128b of data stored at a specific address in the RRAM.\nThe write command writes 128b of data to a store buffer which is emulated with a FIFO and writes\nthe content of the FIFO to the RRAM data or info array once the wr_last signal is set.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "TotalPages",
+        "desc": "Total number of data pages",
+        "default": "4096"
+      },
+      {
+        "name": "DataWidth",
+        "desc": "RRAM word data width",
+        "default": "128"
+      },
+      {
+        "name": "WordsPerPage",
+        "desc": "Number of words per page",
+        "default": "32"
+      },
+      {
+        "name": "TotalInfoPages",
+        "desc": "Total number of info pages",
+        "default": "8"
+      },
+      {
+        "name": "MaxWrWords",
+        "desc": "Maximum number of words per write",
+        "default": "32"
+      }
+    ],
+    "interrupts": [],
+    "alerts": [],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/rram_macro.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nOpen-source RRAM macro",
+      "params": [
+        {
+          "name": "TotalPages",
+          "default": "4096",
+          "desc": ""
+        },
+        {
+          "name": "DataWidth",
+          "default": "128",
+          "desc": ""
+        },
+        {
+          "name": "WordsPerPage",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "TotalInfoPages",
+          "default": "8",
+          "desc": ""
+        },
+        {
+          "name": "MaxWrWords",
+          "default": "32",
+          "desc": "Maximum number of words per write"
+        }
+      ]
+    }
+  }
+}

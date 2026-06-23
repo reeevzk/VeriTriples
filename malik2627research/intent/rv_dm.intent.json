@@ -1,0 +1,131 @@
+{
+  "ip_name": "rv_dm",
+  "ip_intent": {
+    "ip_name": "rv_dm",
+    "one_line_desc": "Enables debug support for Ibex, access protected by life cycle",
+    "one_paragraph_desc": "RISC-V Debug Module provides a JTAG test access port (TAP) or Debug Module Interface (DMI) to interface the Ibex RISC-V core as well as hardware blocks attached to the TileLink on-chip interconnect.\nThe interface to Ibex is compliant with the RISC-V Debug Specification 0.13.2, which in turn is supported by debug software such as OpenOCD and GDB.\nFor security reasons, RISC-V Debug Module is only active in life cycles that have hardware debug enabled.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_lc_i",
+        "reset": "rst_lc_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "host"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "NrHarts",
+        "desc": "Number of hardware threads in the system.",
+        "default": "1"
+      },
+      {
+        "name": "IdcodeValue",
+        "desc": "RISC-V debug module JTAG ID code.",
+        "default": "32'h 0000_0001"
+      },
+      {
+        "name": "UseDmiInterface",
+        "desc": "When 1, a TLUL-based DMI interface is used. When 0, a JTAG TAP is used.",
+        "default": "0"
+      },
+      {
+        "name": "SecVolatileRawUnlockEn",
+        "desc": "Disable (0) or enable (1) volatile RAW UNLOCK capability.\nIf enabled, the strap_en_override_i input can be used to re-sample the straps at runtime.\nIMPORTANT NOTE: This should only be used in test chips. The parameter must be set\nto 0 in production tapeouts since this weakens the security posture of the RAW\nUNLOCK mechanism.",
+        "default": "1'b0"
+      },
+      {
+        "name": "TlulHostUserRsvdBits",
+        "desc": "TLUL user bits sent on outgoing transfers.",
+        "default": "'0"
+      }
+    ],
+    "interrupts": [],
+    "alerts": [
+      {
+        "intent_id": "rv_dm.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/rv_dm.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "IdcodeValue",
+          "default": "32'h 0000_0001",
+          "desc": ""
+        },
+        {
+          "name": "UseDmiInterface",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "SecVolatileRawUnlockEn",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "TlulHostUserRsvdBits",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rv_dm_dmi_gate.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDMI gate for the RISC-V Debug Module",
+      "params": [
+        {
+          "name": "SecVolatileRawUnlockEn",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

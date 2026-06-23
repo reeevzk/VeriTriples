@@ -1,0 +1,103 @@
+{
+  "ip_name": "otp_macro",
+  "ip_intent": {
+    "ip_name": "otp_macro",
+    "one_line_desc": "OTP macro simulation model and CSR block",
+    "one_paragraph_desc": "OTP macro has one-time programmable fuses that configure this top.\nIt is tightly coupled to the OTP controller, but placed at the top for\nease of integration. It contains a CSR block for testing and macro specific\nfunctionality.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "Width",
+        "desc": "Size of storage words in bits",
+        "default": "16"
+      },
+      {
+        "name": "Depth",
+        "desc": "Number of words",
+        "default": "1024"
+      },
+      {
+        "name": "SizeWidth",
+        "desc": "Number of words transferred per access",
+        "default": "2"
+      },
+      {
+        "name": "MemInitFile",
+        "desc": "",
+        "default": "\"\""
+      },
+      {
+        "name": "VendorTestOffset",
+        "desc": "",
+        "default": "8"
+      },
+      {
+        "name": "VendorTestSize",
+        "desc": "",
+        "default": "8"
+      }
+    ],
+    "interrupts": [],
+    "alerts": [],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/otp_macro.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "Width",
+          "default": "16",
+          "desc": ""
+        },
+        {
+          "name": "Depth",
+          "default": "1024",
+          "desc": ""
+        },
+        {
+          "name": "SizeWidth",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "MemInitFile",
+          "default": "\"\"",
+          "desc": ""
+        },
+        {
+          "name": "VendorTestOffset",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "VendorTestSize",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "1'b1",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

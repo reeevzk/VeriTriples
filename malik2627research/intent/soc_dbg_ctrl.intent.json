@@ -1,0 +1,72 @@
+{
+  "ip_name": "soc_dbg_ctrl",
+  "ip_intent": {
+    "ip_name": "soc_dbg_ctrl",
+    "one_line_desc": "Control module to enable or disable debug access",
+    "one_paragraph_desc": "Module that controls the Debug / DFT access feature for an SoC for which OpenTitan serves as an integrated HW RoT.\nA debug policy bus driven from this module governs the unlock policy. Output from the debug policy bus is decoded by various debug / DFT logic blocks in an SoC to determine if the debug / DFT access feature is allowed or not.\nThe access policy is derived by the RoT with a challenge-response based debug authentication exchange session with a remote policy enforcer.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [],
+    "interrupts": [],
+    "alerts": [
+      {
+        "intent_id": "soc_dbg_ctrl.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      },
+      {
+        "intent_id": "soc_dbg_ctrl.alert.recov_ctrl_update_err",
+        "name": "recov_ctrl_update_err",
+        "desc": "This recoverable alert is triggered upon detecting an update error in the shadowed Control Register."
+      }
+    ],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/soc_dbg_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/soc_dbg_ctrl_decode.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "SyncDbgPolicy",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "SampleValidOnce",
+          "default": "1'b0",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

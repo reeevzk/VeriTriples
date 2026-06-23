@@ -1,0 +1,286 @@
+{
+  "ip_name": "rram_ctrl",
+  "ip_intent": {
+    "ip_name": "rram_ctrl",
+    "one_line_desc": "Interfaces and manages integrated non-volatile RRAM memory; supports scrambling, integrity, secure wipe and emulated OTP access.",
+    "one_paragraph_desc": "RRAM Controller interfaces the integrated, non-volatile RRAM memory with software and other hardware components in the system, such as Life Cycle Controller, Key Manager, and OTP Controller.\nIt consists of the open-source RRAM controller that interfaces with a third party RRAM macro.\nThe protocol controller handles direct memory mapped read requests, software controlled read and write requests, as well as life cycle RMA entry.\nThe controller supports a differentiation between info and data partitions, RRAM memory protection at page boundaries, and the handling of key manager secrets inaccessible to software.\nThe data partition of the RRAM is further divided into a data region and an OTP region.\nThe controller handles OTP read and write requests that are emulated with a read-set-write algorithm on the OTP region.\nThe actual physical controller is highly parameterized (number of pages, number of words and word size for each page, and number of read buffers) and supports XEX scrambling configurable by software, as well as ECC support configurable on a page boundary.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_otp_i",
+        "reset": "rst_otp_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "RndCnstAddrKey",
+        "desc": "Compile-time random bits for default address key",
+        "default": null
+      },
+      {
+        "name": "RndCnstDataKey",
+        "desc": "Compile-time random bits for default data key",
+        "default": null
+      },
+      {
+        "name": "RndCnstAllSeeds",
+        "desc": "Compile-time random bits for default seeds",
+        "default": null
+      },
+      {
+        "name": "RndCnstLfsrSeed",
+        "desc": "Compile-time random bits for initial LFSR seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstLfsrPerm",
+        "desc": "Compile-time random permutation for LFSR output",
+        "default": null
+      },
+      {
+        "name": "ExecEn",
+        "desc": "Constant value that enables RRAM execution",
+        "default": "2724870391"
+      },
+      {
+        "name": "SecScrambleEn",
+        "desc": "Compile-time option to enable RRAM scrambling",
+        "default": "1"
+      },
+      {
+        "name": "WrFifoDepth",
+        "desc": "Depth of write fifo",
+        "default": "4"
+      },
+      {
+        "name": "RdFifoDepth",
+        "desc": "Depth of read fifo",
+        "default": "16"
+      },
+      {
+        "name": "NumRegions",
+        "desc": "Number of configurable rram regions",
+        "default": "8"
+      },
+      {
+        "name": "NumInfoPages",
+        "desc": "Number of info pages",
+        "default": "8"
+      },
+      {
+        "name": "NumDataPages",
+        "desc": "Number of data pages",
+        "default": "4096"
+      },
+      {
+        "name": "WordsPerPage",
+        "desc": "Number of words per page",
+        "default": "32"
+      },
+      {
+        "name": "BytesPerWord",
+        "desc": "Number of bytes per word",
+        "default": "16"
+      },
+      {
+        "name": "BytesPerPage",
+        "desc": "Number of bytes per page",
+        "default": "512"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "rram_ctrl.interrupt.wr_empty",
+        "name": "wr_empty",
+        "desc": "Write FIFO empty"
+      },
+      {
+        "intent_id": "rram_ctrl.interrupt.wr_lvl",
+        "name": "wr_lvl",
+        "desc": "Write FIFO drained to level"
+      },
+      {
+        "intent_id": "rram_ctrl.interrupt.rd_full",
+        "name": "rd_full",
+        "desc": "Read FIFO full"
+      },
+      {
+        "intent_id": "rram_ctrl.interrupt.rd_lvl",
+        "name": "rd_lvl",
+        "desc": "Read FIFO filled to level"
+      },
+      {
+        "intent_id": "rram_ctrl.interrupt.op_done",
+        "name": "op_done",
+        "desc": "Operation complete"
+      },
+      {
+        "intent_id": "rram_ctrl.interrupt.corr_err",
+        "name": "corr_err",
+        "desc": "Correctable error encountered"
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "rram_ctrl.alert.recov_err",
+        "name": "recov_err",
+        "desc": "RRAM recoverable errors"
+      },
+      {
+        "intent_id": "rram_ctrl.alert.fatal_std_err",
+        "name": "fatal_std_err",
+        "desc": "RRAM standard fatal errors"
+      },
+      {
+        "intent_id": "rram_ctrl.alert.fatal_err",
+        "name": "fatal_err",
+        "desc": "RRAM fatal errors including uncorrectable ECC errors.\n\nNote that this alert is not always fatal.\nThe underlying error bits in the !!FAULT_STATUS register remain set until reset, meaning the alert keeps firing.\nThis doesn't hold for !!FAULT_STATUS.PHY_RELBL_ERR.\nTo enable firmware dealing with multi-bit ECC errors during firmware selection and verification, these error bits can be cleared.\nAfter passing this stage, it is recommended that firmware classifies the corresponding alert as fatal on the receiver end, i.e, inside the alert handler."
+      },
+      {
+        "intent_id": "rram_ctrl.alert.fatal_macro_err",
+        "name": "fatal_macro_err",
+        "desc": "Fatal errors triggered inside the RRAM macro, including fatal TL-UL bus integrity faults of the test interface."
+      },
+      {
+        "intent_id": "rram_ctrl.alert.recov_macro_err",
+        "name": "recov_macro_err",
+        "desc": "Recoverable errors triggered inside the RRAM macro."
+      }
+    ],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/rram_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM Controller Module:\nThe RRAM controller manages access to the vendor macro or the open-source emulation model.\nThe controller can be accessed through two main interfaces:\n- host_tl (read-only memory mapped access to data partition of the RRAM)\n- core_tl (to configure the controller and to issue read/write transactions to the RRAM)\nThe controller has two additional hardware plugs:\n- rram_ctrl_lcmgr: This FSM reads seeds and scrambling keys from the RRAM and handles RMA-Req.\n- rram_ctrl_otp: otp_ctrl can issue init, read, write and zeroize commands to the OTP partition\n    of the RRAM.\nThe controller supports memory protection and scrambling.",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstAddrKey",
+          "default": "RndCnstAddrKeyDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstDataKey",
+          "default": "RndCnstDataKeyDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstAllSeeds",
+          "default": "RndCnstAllSeedsDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrSeed",
+          "default": "RndCnstLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrPerm",
+          "default": "RndCnstLfsrPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "WrFifoDepth",
+          "default": "MaxFifoDepth",
+          "desc": ""
+        },
+        {
+          "name": "RdFifoDepth",
+          "default": "MaxFifoDepth",
+          "desc": ""
+        },
+        {
+          "name": "SecScrambleEn",
+          "default": "1'b1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rram_ctrl_arb.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM Controller Arbiter\nArbitrates between two hardware interfaces (Lcmgr, OtpCtrl) and a software interface",
+      "params": []
+    },
+    "rtl/rram_ctrl_mp.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM Memory Protection:",
+      "params": []
+    },
+    "rtl/rram_ctrl_mp_region_sel.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM memory protection rule selection",
+      "params": [
+        {
+          "name": "Regions",
+          "default": "4",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rram_ctrl_rd.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM control read handler:\nHandles data interface and counts the requested number of bus words per transaction\nTransactions are then issued to rram_ctrl_mp",
+      "params": []
+    },
+    "rtl/rram_ctrl_region_cfg.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM control region configuration processing",
+      "params": []
+    },
+    "rtl/rram_ctrl_wr.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM ctrl write handler:\nHandles fifo interface and counts the requested number of bus words per transaction\nTransactions are then issued to rram_ctrl_mp",
+      "params": []
+    },
+    "rtl/rram_phy.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM Phy Module",
+      "params": [
+        {
+          "name": "SecScrambleEn",
+          "default": "1'b1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rram_phy_rd.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/rram_phy_rd_buf_dep.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM Phy Read Buffers Dependency",
+      "params": [
+        {
+          "name": "Depth",
+          "default": "2",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rram_phy_rd_buffer.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM Phy Read Buffers",
+      "params": []
+    },
+    "rtl/rram_phy_wr.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nRRAM Phy Write Module",
+      "params": []
+    }
+  }
+}

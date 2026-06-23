@@ -1,0 +1,774 @@
+{
+  "ip_name": "kmac",
+  "ip_intent": {
+    "ip_name": "kmac",
+    "one_line_desc": "Accelerator for Keccak-based keyed hash message authentication code and SHA-3 hash functions; with SCA and FI countermeasures",
+    "one_paragraph_desc": "OpenTitan protocols use [Keccak/SHA-3][nist-fips-202]-based cryptographic primitives for data authentication, integrity checking, and key derivation.\nKMAC Accelerator supports Keccak-based Message Authentication Code (KMAC) and the SHA3-derived functions SHAKE and cSHAKE as defined in [NIST SP 800-185][nist-sp-800-185].\nThe Keccak core uses first-order domain-oriented masking (DOM) to deter side-channel analysis (SCA).\nTo save area, the masking can optionally be disabled using a compile-time Verilog parameter.\nIn addition, KMAC Accelerator features several countermeasures to deter fault injection (FI) attacks.\n\n[nist-fips-202]: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf\n[nist-sp-800-185]: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_edn_i",
+        "reset": "rst_edn_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "EnMasking",
+        "desc": "Disable(0) or enable(1) first-order masking of Keccak round.",
+        "default": "1"
+      },
+      {
+        "name": "SwKeyMasked",
+        "desc": "Disable(0) or enable(1) software key masking in case masking is disabled (EnMasking == 0).\nIf masking is enabled, this parameter has no effect.\nMainly useful for software interface compatibility between the masked and unmasked design.\nMostly relevant for SCA measurements.",
+        "default": "0"
+      },
+      {
+        "name": "SecCmdDelay",
+        "desc": "Command delay, useful for SCA measurements only.\nA value of e.g. 40 allows the processor to go into sleep before KMAC starts operation.\nIf a value greater than 0 is chosen, software can pass two commands in series.\nThe second command is buffered internally and will be presented to the hardware SecCmdDelay number of cycles after the first one.",
+        "default": "0"
+      },
+      {
+        "name": "SecIdleAcceptSwMsg",
+        "desc": "If enabled (1), software writes to the message FIFO before having received a START command are not ignored.\nDisabled (0) by default.\nUseful for SCA measurements only.",
+        "default": "0"
+      },
+      {
+        "name": "NumAppIntf",
+        "desc": "Number of application interfaces",
+        "default": "4"
+      },
+      {
+        "name": "AppCfg",
+        "desc": "Application interface configuration.\nTop-level connection to the application interface must follow this definition.",
+        "default": "'{kmac_pkg::AppCfgKeyMgr, kmac_pkg::AppCfgLcCtrl, kmac_pkg::AppCfgRomCtrl, kmac_pkg::AppCfgOtbn}"
+      },
+      {
+        "name": "NumWordsKey",
+        "desc": "Number of words for the secret key",
+        "default": "16"
+      },
+      {
+        "name": "NumWordsPrefix",
+        "desc": "Number of words for Encoded NsPrefix.",
+        "default": "11"
+      },
+      {
+        "name": "NumEntriesMsgFifo",
+        "desc": "Number of entries in the message FIFO. Must match kmac_pkg::MsgFifoDepth.",
+        "default": "10"
+      },
+      {
+        "name": "NumBytesMsgFifoEntry",
+        "desc": "Number of bytes in a single entry of the message FIFO. Must match kmac_pkg::MsgWidth.",
+        "default": "8"
+      },
+      {
+        "name": "HashCntW",
+        "desc": "Width of the hash counter in the entropy",
+        "default": "10"
+      },
+      {
+        "name": "NumSeedsEntropy",
+        "desc": "Number of words for the PRNG seed used for entropy generation",
+        "default": "6"
+      },
+      {
+        "name": "RndCnstLfsrSeed",
+        "desc": "Compile-time random data for PRNG default seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstLfsrPerm",
+        "desc": "Compile-time random permutation for PRNG output",
+        "default": null
+      },
+      {
+        "name": "RndCnstBufferLfsrSeed",
+        "desc": "Compile-time random data for PRNG buffer default seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstMsgPerm",
+        "desc": "Compile-time random permutation for LFSR Message output",
+        "default": null
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "kmac.interrupt.kmac_done",
+        "name": "kmac_done",
+        "desc": "KMAC/SHA3 absorbing has been completed"
+      },
+      {
+        "intent_id": "kmac.interrupt.fifo_empty",
+        "name": "fifo_empty",
+        "desc": "The message FIFO is empty.\nThis interrupt is raised only if the message FIFO is actually writable by software, i.e., if all of the following conditions are met:\ni) The KMAC block is not exercised by a hardware application interface.\nii) The SHA3 block is in the Absorb state.\niii) Software has not yet written the Process command to finish the absorption process.\nFor the interrupt to be raised, the message FIFO must also have been full previously.\nOtherwise, the hardware empties the FIFO faster than software can fill it and there is no point in interrupting the software to inform it about the message FIFO being empty."
+      },
+      {
+        "intent_id": "kmac.interrupt.kmac_err",
+        "name": "kmac_err",
+        "desc": "KMAC/SHA3 error occurred. ERR_CODE register shows the details"
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "kmac.alert.recov_operation_err",
+        "name": "recov_operation_err",
+        "desc": "Alert for KMAC operation error. It occurs when the shadow registers have update errors."
+      },
+      {
+        "intent_id": "kmac.alert.fatal_fault_err",
+        "name": "fatal_fault_err",
+        "desc": "This fatal alert is triggered when a fatal error is detected inside the KMAC unit.\nExamples for such faults include:\ni) TL-UL bus integrity fault.\nii) Storage errors in the shadow registers.\niii) Errors in the message, round, or key counter.\niv) Any internal FSM entering an invalid state.\nv) An error in the redundant lfsr.\nThe KMAC unit cannot recover from such an error and needs to be reset."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "kmac.reg.CFG_REGWEN",
+        "name": "CFG_REGWEN",
+        "desc": "Controls the configurability of !!CFG_SHADOWED register.\n\nThis register ensures the contents of !!CFG_SHADOWED register cannot be\nchanged by the software while the KMAC/SHA3 is in operation mode.",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.CFG_REGWEN.en",
+            "name": "en",
+            "desc": "Configuration enable.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.CFG_SHADOWED",
+        "name": "CFG_SHADOWED",
+        "desc": "KMAC Configuration register.\n\nThis register is  updated when the hashing engine is in Idle.\nIf the software updates the register while the engine computes, the\nupdated value will be discarded.",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.kmac_en",
+            "name": "kmac_en",
+            "desc": "KMAC datapath enable.\n\nIf this bit is 1, the KMAC mode is active and the secret key is prepended to the incoming message.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.kstrength",
+            "name": "kstrength",
+            "desc": "Hashing Strength\n\n3 bit field to select the security strength of SHA3 hashing\nengine. If mode field is set to SHAKE or cSHAKE, only 128 and\n256 strength can be selected. Other value will result error\nwhen hashing starts.",
+            "bits": "3:1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.mode",
+            "name": "mode",
+            "desc": "Keccak hashing mode.\n\nThis module supports SHA3 main hashing algorithm and the part\nof its derived functions, SHAKE and cSHAKE with limitations.\nThis field is to select the mode.",
+            "bits": "5:4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.msg_endianness",
+            "name": "msg_endianness",
+            "desc": "Message Endianness.\n\nIf 1 then each individual multi-byte value, regardless of its\nalignment, written to !!MSG_FIFO will be added to the message\nin big-endian byte order.\nIf 0, each value will be added to the message in little-endian\nbyte order.\nA message written to !!MSG_FIFO one byte at a time will not be\naffected by this setting.\nFrom a hardware perspective byte swaps are performed on a TL-UL\nword granularity.",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.state_endianness",
+            "name": "state_endianness",
+            "desc": "State Endianness.\n\nIf 1 then each individual word in the !!STATE output register\nis converted to big-endian byte order.\nThe order of the words in relation to one another is not\nchanged.\nThis setting does not affect how the state is interpreted\nduring computation.",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.sideload",
+            "name": "sideload",
+            "desc": "Sideloaded Key.\n\nIf 1, KMAC uses KeyMgr sideloaded key for SW initiated KMAC\noperation. KMAC uses the sideloaded key regardless of this\nconfiguration when KeyMgr initiates the KMAC operation for\nKey Derivation Function (KDF).",
+            "bits": "12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.entropy_mode",
+            "name": "entropy_mode",
+            "desc": "Entropy Mode\n\nUsing this field, software can configure mode of operation of the internal pseudo-random number generator (PRNG).\n\nNote that once software has configured a value different from `idle_mode` after reset, and set the !!CFG_SHADOWED.entropy_ready bit afterwards, the PRNG configuration cannot be changed anymore (unless an EDN request timeout occurs when running in EDN mode).\nFurther writes to this field will change the value received upon reading the register, but they will be ignored by the internal hardware.",
+            "bits": "17:16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.entropy_fast_process",
+            "name": "entropy_fast_process",
+            "desc": "Entropy Fast process mode.\n\nIf 1, entropy logic uses garbage data while not processing the KMAC\nkey block. It will re-use previous entropy value and will not\nexpand the entropy when it is consumed. Only it refreshes the\nentropy while processing the secret key block. This process should\nnot be used if SCA resistance is required because it may cause side\nchannel leakage.",
+            "bits": "19",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.msg_mask",
+            "name": "msg_mask",
+            "desc": "Message Masking with PRNG.\n\nIf 1, KMAC applies PRNG to the input messages to the Keccak module\nwhen KMAC mode is on.",
+            "bits": "20",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.entropy_ready",
+            "name": "entropy_ready",
+            "desc": "Entropy Ready status.\n\nSoftware sets this field to allow the entropy generator in KMAC to\nfetch the entropy and run.",
+            "bits": "24",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CFG_SHADOWED.en_unsupported_modestrength",
+            "name": "en_unsupported_modestrength",
+            "desc": "Enable Unsupported Mode and Strength configs.\n\nSW may set this field for KMAC to move forward with unsupported\nKeccak Mode and Strength configurations, such as cSHAKE512.\n\nIf not set, KMAC won't propagate the SW command (CmdStart) to the\nrest of the blocks (AppIntf, KMAC Core, SHA3).",
+            "bits": "26",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.CMD",
+        "name": "CMD",
+        "desc": "KMAC/ SHA3 command register.\n\nThis register is to control the KMAC to start accepting message,\nto process the message, and to manually run additional keccak\nrounds at the end. Only at certain stage, the CMD affects to the\ncontrol logic. It follows the sequence of\n\n`start` --> `process` --> {`run` if needed --> } `done`",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.CMD.cmd",
+            "name": "cmd",
+            "desc": "Issue a command to the KMAC/SHA3 IP. The command is sparse\nencoded. To prevent sw from writing multiple commands at once,\nthe field is defined as enum.",
+            "bits": "5:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CMD.entropy_req",
+            "name": "entropy_req",
+            "desc": "Software can set this bit to 1 to manually trigger the reseeding of the internal PRNG when running in EDN mode.\nThis will also clear !!ENTROPY_REFRESH_HASH_CNT.\n\nNote that the hardware may miss the trigger pulse if the module is not idle, or if the module is currently performing a reseed operation.",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CMD.hash_cnt_clr",
+            "name": "hash_cnt_clr",
+            "desc": "Software can set this bit to 1 to manually clear !!ENTROPY_REFRESH_HASH_CNT.",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.CMD.err_processed",
+            "name": "err_processed",
+            "desc": "When error occurs and one of the state machine stays at\n Error handling state, SW may process the error based on\n ERR_CODE, then let FSM back to the reset state",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.STATUS",
+        "name": "STATUS",
+        "desc": "KMAC/SHA3 Status register.",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.STATUS.sha3_idle",
+            "name": "sha3_idle",
+            "desc": "If 1, SHA3 hashing engine is in idle state.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.STATUS.sha3_absorb",
+            "name": "sha3_absorb",
+            "desc": "If 1, SHA3 is receiving message stream and processing it",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.STATUS.sha3_squeeze",
+            "name": "sha3_squeeze",
+            "desc": "If 1, SHA3 completes sponge absorbing stage.\nIn this stage, SW can manually run the hashing engine.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.STATUS.fifo_depth",
+            "name": "fifo_depth",
+            "desc": "Count of occupied entries in the message FIFO.",
+            "bits": "12:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.STATUS.fifo_empty",
+            "name": "fifo_empty",
+            "desc": "Message FIFO Empty indicator.\n\nThe FIFO's `Pass` parameter is set to `1'b 1`. So, by default, if\nthe SHA engine is ready, the write data to FIFO just passes\nthrough.\n\nIn this case, `fifo_depth` remains **0**. `fifo_empty`, however,\nlowers the value to **0** for a cycle, then goes back to the empty\nstate, **1**.\n\nSee the \"Message FIFO\" section in the spec for the reason.",
+            "bits": "14",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.STATUS.fifo_full",
+            "name": "fifo_full",
+            "desc": "Message FIFO Full indicator",
+            "bits": "15",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.STATUS.ALERT_FATAL_FAULT",
+            "name": "ALERT_FATAL_FAULT",
+            "desc": "No fatal fault has occurred inside the KMAC unit (0).\nA fatal fault has occurred and the KMAC unit needs to be reset (1),\nExamples for such faults include\ni) TL-UL bus integrity fault\nii) storage errors in the shadow registers\niii) errors in the message, round, or key counter\niv) any internal FSM entering an invalid state\nv) an error in the redundant lfsr",
+            "bits": "16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.STATUS.ALERT_RECOV_CTRL_UPDATE_ERR",
+            "name": "ALERT_RECOV_CTRL_UPDATE_ERR",
+            "desc": "An update error has not occurred (0) or has occurred (1) in the shadowed Control Register.\nKMAC operation needs to be restarted by re-writing the Control Register.",
+            "bits": "17",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.ENTROPY_PERIOD",
+        "name": "ENTROPY_PERIOD",
+        "desc": "Entropy Timer Periods.",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.ENTROPY_PERIOD.prescaler",
+            "name": "prescaler",
+            "desc": "EDN Wait timer prescaler.\n\nEDN Wait timer has 16 bit value. The timer value is increased when the timer pulse is generated. Timer pulse is raises when the number of the clock cycles hit this prescaler value.\n\nThe exact period of the timer pulse is unknown as the KMAC input clock may contain jitters.",
+            "bits": "9:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "kmac.reg.ENTROPY_PERIOD.wait_timer",
+            "name": "wait_timer",
+            "desc": "EDN request wait timer.\n\nThe entropy module in KMAC waits up to this field in the timer pulse\nafter it sends request to EDN module. If the timer expires, the\nentropy module moves to an error state and notifies to the system.\n\nIf there is a pending EDN request during wait timer update, then this update is delayed until the EDN request is complete.\n\nIf 0, the entropy module waits the EDN response always. If EDN does\nnot respond in this configuration, the software shall reset the IP.",
+            "bits": "31:16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.ENTROPY_REFRESH_HASH_CNT",
+        "name": "ENTROPY_REFRESH_HASH_CNT",
+        "desc": "Entropy Refresh Counter\n\nKMAC entropy can be refreshed after the given threshold KMAC operations\nrun. If the KMAC hash counter !!ENTROPY_REFRESH_HASH_CNT hits (GTE) the\nconfigured threshold !!ENTROPY_REFRESH_THRESHOLD_SHADOWED, the entropy\nmodule in the KMAC IP requests new seed to EDN and reset the KMAC\nhash counter.\n\nIf the threshold is 0, the refresh by the counter does not work. And the\ncounter is only reset by the CMD.hash_cnt_clr CSR bit.",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.ENTROPY_REFRESH_HASH_CNT.hash_cnt",
+            "name": "hash_cnt",
+            "desc": "Hash (KMAC) counter",
+            "bits": "HashCntW-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.ENTROPY_REFRESH_THRESHOLD_SHADOWED",
+        "name": "ENTROPY_REFRESH_THRESHOLD_SHADOWED",
+        "desc": "Entropy Refresh Threshold\n\nKMAC entropy can be refreshed after the given threshold KMAC operations\nrun. If the KMAC hash counter !!ENTROPY_REFRESH_HASH_CNT hits (GTE) the\nconfigured threshold !!ENTROPY_REFRESH_THRESHOLD_SHADOWED, the entropy\nmodule in the KMAC IP requests new seed to EDN and reset the KMAC\nhash counter.\n\nIf the threshold is 0, the refresh by the counter does not work. And the\ncounter is only reset by the CMD.hash_cnt_clr CSR bit.",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.ENTROPY_REFRESH_THRESHOLD_SHADOWED.threshold",
+            "name": "threshold",
+            "desc": "Hash Threshold",
+            "bits": "HashCntW-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.ENTROPY_SEED",
+        "name": "ENTROPY_SEED",
+        "desc": "Entropy Seed\n\nEntropy seed register for the integrated entropy generator.\n\nIf !!CFG_SHADOWED.entropy_mode is set to sw_mode, software first needs to set !!CFG_SHADOWED.entropy_ready.\nThen, software needs to write the !!ENTROPY_SEED register 6 times.\nUpon each write, the written value is loaded into the corresponding state chunk of the entropy generator.\n\nAfter writing the !!ENTROPY_SEED register 6 times, the entropy generator will start its operation.\nAfter this point, writing this register has no longer any effect.",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.ENTROPY_SEED.seed",
+            "name": "seed",
+            "desc": "32-bit chunk of the entropy generator seed",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.KEY_LEN",
+        "name": "KEY_LEN",
+        "desc": "Secret Key length in bit.\n\nThis value is used to make encoded secret key in KMAC.\nKMAC supports certain lengths of the secret key. Currently it\nsupports 128b, 192b, 256b, 384b, and 512b secret keys.",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.KEY_LEN.len",
+            "name": "len",
+            "desc": "Key length choice",
+            "bits": "2:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "kmac.reg.ERR_CODE",
+        "name": "ERR_CODE",
+        "desc": "KMAC/SHA3 Error Code",
+        "fields": [
+          {
+            "intent_id": "kmac.reg.ERR_CODE.err_code",
+            "name": "err_code",
+            "desc": "If the `kmac_err` interrupt occurs, this register has information on the error cause.\nBits 31:24 contain the error code (please refer to `err_code_e` in `hw/ip/kmac/rtl/kmac_pkg.sv`) for the encoding, and bits 23:0 contain additional debug information.\nThis register does *not* get cleared when the `kmac_err` interrupt state gets cleared.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "pre_dv/kmac_reduced_tb/rtl/kmac_reduced_tb.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKMAC reduced testbench",
+      "params": [
+        {
+          "name": "EnMasking",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "MsgWidthChunks",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "MsgLen",
+          "default": "MsgWidth * MsgWidthChunks",
+          "desc": ""
+        },
+        {
+          "name": "EntropyWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "DigestLen",
+          "default": "256",
+          "desc": ""
+        },
+        {
+          "name": "DigestLenBytes",
+          "default": "256/8",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/keccak_2share.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "Width",
+          "default": "1600",
+          "desc": ""
+        },
+        {
+          "name": "EnMasking",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "ForceRandExt",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RC",
+          "default": "'0",
+          "desc": "RC[2**j-1] = rc(j+7*rnd)"
+        }
+      ]
+    },
+    "rtl/keccak_round.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKeccak full round logic based on given input `Width`\ne.g. Width 800 requires 22 rounds",
+      "params": [
+        {
+          "name": "Width",
+          "default": "1600",
+          "desc": ""
+        },
+        {
+          "name": "DInWidth",
+          "default": "64",
+          "desc": ""
+        },
+        {
+          "name": "EnMasking",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "ForceRandExt",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "storage_d",
+          "default": "keccak_out",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/kmac.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKMAC/SHA3",
+      "params": [
+        {
+          "name": "EnMasking",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "SwKeyMasked",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "SecCmdDelay",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "SecIdleAcceptSwMsg",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "NumAppIntf",
+          "default": "4",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrPerm",
+          "default": "RndCnstLfsrPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrSeed",
+          "default": "RndCnstLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstBufferLfsrSeed",
+          "default": "RndCnstBufferLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstMsgPerm",
+          "default": "RndCnstMsgPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/kmac_app.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKMAC Application interface",
+      "params": [
+        {
+          "name": "EnMasking",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "SecIdleAcceptSwMsg",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "NumAppIntf",
+          "default": "4",
+          "desc": ""
+        },
+        {
+          "name": "EnMasking",
+          "default": "1:",
+          "desc": "- For static and dynamic interface:"
+        }
+      ]
+    },
+    "rtl/kmac_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKMAC control and padding logic",
+      "params": [
+        {
+          "name": "EnMasking",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/kmac_entropy.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "RndCnstLfsrPerm",
+          "default": "RndCnstLfsrPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrSeed",
+          "default": "RndCnstLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstBufferLfsrSeed",
+          "default": "RndCnstBufferLfsrSeedDefault",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/kmac_errchk.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKMAC Error Checking logic",
+      "params": [
+        {
+          "name": "EnMasking",
+          "default": "1'b 1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/kmac_msgfifo.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKMAC MSG_FIFO",
+      "params": [
+        {
+          "name": "OutWidth",
+          "default": "64",
+          "desc": ""
+        },
+        {
+          "name": "EnMasking",
+          "default": "1'b 1",
+          "desc": ""
+        },
+        {
+          "name": "MsgDepth",
+          "default": "9",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/kmac_reduced.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "EnMasking",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "MsgLen",
+          "default": "128",
+          "desc": ""
+        },
+        {
+          "name": "EntropyWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrPerm",
+          "default": "RndCnstLfsrPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrSeed",
+          "default": "RndCnstLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstBufferLfsrSeed",
+          "default": "RndCnstBufferLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstMsgPerm",
+          "default": "RndCnstMsgPermDefault",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/kmac_staterd.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKeccak state read",
+      "params": [
+        {
+          "name": "AddrW",
+          "default": "9",
+          "desc": ""
+        },
+        {
+          "name": "EnMasking",
+          "default": "1'b0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/sha3.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "EnMasking",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "Share",
+          "default": "(EnMasking) ? 2 : 1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/sha3pad.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSHA3 padding logic",
+      "params": [
+        {
+          "name": "EnMasking",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

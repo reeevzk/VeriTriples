@@ -1,0 +1,1106 @@
+{
+  "ip_name": "usbdev",
+  "ip_intent": {
+    "ip_name": "usbdev",
+    "one_line_desc": "USB 2.0 Full Speed device interface (12 Mbit/s)",
+    "one_paragraph_desc": "USB Device provides compatibility with the industry standard Universal Serial Bus by implementing a Full Speed device (12 Mbit/s) according to the USB 2.0 Specification.\nUSB Device supports up to 12 bidirectional endpoints which may be used to support all of the USB 2.0 transfer types, including Isochronous transfers.\nSupport for packet transmission and reception is provided in hardware, with the generation of interrupts for software to mediate the different stages of Control and Data Transfers.\nThe maximum packet size for transfers is configurable up to the specification limit of 64 bytes per packet, reducing the protocol overhead for Bulk transfers, and the inbuilt 2 KiB memory can accommodate 32 packets.\nUSB Device may be configured to use either a single-ended interface to an external differential transceiver or a differential input/output for more direct interfacing and reduced hardware complexity when prototyping.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_aon_i",
+        "reset": "rst_aon_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "Stub",
+        "desc": "Stub out the USB device logic, leaving only the register interface",
+        "default": "0"
+      },
+      {
+        "name": "NEndpoints",
+        "desc": "Number of endpoints",
+        "default": "12"
+      },
+      {
+        "name": "RcvrWakeTimeUs",
+        "desc": "Maximum number of microseconds for the differential receiver to become operational",
+        "default": "1"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "usbdev.interrupt.pkt_received",
+        "name": "pkt_received",
+        "desc": "Raised if a packet was received using an OUT or SETUP transaction.\nThis interrupt is directly tied to whether the RX FIFO is empty, so it should be cleared only after handling the FIFO entry."
+      },
+      {
+        "intent_id": "usbdev.interrupt.pkt_sent",
+        "name": "pkt_sent",
+        "desc": "Raised if a packet was sent as part of an IN transaction.\nThis interrupt is directly tied to whether a sent packet has not been acknowledged in the !!in_sent register.\nIt should be cleared only after clearing all bits in the !!in_sent register."
+      },
+      {
+        "intent_id": "usbdev.interrupt.disconnected",
+        "name": "disconnected",
+        "desc": "Raised if VBUS is lost or the pullup is disabled, thus the link is disconnected."
+      },
+      {
+        "intent_id": "usbdev.interrupt.host_lost",
+        "name": "host_lost",
+        "desc": "Raised if link is active but SOF was not received from host for 4.096 ms. The SOF should be every 1 ms."
+      },
+      {
+        "intent_id": "usbdev.interrupt.link_reset",
+        "name": "link_reset",
+        "desc": "Raised if the link is at SE0 longer than 3 us indicating a link reset (host asserts for min 10 ms, device can react after 2.5 us)."
+      },
+      {
+        "intent_id": "usbdev.interrupt.link_suspend",
+        "name": "link_suspend",
+        "desc": "Raised if the line has signaled J for longer than 3ms and is therefore in suspend state."
+      },
+      {
+        "intent_id": "usbdev.interrupt.link_resume",
+        "name": "link_resume",
+        "desc": "Raised when the link becomes active again after being suspended."
+      },
+      {
+        "intent_id": "usbdev.interrupt.av_out_empty",
+        "name": "av_out_empty",
+        "desc": "Raised when the Available OUT Buffer FIFO is empty and the device interface is enabled.\nThis interrupt is directly tied to the FIFO status, so the Available OUT Buffer FIFO must be provided with a free buffer before the interrupt can be cleared."
+      },
+      {
+        "intent_id": "usbdev.interrupt.rx_full",
+        "name": "rx_full",
+        "desc": "Raised when the RX FIFO is full and the device interface is enabled.\nThis interrupt is directly tied to the FIFO status, so the RX FIFO must have an entry removed before the interrupt is cleared.\nIf the condition is not cleared, the interrupt can re-assert."
+      },
+      {
+        "intent_id": "usbdev.interrupt.av_overflow",
+        "name": "av_overflow",
+        "desc": "Raised if a write was done to either the Available OUT Buffer FIFO or the Available SETUP Buffer FIFO when the FIFO was full."
+      },
+      {
+        "intent_id": "usbdev.interrupt.link_in_err",
+        "name": "link_in_err",
+        "desc": "Raised if a packet to an IN endpoint started to be received but was\nthen dropped due to an error. After transmitting the IN payload,\nthe USB device expects a valid ACK handshake packet. This error is\nraised if either the packet or CRC is invalid, leading to a NAK instead,\nor if a different token was received."
+      },
+      {
+        "intent_id": "usbdev.interrupt.rx_crc_err",
+        "name": "rx_crc_err",
+        "desc": "Raised if a CRC error occurred on a received packet."
+      },
+      {
+        "intent_id": "usbdev.interrupt.rx_pid_err",
+        "name": "rx_pid_err",
+        "desc": "Raised if an invalid Packet IDentifier (PID) was received."
+      },
+      {
+        "intent_id": "usbdev.interrupt.rx_bitstuff_err",
+        "name": "rx_bitstuff_err",
+        "desc": "Raised if an invalid bitstuffing was received."
+      },
+      {
+        "intent_id": "usbdev.interrupt.frame",
+        "name": "frame",
+        "desc": "Raised when the USB frame number is updated with a valid SOF."
+      },
+      {
+        "intent_id": "usbdev.interrupt.powered",
+        "name": "powered",
+        "desc": "Raised if VBUS is applied."
+      },
+      {
+        "intent_id": "usbdev.interrupt.link_out_err",
+        "name": "link_out_err",
+        "desc": "Raised if a packet to an OUT endpoint started to be received but was then dropped due to an error.\nThis error is raised if the data toggle, token, packet and/or CRC are invalid, or if the appropriate Available OUT Buffer FIFO is empty and/or the Received Buffer FIFO is full when a packet should have been received.\nAttempting to perform an OUT transaction to an endpoint that is stalled, i.e. its control bit in `out_stall` is set, will also cause this error to be raised."
+      },
+      {
+        "intent_id": "usbdev.interrupt.av_setup_empty",
+        "name": "av_setup_empty",
+        "desc": "Raised when the Available SETUP Buffer FIFO is empty and the device interface is enabled.\nThis interrupt is directly tied to the FIFO status, so the Available SETUP Buffer FIFO must be provided with a free buffer before the interrupt can be cleared."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "usbdev.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "usbdev.reg.usbctrl",
+        "name": "usbctrl",
+        "desc": "USB Control",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.usbctrl.enable",
+            "name": "enable",
+            "desc": "Set to connect the USB interface (i.e. assert the pullup).",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbctrl.resume_link_active",
+            "name": "resume_link_active",
+            "desc": "Write a 1 to this bit to instruct usbdev to jump to the LinkResuming state.\nThe write will only have an effect when the device is in the LinkPowered state.\nIts intention is to handle a resume-from-suspend event after the IP has been powered down.",
+            "bits": "1",
+            "swaccess": "wo",
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbctrl.device_address",
+            "name": "device_address",
+            "desc": "Device address set by host (this should be copied from\nthe Set Device ID SETUP packet).\n\nThis will be zeroed by the hardware when the link resets.",
+            "bits": "22:16",
+            "swaccess": null,
+            "hwaccess": "hrw"
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.usbstat",
+        "name": "usbstat",
+        "desc": "USB Status",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.usbstat.frame",
+            "name": "frame",
+            "desc": "Frame index received from host. On an active link, this will increment every millisecond.",
+            "bits": "10:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.host_lost",
+            "name": "host_lost",
+            "desc": "Start of frame not received from host for 4.096 ms and the line is active.",
+            "bits": "11",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.link_state",
+            "name": "link_state",
+            "desc": "State of USB link, decoded from line.",
+            "bits": "14:12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.sense",
+            "name": "sense",
+            "desc": "Reflects the state of the sense pin.\n1 indicates that the host is providing VBUS.\nNote that this bit always shows the state of the actual pin and is unaffected by the direct pin driving in phy_pins_drive.",
+            "bits": "15",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.av_out_depth",
+            "name": "av_out_depth",
+            "desc": "Number of buffers in the Available OUT Buffer FIFO.\n\nThese buffers are available for receiving OUT DATA packets.",
+            "bits": "19:16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.av_setup_depth",
+            "name": "av_setup_depth",
+            "desc": "Number of buffers in the Available SETUP Buffer FIFO.\n\nThese buffers are available for receiving SETUP DATA packets.",
+            "bits": "22:20",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.av_out_full",
+            "name": "av_out_full",
+            "desc": "Available OUT Buffer FIFO is full.",
+            "bits": "23",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.rx_depth",
+            "name": "rx_depth",
+            "desc": "Number of buffers in the Received Buffer FIFO.\n\nThese buffers have packets that have been received and\nshould be popped from the FIFO and processed.",
+            "bits": "27:24",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.av_setup_full",
+            "name": "av_setup_full",
+            "desc": "Available SETUP Buffer FIFO is full.",
+            "bits": "30",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.usbstat.rx_empty",
+            "name": "rx_empty",
+            "desc": "Received Buffer FIFO is empty.",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.avoutbuffer",
+        "name": "avoutbuffer",
+        "desc": "Available OUT Buffer FIFO",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.avoutbuffer.buffer",
+            "name": "buffer",
+            "desc": "This field contains the buffer ID being passed to the USB receive engine.\n\nIf the Available OUT Buffer FIFO is full, any write operations are discarded.",
+            "bits": "4:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.avsetupbuffer",
+        "name": "avsetupbuffer",
+        "desc": "Available SETUP Buffer FIFO",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.avsetupbuffer.buffer",
+            "name": "buffer",
+            "desc": "This field contains the buffer ID being passed to the USB receive engine.\n\nIf the Available SETUP Buffer FIFO is full, any write operations are discarded.",
+            "bits": "4:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.rxfifo",
+        "name": "rxfifo",
+        "desc": "Received Buffer FIFO",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.rxfifo.buffer",
+            "name": "buffer",
+            "desc": "This field contains the buffer ID that data was received into.\nOn read the buffer ID is popped from the Received Buffer FIFO and returned to software.",
+            "bits": "4:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.rxfifo.size",
+            "name": "size",
+            "desc": "This field contains the data length in bytes of the packet written to the buffer.",
+            "bits": "14:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.rxfifo.setup",
+            "name": "setup",
+            "desc": "This bit indicates if the received transaction is of type SETUP (1) or OUT (0).",
+            "bits": "19",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.rxfifo.ep",
+            "name": "ep",
+            "desc": "This field contains the endpoint ID to which the packet was directed.",
+            "bits": "23:20",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.rxenable_out",
+        "name": "rxenable_out",
+        "desc": "Receive OUT transaction enable",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.rxenable_out.out",
+            "name": "out",
+            "desc": "This bit must be set to enable OUT transactions to be received on the endpoint.\nIf the bit is clear but the endpoint is enabled, then an OUT request will receive a NAK in response.\nIf set_nak_out for this endpoint is set, hardware will clear this bit whenever an OUT transaction is received on this endpoint.\nSoftware must set this bit again to receive the next OUT transaction.\nUntil that happens, hardware will continue to NAK any OUT transactions to this endpoint.",
+            "bits": "NEndpoints-1:0",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.rxenable_out.preserve",
+            "name": "preserve",
+            "desc": "When writing to this register, only those 'out' bits with a corresponding 'preserve' bit of 0 are updated.\nThe 'preserve' field should therefore normally be set to all '1s', except for those bits that the software wishes to modify.\nThis conditional update facility avoids a race with the hardware when it is clearing the 'out' bit for another enabled endpoint.",
+            "bits": "NEndpoints+15:16",
+            "swaccess": "wo",
+            "hwaccess": "hro"
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.out_data_toggle",
+        "name": "out_data_toggle",
+        "desc": "OUT Endpoints Data Toggles",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.out_data_toggle.status",
+            "name": "status",
+            "desc": "Reading returns the current state of the OUT endpoint Data Toggle flags.\nWriting sets the Data Toggle flag for each endpoint if the corresponding mask bit\nin the upper half of this register is set.",
+            "bits": "11:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.out_data_toggle.mask",
+            "name": "mask",
+            "desc": "Reads as zero.\nWhen writing, a set bit will cause the Data Toggle flag of the corresponding\nOUT endpoint to be updated. A clear bit will leave the flag for the corresponding\nendpoint unchanged.",
+            "bits": "27:16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.in_data_toggle",
+        "name": "in_data_toggle",
+        "desc": "IN Endpoints Data Toggles",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.in_data_toggle.status",
+            "name": "status",
+            "desc": "Reading returns the current state of the IN endpoint Data Toggle flags.\nWriting sets the Data Toggle flag for each endpoint if the corresponding mask bit\nin the upper half of this register is set.",
+            "bits": "11:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.in_data_toggle.mask",
+            "name": "mask",
+            "desc": "Reads as zero.\nWhen writing, a set bit will cause the Data Toggle flag of the corresponding\nIN endpoint to be updated. A clear bit will leave the flag for the corresponding\nendpoint unchanged.",
+            "bits": "27:16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.phy_pins_sense",
+        "name": "phy_pins_sense",
+        "desc": "USB PHY pins sense.\nThis register can be used to read out the state of the USB device inputs and outputs from software.\nThis is designed to be used for debugging purposes or during chip testing.",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.rx_dp_i",
+            "name": "rx_dp_i",
+            "desc": "USB D+ input.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.rx_dn_i",
+            "name": "rx_dn_i",
+            "desc": "USB D- input.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.rx_d_i",
+            "name": "rx_d_i",
+            "desc": "USB data input from an external differential receiver, if available.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.tx_dp_o",
+            "name": "tx_dp_o",
+            "desc": "USB transmit D+ output (readback).",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.tx_dn_o",
+            "name": "tx_dn_o",
+            "desc": "USB transmit D- output (readback).",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.tx_d_o",
+            "name": "tx_d_o",
+            "desc": "USB transmit data value (readback).",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.tx_se0_o",
+            "name": "tx_se0_o",
+            "desc": "USB single-ended zero output (readback).",
+            "bits": "11",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.tx_oe_o",
+            "name": "tx_oe_o",
+            "desc": "USB OE output (readback).",
+            "bits": "12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_sense.pwr_sense",
+            "name": "pwr_sense",
+            "desc": "USB power sense signal.",
+            "bits": "16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.phy_pins_drive",
+        "name": "phy_pins_drive",
+        "desc": "USB PHY pins drive.\nThis register can be used to control the USB device inputs and outputs from software.\nThis is designed to be used for debugging purposes or during chip testing.",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.dp_o",
+            "name": "dp_o",
+            "desc": "USB transmit D+ output, used with dn_o.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.dn_o",
+            "name": "dn_o",
+            "desc": "USB transmit D- output, used with dp_o.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.d_o",
+            "name": "d_o",
+            "desc": "USB transmit data output, encoding K and J when se0_o is 0.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.se0_o",
+            "name": "se0_o",
+            "desc": "USB single-ended zero output.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.oe_o",
+            "name": "oe_o",
+            "desc": "USB OE output.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.rx_enable_o",
+            "name": "rx_enable_o",
+            "desc": "Enable differential receiver.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.dp_pullup_en_o",
+            "name": "dp_pullup_en_o",
+            "desc": "USB D+ pullup enable output.",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.dn_pullup_en_o",
+            "name": "dn_pullup_en_o",
+            "desc": "USB D- pullup enable output.",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_pins_drive.en",
+            "name": "en",
+            "desc": "0: Outputs are controlled by the hardware block.\n1: Outputs are controlled with this register.",
+            "bits": "16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.phy_config",
+        "name": "phy_config",
+        "desc": "USB PHY Configuration",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.phy_config.use_diff_rcvr",
+            "name": "use_diff_rcvr",
+            "desc": "Detect received K and J symbols from the usb_rx_d signal, which must be driven from an external differential receiver.\nIf 1, make use of the usb_rx_d input.\nIf 0, the usb_rx_d input is ignored and the usb_rx_dp and usb_rx_dn pair are used to detect K and J (useful for some environments, but will be unlikely to pass full USB compliance).\nRegardless of the state of this field usb_rx_dp and usb_rx_dn are always used to detect SE0.\nThis bit also feeds the rx_enable pin, activating the receiver when the device is not suspended.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_config.tx_use_d_se0",
+            "name": "tx_use_d_se0",
+            "desc": "If 1, select the d and se0 TX interface.\nIf 0, select the dp and dn TX interface.\nThis directly controls the output pin of the same name.\nIt is intended to be used to enable the use of a variety of external transceivers, to select an encoding that matches the transceiver.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_config.eop_single_bit",
+            "name": "eop_single_bit",
+            "desc": "Recognize a single SE0 bit as an end of packet, otherwise two successive bits are required.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_config.pinflip",
+            "name": "pinflip",
+            "desc": "Flip the D+/D- pins.\nParticularly useful if D+/D- are mapped to SBU1/SBU2 pins of USB-C.\n",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_config.usb_ref_disable",
+            "name": "usb_ref_disable",
+            "desc": "0: Enable reference signal generation for clock synchronization, 1: disable it by forcing the associated signals to zero.\n",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.phy_config.tx_osc_test_mode",
+            "name": "tx_osc_test_mode",
+            "desc": "Disable (0) or enable (1) oscillator test mode.\nIf enabled, the device constantly transmits a J/K pattern, which is useful for testing the USB clock.\nNote that while in oscillator test mode, the device no longer receives SOFs and consequently does not generate the reference signal for clock synchronization.\nThe clock might drift off.\n",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.wake_control",
+        "name": "wake_control",
+        "desc": "USB wake module control for suspend / resume",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.wake_control.suspend_req",
+            "name": "suspend_req",
+            "desc": "Suspend request to the wake detection module.\n\nTrigger the wake detection module to begin monitoring for wake-from-suspend events.\nWhen written with a 1, the wake detection module will activate.\nActivation may not happen immediately, and its status can be verified by checking wake_events.module_active.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.wake_control.wake_ack",
+            "name": "wake_ack",
+            "desc": "Wake acknowledgement.\n\nSignal to the wake detection module that it may release control of the pull-ups back to the main block and return to an inactive state.\nThe release back to normal state may not happen immediately.\nThe status can be confirmed via wake_events.module_active.\n\nNote that this bit can also be used without powering down, such as when usbdev detects resume signaling before transitions to low power states have begun.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.wake_events",
+        "name": "wake_events",
+        "desc": "USB wake module events and debug",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.wake_events.module_active",
+            "name": "module_active",
+            "desc": "USB aon wake module is active, monitoring events and controlling the pull-ups.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.wake_events.disconnected",
+            "name": "disconnected",
+            "desc": "USB aon wake module detected VBUS was interrupted while monitoring events.",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.wake_events.bus_reset",
+            "name": "bus_reset",
+            "desc": "USB aon wake module detected a bus reset while monitoring events.",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.wake_events.bus_not_idle",
+            "name": "bus_not_idle",
+            "desc": "USB aon wake module detected a non-idle bus while monitoring events.",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.fifo_ctrl",
+        "name": "fifo_ctrl",
+        "desc": "FIFO control register",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.fifo_ctrl.avout_rst",
+            "name": "avout_rst",
+            "desc": "Software reset of the Available OUT Buffer FIFO. This must be used only when the USB device\nis not connected to the USB.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.fifo_ctrl.avsetup_rst",
+            "name": "avsetup_rst",
+            "desc": "Software reset of the Available SETUP Buffer FIFO. This must be used only when the USB device\nis not connected to the USB.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "usbdev.reg.fifo_ctrl.rx_rst",
+            "name": "rx_rst",
+            "desc": "Software reset the of Rx Buffer FIFO. This must be used only when the USB device is not\nconnected to the USB.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.count_out",
+        "name": "count_out",
+        "desc": "Counter for OUT side USB events.",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.count_out.count",
+            "name": "count",
+            "desc": "Number of events counted.",
+            "bits": "7:0",
+            "swaccess": "ro",
+            "hwaccess": "hwo"
+          },
+          {
+            "intent_id": "usbdev.reg.count_out.datatog_out",
+            "name": "datatog_out",
+            "desc": "Count the OUT transactions for which the USB device acknowledged the OUT packet\nand dropped it internally, which is the correct response to a packet transmitted\nwith an incorrect Data Toggle.\n\nThe expectation is that this packet is a retry of the previous packet transmission\nand that the handshake response was not received intact by the USB host, indicating\nunreliable communications.\n\nOther causes of Data Toggle synchronization failure may result in data loss.",
+            "bits": "12",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_out.drop_rx",
+            "name": "drop_rx",
+            "desc": "Count the SETUP/OUT packets ignored, dropped or NAKed because the RX FIFO was full.\nSETUP packets have been ignored, Isochronous OUT packets have been dropped, and\nnon-Isochronous OUT packets have been NAKed.",
+            "bits": "13",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_out.drop_avout",
+            "name": "drop_avout",
+            "desc": "Count the OUT packets that could not be accepted because there was no buffer in the\nAv OUT FIFO. Non-Isochronous OUT packets have been NAKed.\nIsochronous OUT packets were ignored.",
+            "bits": "14",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_out.ign_avsetup",
+            "name": "ign_avsetup",
+            "desc": "Count the SETUP packets that were ignored because there was no buffer in the\nAv SETUP FIFO.",
+            "bits": "15",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_out.endpoints",
+            "name": "endpoints",
+            "desc": "Set of OUT endpoints for which this counter is enabled.",
+            "bits": "27:16",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_out.rst",
+            "name": "rst",
+            "desc": "Write 1 to reset the counter.",
+            "bits": "31",
+            "swaccess": "wo",
+            "hwaccess": "hro"
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.count_in",
+        "name": "count_in",
+        "desc": "Counter for IN side USB events.",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.count_in.count",
+            "name": "count",
+            "desc": "Number of events counted.",
+            "bits": "7:0",
+            "swaccess": "ro",
+            "hwaccess": "hwo"
+          },
+          {
+            "intent_id": "usbdev.reg.count_in.nodata",
+            "name": "nodata",
+            "desc": "Count the IN transactions that were attempted when there was no packet available\nin the corresponding 'configin' register(s). This is not necessarily an error\ncondition, and the counter primarily offers some visibility into when the IN\ntraffic is underusing the available bus bandwidth.\nIt is of particular utility to Isochronous IN endpoints.",
+            "bits": "13",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_in.nak",
+            "name": "nak",
+            "desc": "Count the IN transactions rejected by the host responding with a NAK handshake.",
+            "bits": "14",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_in.timeout",
+            "name": "timeout",
+            "desc": "Count the IN transactions for which the USB host did not respond with a handshake,\nand the transactions timed out. This indicates that the host did not receive it\nand decode it as a valid packet, suggesting that communication is unreliable.\n\nIsochronous IN transactions are excluded from this count because there is no\nhandshake response to Isochronous packet transfers.",
+            "bits": "15",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_in.endpoints",
+            "name": "endpoints",
+            "desc": "Set of endpoints for which this counter is enabled.",
+            "bits": "27:16",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_in.rst",
+            "name": "rst",
+            "desc": "Write 1 to reset the counter.",
+            "bits": "31",
+            "swaccess": "wo",
+            "hwaccess": "hro"
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.count_nodata_in",
+        "name": "count_nodata_in",
+        "desc": "Count of IN transactions for which no packet data was available.\n\nThis secondary register allows some partitioning of endpoints among the two\ncounters, for more targeted measurement, eg. endpoints may be grouped according to\nthe expected bandwidth usage, or Isochronous vs. non-Isochronous transfers.",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.count_nodata_in.count",
+            "name": "count",
+            "desc": "Number of IN transactions that were attempted when there was no packet available\nin the corresponding 'configin' register(s).",
+            "bits": "7:0",
+            "swaccess": "ro",
+            "hwaccess": "hwo"
+          },
+          {
+            "intent_id": "usbdev.reg.count_nodata_in.endpoints",
+            "name": "endpoints",
+            "desc": "Set of endpoints for which this counter is enabled.",
+            "bits": "27:16",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_nodata_in.rst",
+            "name": "rst",
+            "desc": "Write 1 to reset the counter.",
+            "bits": "31",
+            "swaccess": "wo",
+            "hwaccess": "hro"
+          }
+        ]
+      },
+      {
+        "intent_id": "usbdev.reg.count_errors",
+        "name": "count_errors",
+        "desc": "Count of error conditions detected on token packets from the host.",
+        "fields": [
+          {
+            "intent_id": "usbdev.reg.count_errors.count",
+            "name": "count",
+            "desc": "Number of events counted.",
+            "bits": "7:0",
+            "swaccess": "ro",
+            "hwaccess": "hwo"
+          },
+          {
+            "intent_id": "usbdev.reg.count_errors.pid_invalid",
+            "name": "pid_invalid",
+            "desc": "Number of Invalid PIDs detected on packets from the host. Invalid PIDs may\nindicate very unreliable communication and/or a substantial frequency mismatch\nbetween the host and the device.",
+            "bits": "27",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_errors.bitstuff",
+            "name": "bitstuff",
+            "desc": "Number of SETUP/OUT packets that were ignored, dropped or NAKed because a\nBit Stuffing error was detected.",
+            "bits": "28",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_errors.crc16",
+            "name": "crc16",
+            "desc": "Count SETUP/OUT DATA packets that were ignored, dropped or NAKed because a\nCRC16 error was detected.",
+            "bits": "29",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_errors.crc5",
+            "name": "crc5",
+            "desc": "Count CRC5 errors detected on token packets sent by the host. CRC5 errors on\ntoken packets received from the host indicate very unreliable communication and\npossibly a substantial frequency mismatch between the host and the device.",
+            "bits": "30",
+            "swaccess": "rw",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "usbdev.reg.count_errors.rst",
+            "name": "rst",
+            "desc": "Write 1 to reset the counter.",
+            "bits": "31",
+            "swaccess": "wo",
+            "hwaccess": "hro"
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/usb_fs_nb_in_pe.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\nCopyright Luke Valenty (TinyFPGA project, https://github.com/tinyfpga/TinyFPGA-Bootloader).\n\nUSB Full Speed Non-Buffered Protocol Engine for IN endpoints\n\nDecode IN requests from host and respond with data if there is any\n\nBased on usb_fs_in_pe.v from the TinyFPGA-Bootloader project but\nthis version contains no packet buffers",
+      "params": [
+        {
+          "name": "NumInEps",
+          "default": "12",
+          "desc": ""
+        },
+        {
+          "name": "MaxInPktSizeByte",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "AckTimeoutCnt",
+          "default": "((17 * 4) + 6) - 1",
+          "desc": ""
+        },
+        {
+          "name": "PktW",
+          "default": "$clog2(MaxInPktSizeByte)",
+          "desc": ""
+        },
+        {
+          "name": "AckTimeoutCntW",
+          "default": "$clog2(AckTimeoutCnt)",
+          "desc": "derived parameter"
+        }
+      ]
+    },
+    "rtl/usb_fs_nb_out_pe.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\nCopyright Luke Valenty (TinyFPGA project, https://github.com/tinyfpga/TinyFPGA-Bootloader).\n\nUSB Full Speed Non-Buffered Protocol Engine for OUT/SETUP endpoints\n\nDecode OUT/SETUP requests from host and accept data unless buffers are full\n(SETUP is a special form of OUT and starts a transaction sequence)\n\nBased on usb_fs_out_pe.v from the TinyFPGA-Bootloader project but\nthis version contains no packet buffers",
+      "params": [
+        {
+          "name": "NumOutEps",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "MaxOutPktSizeByte",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "AckTimeoutCnt",
+          "default": "17 * 4",
+          "desc": ""
+        },
+        {
+          "name": "PktW",
+          "default": "$clog2(MaxOutPktSizeByte)",
+          "desc": ""
+        },
+        {
+          "name": "AckTimeoutCntW",
+          "default": "$clog2(AckTimeoutCnt)",
+          "desc": "derived parameter"
+        }
+      ]
+    },
+    "rtl/usb_fs_nb_pe.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\nCopyright Luke Valenty (TinyFPGA project, https://github.com/tinyfpga/TinyFPGA-Bootloader).\n\nUSB Full Speed Non-Buffered Protocol Engine\n\nDecodes low level USB link protocol from external usb_fs_tx/rx\nProvides upper level with\n- OUT endpoint interface (host to device) which also covers SETUP\n- IN endpoint interface (device to host)\n- Start of Frame interface\n\nBased on usb_fs_pe.v from the TinyFPGA-Bootloader project but\nthis version contains no packet buffers",
+      "params": [
+        {
+          "name": "NumOutEps",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "NumInEps",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "MaxPktSizeByte",
+          "default": "32",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/usb_fs_rx.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\nCopyright Luke Valenty (TinyFPGA project, https://github.com/tinyfpga/TinyFPGA-Bootloader).",
+      "params": []
+    },
+    "rtl/usb_fs_tx.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\nCopyright Luke Valenty (TinyFPGA project, https://github.com/tinyfpga/TinyFPGA-Bootloader).",
+      "params": []
+    },
+    "rtl/usb_fs_tx_mux.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\nCopyright Luke Valenty (TinyFPGA project, https://github.com/tinyfpga/TinyFPGA-Bootloader).",
+      "params": []
+    },
+    "rtl/usbdev.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nUSB Full Speed Device Interface (usbdev).",
+      "params": [
+        {
+          "name": "Stub",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "RcvrWakeTimeUs",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "RXFifoDepthW",
+          "default": "prim_util_pkg::vbits(RXFifoDepth+1)",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/usbdev_aon_wake.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nAlways On USB wake detect",
+      "params": []
+    },
+    "rtl/usbdev_counter.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nUSB device event counter\n\nAt every rising edge within 'event_i' the counter samples the current endpoint as indicated by\n'ep_i' and increments the count if the endpoint in question is enabled at that moment.\n\nThis means the set of endpoints for which events are counted may be changed over time by\nsoftware, whilst the USB device is active, multiplexing a single counter amongst multiple\nsets of endpoints.\n\nThe counter value saturates at its maximum and may be reset by software at any point.",
+      "params": [
+        {
+          "name": "NEndpoints",
+          "default": "12",
+          "desc": ""
+        },
+        {
+          "name": "NEvents",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "Width",
+          "default": "8",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/usbdev_iomux.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nUSB IO Mux\n\nMuxes the USB IO signals between the override CSRs and the USB engine. The\nincoming signals are also synchronized to the corresponding clock domain.",
+      "params": []
+    },
+    "rtl/usbdev_linkstate.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nLink state detection",
+      "params": []
+    },
+    "rtl/usbdev_usbif.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nUSB Full-Speed Device Interface core internals",
+      "params": [
+        {
+          "name": "NEndpoints",
+          "default": "12",
+          "desc": ""
+        },
+        {
+          "name": "AVFifoWidth",
+          "default": "4",
+          "desc": ""
+        },
+        {
+          "name": "RXFifoWidth",
+          "default": "4",
+          "desc": ""
+        },
+        {
+          "name": "MaxPktSizeByte",
+          "default": "64",
+          "desc": ""
+        },
+        {
+          "name": "NBuf",
+          "default": "4",
+          "desc": ""
+        },
+        {
+          "name": "SramAw",
+          "default": "4",
+          "desc": ""
+        },
+        {
+          "name": "PktW",
+          "default": "$clog2(MaxPktSizeByte)",
+          "desc": "derived parameter"
+        }
+      ]
+    }
+  }
+}

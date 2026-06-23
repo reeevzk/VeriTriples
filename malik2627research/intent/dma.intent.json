@@ -1,0 +1,610 @@
+{
+  "ip_name": "dma",
+  "ip_intent": {
+    "ip_name": "dma",
+    "one_line_desc": "DMA Controller for the integrated OpenTitan.",
+    "one_paragraph_desc": "The secure DMA controller provides OpenTitan with the ability to move data blobs securely in and out of the OpenTitan memory while offloading the Ibex core to focus on security critical tasks.\nThe secure DMA provides an hardware isolation layer between OpenTitan and the rest of the SoC.\nIt provides the hardware enforcement of security properties through well defined isolation & access control techniques, hardware based checking and other protection mechanisms.\nNote that depending upon use case, it is expected that the SoC provides proper security mechanisms for code / data protections such as access control mechanisms, encrypted (w/integrity protection) memory regions etc.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "host"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "NumIntClearSources",
+        "desc": "Number of interrupt clearing sources to process",
+        "default": "11"
+      },
+      {
+        "name": "EnableDataIntgGen",
+        "desc": "Compute integrity bits for A channel data on all TL-UL host ports",
+        "default": "1'b1"
+      },
+      {
+        "name": "EnableRspDataIntgCheck",
+        "desc": "Enable integrity checks on the response TL-UL D channel",
+        "default": "1'b1"
+      },
+      {
+        "name": "TlUserRsvd",
+        "desc": "Value of `rsvd` field in A channel of all TL-UL host ports",
+        "default": "'0"
+      },
+      {
+        "name": "SysRaclRole",
+        "desc": "RACL propagated on the Sys interface via `racl_vec`",
+        "default": "'0"
+      },
+      {
+        "name": "OtAgentId",
+        "desc": "OT Agent ID",
+        "default": "0"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "dma.interrupt.dma_done",
+        "name": "dma_done",
+        "desc": "DMA operation has been completed."
+      },
+      {
+        "intent_id": "dma.interrupt.dma_chunk_done",
+        "name": "dma_chunk_done",
+        "desc": "Indicates the transfer of a single chunk has been completed."
+      },
+      {
+        "intent_id": "dma.interrupt.dma_error",
+        "name": "dma_error",
+        "desc": "DMA error has occurred. DMA_STATUS.error_code register shows the details."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "dma.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "dma.reg.SRC_ADDR_LO",
+        "name": "SRC_ADDR_LO",
+        "desc": "Lower 32 bits of the physical or virtual address of memory location within SoC memory address map or physical address within OT non-secure memory space.\nData is read from this location in a copy operation.\nThe address may be an IO virtual address.\nMust be aligned to the transfer width.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.SRC_ADDR_LO.src_addr_lo",
+            "name": "src_addr_lo",
+            "desc": "Lower 32 bits of the source address.\nMust be aligned to the transfer width.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.SRC_ADDR_HI",
+        "name": "SRC_ADDR_HI",
+        "desc": "Upper 32 bits of the source address.\nMust be aligned to the transfer width.\nSource and destination address must have the same alignment.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.SRC_ADDR_HI.src_addr_hi",
+            "name": "src_addr_hi",
+            "desc": "Upper 32 bits of the physical or virtual address of memory location within SoC memory address map or physical address within OT non-secure memory space.\nMust be aligned to the transfer width.\nSource and destination address must have the same alignment.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.DST_ADDR_LO",
+        "name": "DST_ADDR_LO",
+        "desc": "Lower 32 bits of the physical or virtual address of memory location within SoC memory address map or physical address within OT non-secure memory space.\nData is written to this location in a copy operation.\nThe address may be an IO virtual address.\nMust be aligned to the transfer width.\nSource and destination address must have the same alignment.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.DST_ADDR_LO.dst_addr_lo",
+            "name": "dst_addr_lo",
+            "desc": "Lower 32 bits of the destination address.\nMust be aligned to the transfer width.\nSource and destination address must have the same alignment.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.DST_ADDR_HI",
+        "name": "DST_ADDR_HI",
+        "desc": "Upper 32 bits of the destination address.\nMust be aligned to the transfer width.\nSource and destination address must have the same alignment.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.DST_ADDR_HI.dst_addr_hi",
+            "name": "dst_addr_hi",
+            "desc": "Upper 32 bits of the physical or virtual address of memory location within SoC memory address map or physical address within OT non-secure memory space.\nMust be aligned to the transfer width.\nSource and destination address must have the same alignment.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.ADDR_SPACE_ID",
+        "name": "ADDR_SPACE_ID",
+        "desc": "Address spaces that source and destination pointers refer to.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.ADDR_SPACE_ID.src_asid",
+            "name": "src_asid",
+            "desc": "Target address space that the source address pointer refers to.",
+            "bits": "3:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.ADDR_SPACE_ID.dst_asid",
+            "name": "dst_asid",
+            "desc": "Target address space that the destination address pointer refers to.",
+            "bits": "7:4",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.ENABLED_MEMORY_RANGE_BASE",
+        "name": "ENABLED_MEMORY_RANGE_BASE",
+        "desc": "Base Address to mark the start of the DMA enabled memory range within the OT internal memory space.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.ENABLED_MEMORY_RANGE_BASE.base",
+            "name": "base",
+            "desc": "Base Address to mark the start of the DMA enabled memory range within the OT internal memory space.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.ENABLED_MEMORY_RANGE_LIMIT",
+        "name": "ENABLED_MEMORY_RANGE_LIMIT",
+        "desc": "Limit Address to mark the end of the DMA enabled memory range within the OT internal memory space; address is inclusive.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.ENABLED_MEMORY_RANGE_LIMIT.limit",
+            "name": "limit",
+            "desc": "Limit Address to mark the end of the DMA enabled memory range within the OT internal memory space; inclusive.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.RANGE_VALID",
+        "name": "RANGE_VALID",
+        "desc": "Indicates that the ENABLED_MEMORY_RANGE_BASE and _LIMIT registers have been programmed to restrict DMA accesses within the OT internal address space.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.RANGE_VALID.range_valid",
+            "name": "range_valid",
+            "desc": "Once set the enabled memory base and limit registers are valid.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.RANGE_REGWEN",
+        "name": "RANGE_REGWEN",
+        "desc": "Used to lock the DMA enabled memory range configuration registers.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.RANGE_REGWEN.regwen",
+            "name": "regwen",
+            "desc": "Used by firmware to lock the DMA enabled memory range configuration registers from further modification.\nOnce this register is set to kMultiBitBool4False, it can only be set to kMultiBitBool4True through a reset event.\n\nDefault Value = kMultiBitBool4True -> Unlocked at reset.",
+            "bits": "3:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.CFG_REGWEN",
+        "name": "CFG_REGWEN",
+        "desc": "Indicates whether the configuration registers are locked because the DMA controller is operating.\nIn the idle state, this register is set to kMultiBitBool4True.\nWhen the DMA is performing an operation, i.e. the DMA is busy, this register is set to kMultiBitBool4False.\nDuring the DMA operation, the CONTROL and STATUS registers remain usable.\nThe comportable registers (the interrupt and alert configuration) are NOT locked during the DMA operation and can still be updated.\nWhen the DMA reaches an interrupt or alert condition, it will perform the action according to the current register configuration.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.CFG_REGWEN.regwen",
+            "name": "regwen",
+            "desc": "Used by hardware to lock the DMA configuration registers.\nThis register is purely managed by hardware and only software readable.",
+            "bits": "3:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.TOTAL_DATA_SIZE",
+        "name": "TOTAL_DATA_SIZE",
+        "desc": "Total size (in bytes) of the data to be transferred.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.TOTAL_DATA_SIZE.data_size",
+            "name": "data_size",
+            "desc": "Total size (in bytes) of the data to be transferred. The complete transfer operation\nmay consist of multiple chunks of data as specified by the CHUNK_DATA_SIZE register.\n\nMinimum: 1 byte.\nMaximum: May be restricted to a maximum pre-defined size based on OT DMA enabled memory space allocation.\nWorks in conjunction with the TRANSFER_WIDTH register.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.CHUNK_DATA_SIZE",
+        "name": "CHUNK_DATA_SIZE",
+        "desc": "Number of bytes to be transferred in response to each interrupt/firmware request.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.CHUNK_DATA_SIZE.data_size",
+            "name": "data_size",
+            "desc": "Size (in bytes) for a single DMA transfer.\nIn hardware handshake mode, the DMA reads in chunks of CHUNK_DATA_SIZE from the peripheral.\nFor a single memory transfer CHUNK_DATA_SIZE and TOTAL_DATA_SIZE are set to the same value.\n\nMinimum: 1 byte.\nMaximum: May be restricted to a maximum pre-defined size based on OT DMA enabled memory space allocation.\nWorks in conjunction with the TRANSFER_WIDTH register.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.TRANSFER_WIDTH",
+        "name": "TRANSFER_WIDTH",
+        "desc": "Denotes the width of each transaction that the DMA shall issue.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.TRANSFER_WIDTH.transaction_width",
+            "name": "transaction_width",
+            "desc": "Denotes the width of each transaction that the DMA shall issue during the data movement.\n\nMultiple transactions of this width will be issued until TOTAL_DATA_SIZE bytes have been transferred.\nNote that firmware may need to set a different value if a receiving IP supports a read / write transaction width that is less than 1 DWORD.\nThis does not affect the wrap-around mechanism.\nNote that the value 3 for this register represents an invalid configuration that leads to an error.",
+            "bits": "1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.CONTROL",
+        "name": "CONTROL",
+        "desc": "Control register for DMA data movement.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.CONTROL.opcode",
+            "name": "opcode",
+            "desc": "Defines the type of DMA operations.",
+            "bits": "3:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.CONTROL.hardware_handshake_enable",
+            "name": "hardware_handshake_enable",
+            "desc": "Enable hardware handshake mode.\nUsed to clear FIFOs from low speed IO peripherals receiving data, e.g., I3C receive buffer.\n  Listen to an input trigger signal.\n  Read data from source address location.\n  Copy to destination address.\n  Number of bytes specified in size register.\n  Note assumption is the peripheral lowers input once FIFO is cleared.\nNo explicit clearing necessary.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.CONTROL.digest_swap",
+            "name": "digest_swap",
+            "desc": "Digest register byte swap.\n\nIf 1 the value in each digest output register is converted to big-endian byte order.\nThis setting does not affect the order of the digest output registers, !!SHA2_DIGEST_0 still contains the first 4 bytes of the digest.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.CONTROL.initial_transfer",
+            "name": "initial_transfer",
+            "desc": "Marks the initial transfer to initialize the DMA and SHA engine for one transfer that can span over multiple single DMA transfers.\nUsed for hardware handshake and ordinary transfers, in which multiple transfers contribute to a final digest.\nNote, for non-handshake transfers with inline hashing mode enabled, this bit must be set to also mark the first transfer.",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "dma.reg.CONTROL.abort",
+            "name": "abort",
+            "desc": "Aborts the DMA operation if this bit is set.\nSets the corresponding bit in the status register once abort operation is complete.\nAny OpenTitan-internal transactions are guaranteed to complete, but there are no guarantees on the SoC interface.",
+            "bits": "27",
+            "swaccess": "wo",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "dma.reg.CONTROL.go",
+            "name": "go",
+            "desc": "Setting this bit triggers the DMA operation.\nFor normal operation, the DMA engine clears the `go` bit automatically after the configured operation is complete.\nFor Hardware handshake operation, DMA engine does not auto clear the Go bit.\nFirmware shall clear the Go bit when it intends to stop the hardware handshake operation.",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": "hrw"
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.SRC_CONFIG",
+        "name": "SRC_CONFIG",
+        "desc": "Defines the addressing behavior of the DMA for the source address.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.SRC_CONFIG.wrap",
+            "name": "wrap",
+            "desc": "When 0: Chunks occupy contiguous ascending addresses.\nWhen 1: Source address wraps back to the starting address when finishing a chunk.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.SRC_CONFIG.increment",
+            "name": "increment",
+            "desc": "Defines the increment behavior after every DMA read.\nWhen 0: Source address is not changed.\n        All reads are done from the same address.\nWhen 1: Source address is incremented by transfer_width after each read.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.DST_CONFIG",
+        "name": "DST_CONFIG",
+        "desc": "Defines the addressing behavior of the DMA for the destination address.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.DST_CONFIG.wrap",
+            "name": "wrap",
+            "desc": "When 0: Chunks occupy contiguous ascending addresses.\nWhen 1: Destination address wraps back to the starting address when finishing a chunk.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.DST_CONFIG.increment",
+            "name": "increment",
+            "desc": "Defines the increment behavior after every DMA write.\nWhen 0: Destination address is not changed.\n        All writes are done to the same address.\nWhen 1: Destination address is incremented by transfer_width after each write.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.STATUS",
+        "name": "STATUS",
+        "desc": "Status indication for DMA data movement.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.STATUS.busy",
+            "name": "busy",
+            "desc": "DMA operation is active if this bit is set.\nDMA engine clears this bit when operation is complete.\nThis bit may be set as long as hardware handshake mode is active and triggered.",
+            "bits": "0",
+            "swaccess": "ro",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "dma.reg.STATUS.done",
+            "name": "done",
+            "desc": "Configured DMA operation is complete.\nCleared automatically by the hardware when starting a new transfer.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "dma.reg.STATUS.aborted",
+            "name": "aborted",
+            "desc": "Set once aborted operation drains.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.STATUS.error",
+            "name": "error",
+            "desc": "Error occurred during the operation.\nERROR_CODE register denotes the source of the error.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "dma.reg.STATUS.sha2_digest_valid",
+            "name": "sha2_digest_valid",
+            "desc": "Indicates whether the SHA2_DIGEST register contains a valid digest.\nThis value is cleared on the initial transfer and set when the digest is written.",
+            "bits": "4",
+            "swaccess": "ro",
+            "hwaccess": "hrw"
+          },
+          {
+            "intent_id": "dma.reg.STATUS.chunk_done",
+            "name": "chunk_done",
+            "desc": "Transfer of a single chunk is complete.\nOnly raised for multi-chunk memory-to-memory transfers.\nCleared automatically by the hardware when starting the transfer of a new chunk.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": "hrw"
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.ERROR_CODE",
+        "name": "ERROR_CODE",
+        "desc": "Denotes the source of the operational error.\nThe error is cleared by writing the RW1C STATUS.error register.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.ERROR_CODE.src_addr_error",
+            "name": "src_addr_error",
+            "desc": "Source address is invalid.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.ERROR_CODE.dst_addr_error",
+            "name": "dst_addr_error",
+            "desc": "Destination address is invalid.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.ERROR_CODE.opcode_error",
+            "name": "opcode_error",
+            "desc": "Opcode is invalid.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.ERROR_CODE.size_error",
+            "name": "size_error",
+            "desc": "TRANSFER_WIDTH encodes an invalid value, TOTAL_DATA_SIZE or CHUNK_SIZE are zero, or inline hashing is not using 32-bit transfer width",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.ERROR_CODE.bus_error",
+            "name": "bus_error",
+            "desc": "The bus transfer returned an error.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.ERROR_CODE.base_limit_error",
+            "name": "base_limit_error",
+            "desc": "The base and limit addresses contain an invalid value.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.ERROR_CODE.range_valid_error",
+            "name": "range_valid_error",
+            "desc": "The DMA enabled memory range is not configured.",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "dma.reg.ERROR_CODE.asid_error",
+            "name": "asid_error",
+            "desc": "The source or destination ASID contains an invalid value.",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.HANDSHAKE_INTR_ENABLE",
+        "name": "HANDSHAKE_INTR_ENABLE",
+        "desc": "Enable bits for incoming handshake interrupt wires.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.HANDSHAKE_INTR_ENABLE.mask",
+            "name": "mask",
+            "desc": "Enable bits for incoming handshake interrupt wires.",
+            "bits": "NumIntClearSources-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.CLEAR_INTR_SRC",
+        "name": "CLEAR_INTR_SRC",
+        "desc": "Valid bits for which interrupt sources need clearing.\nWhen HANDSHAKE_INTR_ENABLE is non-zero and corresponding lsio_trigger becomes set,\nDMA issues writes with address from INTR_SRC_ADDR and write value from INTR_SRC_WR_VAL corresponding to each\nbit set in this register.",
+        "fields": [
+          {
+            "intent_id": "dma.reg.CLEAR_INTR_SRC.source",
+            "name": "source",
+            "desc": "Source N needs interrupt cleared",
+            "bits": "NumIntClearSources-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "dma.reg.CLEAR_INTR_BUS",
+        "name": "CLEAR_INTR_BUS",
+        "desc": "Bus selection bit where the clearing command should be performed.\"\n0: CTN/System fabric\n1: OT-internal crossbar",
+        "fields": [
+          {
+            "intent_id": "dma.reg.CLEAR_INTR_BUS.bus",
+            "name": "bus",
+            "desc": "Bus selection bit for source N.",
+            "bits": "NumIntClearSources-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/dma.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "EnableDataIntgGen",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "EnableRspDataIntgCheck",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "TlUserRsvd",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "SysRaclRole",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "OtAgentId",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

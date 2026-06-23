@@ -1,0 +1,203 @@
+{
+  "ip_name": "rom_ctrl",
+  "ip_intent": {
+    "ip_name": "rom_ctrl",
+    "one_line_desc": "Interfaces scrambled boot ROM with system bus and KMAC for initial health check after reset",
+    "one_paragraph_desc": "ROM Controller interfaces between the system bus and the scrambled ROM.\nIt is responsible for descrambling on memory fetches.\nIt also has a checker block that interfaces KMAC Accelerator to perform a cryptographic hash of the ROM contents at boot to detect any malicious changes to the ROM itself while in reset.\nROM Controller also has status registers for ROM integrity errors or checker block FSM glitches.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "BootRomInitFile",
+        "desc": "Contents of ROM",
+        "default": "\"\""
+      },
+      {
+        "name": "FlopToKmac",
+        "desc": "Add a flop stage between the output of the ROM and the data that gets\nsent to KMAC. This may break long paths in a target chip, at the cost of\nadding chip area.",
+        "default": "1'b0"
+      },
+      {
+        "name": "RndCnstScrNonce",
+        "desc": "Fixed nonce used for address / data scrambling",
+        "default": null
+      },
+      {
+        "name": "RndCnstScrKey",
+        "desc": "Randomised constant used as a scrambling key for ROM data",
+        "default": null
+      },
+      {
+        "name": "SecDisableScrambling",
+        "desc": "Disable scrambling and checking in rom_ctrl, turning the block into a\nsimple ROM wrapper. This isn't intended for real chips, but is useful\nfor small FPGA targets where there's not space for the PRINCE\nprimitives.",
+        "default": "1'b0"
+      },
+      {
+        "name": "MemSizeRom",
+        "desc": "Memory size of the ROM (in bytes).",
+        "default": "0x8000"
+      }
+    ],
+    "interrupts": [],
+    "alerts": [
+      {
+        "intent_id": "rom_ctrl.alert.fatal",
+        "name": "fatal",
+        "desc": "A fatal error. Fatal alerts are non-recoverable and will be asserted until a hard reset."
+      }
+    ],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/rom_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "BootRomInitFile",
+          "default": "\"\"",
+          "desc": ""
+        },
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "FlopToKmac",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstScrNonce",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstScrKey",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "MemSizeRom",
+          "default": "32'h8000",
+          "desc": ""
+        },
+        {
+          "name": "SecDisableScrambling",
+          "default": "1'b0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rom_ctrl_compare.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\n\nThe comparator inside the ROM checker",
+      "params": [
+        {
+          "name": "NumWords",
+          "default": "2",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rom_ctrl_counter.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "RomDepth",
+          "default": "16",
+          "desc": ""
+        },
+        {
+          "name": "RomTopCount",
+          "default": "2",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rom_ctrl_fsm.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "RomDepth",
+          "default": "16",
+          "desc": ""
+        },
+        {
+          "name": "TopCount",
+          "default": "8",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rom_ctrl_mux.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\n\nThe mux to select between ROM inputs",
+      "params": [
+        {
+          "name": "AW",
+          "default": "8",
+          "desc": ""
+        },
+        {
+          "name": "DW",
+          "default": "39",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/rom_ctrl_scrambled_rom.sv": {
+      "doc_comment": "A scrambled ROM. This is scrambled with a fixed key, passed in as a parameter (this parameter\nwill be a compile-time random constant).\n\nThis code follows the structure of prim_ram_1p_scr.sv (although it's much simplified because the\nkey is fixed and we don't support writes). For more information about what is going on, see that\nfile. Using the parameter names in prim_ram_1p_scr, we have NumPrinceRoundsHalf = 3 (so\napproximately 7 effective rounds), NumDiffRounds = 2 and NumAddrScrRounds = 2 (enabling address\nscrambling with 2 rounds).\n\nThere are two input address ports (rom_addr_i and prince_addr_i). These are expected to be\nconnected to signals that are logically the same. The first is used as an input to the physical\nROM index. The second is used when calculating the address-tweakable keystream. The trick is that\nyou can mitigate fault-injection attacks that corrupt the address by splitting it somewhere\n\"upstream\". If a fault-injection only corrupts one of the two addresses, the result will be\ngarbage.",
+      "params": [
+        {
+          "name": "NumPrinceRoundsHalf",
+          "default": "3 (so",
+          "desc": "approximately 7 effective rounds)"
+        },
+        {
+          "name": "MemInitFile",
+          "default": "\"\"",
+          "desc": ""
+        },
+        {
+          "name": "Width",
+          "default": "40",
+          "desc": ""
+        },
+        {
+          "name": "Depth",
+          "default": "16",
+          "desc": ""
+        },
+        {
+          "name": "ScrNonce",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "ScrKey",
+          "default": "'0",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

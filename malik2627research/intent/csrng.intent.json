@@ -1,0 +1,601 @@
+{
+  "ip_name": "csrng",
+  "ip_intent": {
+    "ip_name": "csrng",
+    "one_line_desc": "Takes entropy bits to produce cryptographically secure random numbers for consumption by hardware blocks and by software",
+    "one_paragraph_desc": "Cryptographically Secure Random Number Generator (CSRNG) consumes random seeds from Entropy Source and generates random numbers for separate application interface contexts, such as multiple entropy distribution networks and software.\nWhen used in fully deterministic mode, the random numbers are generated just based on seeds provided by the application input.\nCSRNG targets compliance with [BSI's AIS31 recommendations for Common Criteria (CC)][bsi-ais31] as well as NIST's [SP 800-90A][nist-sp-800-90a] and [SP 800-90C][nist-sp-800-90c].\nInternally, it uses the CTR_DRBG construction with a security strength of 256 bits as specified by [SP 800-90A][nist-sp-800-90a].\n\n[bsi-ais31]: https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Interpretationen/AIS_31_Functionality_classes_for_random_number_generators_e.pdf\n[nist-sp-800-90a]: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-90Ar1.pdf\n[nist-sp-800-90c]: https://csrc.nist.gov/CSRC/media/Publications/sp/800-90c/draft/documents/sp800_90c_second_draft.pdf",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "RndCnstCsKeymgrDivNonProduction",
+        "desc": "Compile-time random bits for csrng state group diversification value",
+        "default": null
+      },
+      {
+        "name": "RndCnstCsKeymgrDivProduction",
+        "desc": "Compile-time random bits for csrng state group diversification value",
+        "default": null
+      },
+      {
+        "name": "SBoxImpl",
+        "desc": "Selection of the S-Box implementation. See aes_pkg.sv.",
+        "default": "aes_pkg::SBoxImplCanright"
+      },
+      {
+        "name": "NumApps",
+        "desc": "Number of application interfaces",
+        "default": "3"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "csrng.interrupt.cs_cmd_req_done",
+        "name": "cs_cmd_req_done",
+        "desc": "Asserted when a command request is completed."
+      },
+      {
+        "intent_id": "csrng.interrupt.cs_entropy_req",
+        "name": "cs_entropy_req",
+        "desc": "Asserted when a request for entropy has been made."
+      },
+      {
+        "intent_id": "csrng.interrupt.cs_hw_inst_exc",
+        "name": "cs_hw_inst_exc",
+        "desc": "Asserted when a hardware-attached CSRNG instance encounters a command exception"
+      },
+      {
+        "intent_id": "csrng.interrupt.cs_fatal_err",
+        "name": "cs_fatal_err",
+        "desc": "Asserted when a FIFO error or a fatal alert occurs. Check the !!ERR_CODE register to get more information."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "csrng.alert.recov_alert",
+        "name": "recov_alert",
+        "desc": "This alert is triggered when a recoverable alert occurs.  Check the !!RECOV_ALERT_STS register to get more information."
+      },
+      {
+        "intent_id": "csrng.alert.fatal_alert",
+        "name": "fatal_alert",
+        "desc": "This alert triggers (i) if an illegal state machine state is reached, or\n(ii) if an AES fatal alert condition occurs, or (iii) if a fatal integrity\nfailure is detected on the TL-UL bus."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "csrng.reg.REGWEN",
+        "name": "REGWEN",
+        "desc": "Register write enable for all control registers",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.REGWEN.None",
+            "name": null,
+            "desc": "When true, all writeable registers can be modified.\nWhen false, they become read-only.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.CTRL",
+        "name": "CTRL",
+        "desc": "Control register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.CTRL.ENABLE",
+            "name": "ENABLE",
+            "desc": "Setting this field to kMultiBitBool4True will enable the CSRNG module. The modules\nof the entropy complex may only be enabled and disabled in a specific order, see\nProgrammers Guide for details.",
+            "bits": "3:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.CTRL.SW_APP_ENABLE",
+            "name": "SW_APP_ENABLE",
+            "desc": "Setting this field to kMultiBitBool4True will enable reading from the !!GENBITS register.\nThis application interface for software (register based) will be enabled\nonly if the otp_en_csrng_sw_app_read input vector is set to the enable encoding.",
+            "bits": "7:4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.CTRL.READ_INT_STATE",
+            "name": "READ_INT_STATE",
+            "desc": "Setting this field to kMultiBitBool4True will enable reading from the !!INT_STATE_VAL register.\nReading the internal state of the enable instances will be enabled\nonly if the otp_en_csrng_sw_app_read input vector is set to the enable encoding.\nAlso, the !!INT_STATE_READ_ENABLE bit of the selected instance needs to be set to true for this to work.",
+            "bits": "11:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.CTRL.FIPS_FORCE_ENABLE",
+            "name": "FIPS_FORCE_ENABLE",
+            "desc": "Setting this field to kMultiBitBool4True enables forcing the FIPS/CC compliance flag to true via the !!FIPS_FORCE register.",
+            "bits": "15:12",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.CMD_REQ",
+        "name": "CMD_REQ",
+        "desc": "Command request register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.CMD_REQ.CMD_REQ",
+            "name": "CMD_REQ",
+            "desc": "Writing this request with defined CSRNG commands will initiate all\npossible CSRNG actions. The application interface must wait for the\n\"ack\" to return before issuing new commands.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.RESEED_INTERVAL",
+        "name": "RESEED_INTERVAL",
+        "desc": "CSRNG maximum number of generate requests allowed between reseeds register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.RESEED_INTERVAL.RESEED_INTERVAL",
+            "name": "RESEED_INTERVAL",
+            "desc": "Setting this field will set the number of generate requests that can be\nmade to CSRNG before a reseed request needs to be made.\nThis register supports a maximum of 2^32 requests between reseeds.\nThis register will be compared to a counter, which counts the number of\ngenerate commands between reseed or instantiate commands.\nIf the counter reaches the value of this register, the violating command\nwill be acknowledged with a status error.\nIf the violating command was issued by a HW instance, an interrupt will\nbe triggered.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.SW_CMD_STS",
+        "name": "SW_CMD_STS",
+        "desc": "Application interface command status register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.SW_CMD_STS.CMD_RDY",
+            "name": "CMD_RDY",
+            "desc": "This bit indicates when the command interface is ready to accept commands.\nBefore starting to write a new command to !!SW_CMD_REQ, this field needs to be polled.\n0b0: CSRNG is not ready to accept commands or the last command hasn't been acked yet.\n0b1: CSRNG is ready to accept the next command.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.SW_CMD_STS.CMD_ACK",
+            "name": "CMD_ACK",
+            "desc": "This one bit field indicates when a SW command has been acknowledged by the CSRNG.\nIt is set to low each time a new command is written to !!CMD_REQ.\nThe field is set to high once a SW command request has been acknowledged by the CSRNG.\n0b0: The last SW command has not been acknowledged yet.\n0b1: The last SW command has been acknowledged.\nIn case of a generate command the acknowledgement goes high after all of the requested entropy is consumed.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.SW_CMD_STS.CMD_STS",
+            "name": "CMD_STS",
+            "desc": "This field represents the status code returned with the application command ack.\nIt is updated each time a command ack is asserted on the internal application\ninterface for software use.\nTo check whether a command was successful, wait for !!INTR_STATE.CS_CMD_REQ_DONE or\n!!SW_CMD_STS.CMD_ACK to be high and then check the value of this field.",
+            "bits": "5:3",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.GENBITS_VLD",
+        "name": "GENBITS_VLD",
+        "desc": "Generate bits returned valid register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.GENBITS_VLD.GENBITS_VLD",
+            "name": "GENBITS_VLD",
+            "desc": "This bit is set when genbits are available on this application interface after a generate command has been issued.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.GENBITS_VLD.GENBITS_FIPS",
+            "name": "GENBITS_FIPS",
+            "desc": "This bit is set when genbits are FIPS/CC compliant.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.GENBITS",
+        "name": "GENBITS",
+        "desc": "Generate bits returned register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.GENBITS.GENBITS",
+            "name": "GENBITS",
+            "desc": "Reading this register will get the generated bits that were requested with\nthe generate request. This register must be read four times for each request\nmade. For example, an application command generate request with\na `clen` value of 4 requires this register to be read 16 times to get all\nof the data out of the FIFO path.\nNote that for !!GENBITS to be able to deliver random numbers, also !!CTRL.SW_APP_ENABLE needs to be set to `kMultiBitBool4True`.\nIn addition, the otp_en_csrng_sw_app_read input needs to be set to `kMultiBitBool8True`.\nOtherwise, the register reads as 0.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.INT_STATE_READ_ENABLE",
+        "name": "INT_STATE_READ_ENABLE",
+        "desc": "Internal state read enable register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.INT_STATE_READ_ENABLE.INT_STATE_READ_ENABLE",
+            "name": "INT_STATE_READ_ENABLE",
+            "desc": "Per-instance internal state read enable.\nDefines whether the internal state of the corresponding instance is readable via !!INT_STATE_VAL.\nNote that for !!INT_STATE_VAL to provide read access to the internal state, also !!CTRL.READ_INT_STATE needs to be set to `kMultiBitBool4True`.\nIn addition, the otp_en_csrng_sw_app_read input needs to be set to `kMultiBitBool8True`.",
+            "bits": "2:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.INT_STATE_READ_ENABLE_REGWEN",
+        "name": "INT_STATE_READ_ENABLE_REGWEN",
+        "desc": "Internal state read enable REGWEN register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.INT_STATE_READ_ENABLE_REGWEN.None",
+            "name": null,
+            "desc": "INT_STATE_READ_ENABLE register configuration enable bit.\nIf this is cleared to 0, the INT_STATE_READ_ENABLE register cannot be written anymore.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.INT_STATE_NUM",
+        "name": "INT_STATE_NUM",
+        "desc": "Internal state number register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.INT_STATE_NUM.INT_STATE_NUM",
+            "name": "INT_STATE_NUM",
+            "desc": "Setting this field will set the number for which internal state can be\nselected for a read access. Up to 16 internal state values can be chosen\nfrom this register. The actual number of valid internal state fields\nis set by parameter NumHwApps plus 1 software app. For those selections that point\nto reserved locations (greater than NumHwApps plus 1), the returned value\nwill be zero. Writing this register will also reset the internal read\npointer for the !!INT_STATE_VAL register.\nNote: This register should be read back after being written to ensure\nthat the !!INT_STATE_VAL read back is accurate.",
+            "bits": "3:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.INT_STATE_VAL",
+        "name": "INT_STATE_VAL",
+        "desc": "Internal state read access register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.INT_STATE_VAL.INT_STATE_VAL",
+            "name": "INT_STATE_VAL",
+            "desc": "Reading this register will dump out the contents of the selected internal state field.\nSince the internal state field is 448 bits wide, it will require 14 reads from this\nregister to gather the entire field. Once 14 reads have been done, the internal read\npointer (selects 32 bits of the 448 bit field) will reset to zero. The !!INT_STATE_NUM\ncan be re-written at this time (internal read pointer is also reset), and then\nanother internal state field can be read.\nNote that for !!INT_STATE_VAL to provide read access to the internal state, also !!CTRL.READ_INT_STATE needs to be set to `kMultiBitBool4True`.\nIn addition, the otp_en_csrng_sw_app_read input needs to be set to `kMultiBitBool8True`.\nAlso, the !!INT_STATE_READ_ENABLE bit of the selected instance needs to be set to true for this to work.\nOtherwise, the register reads as 0.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.FIPS_FORCE",
+        "name": "FIPS_FORCE",
+        "desc": "FIPS/CC compliance flag forcing register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.FIPS_FORCE.FIPS_FORCE",
+            "name": "FIPS_FORCE",
+            "desc": "Force the FIPS/CC compliance flag of individual instances to true.\nThis allows CSRNG to set the output FIPS/CC compliance flag to true despite running in fully deterministic mode (flag0 being true).\nThis can be useful e.g. for known-answer testing through entropy consumers accepting FIPS/CC compliant entropy only, or when firmware is used to derive FIPS/CC compliant entropy seeds.\nAfter setting a particular bit to 1, the FIPS/CC compliance flag of the corresponding instance will be forced to true upon the next Instantiate or Reseed command.\n\nNote that for this to work, !!CTRL.FIPS_FORCE_ENABLE needs to be set to kMultiBitBool4True.",
+            "bits": "2:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.HW_EXC_STS",
+        "name": "HW_EXC_STS",
+        "desc": "Hardware instance exception status register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.HW_EXC_STS.HW_EXC_STS",
+            "name": "HW_EXC_STS",
+            "desc": "Reading this register indicates whether one of the CSRNG HW instances has\nencountered an exception.  Each bit corresponds to a particular hardware\ninstance, with bit 0 corresponding to instance HW0, bit 1 corresponding\nto instance HW1, and so forth. (To monitor the status of requests made\nto the SW instance, check the !!SW_CMD_STS register). Writing a zero to this register\nresets the status bits.",
+            "bits": "15:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.RECOV_ALERT_STS",
+        "name": "RECOV_ALERT_STS",
+        "desc": "Recoverable alert status register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.ENABLE_FIELD_ALERT",
+            "name": "ENABLE_FIELD_ALERT",
+            "desc": "This bit is set when the ENABLE field in the !!CTRL register is set to\na value other than kMultiBitBool4True or kMultiBitBool4False.\nWriting a zero resets this status bit.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.SW_APP_ENABLE_FIELD_ALERT",
+            "name": "SW_APP_ENABLE_FIELD_ALERT",
+            "desc": "This bit is set when the SW_APP_ENABLE field in the !!CTRL register is set to\na value other than kMultiBitBool4True or kMultiBitBool4False.\nWriting a zero resets this status bit.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.READ_INT_STATE_FIELD_ALERT",
+            "name": "READ_INT_STATE_FIELD_ALERT",
+            "desc": "This bit is set when the READ_INT_STATE field in the !!CTRL register is set to\na value other than kMultiBitBool4True or kMultiBitBool4False.\nWriting a zero resets this status bit.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.FIPS_FORCE_ENABLE_FIELD_ALERT",
+            "name": "FIPS_FORCE_ENABLE_FIELD_ALERT",
+            "desc": "This bit is set when the FIPS_FORCE_ENABLE field in the !!CTRL register is set to a value other than kMultiBitBool4True or kMultiBitBool4False.\nWriting a zero resets this status bit.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.ACMD_FLAG0_FIELD_ALERT",
+            "name": "ACMD_FLAG0_FIELD_ALERT",
+            "desc": "This bit is set when the FLAG0 field in the Application Command is set to\na value other than kMultiBitBool4True or kMultiBitBool4False.\nWriting a zero resets this status bit.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.CS_BUS_CMP_ALERT",
+            "name": "CS_BUS_CMP_ALERT",
+            "desc": "This bit is set when the software application port genbits bus value is equal\nto the prior valid value on the bus, indicating a possible attack.\nWriting a zero resets this status bit.",
+            "bits": "12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.CMD_STAGE_INVALID_ACMD_ALERT",
+            "name": "CMD_STAGE_INVALID_ACMD_ALERT",
+            "desc": "This bit is set when an unsupported/illegal CSRNG command is received by the\nmain state machine.\nThe invalid command is ignored and CSRNG continues to operate.\nWriting a zero resets this status bit.",
+            "bits": "13",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.CMD_STAGE_INVALID_CMD_SEQ_ALERT",
+            "name": "CMD_STAGE_INVALID_CMD_SEQ_ALERT",
+            "desc": "This bit is set when an out of order command is received by the main state machine.\nThis happens when an instantiate command is sent for a state that was already\ninstantiated or when any command other than instantiate is sent for a state that\nwasn't instantiated yet.\nThe invalid command is ignored and CSRNG continues to operate.\nWriting a zero resets this status bit.",
+            "bits": "14",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.RECOV_ALERT_STS.CMD_STAGE_RESEED_CNT_ALERT",
+            "name": "CMD_STAGE_RESEED_CNT_ALERT",
+            "desc": "This bit is set when the maximum number of generate requests between reseeds is\nexceeded.\nThe invalid generate command is ignored and CSRNG continues to operate.\nWriting a zero resets this status bit.",
+            "bits": "15",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.ERR_CODE",
+        "name": "ERR_CODE",
+        "desc": "Hardware detection of error conditions status register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.ERR_CODE.SFIFO_CMD_ERR",
+            "name": "SFIFO_CMD_ERR",
+            "desc": "This bit will be set to one when an error has been detected for the\ncommand stage command FIFO. The type of error is reflected in the type status\nbits (bits 28 through 30 of this register).\nThis bit will stay set until the next reset.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.SFIFO_GENBITS_ERR",
+            "name": "SFIFO_GENBITS_ERR",
+            "desc": "This bit will be set to one when an error has been detected for the\ncommand stage genbits FIFO. The type of error is reflected in the type status\nbits (bits 28 through 30 of this register).\nThis bit will stay set until the next reset.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.CMD_STAGE_SM_ERR",
+            "name": "CMD_STAGE_SM_ERR",
+            "desc": "This bit will be set to one when an illegal state has been detected for the\ncommand stage state machine. This error will signal a fatal alert, and also\nan interrupt if enabled.\nThis bit will stay set until the next reset.",
+            "bits": "20",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.MAIN_SM_ERR",
+            "name": "MAIN_SM_ERR",
+            "desc": "This bit will be set to one when an illegal state has been detected for the\nmain state machine. This error will signal a fatal alert, and also\nan interrupt if enabled.\nThis bit will stay set until the next reset.",
+            "bits": "21",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.CTR_DRBG_SM_ERR",
+            "name": "CTR_DRBG_SM_ERR",
+            "desc": "This bit will be set to one when an illegal state has been detected for the\nctr_drbg state machine. This error will signal a fatal alert, and also\nan interrupt if enabled.\nThis bit will stay set until the next reset.",
+            "bits": "22",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.AES_CIPHER_SM_ERR",
+            "name": "AES_CIPHER_SM_ERR",
+            "desc": "This bit will be set to one when an AES fatal error has been detected.\nThis error will signal a fatal alert, and also an interrupt if enabled.\nThis bit will stay set until the next reset.",
+            "bits": "25",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.CTR_ERR",
+            "name": "CTR_ERR",
+            "desc": "This bit will be set to one when a mismatch in any of the hardened counters\nhas been detected.\nThis error will signal a fatal alert, and also an interrupt if enabled.\nThis bit will stay set until the next reset.",
+            "bits": "26",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.FIFO_WRITE_ERR",
+            "name": "FIFO_WRITE_ERR",
+            "desc": "This bit will be set to one when any of the source bits (bits 0 through 15 of this\nthis register) are asserted as a result of an error pulse generated from\nany full FIFO that has been received a write pulse.\nThis bit will stay set until the next reset.",
+            "bits": "28",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.FIFO_READ_ERR",
+            "name": "FIFO_READ_ERR",
+            "desc": "This bit will be set to one when any of the source bits (bits 0 through 15 of this\nthis register) are asserted as a result of an error pulse generated from\nany empty FIFO that has received a read pulse.\nThis bit will stay set until the next reset.",
+            "bits": "29",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "csrng.reg.ERR_CODE.FIFO_STATE_ERR",
+            "name": "FIFO_STATE_ERR",
+            "desc": "This bit will be set to one when any of the source bits (bits 0 through 15 of this\nthis register) are asserted as a result of an error pulse generated from\nany FIFO where both the empty and full status bits are set.\nThis bit will stay set until the next reset.",
+            "bits": "30",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.ERR_CODE_TEST",
+        "name": "ERR_CODE_TEST",
+        "desc": "Test error conditions register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.ERR_CODE_TEST.ERR_CODE_TEST",
+            "name": "ERR_CODE_TEST",
+            "desc": "Setting this field will set the bit number for which an error\nwill be forced in the hardware. This bit number is that same one\nfound in the !!ERR_CODE register. The action of writing this\nregister will force an error pulse. The sole purpose of this\nregister is to test that any error properly propagates to either\nan interrupt or an alert.",
+            "bits": "4:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "csrng.reg.MAIN_SM_STATE",
+        "name": "MAIN_SM_STATE",
+        "desc": "Main state machine state debug register",
+        "fields": [
+          {
+            "intent_id": "csrng.reg.MAIN_SM_STATE.MAIN_SM_STATE",
+            "name": "MAIN_SM_STATE",
+            "desc": "This is the state of the CSRNG main state machine.\nSee the RTL file `csrng_main_sm` for the meaning of the values.",
+            "bits": "5:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/csrng.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: csrng top level wrapper file",
+      "params": [
+        {
+          "name": "SBoxImpl",
+          "default": "aes_pkg::SBoxImplCanright",
+          "desc": ""
+        },
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstCsKeymgrDivNonProduction",
+          "default": "CsKeymgrDivWidth'(0)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstCsKeymgrDivProduction",
+          "default": "CsKeymgrDivWidth'(0)",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/csrng_block_encrypt.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "SBoxImpl",
+          "default": "aes_pkg::SBoxImplLut",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/csrng_cmd_stage.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/csrng_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "SBoxImpl",
+          "default": "aes_pkg::SBoxImplLut",
+          "desc": ""
+        },
+        {
+          "name": "NumHwApps",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstCsKeymgrDivNonProduction",
+          "default": "CsKeymgrDivWidth'(0)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstCsKeymgrDivProduction",
+          "default": "CsKeymgrDivWidth'(0)",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/csrng_ctr_drbg.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nImplementation of the NIST SP800-90A CTR DRBG algorithm, no derivation function.",
+      "params": []
+    },
+    "rtl/csrng_main_sm.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/csrng_state_db.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    }
+  }
+}

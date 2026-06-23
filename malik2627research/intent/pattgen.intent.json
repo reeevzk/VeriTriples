@@ -1,0 +1,214 @@
+{
+  "ip_name": "pattgen",
+  "ip_intent": {
+    "ip_name": "pattgen",
+    "one_line_desc": "Transmission of short time-dependent data patterns on two clock-parallel output channels",
+    "one_paragraph_desc": "Pattern Generator transmits short time-dependent data patterns on two clock-parallel channels.\nEach channel consists of one clock and one data line.\nThe channels are configured using the following parameters: clock divider ratio, clock polarity, pattern length, pattern data, and repetition count.\nEffectively, Pattern Generator outputs the pattern data a specified number of times with the corresponding clock and then raises an interrupt when it is done.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "NumRegsData",
+        "desc": "Number of data registers per each channel",
+        "default": "2"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "pattgen.interrupt.done_ch0",
+        "name": "done_ch0",
+        "desc": "raise if pattern generation on Channel 0 is complete"
+      },
+      {
+        "intent_id": "pattgen.interrupt.done_ch1",
+        "name": "done_ch1",
+        "desc": "raise if pattern generation on Channel 1 is complete"
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "pattgen.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "pattgen.reg.CTRL",
+        "name": "CTRL",
+        "desc": "PATTGEN control register",
+        "fields": [
+          {
+            "intent_id": "pattgen.reg.CTRL.ENABLE_CH0",
+            "name": "ENABLE_CH0",
+            "desc": "Enable pattern generator functionality for Channel 0",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.CTRL.ENABLE_CH1",
+            "name": "ENABLE_CH1",
+            "desc": "Enable pattern generator functionality for Channel 1",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.CTRL.POLARITY_CH0",
+            "name": "POLARITY_CH0",
+            "desc": "Clock (`pcl`) polarity for Channel 0.  If low, `pda` signal changes on falling edge of pcl signal, otherwise pda changes on rising edge. Note that writes to a channel's configuration registers have no effect while the channel is enabled.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.CTRL.POLARITY_CH1",
+            "name": "POLARITY_CH1",
+            "desc": "Clock (`pcl`) polarity for Channel 1.  If low, `pda` signal changes on falling edge of `pcl` signal, otherwise pda changes on rising edge. Note that writes to a channel's configuration registers have no effect while the channel is enabled.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.CTRL.INACTIVE_LEVEL_PCL_CH0",
+            "name": "INACTIVE_LEVEL_PCL_CH0",
+            "desc": "If 0, `pcl` is low when pattgen is not actively sending data bits (i.e., when pattgen is disabled or all data bits have been sent).\nIf 1, `pcl` is high when pattgen is not actively sending data bits.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.CTRL.INACTIVE_LEVEL_PDA_CH0",
+            "name": "INACTIVE_LEVEL_PDA_CH0",
+            "desc": "If 0, `pda` is low when pattgen is not actively sending data bits (i.e., when pattgen is disabled or all data bits have been sent).\nIf 1, `pda` is high when pattgen is not actively sending data bits.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.CTRL.INACTIVE_LEVEL_PCL_CH1",
+            "name": "INACTIVE_LEVEL_PCL_CH1",
+            "desc": "If 0, `pcl` is low when pattgen is not actively sending data bits (i.e., when pattgen is disabled or all data bits have been sent).\nIf 1, `pcl` is high when pattgen is not actively sending data bits.",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.CTRL.INACTIVE_LEVEL_PDA_CH1",
+            "name": "INACTIVE_LEVEL_PDA_CH1",
+            "desc": "If 0, `pda` is low when pattgen is not actively sending data bits (i.e., when pattgen is disabled or all data bits have been sent).\nIf 1, `pda` is high when pattgen is not actively sending data bits.",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "pattgen.reg.PREDIV_CH0",
+        "name": "PREDIV_CH0",
+        "desc": "PATTGEN pre-divider register for Channel 0",
+        "fields": [
+          {
+            "intent_id": "pattgen.reg.PREDIV_CH0.CLK_RATIO",
+            "name": "CLK_RATIO",
+            "desc": "Clock divider ratio fpr Channel 0 (relative to I/O clock). Note that writes to a channel's configuration registers have no effect while the channel is enabled.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "pattgen.reg.PREDIV_CH1",
+        "name": "PREDIV_CH1",
+        "desc": "PATTGEN pre-divider register for Channel 1",
+        "fields": [
+          {
+            "intent_id": "pattgen.reg.PREDIV_CH1.CLK_RATIO",
+            "name": "CLK_RATIO",
+            "desc": "Clock divider ratio for Channel 1 (relative to I/O clock). Note that writes to a channel's configuration registers have no effect while the channel is enabled.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "pattgen.reg.SIZE",
+        "name": "SIZE",
+        "desc": "PATTGEN pattern length",
+        "fields": [
+          {
+            "intent_id": "pattgen.reg.SIZE.LEN_CH0",
+            "name": "LEN_CH0",
+            "desc": "Length of the seed pattern for Channel 0, minus 1. Valid values: 0..63. Note that writes to a channel's configuration registers have no effect while the channel is enabled.",
+            "bits": "5:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.SIZE.REPS_CH0",
+            "name": "REPS_CH0",
+            "desc": "Number of pattern repetitions for Channel 0, minus 1. Valid values: 0..1023. Note that writes to a channel's configuration registers have no effect while the channel is enabled.",
+            "bits": "15:6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.SIZE.LEN_CH1",
+            "name": "LEN_CH1",
+            "desc": "Length of the seed pattern for Channel 1, minus 1. Valid values: 0..63. Note that writes to a channel's configuration registers have no effect while the channel is enabled.",
+            "bits": "21:16",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "pattgen.reg.SIZE.REPS_CH1",
+            "name": "REPS_CH1",
+            "desc": "Number of pattern repetitions for Channel 1, minus 1. Valid values: 0..1023. Note that writes to a channel's configuration registers have no effect while the channel is enabled.",
+            "bits": "31:22",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/pattgen.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/pattgen_chan.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/pattgen_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: Pattgen Core Module",
+      "params": []
+    }
+  }
+}

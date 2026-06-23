@@ -1,0 +1,1075 @@
+{
+  "ip_name": "sysrst_ctrl",
+  "ip_intent": {
+    "ip_name": "sysrst_ctrl",
+    "one_line_desc": "Manages board-level reset sequencing, interfaces reset and power manager",
+    "one_paragraph_desc": "System Reset Controller provides basic board-level reset sequencing in response to trusted inputs.\nIt is programmable to accommodate actions triggered by presses of buttons and keyboard key combinations, to control the duration of reset pulses, and to trigger reset or wake-up requests that go to Reset Manager and to Power Manager.\nSystem Reset Controller is part of the always-on power and clock domain.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_aon_i",
+        "reset": "rst_aon_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "NumCombo",
+        "desc": "Number of keyboard combos",
+        "default": "4"
+      },
+      {
+        "name": "NumKeyIntr",
+        "desc": "Number of keys that can trigger interrupts",
+        "default": "7"
+      },
+      {
+        "name": "TimerWidth",
+        "desc": "Number of timer bits",
+        "default": "16"
+      },
+      {
+        "name": "DetTimerWidth",
+        "desc": "Number of detection timer bits",
+        "default": "32"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "sysrst_ctrl.interrupt.event_detected",
+        "name": "event_detected",
+        "desc": "Common interrupt triggered by combo or keyboard events."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "sysrst_ctrl.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "sysrst_ctrl.reg.REGWEN",
+        "name": "REGWEN",
+        "desc": "Configuration write enable control register",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.REGWEN.write_en",
+            "name": "write_en",
+            "desc": "config write enable.\n0: cfg is locked(not writable); 1: cfg is not locked(writable)",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.EC_RST_CTL",
+        "name": "EC_RST_CTL",
+        "desc": "EC reset control register",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.EC_RST_CTL.ec_rst_pulse",
+            "name": "ec_rst_pulse",
+            "desc": "Configure the pulse width of ec_rst_l.\nEach step is 5 us for a 200 kHz clock.",
+            "bits": "TimerWidth-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.ULP_AC_DEBOUNCE_CTL",
+        "name": "ULP_AC_DEBOUNCE_CTL",
+        "desc": "Ultra low power AC debounce control register",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.ULP_AC_DEBOUNCE_CTL.ulp_ac_debounce_timer",
+            "name": "ulp_ac_debounce_timer",
+            "desc": "Configure the debounce timer for the AC input in number of clock cycles.\nEach step is 5 us for a 200 kHz clock.\nThe signal must exceed the debounce time by at least one clock cycle to be detected.",
+            "bits": "TimerWidth-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.ULP_LID_DEBOUNCE_CTL",
+        "name": "ULP_LID_DEBOUNCE_CTL",
+        "desc": "Ultra low power lid debounce control register",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.ULP_LID_DEBOUNCE_CTL.ulp_lid_debounce_timer",
+            "name": "ulp_lid_debounce_timer",
+            "desc": "Configure the debounce timer for the lid in number of clock cycles.\nEach step is 5 us for a 200 kHz clock.\nThe signal must exceed the debounce time by at least one clock cycle to be detected.",
+            "bits": "TimerWidth-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.ULP_PWRB_DEBOUNCE_CTL",
+        "name": "ULP_PWRB_DEBOUNCE_CTL",
+        "desc": "Ultra low power pwrb debounce control register",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.ULP_PWRB_DEBOUNCE_CTL.ulp_pwrb_debounce_timer",
+            "name": "ulp_pwrb_debounce_timer",
+            "desc": "Configure the debounce timer for the power button in number of clock cycles.\nEach step is 5 us for a 200 kHz clock.\nThe signal must exceed the debounce time by at least one clock cycle to be detected.",
+            "bits": "TimerWidth-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.ULP_CTL",
+        "name": "ULP_CTL",
+        "desc": "Ultra low power control register",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.ULP_CTL.ulp_enable",
+            "name": "ulp_enable",
+            "desc": "0: disable ULP wakeup feature and reset the ULP FSM; 1: enable ULP wakeup feature",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.ULP_STATUS",
+        "name": "ULP_STATUS",
+        "desc": "Ultra low power status",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.ULP_STATUS.ulp_wakeup",
+            "name": "ulp_wakeup",
+            "desc": "0: ULP wakeup not detected; 1: ULP wakeup event is detected",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.WKUP_STATUS",
+        "name": "WKUP_STATUS",
+        "desc": "wakeup status",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.WKUP_STATUS.wakeup_sts",
+            "name": "wakeup_sts",
+            "desc": "0: wakeup event not detected; 1: wakeup event is detected",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL",
+        "name": "KEY_INVERT_CTL",
+        "desc": "configure key input output invert property",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.key0_in",
+            "name": "key0_in",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.key0_out",
+            "name": "key0_out",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.key1_in",
+            "name": "key1_in",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.key1_out",
+            "name": "key1_out",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.key2_in",
+            "name": "key2_in",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.key2_out",
+            "name": "key2_out",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.pwrb_in",
+            "name": "pwrb_in",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.pwrb_out",
+            "name": "pwrb_out",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.ac_present",
+            "name": "ac_present",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.bat_disable",
+            "name": "bat_disable",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.lid_open",
+            "name": "lid_open",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INVERT_CTL.z3_wakeup",
+            "name": "z3_wakeup",
+            "desc": "0: don't invert; 1: invert",
+            "bits": "11",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL",
+        "name": "PIN_ALLOWED_CTL",
+        "desc": "This register determines which override values are allowed for a given output.\nIf an override value programmed via !!PIN_OUT_VALUE is not configured as an allowed value,\nit will not have any effect.",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.bat_disable_0",
+            "name": "bat_disable_0",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.ec_rst_l_0",
+            "name": "ec_rst_l_0",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.pwrb_out_0",
+            "name": "pwrb_out_0",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.key0_out_0",
+            "name": "key0_out_0",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.key1_out_0",
+            "name": "key1_out_0",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.key2_out_0",
+            "name": "key2_out_0",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.z3_wakeup_0",
+            "name": "z3_wakeup_0",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.flash_wp_l_0",
+            "name": "flash_wp_l_0",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.bat_disable_1",
+            "name": "bat_disable_1",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.ec_rst_l_1",
+            "name": "ec_rst_l_1",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.pwrb_out_1",
+            "name": "pwrb_out_1",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.key0_out_1",
+            "name": "key0_out_1",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "11",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.key1_out_1",
+            "name": "key1_out_1",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.key2_out_1",
+            "name": "key2_out_1",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "13",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.z3_wakeup_1",
+            "name": "z3_wakeup_1",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "14",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_ALLOWED_CTL.flash_wp_l_1",
+            "name": "flash_wp_l_1",
+            "desc": "0: not allowed; 1: allowed",
+            "bits": "15",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL",
+        "name": "PIN_OUT_CTL",
+        "desc": "Enables the override function for a specific pin.",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL.bat_disable",
+            "name": "bat_disable",
+            "desc": "0: disable override; 1: enable override",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL.ec_rst_l",
+            "name": "ec_rst_l",
+            "desc": "0: disable override; 1: enable override",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL.pwrb_out",
+            "name": "pwrb_out",
+            "desc": "0: disable override; 1: enable override",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL.key0_out",
+            "name": "key0_out",
+            "desc": "0: disable override; 1: enable override",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL.key1_out",
+            "name": "key1_out",
+            "desc": "0: disable override; 1: enable override",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL.key2_out",
+            "name": "key2_out",
+            "desc": "0: disable override; 1: enable override",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL.z3_wakeup",
+            "name": "z3_wakeup",
+            "desc": "0: disable override; 1: enable override",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_CTL.flash_wp_l",
+            "name": "flash_wp_l",
+            "desc": "0: disable override; 1: enable override",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE",
+        "name": "PIN_OUT_VALUE",
+        "desc": "Sets the pin override value. Note that only the values\nconfigured as 'allowed' in !!PIN_ALLOWED_CTL will have\nan effect. Otherwise the pin value will not be overridden.",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE.bat_disable",
+            "name": "bat_disable",
+            "desc": "0: override to 1b0; 1: override to 1b1",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE.ec_rst_l",
+            "name": "ec_rst_l",
+            "desc": "0: override to 1b0; 1: override to 1b1",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE.pwrb_out",
+            "name": "pwrb_out",
+            "desc": "0: override to 1b0; 1: override to 1b1",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE.key0_out",
+            "name": "key0_out",
+            "desc": "0: override to 1b0; 1: override to 1b1",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE.key1_out",
+            "name": "key1_out",
+            "desc": "0: override to 1b0; 1: override to 1b1",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE.key2_out",
+            "name": "key2_out",
+            "desc": "0: override to 1b0; 1: override to 1b1",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE.z3_wakeup",
+            "name": "z3_wakeup",
+            "desc": "0: override to 1b0; 1: override to 1b1",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_OUT_VALUE.flash_wp_l",
+            "name": "flash_wp_l",
+            "desc": "0: override to 1b0; 1: override to 1b1",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE",
+        "name": "PIN_IN_VALUE",
+        "desc": "For SW to read the sysrst_ctrl inputs like GPIO",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE.pwrb_in",
+            "name": "pwrb_in",
+            "desc": "raw pwrb_in value; before the invert logic",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE.key0_in",
+            "name": "key0_in",
+            "desc": "raw key0_in value; before the invert logic",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE.key1_in",
+            "name": "key1_in",
+            "desc": "raw key1_in value; before the invert logic",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE.key2_in",
+            "name": "key2_in",
+            "desc": "raw key2_in value; before the invert logic",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE.lid_open",
+            "name": "lid_open",
+            "desc": "raw lid_open value; before the invert logic",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE.ac_present",
+            "name": "ac_present",
+            "desc": "raw ac_present value; before the invert logic",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE.ec_rst_l",
+            "name": "ec_rst_l",
+            "desc": "raw ec_rst_l value; before the invert logic",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.PIN_IN_VALUE.flash_wp_l",
+            "name": "flash_wp_l",
+            "desc": "raw flash_wp_l value; before the invert logic",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL",
+        "name": "KEY_INTR_CTL",
+        "desc": "Define the keys or inputs that can trigger the interrupt",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.pwrb_in_H2L",
+            "name": "pwrb_in_H2L",
+            "desc": "0: disable, 1: enable",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.key0_in_H2L",
+            "name": "key0_in_H2L",
+            "desc": "0: disable, 1: enable",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.key1_in_H2L",
+            "name": "key1_in_H2L",
+            "desc": "0: disable, 1: enable",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.key2_in_H2L",
+            "name": "key2_in_H2L",
+            "desc": "0: disable, 1: enable",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.ac_present_H2L",
+            "name": "ac_present_H2L",
+            "desc": "0: disable, 1: enable",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.ec_rst_l_H2L",
+            "name": "ec_rst_l_H2L",
+            "desc": "0: disable, 1: enable",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.flash_wp_l_H2L",
+            "name": "flash_wp_l_H2L",
+            "desc": "0: disable, 1: enable",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.pwrb_in_L2H",
+            "name": "pwrb_in_L2H",
+            "desc": "0: disable, 1: enable",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.key0_in_L2H",
+            "name": "key0_in_L2H",
+            "desc": "0: disable, 1: enable",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.key1_in_L2H",
+            "name": "key1_in_L2H",
+            "desc": "0: disable, 1: enable",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.key2_in_L2H",
+            "name": "key2_in_L2H",
+            "desc": "0: disable, 1: enable",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.ac_present_L2H",
+            "name": "ac_present_L2H",
+            "desc": "0: disable, 1: enable",
+            "bits": "11",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.ec_rst_l_L2H",
+            "name": "ec_rst_l_L2H",
+            "desc": "0: disable, 1: enable",
+            "bits": "12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_CTL.flash_wp_l_L2H",
+            "name": "flash_wp_l_L2H",
+            "desc": "0: disable, 1: enable",
+            "bits": "13",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.KEY_INTR_DEBOUNCE_CTL",
+        "name": "KEY_INTR_DEBOUNCE_CTL",
+        "desc": "Debounce timer control register for key-triggered interrupt",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_DEBOUNCE_CTL.debounce_timer",
+            "name": "debounce_timer",
+            "desc": "Define the timer value so that the key or input is not oscillating in clock cycles.\nEach step is 5 us for a 200 kHz clock.\nThe signal must exceed the debounce time by at least one clock cycle to be detected.",
+            "bits": "TimerWidth-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_DEBOUNCE_CTL",
+        "name": "AUTO_BLOCK_DEBOUNCE_CTL",
+        "desc": "Debounce timer control register for pwrb_in H2L transition",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_DEBOUNCE_CTL.debounce_timer",
+            "name": "debounce_timer",
+            "desc": "Define the timer value so that the pwrb_in is not oscillating in clock cycles.\nEach step is 5 us for a 200 kHz clock.\nThe signal must exceed the debounce time by at least one clock cycle to be detected.",
+            "bits": "TimerWidth-1:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_DEBOUNCE_CTL.auto_block_enable",
+            "name": "auto_block_enable",
+            "desc": "0: disable, 1: enable",
+            "bits": "16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_OUT_CTL",
+        "name": "AUTO_BLOCK_OUT_CTL",
+        "desc": "configure the key outputs to auto-override and their value",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_OUT_CTL.key0_out_sel",
+            "name": "key0_out_sel",
+            "desc": "0: disable auto-block; 1: enable auto-block",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_OUT_CTL.key1_out_sel",
+            "name": "key1_out_sel",
+            "desc": "0: disable auto-block; 1: enable auto-block",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_OUT_CTL.key2_out_sel",
+            "name": "key2_out_sel",
+            "desc": "0: disable auto-block; 1: enable auto-block",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_OUT_CTL.key0_out_value",
+            "name": "key0_out_value",
+            "desc": "0: override to 1'b0; 1: override to 1'b1",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_OUT_CTL.key1_out_value",
+            "name": "key1_out_value",
+            "desc": "0: override to 1'b0; 1: override to 1'b1",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.AUTO_BLOCK_OUT_CTL.key2_out_value",
+            "name": "key2_out_value",
+            "desc": "0: override to 1'b0; 1: override to 1'b1",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.COMBO_INTR_STATUS",
+        "name": "COMBO_INTR_STATUS",
+        "desc": "Combo interrupt source. These registers will only be set if the\ninterrupt action is configured in the corresponding !!COM_OUT_CTL register.",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.COMBO_INTR_STATUS.combo0_H2L",
+            "name": "combo0_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.COMBO_INTR_STATUS.combo1_H2L",
+            "name": "combo1_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.COMBO_INTR_STATUS.combo2_H2L",
+            "name": "combo2_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.COMBO_INTR_STATUS.combo3_H2L",
+            "name": "combo3_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS",
+        "name": "KEY_INTR_STATUS",
+        "desc": "key interrupt source",
+        "fields": [
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.pwrb_H2L",
+            "name": "pwrb_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.key0_in_H2L",
+            "name": "key0_in_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.key1_in_H2L",
+            "name": "key1_in_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.key2_in_H2L",
+            "name": "key2_in_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.ac_present_H2L",
+            "name": "ac_present_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.ec_rst_l_H2L",
+            "name": "ec_rst_l_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.flash_wp_l_H2L",
+            "name": "flash_wp_l_H2L",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.pwrb_L2H",
+            "name": "pwrb_L2H",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.key0_in_L2H",
+            "name": "key0_in_L2H",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.key1_in_L2H",
+            "name": "key1_in_L2H",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.key2_in_L2H",
+            "name": "key2_in_L2H",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.ac_present_L2H",
+            "name": "ac_present_L2H",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "11",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.ec_rst_l_L2H",
+            "name": "ec_rst_l_L2H",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "sysrst_ctrl.reg.KEY_INTR_STATUS.flash_wp_l_L2H",
+            "name": "flash_wp_l_L2H",
+            "desc": "0: case not detected;1: case detected",
+            "bits": "13",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/sysrst_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/sysrst_ctrl_autoblock.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/sysrst_ctrl_combo.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: sysrst_ctrl combo Module",
+      "params": []
+    },
+    "rtl/sysrst_ctrl_comboact.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: sysrst_ctrl combo action Module",
+      "params": []
+    },
+    "rtl/sysrst_ctrl_detect.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "DebounceTimerWidth",
+          "default": "16",
+          "desc": ""
+        },
+        {
+          "name": "DetectTimerWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "EventType",
+          "default": "LowLevel",
+          "desc": ""
+        },
+        {
+          "name": "Sticky",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/sysrst_ctrl_intr.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: sysrst_ctrl interrupt Module",
+      "params": []
+    },
+    "rtl/sysrst_ctrl_keyintr.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: sysrst_ctrl key-triggered interrupt Module",
+      "params": []
+    },
+    "rtl/sysrst_ctrl_pin.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: sysrst_ctrl pin visibility and override Module",
+      "params": []
+    },
+    "rtl/sysrst_ctrl_ulp.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    }
+  }
+}

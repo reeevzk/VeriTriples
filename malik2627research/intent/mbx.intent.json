@@ -1,0 +1,267 @@
+{
+  "ip_name": "mbx",
+  "ip_intent": {
+    "ip_name": "mbx",
+    "one_line_desc": "DOE mailbox for use as an integrated OpenTitan communication channel.",
+    "one_paragraph_desc": "The SoC (i.e., the SoC Host CPU or other SoC Execution Engines) may request security services from OpenTitan.\nThis means that pre-defined control information must be passed to OpenTitan from the security service requester.\nA secure inbound/outbound mailbox can be used to implement a secure channel for these request/response transactions between the SoC and OpenTitan.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "host"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [],
+    "interrupts": [
+      {
+        "intent_id": "mbx.interrupt.mbx_ready",
+        "name": "mbx_ready",
+        "desc": "A new object was received in the inbound mailbox."
+      },
+      {
+        "intent_id": "mbx.interrupt.mbx_abort",
+        "name": "mbx_abort",
+        "desc": "An abort request was received from the requester."
+      },
+      {
+        "intent_id": "mbx.interrupt.mbx_error",
+        "name": "mbx_error",
+        "desc": "The mailbox instance generated an error."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "mbx.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      },
+      {
+        "intent_id": "mbx.alert.recov_fault",
+        "name": "recov_fault",
+        "desc": "This recoverable alert is triggered when memory with invalid ECC (e.g., uninitialized memory) or at an invalid address is accessed."
+      }
+    ],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/mbx.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "CfgSramAddrWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgSramDataWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgObjectSizeWidth",
+          "default": "11",
+          "desc": ""
+        },
+        {
+          "name": "DoeIrqSupport",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "DoeAsyncMsgSupport",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinSocWdata",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinSocRdata",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/mbx_fsm.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "CfgOmbx",
+          "default": "1'b1",
+          "desc": "1'b1: Obmbx"
+        }
+      ]
+    },
+    "rtl/mbx_hostif.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "CfgSramAddrWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgSramDataWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgObjectSizeWidth",
+          "default": "11",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "1'b1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/mbx_imbx.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "CfgSramAddrWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgSramDataWidth",
+          "default": "32",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/mbx_ombx.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "CfgSramAddrWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgSramDataWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgObjectSizeWidth",
+          "default": "11",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/mbx_sramrwarb.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "CfgSramAddrWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgSramDataWidth",
+          "default": "32",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/mbx_sysif.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "CfgSramAddrWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "CfgSramDataWidth",
+          "default": "32",
+          "desc": ""
+        },
+        {
+          "name": "DoeIrqSupport",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "DoeAsyncMsgSupport",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinSocWdata",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelWinSocRdata",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

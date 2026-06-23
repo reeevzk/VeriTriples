@@ -1,0 +1,183 @@
+{
+  "ip_name": "sram_ctrl",
+  "ip_intent": {
+    "ip_name": "sram_ctrl",
+    "one_line_desc": "Interfacing on-chip SRAM blocks with system bus, supports lightweight scrambling, integrity and secure wipe",
+    "one_paragraph_desc": "SRAM Controller instantiates on-chip SRAM and makes it accessible through the TileLink on-chip interconnect.\nSRAM Controller includes a lightweight scrambling mechanism based on the PRINCE cipher to reduce the attack surface on the confidentiality and integrity of data stored in the SRAM.\nFor end-to-end data integrity protection, SRAM Controller stores the integrity bits alongside data words in memory and raises an alert if it detects an integrity fault.\nSRAM Controller contains an LFSR-based initialization mechanism that overwrites the entire SRAM with pseudorandom data.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_otp_i",
+        "reset": "rst_otp_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "RndCnstSramKey",
+        "desc": "Compile-time random reset value for SRAM scrambling key.",
+        "default": null
+      },
+      {
+        "name": "RndCnstSramNonce",
+        "desc": "Compile-time random reset value for SRAM scrambling nonce.",
+        "default": null
+      },
+      {
+        "name": "RndCnstLfsrSeed",
+        "desc": "Compile-time random bits for initial LFSR seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstLfsrPerm",
+        "desc": "Compile-time random permutation for LFSR output",
+        "default": null
+      },
+      {
+        "name": "MemSizeRam",
+        "desc": "Memory size of the RAM (in bytes).",
+        "default": "0x1000"
+      },
+      {
+        "name": "InstSize",
+        "desc": "Memory size of a single RAM tile (in bytes).",
+        "default": "4096"
+      },
+      {
+        "name": "NumRamInst",
+        "desc": "Number of internal RAM instances. Must be the same as ceil(MemSizeRam / InstSize) .",
+        "default": "1"
+      },
+      {
+        "name": "InstrExec",
+        "desc": "Support execution from SRAM",
+        "default": "1"
+      },
+      {
+        "name": "NumPrinceRoundsHalf",
+        "desc": "Number of PRINCE half rounds for the SRAM scrambling feature",
+        "default": "3"
+      },
+      {
+        "name": "Outstanding",
+        "desc": "Number of outstanding TLUL transactions",
+        "default": "2"
+      },
+      {
+        "name": "EccCorrection",
+        "desc": "Enable single-bit error correction and error logging",
+        "default": "0"
+      }
+    ],
+    "interrupts": [],
+    "alerts": [
+      {
+        "intent_id": "sram_ctrl.alert.fatal_error",
+        "name": "fatal_error",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected,\nor if the initialization mechanism has reached an invalid state."
+      }
+    ],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/sram_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSRAM controller.",
+      "params": [
+        {
+          "name": "MemSizeRam",
+          "default": "32'h1000",
+          "desc": ""
+        },
+        {
+          "name": "InstSize",
+          "default": "MemSizeRam",
+          "desc": ""
+        },
+        {
+          "name": "NumRamInst",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "InstrExec",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "NumPrinceRoundsHalf",
+          "default": "3",
+          "desc": ""
+        },
+        {
+          "name": "Outstanding",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "EccCorrection",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        },
+        {
+          "name": "RaclPolicySelNumRangesRam",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstSramKey",
+          "default": "RndCnstSramKeyDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstSramNonce",
+          "default": "RndCnstSramNonceDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrSeed",
+          "default": "RndCnstLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrPerm",
+          "default": "RndCnstLfsrPermDefault",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

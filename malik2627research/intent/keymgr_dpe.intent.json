@@ -1,0 +1,702 @@
+{
+  "ip_name": "keymgr_dpe",
+  "ip_intent": {
+    "ip_name": "keymgr_dpe",
+    "one_line_desc": "Manage multiple DICE sessions in a DPE-compatible way",
+    "one_paragraph_desc": "Key Manager DPE serves as the core hardware block for DPE. DPE stands for DICE Protection Environment.\n[DPE-version1.0-rev0.6]: https://trustedcomputinggroup.org/wp-content/uploads/TCG-DICE-Protection-Environment-Specification_14february2023-1.pdf",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_edn_i",
+        "reset": "rst_edn_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "KmacEnMasking",
+        "desc": "Flag indicating with kmac masking is enabled",
+        "default": "1"
+      },
+      {
+        "name": "RndCnstLfsrSeed",
+        "desc": "Compile-time random bits for initial LFSR seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstLfsrPerm",
+        "desc": "Compile-time random permutation for LFSR output",
+        "default": null
+      },
+      {
+        "name": "RndCnstRandPerm",
+        "desc": "Compile-time random permutation for entropy used in share overriding",
+        "default": null
+      },
+      {
+        "name": "RndCnstRevisionSeed",
+        "desc": "Compile-time random bits for revision seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstSoftOutputSeed",
+        "desc": "Compile-time random bits for software generation seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstHardOutputSeed",
+        "desc": "Compile-time random bits for hardware generation seed",
+        "default": null
+      },
+      {
+        "name": "RndCnstAesSeed",
+        "desc": "Compile-time random bits for generation seed when aes destination selected",
+        "default": null
+      },
+      {
+        "name": "RndCnstKmacSeed",
+        "desc": "Compile-time random bits for generation seed when kmac destination selected",
+        "default": null
+      },
+      {
+        "name": "RndCnstOtbnSeed",
+        "desc": "Compile-time random bits for generation seed when otbn destination selected",
+        "default": null
+      },
+      {
+        "name": "RndCnstNoneSeed",
+        "desc": "Compile-time random bits for generation seed when no destination selected",
+        "default": null
+      },
+      {
+        "name": "NumSaltReg",
+        "desc": "Number of Registers for SW inputs (Salt)",
+        "default": "8"
+      },
+      {
+        "name": "NumSwBindingReg",
+        "desc": "Number of Registers for SW inputs (SW binding)",
+        "default": "8"
+      },
+      {
+        "name": "NumOutReg",
+        "desc": "Number of Registers for SW outputs",
+        "default": "8"
+      },
+      {
+        "name": "NumKeyVersion",
+        "desc": "Number of Registers for key version",
+        "default": "1"
+      },
+      {
+        "name": "NumRomDigestInputs",
+        "desc": "Number of digest inputs from ROM_CTRL",
+        "default": "2"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "keymgr_dpe.interrupt.op_done",
+        "name": "op_done",
+        "desc": "Operation complete"
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "keymgr_dpe.alert.recov_operation_err",
+        "name": "recov_operation_err",
+        "desc": "Alert for key manager operation errors.  These errors could have been caused by\nsoftware"
+      },
+      {
+        "intent_id": "keymgr_dpe.alert.fatal_fault_err",
+        "name": "fatal_fault_err",
+        "desc": "Alert for key manager faults.  These errors cannot be caused by software"
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "keymgr_dpe.reg.CFG_REGWEN",
+        "name": "CFG_REGWEN",
+        "desc": "Key manager configuration enable",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.CFG_REGWEN.EN",
+            "name": "EN",
+            "desc": "key manager configuration enable.\nWhen key manager operation is started (see CONTROL), registers protected by this EN are no longer\nmodifiable until the operation completes.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.START",
+        "name": "START",
+        "desc": "Key manager operation start",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.START.EN",
+            "name": "EN",
+            "desc": "Start key manager operations",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": "hrw"
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.CONTROL_SHADOWED",
+        "name": "CONTROL_SHADOWED",
+        "desc": "Key manager operation controls",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.CONTROL_SHADOWED.OPERATION",
+            "name": "OPERATION",
+            "desc": "Key manager DPE operation selection",
+            "bits": "6:4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.CONTROL_SHADOWED.DEST_SEL",
+            "name": "DEST_SEL",
+            "desc": "When the OPERATION field is programmed to generate output, this field selects\nthe target cryptograhic use of the key.\n\nThis field should be programmed for both HW / SW generation, as this helps diversify the output.",
+            "bits": "13:12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.CONTROL_SHADOWED.SLOT_SRC_SEL",
+            "name": "SLOT_SRC_SEL",
+            "desc": "The source key slot to be used for the invoked operation.",
+            "bits": "16:14",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.CONTROL_SHADOWED.SLOT_DST_SEL",
+            "name": "SLOT_DST_SEL",
+            "desc": "The destination key slot to be used for the advance and erase operations.",
+            "bits": "20:18",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.CONTROL_SHADOWED.SW_BINDING_ONLY",
+            "name": "SW_BINDING_ONLY",
+            "desc": "Only apply software binding as a message input to the advance operation.",
+            "bits": "22",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.SIDELOAD_CLEAR",
+        "name": "SIDELOAD_CLEAR",
+        "desc": "sideload key slots clear",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.SIDELOAD_CLEAR.VAL",
+            "name": "VAL",
+            "desc": "Depending on the value programmed, a different sideload key slot is cleared.\nIf the value programmed is not one of the enumerated values below, ALL sideload\nkey slots are continuously cleared. In order to stop continuous clearing, SW should\ntoggle the clear bit again (i.e. disable continuous clearing).",
+            "bits": "2:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.RESEED_INTERVAL_REGWEN",
+        "name": "RESEED_INTERVAL_REGWEN",
+        "desc": "regwen for reseed interval",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.RESEED_INTERVAL_REGWEN.EN",
+            "name": "EN",
+            "desc": "Configuration enable for reseed interval",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.RESEED_INTERVAL_SHADOWED",
+        "name": "RESEED_INTERVAL_SHADOWED",
+        "desc": "Reseed interval for key manager entropy reseed",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.RESEED_INTERVAL_SHADOWED.VAL",
+            "name": "VAL",
+            "desc": "Number of internal PRNG updates before a reseed is requested.",
+            "bits": "15:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.SLOT_POLICY_REGWEN",
+        "name": "SLOT_POLICY_REGWEN",
+        "desc": "Register write enable for SLOT_POLICY",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.SLOT_POLICY_REGWEN.EN",
+            "name": "EN",
+            "desc": "Locks SLOT_POLICY register.\n\nAfter a successful advance operation, this register is unlocked again.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.SLOT_POLICY",
+        "name": "SLOT_POLICY",
+        "desc": "Policy bits for the child DPE context",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.SLOT_POLICY.ALLOW_CHILD",
+            "name": "ALLOW_CHILD",
+            "desc": "Set whether this context allows derivation of further children.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.SLOT_POLICY.EXPORTABLE",
+            "name": "EXPORTABLE",
+            "desc": "Set whether the key for the target slot is exportable.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.SLOT_POLICY.RETAIN_PARENT",
+            "name": "RETAIN_PARENT",
+            "desc": "Set whether further advance operations force erasure of the slot.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.SW_BINDING_REGWEN",
+        "name": "SW_BINDING_REGWEN",
+        "desc": "Register write enable for SOFTWARE_BINDING",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.SW_BINDING_REGWEN.EN",
+            "name": "EN",
+            "desc": "Software binding register write enable.\nThis is locked by software and unlocked by hardware upon a successful advance call.\n\nSoftware binding resets to 1, and its value cannot be altered by software until advancement to Init state.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.MAX_KEY_VER_REGWEN",
+        "name": "MAX_KEY_VER_REGWEN",
+        "desc": "Register write enable for MAX_KEY_VERSION",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.MAX_KEY_VER_REGWEN.EN",
+            "name": "EN",
+            "desc": "MAX_KEY_VERSION configure enable.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.MAX_KEY_VER_SHADOWED",
+        "name": "MAX_KEY_VER_SHADOWED",
+        "desc": "Max key version",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.MAX_KEY_VER_SHADOWED.VAL",
+            "name": "VAL",
+            "desc": "Max key version.\n\nAny key version up to the value specified in this register is valid.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.WORKING_STATE",
+        "name": "WORKING_STATE",
+        "desc": "Key manager working state.\n\nThis is a readout of the current key manager working state",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.WORKING_STATE.STATE",
+            "name": "STATE",
+            "desc": "Key manager control state",
+            "bits": "1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.OP_STATUS",
+        "name": "OP_STATUS",
+        "desc": "Key manager status.\n\nHardware sets the status based on software initiated operations.\nThis register must be explicitly cleared by software.\nSoftware clears by writing back whatever it reads.",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.OP_STATUS.STATUS",
+            "name": "STATUS",
+            "desc": "Operation status.",
+            "bits": "1:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.ERR_CODE",
+        "name": "ERR_CODE",
+        "desc": "Key manager error code.\nThis register must be explicitly cleared by software.\n\nThis register represents both synchronous and asynchronous recoverable\nerrors.\n\nSynchronous errors refer to those that only happen when a keymgr operation is\ninvoked, while asynchronous refers to errors that can happen at any time.",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.ERR_CODE.INVALID_OP",
+            "name": "INVALID_OP",
+            "desc": "Invalid operation issued to key manager, synchronous error",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.ERR_CODE.INVALID_KMAC_INPUT",
+            "name": "INVALID_KMAC_INPUT",
+            "desc": "Invalid data issued to kmac interface, synchronous error",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.ERR_CODE.INVALID_SHADOW_UPDATE",
+            "name": "INVALID_SHADOW_UPDATE",
+            "desc": "An error observed during shadow register updates, asynchronous error",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.FAULT_STATUS",
+        "name": "FAULT_STATUS",
+        "desc": "This register represents both synchronous and asynchronous fatal faults.\n\nSynchronous faults refer to those that only happen when a keymgr operation is\ninvoked, while asynchronous refers to faults that can happen at any time.\n",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.CMD",
+            "name": "CMD",
+            "desc": "A non-onehot command was seen in kmac, asynchronous fault.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.KMAC_FSM",
+            "name": "KMAC_FSM",
+            "desc": "The kmac transfer interface FSM is in an invalid state, asynchronous fault.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.KMAC_DONE",
+            "name": "KMAC_DONE",
+            "desc": "The kmac transfer interface encountered an unexpected done, asynchronous fault.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.KMAC_OP",
+            "name": "KMAC_OP",
+            "desc": "KMAC reported an error during keymgr usage, this should never happen - synchronous fault.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.KMAC_OUT",
+            "name": "KMAC_OUT",
+            "desc": "KMAC data returned as all 0's or all 1's - synchronous fault",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.REGFILE_INTG",
+            "name": "REGFILE_INTG",
+            "desc": "Register file integrity error, asynchronous fault",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.SHADOW",
+            "name": "SHADOW",
+            "desc": "Shadow copy storage error, asynchronous fault",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.CTRL_FSM_INTG",
+            "name": "CTRL_FSM_INTG",
+            "desc": "Control FSM integrity error, asynchronous fault",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.CTRL_FSM_CHK",
+            "name": "CTRL_FSM_CHK",
+            "desc": "Control FSM cross check error, asynchronous fault",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.CTRL_FSM_CNT",
+            "name": "CTRL_FSM_CNT",
+            "desc": "Control FSM counter integrity error, asynchronous fault",
+            "bits": "9",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.RESEED_CNT",
+            "name": "RESEED_CNT",
+            "desc": "Reseed counter integrity error, asynchronous fault",
+            "bits": "10",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.SIDE_CTRL_FSM",
+            "name": "SIDE_CTRL_FSM",
+            "desc": "Sideload control FSM integrity error, asynchronous fault",
+            "bits": "11",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.SIDE_CTRL_SEL",
+            "name": "SIDE_CTRL_SEL",
+            "desc": "Sideload control key select error, synchronous fault",
+            "bits": "12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.FAULT_STATUS.KEY_ECC",
+            "name": "KEY_ECC",
+            "desc": "Secret key ecc error, asynchronous fault",
+            "bits": "13",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.DEBUG",
+        "name": "DEBUG",
+        "desc": "The register holds some debug information that may be convenient if keymgr\nmisbehaves.",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INVALID_CREATOR_SEED",
+            "name": "INVALID_CREATOR_SEED",
+            "desc": "Creator seed failed input checks during operation",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INVALID_OWNER_SEED",
+            "name": "INVALID_OWNER_SEED",
+            "desc": "Owner seed failed input checks during operation",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INVALID_DEV_ID",
+            "name": "INVALID_DEV_ID",
+            "desc": "Device ID failed input checks during operation",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INVALID_HEALTH_STATE",
+            "name": "INVALID_HEALTH_STATE",
+            "desc": "Health state failed input checks during operation",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INVALID_KEY_VERSION",
+            "name": "INVALID_KEY_VERSION",
+            "desc": "Key version failed input checks during operation",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INVALID_KEY",
+            "name": "INVALID_KEY",
+            "desc": "Key fed to kmac failed input checks during operation",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INVALID_DIGEST",
+            "name": "INVALID_DIGEST",
+            "desc": "ROM digest failed input checks during operation",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INVALID_ROOT_KEY",
+            "name": "INVALID_ROOT_KEY",
+            "desc": "OTP root key was invalid during the first advance",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "keymgr_dpe.reg.DEBUG.INACTIVE_LC_EN",
+            "name": "INACTIVE_LC_EN",
+            "desc": "Enable signal from LC ctrl is deactivated",
+            "bits": "8",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "keymgr_dpe.reg.LOAD_KEY_LOCK",
+        "name": "LOAD_KEY_LOCK",
+        "desc": "Register write lock for the LOAD_KEY command",
+        "fields": [
+          {
+            "intent_id": "keymgr_dpe.reg.LOAD_KEY_LOCK.LOCK",
+            "name": "LOCK",
+            "desc": "Load key register write lock.\n\nLoad key lock to 0, and its value cannot be altered by software until the next reset or locked.\nOnce locked, the LOAD_KEY command is disabled.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/keymgr_dpe.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager top level",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "KmacEnMasking",
+          "default": "1'b1",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrSeed",
+          "default": "RndCnstLfsrSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLfsrPerm",
+          "default": "RndCnstLfsrPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstRandPerm",
+          "default": "RndCnstRandPermDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstRevisionSeed",
+          "default": "RndCnstRevisionSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstSoftOutputSeed",
+          "default": "RndCnstSoftOutputSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstHardOutputSeed",
+          "default": "RndCnstHardOutputSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstNoneSeed",
+          "default": "RndCnstNoneSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstAesSeed",
+          "default": "RndCnstAesSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstOtbnSeed",
+          "default": "RndCnstOtbnSeedDefault",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstKmacSeed",
+          "default": "RndCnstKmacSeedDefault",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/keymgr_dpe_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager top level",
+      "params": [
+        {
+          "name": "hw_sel_o",
+          "default": "= 1` indicates whether the generated key output",
+          "desc": "goes to sideload port. The safe default here is software CSR key."
+        }
+      ]
+    },
+    "rtl/keymgr_dpe_op_state_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nKey manager operation state control",
+      "params": []
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "ip_name": "bkdr_loader",
+  "ip_intent": {
+    "ip_name": "bkdr_loader",
+    "one_line_desc": "Provides FPGA-only indirect programming to RAMs",
+    "one_paragraph_desc": "The BKDR_LOADER intercepts the reset and JTAG signals between the FPGA pad array and the top-level\nOpenTitan instance. On reset, the IP samples the tap strap pins and becomes active if both straps\nsignals are high (DFT mode on the ASIC). When active, the module keeps the reset to both the AST\nand OpenTitan asserted to prevent any access to non-initialized memory regions. It presents an\ninternal RISC-V DTM over which the loader's internal register can be accessed. The BKDR_LOADER\npresents both the number of targets and key target information through its register space.\nAfter completing preloading and data validation, the loader is deactivated until the next\nbutton reset via the control register. In this case, the JTAG signals are forwarded to OpenTitan\nand the reset to the AST and OpenTitan is de-asserted.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "NumBkdrTgts",
+        "desc": "Number of RAM Targets",
+        "default": "12"
+      },
+      {
+        "name": "MaxWordWidthDiv32",
+        "desc": "Max bit width of a word / 32",
+        "default": "8"
+      }
+    ],
+    "interrupts": [],
+    "alerts": [],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/bkdr_loader.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nBackdoor loader with indirect programming.",
+      "params": []
+    }
+  }
+}

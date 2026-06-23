@@ -1,0 +1,415 @@
+{
+  "ip_name": "uart",
+  "ip_intent": {
+    "ip_name": "uart",
+    "one_line_desc": "Full duplex serial communication interface, supports bit rates of up to 1 Mbit/s",
+    "one_paragraph_desc": "Universal Asynchronous Receiver/Transmitter (UART) provides industry standard serial communication with external devices via two wires at a programmable baud rate.\nIts full duplex design supports simultaneous transmission and reception, and flow control may be achieved using software handshaking if required.\nTo reduce software load, UART includes hardware FIFOs and supports interrupt generation when the FIFO level reaches software-programmable thresholds.\nFor compatibility with a variety of different targets and applications, the baud rate is software programmable and bit rates of up to 1 Mbit/s are supported.\nThe data format is restricted to 8 bits, reducing the complexity and cost, with optional parity for robustness against transmission errors.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "RxFifoDepth",
+        "desc": "Number of bytes in the RX FIFO.",
+        "default": "64"
+      },
+      {
+        "name": "TxFifoDepth",
+        "desc": "Number of bytes in the TX FIFO.",
+        "default": "32"
+      }
+    ],
+    "interrupts": [
+      {
+        "intent_id": "uart.interrupt.tx_watermark",
+        "name": "tx_watermark",
+        "desc": "raised if the transmit FIFO is past the high-water mark."
+      },
+      {
+        "intent_id": "uart.interrupt.rx_watermark",
+        "name": "rx_watermark",
+        "desc": "raised if the receive FIFO is past the high-water mark."
+      },
+      {
+        "intent_id": "uart.interrupt.tx_done",
+        "name": "tx_done",
+        "desc": "raised if the transmit FIFO has emptied and no transmit is ongoing."
+      },
+      {
+        "intent_id": "uart.interrupt.rx_overflow",
+        "name": "rx_overflow",
+        "desc": "raised if the receive FIFO has overflowed."
+      },
+      {
+        "intent_id": "uart.interrupt.rx_frame_err",
+        "name": "rx_frame_err",
+        "desc": "raised if a framing error has been detected on receive."
+      },
+      {
+        "intent_id": "uart.interrupt.rx_break_err",
+        "name": "rx_break_err",
+        "desc": "raised if break condition has been detected on receive."
+      },
+      {
+        "intent_id": "uart.interrupt.rx_timeout",
+        "name": "rx_timeout",
+        "desc": "raised if RX FIFO has characters remaining in the FIFO without being\nretrieved for the programmed time period."
+      },
+      {
+        "intent_id": "uart.interrupt.rx_parity_err",
+        "name": "rx_parity_err",
+        "desc": "raised if the receiver has detected a parity error."
+      },
+      {
+        "intent_id": "uart.interrupt.tx_empty",
+        "name": "tx_empty",
+        "desc": "raised if the transmit FIFO is empty."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "uart.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "uart.reg.CTRL",
+        "name": "CTRL",
+        "desc": "UART control register",
+        "fields": [
+          {
+            "intent_id": "uart.reg.CTRL.TX",
+            "name": "TX",
+            "desc": "TX enable",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.CTRL.RX",
+            "name": "RX",
+            "desc": "RX enable",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.CTRL.NF",
+            "name": "NF",
+            "desc": "RX noise filter enable.\nIf the noise filter is enabled, RX line goes through the 3-tap\nrepetition code. It ignores single IP clock period noise.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.CTRL.SLPBK",
+            "name": "SLPBK",
+            "desc": "System loopback enable.\n\nIf this bit is turned on, any outgoing bits to TX are received through RX.\nSee Block Diagram. Note that the TX line goes 1 if System loopback is enabled.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.CTRL.LLPBK",
+            "name": "LLPBK",
+            "desc": "Line loopback enable.\n\nIf this bit is turned on, incoming bits are forwarded to TX for testing purpose.\nSee Block Diagram. Note that the internal design sees RX value as 1 always if line\nloopback is enabled.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.CTRL.PARITY_EN",
+            "name": "PARITY_EN",
+            "desc": "If true, parity is enabled in both RX and TX directions.",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.CTRL.PARITY_ODD",
+            "name": "PARITY_ODD",
+            "desc": "If PARITY_EN is true, this determines the type, 1 for odd parity, 0 for even.",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.CTRL.RXBLVL",
+            "name": "RXBLVL",
+            "desc": "Trigger level for RX break detection. Sets the number of character\ntimes the line must be low to detect a break.",
+            "bits": "9:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.CTRL.NCO",
+            "name": "NCO",
+            "desc": "BAUD clock rate control.",
+            "bits": "31:16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "uart.reg.STATUS",
+        "name": "STATUS",
+        "desc": "UART live status register",
+        "fields": [
+          {
+            "intent_id": "uart.reg.STATUS.TXFULL",
+            "name": "TXFULL",
+            "desc": "TX buffer is full",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.STATUS.RXFULL",
+            "name": "RXFULL",
+            "desc": "RX buffer is full",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.STATUS.TXEMPTY",
+            "name": "TXEMPTY",
+            "desc": "TX FIFO is empty",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.STATUS.TXIDLE",
+            "name": "TXIDLE",
+            "desc": "TX FIFO is empty and all bits have been transmitted",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.STATUS.RXIDLE",
+            "name": "RXIDLE",
+            "desc": "RX is idle",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.STATUS.RXEMPTY",
+            "name": "RXEMPTY",
+            "desc": "RX FIFO is empty",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "uart.reg.RDATA",
+        "name": "RDATA",
+        "desc": "UART read data",
+        "fields": [
+          {
+            "intent_id": "uart.reg.RDATA.None",
+            "name": null,
+            "desc": "",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "uart.reg.WDATA",
+        "name": "WDATA",
+        "desc": "UART write data",
+        "fields": [
+          {
+            "intent_id": "uart.reg.WDATA.None",
+            "name": null,
+            "desc": "",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "uart.reg.FIFO_CTRL",
+        "name": "FIFO_CTRL",
+        "desc": "UART FIFO control register",
+        "fields": [
+          {
+            "intent_id": "uart.reg.FIFO_CTRL.RXRST",
+            "name": "RXRST",
+            "desc": "RX fifo reset. Write 1 to the register resets RX_FIFO. Read returns 0",
+            "bits": "0",
+            "swaccess": "wo",
+            "hwaccess": "hro"
+          },
+          {
+            "intent_id": "uart.reg.FIFO_CTRL.TXRST",
+            "name": "TXRST",
+            "desc": "TX fifo reset. Write 1 to the register resets TX_FIFO. Read returns 0",
+            "bits": "1",
+            "swaccess": "wo",
+            "hwaccess": "hro"
+          },
+          {
+            "intent_id": "uart.reg.FIFO_CTRL.RXILVL",
+            "name": "RXILVL",
+            "desc": "Trigger level for RX interrupts. If the FIFO depth is greater than or equal to\nthe setting, it raises rx_watermark interrupt.",
+            "bits": "4:2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.FIFO_CTRL.TXILVL",
+            "name": "TXILVL",
+            "desc": "Trigger level for TX interrupts. If the FIFO depth is less than the setting, it\nraises tx_watermark interrupt.",
+            "bits": "7:5",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "uart.reg.FIFO_STATUS",
+        "name": "FIFO_STATUS",
+        "desc": "UART FIFO status register",
+        "fields": [
+          {
+            "intent_id": "uart.reg.FIFO_STATUS.TXLVL",
+            "name": "TXLVL",
+            "desc": "Current fill level of TX fifo",
+            "bits": "7:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.FIFO_STATUS.RXLVL",
+            "name": "RXLVL",
+            "desc": "Current fill level of RX fifo",
+            "bits": "23:16",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "uart.reg.OVRD",
+        "name": "OVRD",
+        "desc": "TX pin override control. Gives direct SW control over TX pin state",
+        "fields": [
+          {
+            "intent_id": "uart.reg.OVRD.TXEN",
+            "name": "TXEN",
+            "desc": "Enable TX pin override control",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.OVRD.TXVAL",
+            "name": "TXVAL",
+            "desc": "Write to set the value of the TX pin",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "uart.reg.VAL",
+        "name": "VAL",
+        "desc": "UART oversampled values",
+        "fields": [
+          {
+            "intent_id": "uart.reg.VAL.RX",
+            "name": "RX",
+            "desc": "Last 16 oversampled values of RX. Most recent bit is bit 0, oldest 15.",
+            "bits": "15:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "uart.reg.TIMEOUT_CTRL",
+        "name": "TIMEOUT_CTRL",
+        "desc": "UART RX timeout control",
+        "fields": [
+          {
+            "intent_id": "uart.reg.TIMEOUT_CTRL.VAL",
+            "name": "VAL",
+            "desc": "RX timeout value in UART bit times",
+            "bits": "23:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "uart.reg.TIMEOUT_CTRL.EN",
+            "name": "EN",
+            "desc": "Enable RX timeout feature",
+            "bits": "31",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/uart.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: UART top level wrapper file",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/uart_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/uart_rx.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: UART Receive Module",
+      "params": []
+    },
+    "rtl/uart_tx.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nDescription: UART Transmit Module",
+      "params": []
+    }
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "ip_name": "lc_ctrl",
+  "ip_intent": {
+    "ip_name": "lc_ctrl",
+    "one_line_desc": "Manages device life cycle states and transitions, and controls key manager, NVM (flash), OTP, and debug access",
+    "one_paragraph_desc": "Life Cycle Controller is responsible for handling and guarding transitions between different device life cycle states, concurrently decoding the current life cycle state and redundantly broadcasting encoded life cycle qualification signals across the system, e.g., to control the behavior of the Key Manager, the non-volatile memory controller (e.g. Flash Controller), the OTP Controller, and the debug infrastructure.\nIn addition, it features an escalation receiver for the alert system to invalidate the life cycle state as part of an escalation sequence.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_kmac_i",
+        "reset": "rst_kmac_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      },
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "SecVolatileRawUnlockEn",
+        "desc": "Disable (0) or enable (1) volatile RAW UNLOCK capability.\nIf enabled, it is possible to perform a volatile RAW -> TEST_UNLOCKED0 transition\nwithout programming the OTP. This is a useful fallback mode in case the OTP is\nnot working correctly.\n\nIMPORTANT NOTE: This should only be used in test chips. The parameter must be set\nto 0 in production tapeouts since this weakens the security posture of the RAW\nUNLOCK mechanism.",
+        "default": "1'b0"
+      },
+      {
+        "name": "UseDmiInterface",
+        "desc": "When 1, a TLUL-based DMI interface is used. When 0, a JTAG TAP is used.",
+        "default": "0"
+      },
+      {
+        "name": "RndCnstLcKeymgrDivInvalid",
+        "desc": "Diversification value used for all invalid life cycle states.",
+        "default": null
+      },
+      {
+        "name": "RndCnstLcKeymgrDivTestUnlocked",
+        "desc": "Diversification value used for the TEST_UNLOCKED* life cycle states.",
+        "default": null
+      },
+      {
+        "name": "RndCnstLcKeymgrDivDev",
+        "desc": "Diversification value used for the DEV life cycle state.",
+        "default": null
+      },
+      {
+        "name": "RndCnstLcKeymgrDivProduction",
+        "desc": "Diversification value used for the PROD/PROD_END life cycle states.",
+        "default": null
+      },
+      {
+        "name": "RndCnstLcKeymgrDivRma",
+        "desc": "Diversification value used for the RMA life cycle state.",
+        "default": null
+      },
+      {
+        "name": "RndCnstInvalidTokens",
+        "desc": "Compile-time random bits used for invalid tokens in the token mux",
+        "default": null
+      },
+      {
+        "name": "SiliconCreatorIdWidth",
+        "desc": "Width of SiliconCreatorId revision field.",
+        "default": "16"
+      },
+      {
+        "name": "ProductIdWidth",
+        "desc": "Width of ProductId revision field.",
+        "default": "16"
+      },
+      {
+        "name": "RevisionIdWidth",
+        "desc": "Width of RevisionId revision field.",
+        "default": "8"
+      },
+      {
+        "name": "SiliconCreatorId",
+        "desc": "Chip generation number.",
+        "default": "'0"
+      },
+      {
+        "name": "ProductId",
+        "desc": "Chip revision number.",
+        "default": "'0"
+      },
+      {
+        "name": "RevisionId",
+        "desc": "Chip revision number.",
+        "default": "'0"
+      },
+      {
+        "name": "IdcodeValue",
+        "desc": "JTAG ID code.",
+        "default": "32'h00000001"
+      },
+      {
+        "name": "NumTokenWords",
+        "desc": "Number of 32bit words in a token.",
+        "default": "4"
+      },
+      {
+        "name": "CsrLcStateWidth",
+        "desc": "Number of life cycle state enum bits.",
+        "default": "30"
+      },
+      {
+        "name": "CsrLcCountWidth",
+        "desc": "Number of life cycle transition counter bits.",
+        "default": "5"
+      },
+      {
+        "name": "CsrLcIdStateWidth",
+        "desc": "Number of life cycle id state enum bits.",
+        "default": "32"
+      },
+      {
+        "name": "CsrOtpTestCtrlWidth",
+        "desc": "Number of vendor/test-specific OTP control bits.",
+        "default": "32"
+      },
+      {
+        "name": "CsrOtpTestStatusWidth",
+        "desc": "Number of vendor/test-specific OTP status bits.",
+        "default": "32"
+      },
+      {
+        "name": "NumDeviceIdWords",
+        "desc": "Number of 32bit words in the Device ID.",
+        "default": "8"
+      },
+      {
+        "name": "NumManufStateWords",
+        "desc": "Number of 32bit words in the manufacturing state.",
+        "default": "8"
+      },
+      {
+        "name": "NumRmaAckSigs",
+        "desc": "Number of NVM RMA wiping response signals",
+        "default": "2"
+      },
+      {
+        "name": "EscNumSeverities",
+        "desc": "Number of escalation severities",
+        "default": "4"
+      },
+      {
+        "name": "EscPingCountWidth",
+        "desc": "Width of ping count for the escalation receiver",
+        "default": "16"
+      }
+    ],
+    "interrupts": [],
+    "alerts": [
+      {
+        "intent_id": "lc_ctrl.alert.fatal_prog_error",
+        "name": "fatal_prog_error",
+        "desc": "This alert triggers if an error occurred during an OTP programming operation."
+      },
+      {
+        "intent_id": "lc_ctrl.alert.fatal_state_error",
+        "name": "fatal_state_error",
+        "desc": "This alert triggers if an error in the life cycle state or life cycle controller FSM is detected."
+      },
+      {
+        "intent_id": "lc_ctrl.alert.fatal_bus_integ_error",
+        "name": "fatal_bus_integ_error",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": []
+  },
+  "module_intents": {
+    "rtl/lc_ctrl.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nLife cycle controller top.",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "SiliconCreatorId",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "ProductId",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "RevisionId",
+          "default": "'0",
+          "desc": ""
+        },
+        {
+          "name": "IdcodeValue",
+          "default": "32'h00000001",
+          "desc": ""
+        },
+        {
+          "name": "UseDmiInterface",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "NumRmaAckSigs",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivInvalid",
+          "default": "LcKeymgrDivWidth'(0)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivTestUnlocked",
+          "default": "LcKeymgrDivWidth'(1)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivDev",
+          "default": "LcKeymgrDivWidth'(2)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivProduction",
+          "default": "LcKeymgrDivWidth'(3)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivRma",
+          "default": "LcKeymgrDivWidth'(4)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstInvalidTokens",
+          "default": "{TokenMuxBits{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "SecVolatileRawUnlockEn",
+          "default": "0",
+          "desc": ""
+        },
+        {
+          "name": "EscNumSeverities",
+          "default": "4",
+          "desc": ""
+        },
+        {
+          "name": "EscPingCountWidth",
+          "default": "16",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/lc_ctrl_fsm.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nMain Life Cycle Controller FSM.",
+      "params": [
+        {
+          "name": "NumRmaAckSigs",
+          "default": "2",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivInvalid",
+          "default": "LcKeymgrDivWidth'(0)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivTestUnlocked",
+          "default": "LcKeymgrDivWidth'(1)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivDev",
+          "default": "LcKeymgrDivWidth'(2)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivProduction",
+          "default": "LcKeymgrDivWidth'(3)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivRma",
+          "default": "LcKeymgrDivWidth'(4)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstInvalidTokens",
+          "default": "{TokenMuxBits{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "SecVolatileRawUnlockEn",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/lc_ctrl_kmac_if.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSynchronization interface between LC FSM and KMAC.",
+      "params": []
+    },
+    "rtl/lc_ctrl_signal_decode.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "RndCnstLcKeymgrDivInvalid",
+          "default": "LcKeymgrDivWidth'(0)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivTestUnlocked",
+          "default": "LcKeymgrDivWidth'(1)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivDev",
+          "default": "LcKeymgrDivWidth'(2)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivProduction",
+          "default": "LcKeymgrDivWidth'(3)",
+          "desc": ""
+        },
+        {
+          "name": "RndCnstLcKeymgrDivRma",
+          "default": "LcKeymgrDivWidth'(4)",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/lc_ctrl_state_decode.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": []
+    },
+    "rtl/lc_ctrl_state_transition.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nLife cycle state transition function. Checks whether a transition is valid",
+      "params": [
+        {
+          "name": "SecVolatileRawUnlockEn",
+          "default": "0",
+          "desc": ""
+        }
+      ]
+    }
+  }
+}

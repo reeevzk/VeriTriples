@@ -1,0 +1,402 @@
+{
+  "ip_name": "ascon",
+  "ip_intent": {
+    "ip_name": "ascon",
+    "one_line_desc": "Ascon authenticated encryption and decryption engine",
+    "one_paragraph_desc": "[Ascon][graz-ascon] is the winner of the NIST lightweight competition and soon to be\n[standardized][nist-ascon].\n\n[graz-ascon]: https://ascon.iaik.tugraz.at/\n[nist-ascon]: https://csrc.nist.gov/Presentations/2023/update-on-standardization-of-ascon-family",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_edn_i",
+        "reset": "rst_edn_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [
+      {
+        "name": "NumRegsKey",
+        "desc": "Number registers for key",
+        "default": "4"
+      },
+      {
+        "name": "NumRegsNonce",
+        "desc": "Number registers for nonce",
+        "default": "4"
+      },
+      {
+        "name": "NumRegsData",
+        "desc": "Number registers for input and output data (ad/plaintext/ciphertext)",
+        "default": "4"
+      },
+      {
+        "name": "NumRegsTag",
+        "desc": "Number registers for input and output tag",
+        "default": "4"
+      }
+    ],
+    "interrupts": [],
+    "alerts": [
+      {
+        "intent_id": "ascon.alert.recov_ctrl_update_err",
+        "name": "recov_ctrl_update_err",
+        "desc": "This recoverable alert is triggered upon detecting an update error in the shadowed Control Register.\nThe content of the Control Register is not modified (See Control Register).\nThe Ascon unit can be recovered from such a condition by restarting the Ascon operation, i.e., by re-writing the Control Register.\nThis should be monitored by the system."
+      },
+      {
+        "intent_id": "ascon.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered upon detecting a fatal fault inside the Ascon unit.\nExamples for such faults include\ni) storage errors in the shadowed Control Register,\nii) any internal FSM entering an invalid state,\niii) any sparsely encoded signal taking on an invalid value,\niv) errors in the internal round counter,\nv) escalations triggered by the life cycle controller, and\nvi) fatal integrity failures on the TL-UL bus.\nThe Ascon unit cannot recover from such an error and needs to be reset."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "ascon.reg.CTRL_SHADOWED",
+        "name": "CTRL_SHADOWED",
+        "desc": "Control Register.\nCan only be updated when the Ascon unit is idle.\nIf the Ascon unit is non-idle, writes to this register are ignored.\nThis register is shadowed, meaning two subsequent write operations are required to change its content.\nIf the two write operations try to set a different value, a recoverable alert is triggered (See Status Register).\nA read operation clears the internal phase tracking:\nThe next write operation is always considered a first write operation of an update sequence.\nAny write operation to this register will clear the status tracking required for automatic mode (See !!CTRL_AUX_SHADOWED.manual_start_trigger).\nA write to the Control Register is considered the start of a new message.\nHence, software needs to provide a new Nonce and input data afterwards.",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.CTRL_SHADOWED.OPERATION",
+            "name": "OPERATION",
+            "desc": "Specifies which operation ascon should perform.\nThere are:\nEnc, Dec, XOF (not implemented yet)\nThey are one-hot encoded",
+            "bits": "2:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.CTRL_SHADOWED.ASCON_VARIANT",
+            "name": "ASCON_VARIANT",
+            "desc": "Specifies which variant of Ascon is used.\nIt can be either Ascon-128 (2'b01) or Ascon-128a (2'b10).\nThey only differ in the input block size and the number of permutations per round.\nThe size of the key, nonce, tag is 128 bits for both variants.\nThis field is only relevant for encryption or decryption.\nIt is ignored for Ascon-XOF.",
+            "bits": "4:3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.CTRL_SHADOWED.SIDELOAD_KEY",
+            "name": "SIDELOAD_KEY",
+            "desc": "Controls whether the Ascon unit uses the key provided by the key manager via key sideload interface (1)\nor the key provided by software via Initial Key Registers KEY_SHARE1 and KEY_SHARE_0 (0).",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.CTRL_SHADOWED.MASKED_AD_INPUT",
+            "name": "MASKED_AD_INPUT",
+            "desc": "Controls whether the associated data input is provided in shares (1) or not (0).\nIf the input is provided in shares all registers of both shares must be written for each input block.\nIf set to 0, the write operation tracking of Share 1 is disabled.\nSoftware should set Share 1 to all zeros before the first block of associated data is written to Share 0.\nIt does not need to be rewritten for each block.\nOnce all registers of Share 0 have been written, Ascon starts to process the data depending on the !!CTRL_AUX_SHADOWED.manual_start_trigger.",
+            "bits": "6",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.CTRL_SHADOWED.MASKED_MSG_INPUT",
+            "name": "MASKED_MSG_INPUT",
+            "desc": "Controls whether the message input is provided in shares (1) or not (0).\nIf the input is provided in shares all registers of both shares must be written for each input block.\nIf set to 0, the write operation tracking of Share 1 is disabled.\nSoftware should set Share 1 to all zeros before the first block of the message is written to Share 0.\nIt does not need to be rewritten for each block.\nOnce all registers of Share 0 have been written, Ascon starts to process the data depending on the !!CTRL_AUX_SHADOWED.manual_start_trigger.",
+            "bits": "7",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.CTRL_SHADOWED.NO_MSG",
+            "name": "NO_MSG",
+            "desc": "This field is mubi4 encoded.\nMubi4True:  There is no message (plaintext/ciphertext) to be processed.\nMubi4False: There is a message.",
+            "bits": "11:8",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.CTRL_SHADOWED.NO_AD",
+            "name": "NO_AD",
+            "desc": "This field is mubi4 encoded.\nMubi4True:  There are no associated data to be processed.\nMubi4False: There are associated data.",
+            "bits": "15:12",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.CTRL_AUX_SHADOWED",
+        "name": "CTRL_AUX_SHADOWED",
+        "desc": "Auxiliary Control Register.\nThis register is shadowed, meaning two subsequent write operations are required to change its content.\nIf the two write operations try to set a different value, a recoverable alert is triggered (See Status Register).\nA read operation clears the internal phase tracking: The next write operation is always considered a first write operation of an update sequence.\nThese configuration options are only used for special cases during development and can therefore be locked to the default values.\nFor normal operation these options should all be set to zero.",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.CTRL_AUX_SHADOWED.MANUAL_START_TRIGGER",
+            "name": "MANUAL_START_TRIGGER",
+            "desc": "Control whether the Ascon unit should automatically start to encrypt/decrypt when it receives new input data (0)\nor wait for a separate trigger signal before starting (1) (see Trigger Register).\nDefault: 0",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.CTRL_AUX_SHADOWED.FORCE_DATA_OVERWRITE",
+            "name": "FORCE_DATA_OVERWRITE",
+            "desc": "Control whether the Ascon unit is stalled during the last\nencryption/decryption cycle if the previous output data has not yet been read (0)\nor finishes the operation and overwrites the previous output data (1).\nDefault: 0",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.CTRL_AUX_REGWEN",
+        "name": "CTRL_AUX_REGWEN",
+        "desc": "Lock bit for Auxiliary Control Register.",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.CTRL_AUX_REGWEN.None",
+            "name": null,
+            "desc": "Auxiliary Control Register configuration enable bit.\nIf this is cleared to 0, the Auxiliary Control Register cannot be written until the next reset.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.BLOCK_CTRL_SHADOWED",
+        "name": "BLOCK_CTRL_SHADOWED",
+        "desc": "Block Control Register.\nThis register is shadowed, meaning two subsequent write operations are required to change its content.\nIf the two write operations try to set a different value, a recoverable alert is triggered (See Status Register).\nA read operation clears the internal phase tracking:\nThe next write operation is always considered a first write operation of an update sequence.\nThis register has to be written at least for each first and last block of message, associated data.\nIntermediate blocks are expected to be of full block size.\nIf there's only one block of data, all three fields: valid_bytes, data_type_last and data_type_start must be set.",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.BLOCK_CTRL_SHADOWED.DATA_TYPE_START",
+            "name": "DATA_TYPE_START",
+            "desc": "Specifies which input the Ascon unit shall process next.\nThere are:\nPT_IN, CT_IN, AD_IN.\nThey are internally mubi4 encoded.\nOnly one type is allowed to be true at the same time.\nNONE sets all mubi4 encoded values to False.",
+            "bits": "11:0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.BLOCK_CTRL_SHADOWED.DATA_TYPE_LAST",
+            "name": "DATA_TYPE_LAST",
+            "desc": "Specifies that the next read from an input is the last of its kind.\nThere are:\nPT_IN, CT_IN, AD_IN.\nThey are internally mubi4 encoded.\nOnly one type is allowed to be true at the same time.\nNONE sets all mubi4 values to false.",
+            "bits": "23:12",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.BLOCK_CTRL_SHADOWED.VALID_BYTES",
+            "name": "VALID_BYTES",
+            "desc": "Indicates the number of valid bytes [0 to 16] bytes.\nDefault: 16 bytes for ASCON 128a\nDefault:   8 bytes for ASCON 128",
+            "bits": "28:24",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.TRIGGER",
+        "name": "TRIGGER",
+        "desc": "Trigger Register.\nEach bit is individually cleared to zero when executing the corresponding trigger.\nWhile executing any of the triggered operations, the Ascon unit will set the IDLE bit in the Status Register to zero.\nThe processor must check the Status Register before triggering further actions.\nFor example, writes to Initial Key and nonce Registers are ignored while the Ascon unit is busy.\nWrites to the Message and associated data Registers are not ignored but the data will be cleared if a WIPE operation is pending.",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.TRIGGER.START",
+            "name": "START",
+            "desc": "If CTRL_SHADOWED_AUX.manual_start_trigger = 1: Keep Ascon unit paused (0) or trigger the authenticated encryption/decryption of one data block (1).\nIf CTRL_SHADOWED_AUX.manual_start_trigger = 0: writes to this bit are ignored.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.TRIGGER.WIPE",
+            "name": "WIPE",
+            "desc": "Performs a secure wipe of sensitive data.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.STATUS",
+        "name": "STATUS",
+        "desc": "Status Register",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.STATUS.IDLE",
+            "name": "IDLE",
+            "desc": "The Ascon unit is idle (0) or busy (1).",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.STATUS.STALL",
+            "name": "STALL",
+            "desc": "The Ascon unit is not stalled (0) or stalled (1) because there is previous\noutput data that must be read by the processor before the Ascon unit can\noverwrite this data.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.STATUS.WAIT_EDN",
+            "name": "WAIT_EDN",
+            "desc": "The Ascon unit is waiting for new entropy.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.STATUS.ASCON_ERROR",
+            "name": "ASCON_ERROR",
+            "desc": "An error due to a misconfiguration has happened.\nThe user should read out the error register for more information",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.STATUS.ALERT_RECOV_CTRL_UPDATE_ERR",
+            "name": "ALERT_RECOV_CTRL_UPDATE_ERR",
+            "desc": "An update error has not occurred (0) or has occurred (1) in one of the shadowed Control\nRegisters. Ascon operation needs to be restarted by re-writing the Control Registers.",
+            "bits": "4",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.STATUS.ALERT_FATAL_FAULT",
+            "name": "ALERT_FATAL_FAULT",
+            "desc": "No fatal fault has occurred inside the Asconunit (0).\nA fatal fault has occurred and the Ascon unit needs to be reset (1).\nExamples for fatal faults include\ni) storage errors in the Control Register,\nii) if any internal FSM enters an invalid state,\niii) if any sparsely encoded signal takes on an invalid value,\niv) errors in the internal round counter,\nv) escalations triggered by the life cycle controller, and\nvi) fatal integrity failures on the TL-UL bus.",
+            "bits": "5",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.OUTPUT_VALID",
+        "name": "OUTPUT_VALID",
+        "desc": "Output Valid Register\nThis register specifies which output register contains valid data.\nIt also contains the status information whether the TAG comparison was valid or not.",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.OUTPUT_VALID.MSG_VALID",
+            "name": "MSG_VALID",
+            "desc": "Indicates if there is (1) or if there is not (0) valid data in the !!MSG_OUT register.\nIf !!OUTPUT_VALID.MSG_VALID and !!OUTPUT_VALID.TAG_VALID are both set, !!MSG_OUT should be read before !TAG_OUT.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.OUTPUT_VALID.TAG_VALID",
+            "name": "TAG_VALID",
+            "desc": "Indicates if there is (1) or if there is not (0) valid data in the !!TAG_OUT register.\nIf !!OUTPUT_VALID.MSG_VALID and !!OUTPUT_VALID.TAG_VALID are both set,\n!!MSG_OUT should be read before !TAG_OUT.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.OUTPUT_VALID.TAG_COMPARISON_VALID",
+            "name": "TAG_COMPARISON_VALID",
+            "desc": "Indicates if the tag could be successfully compared 2'b01, or not 2'b10\n2'b00 indicates that the tag hasn't been calculated, yet\n2'b11 is invalid.",
+            "bits": "3:2",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.FSM_STATE",
+        "name": "FSM_STATE",
+        "desc": "Main FSM State register.\nThese registers can be used for debugging the internal state of ASCON's FSM.\nThe read can be blocked with the FSM_STATE_REGREN register",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.FSM_STATE.MAIN_FSM",
+            "name": "MAIN_FSM",
+            "desc": "These fields are directly mapped to the ASCON's main state registers.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.FSM_STATE_REGREN",
+        "name": "FSM_STATE_REGREN",
+        "desc": "Lock bit for Auxiliary Control Register.",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.FSM_STATE_REGREN.None",
+            "name": null,
+            "desc": "FSM_STATE register configuration enable bit.\nIf this is cleared to 0, the FSM_STATE register returns all zeros on any read until the next reset.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "ascon.reg.ERROR",
+        "name": "ERROR",
+        "desc": "Error Register.\nError register for errors caused by user's misconfiguration.\nTo clear the error, a wipe must be triggered.",
+        "fields": [
+          {
+            "intent_id": "ascon.reg.ERROR.NO_KEY",
+            "name": "NO_KEY",
+            "desc": "No Key was provided",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.ERROR.NO_NONCE",
+            "name": "NO_NONCE",
+            "desc": "No Nonce was provided",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.ERROR.WRONG_ORDER",
+            "name": "WRONG_ORDER",
+            "desc": "The ordering of associated data and message was wrong.",
+            "bits": "2",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "ascon.reg.ERROR.FLAG_INPUT_MISSMATCH",
+            "name": "FLAG_INPUT_MISSMATCH",
+            "desc": "A flag for an empty input was set, but a non empty input was provided.",
+            "bits": "3",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "pre_dv/ascon_tb/rtl/ascon_sim.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nAscon simulation wrapper",
+      "params": []
+    },
+    "pre_dv/ascon_tb/rtl/ascon_tl_ul_stim.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nAscon simulation wrapper",
+      "params": []
+    },
+    "rtl/ascon.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nAscon top-level wrapper",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/ascon_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nAscon core implementation",
+      "params": []
+    }
+  }
+}

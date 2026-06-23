@@ -1,0 +1,306 @@
+{
+  "ip_name": "aon_timer",
+  "ip_intent": {
+    "ip_name": "aon_timer",
+    "one_line_desc": "Wakeup and watchdog timers running on a low-power, always-on clock",
+    "one_paragraph_desc": "Always-On (AON) Timer is the main timer hardware block of OpenTitan.\nIt includes two 32-bit up-counting timers, one of which functions as a wakeup timer and the other as a watchdog timer.\nThe watchdog timer has two thresholds: a 'bark' threshold that generates an interrupt and a 'bite' threshold that resets the system.\nThe wakeup timer has a 12-bit pre-scaler to enable very long timeouts and also generates an interrupt to the core.\nThe timers run on a ~200 kHz AON clock and have a maximum timeout window of roughly ~6 hours for the watchdog timer and ~1000 days with the use of the pre-scaler for the wakeup timer.",
+    "clocking": [
+      {
+        "clock": "clk_i",
+        "reset": "rst_ni",
+        "primary": true
+      },
+      {
+        "clock": "clk_aon_i",
+        "reset": "rst_aon_ni",
+        "primary": false
+      }
+    ],
+    "bus_interfaces": [
+      {
+        "protocol": "tlul",
+        "direction": "device"
+      }
+    ],
+    "param_list": [],
+    "interrupts": [
+      {
+        "intent_id": "aon_timer.interrupt.wkup_timer_expired",
+        "name": "wkup_timer_expired",
+        "desc": "Raised if the wakeup timer has hit the specified threshold."
+      },
+      {
+        "intent_id": "aon_timer.interrupt.wdog_timer_bark",
+        "name": "wdog_timer_bark",
+        "desc": "Raised if the watchdog timer has hit the bark threshold."
+      }
+    ],
+    "alerts": [
+      {
+        "intent_id": "aon_timer.alert.fatal_fault",
+        "name": "fatal_fault",
+        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected."
+      }
+    ],
+    "registers": [
+      {
+        "intent_id": "aon_timer.reg.WKUP_CTRL",
+        "name": "WKUP_CTRL",
+        "desc": "Wakeup Timer Control register.\nEach write to the register resets the internal prescaler count.",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WKUP_CTRL.enable",
+            "name": "enable",
+            "desc": "When set to 1, the wakeup timer will count",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "aon_timer.reg.WKUP_CTRL.prescaler",
+            "name": "prescaler",
+            "desc": "Pre-scaler value for wakeup timer count",
+            "bits": "12:1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WKUP_THOLD_HI",
+        "name": "WKUP_THOLD_HI",
+        "desc": "Wakeup Timer Threshold Register (bits 63 - 32)",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WKUP_THOLD_HI.threshold_hi",
+            "name": "threshold_hi",
+            "desc": "The count at which a wakeup interrupt should be generated, top 32 bits.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WKUP_THOLD_LO",
+        "name": "WKUP_THOLD_LO",
+        "desc": "Wakeup Timer Threshold Register (bits 31 - 0)",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WKUP_THOLD_LO.threshold_lo",
+            "name": "threshold_lo",
+            "desc": "The count at which a wakeup interrupt should be generated, bottom 32 bits.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WKUP_COUNT_HI",
+        "name": "WKUP_COUNT_HI",
+        "desc": "Wakeup Timer Count Register (bits 63 - 32)",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WKUP_COUNT_HI.count_hi",
+            "name": "count_hi",
+            "desc": "The current wakeup counter value, top 32 bits.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WKUP_COUNT_LO",
+        "name": "WKUP_COUNT_LO",
+        "desc": "Wakeup Timer Count Register (bits 31 - 0)",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WKUP_COUNT_LO.count_lo",
+            "name": "count_lo",
+            "desc": "The current wakeup counter value, bottom 32 bits.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WDOG_REGWEN",
+        "name": "WDOG_REGWEN",
+        "desc": "Watchdog Timer Write Enable Register",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WDOG_REGWEN.regwen",
+            "name": "regwen",
+            "desc": "Once cleared, the watchdog configuration will be locked until the next reset.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WDOG_CTRL",
+        "name": "WDOG_CTRL",
+        "desc": "Watchdog Timer Control register",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WDOG_CTRL.enable",
+            "name": "enable",
+            "desc": "When set to 1, the watchdog timer will count.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "aon_timer.reg.WDOG_CTRL.pause_in_sleep",
+            "name": "pause_in_sleep",
+            "desc": "When set to 1, the watchdog timer will not count during sleep.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WDOG_BARK_THOLD",
+        "name": "WDOG_BARK_THOLD",
+        "desc": "Watchdog Timer Bark Threshold Register",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WDOG_BARK_THOLD.threshold",
+            "name": "threshold",
+            "desc": "The count at which a watchdog bark interrupt should be generated.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WDOG_BITE_THOLD",
+        "name": "WDOG_BITE_THOLD",
+        "desc": "Watchdog Timer Bite Threshold Register",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WDOG_BITE_THOLD.threshold",
+            "name": "threshold",
+            "desc": "The count at which a watchdog bite reset should be generated.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WDOG_COUNT",
+        "name": "WDOG_COUNT",
+        "desc": "Watchdog Timer Count Register",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WDOG_COUNT.count",
+            "name": "count",
+            "desc": "The current watchdog counter value.",
+            "bits": "31:0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.INTR_STATE",
+        "name": "INTR_STATE",
+        "desc": "Interrupt State Register",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.INTR_STATE.wkup_timer_expired",
+            "name": "wkup_timer_expired",
+            "desc": "Raised if the wakeup timer has hit the specified threshold.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "aon_timer.reg.INTR_STATE.wdog_timer_bark",
+            "name": "wdog_timer_bark",
+            "desc": "Raised if the watchdog timer has hit the bark threshold.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.INTR_TEST",
+        "name": "INTR_TEST",
+        "desc": "Interrupt Test Register",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.INTR_TEST.wkup_timer_expired",
+            "name": "wkup_timer_expired",
+            "desc": "Write 1 to force wkup_timer_expired interrupt.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          },
+          {
+            "intent_id": "aon_timer.reg.INTR_TEST.wdog_timer_bark",
+            "name": "wdog_timer_bark",
+            "desc": "Write 1 to force wdog_timer_bark interrupt.",
+            "bits": "1",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      },
+      {
+        "intent_id": "aon_timer.reg.WKUP_CAUSE",
+        "name": "WKUP_CAUSE",
+        "desc": "Wakeup request status",
+        "fields": [
+          {
+            "intent_id": "aon_timer.reg.WKUP_CAUSE.cause",
+            "name": "cause",
+            "desc": "AON timer requested wakeup, write 0 to clear.",
+            "bits": "0",
+            "swaccess": null,
+            "hwaccess": null
+          }
+        ]
+      }
+    ]
+  },
+  "module_intents": {
+    "rtl/aon_timer.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0",
+      "params": [
+        {
+          "name": "AlertAsyncOn",
+          "default": "{NumAlerts{1'b1}}",
+          "desc": ""
+        },
+        {
+          "name": "AlertSkewCycles",
+          "default": "1",
+          "desc": ""
+        },
+        {
+          "name": "EnableRacl",
+          "default": "1'b0",
+          "desc": ""
+        },
+        {
+          "name": "RaclErrorRsp",
+          "default": "EnableRacl",
+          "desc": ""
+        }
+      ]
+    },
+    "rtl/aon_timer_core.sv": {
+      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nThe logical core of the AON (always on) timer IP block.",
+      "params": []
+    }
+  }
+}
