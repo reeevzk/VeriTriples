@@ -1,0 +1,515 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/sim_mem.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/sim_mem.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/riscv_types.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/riscv_types.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/riscv_types.sv(24): 'taiga_config' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/riscv_types.sv(285): package 'riscv_types' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/riscv_types.sv(24): 'taiga_config' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/riscv_types.sv(285): package 'riscv_types' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(24): 'taiga_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(25): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(26): 'csr_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(28): 'RETIRE_PORTS' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(29): 'MAX_IDS' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(90): 'XLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(90): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(91): 'XLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(91): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(92): 'XLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(92): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(103): 'XLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(103): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(104): 'XLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(104): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(129): 'XLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(129): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(130): 'XLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(130): range must be bounded by constant expressions
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(24): 'taiga_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(25): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(26): 'csr_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(28): 'RETIRE_PORTS' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(29): 'MAX_IDS' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(90): 'XLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(90): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(91): 'XLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(91): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(92): 'XLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(92): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(103): 'XLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(103): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(104): 'XLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(104): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(129): 'XLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(129): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(130): 'XLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_types.sv(130): range must be bounded by constant expressions
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(24): 'taiga_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(25): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(158): 'XLEN' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(158): 'ECODE_W' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(158): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(159): 'ECODE_W' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(159): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(165): 'ASIDLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(165): range must be bounded by constant expressions
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(170): package 'csr_types' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(24): 'taiga_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(25): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(158): 'XLEN' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(158): 'ECODE_W' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(158): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(159): 'ECODE_W' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(159): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(165): 'ASIDLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(165): range must be bounded by constant expressions
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/csr_types.sv(170): package 'csr_types' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/l2_arbiter/l2_config_and_types.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/l2_arbiter/l2_config_and_types.sv'
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/l2_arbiter/l2_config_and_types.sv(27): parameter 'L2_SUB_ID_W' declared inside package 'l2_config_and_types' shall be treated as localparam
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5_bram/taiga_config.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5_bram/taiga_config.sv'
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5_bram/taiga_config.sv(263): parameter 'C_M_AXI_ADDR_WIDTH' declared inside package 'taiga_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5_bram/taiga_config.sv(264): parameter 'C_M_AXI_DATA_WIDTH' declared inside package 'taiga_config' shall be treated as localparam
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/debug_module/debug_cfg_types.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/debug_module/debug_cfg_types.sv'
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/debug_module/debug_cfg_types.sv(3): parameter 'DTMCS_USER_REG' declared inside package 'debug_cfg_types' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/debug_module/debug_cfg_types.sv(4): parameter 'DMI_USER_REG' declared inside package 'debug_cfg_types' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/debug_module/debug_cfg_types.sv(5): parameter 'HARTSELLEN' declared inside package 'debug_cfg_types' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/debug_module/debug_cfg_types.sv(6): parameter 'NUM_CPUS' declared inside package 'debug_cfg_types' shall be treated as localparam
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv(33): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv(34): 'taiga_types' is not declared
+[WARN (VERI-9025)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv(36): Empty Port in Module Declaration
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv(341): module 'taiga_tb' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv(33): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv(34): 'taiga_types' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/test_benches/taiga_tb.sv(341): module 'taiga_tb' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_config.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_config.sv'
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_config.sv(263): parameter 'C_M_AXI_ADDR_WIDTH' declared inside package 'taiga_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_config.sv(264): parameter 'C_M_AXI_DATA_WIDTH' declared inside package 'taiga_config' shall be treated as localparam
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_config.sv(320): overwriting previous definition of package 'taiga_config'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5_bram/taiga_config.sv(320): previous definition of design element 'taiga_config' is here
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/one_hot_to_integer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/one_hot_to_integer.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/cycler.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/cycler.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/lutrams/lutram_1w_1r.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/lutrams/lutram_1w_1r.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/div_core.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/div_core.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/priority_encoder.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/priority_encoder.sv'
+[WARN (VERI-1756)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/priority_encoder.sv(39): elaboration system task error violates IEEE 1800 (2005) syntax
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/lfsr.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/lfsr.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tag_bank.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tag_bank.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/clz.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/clz.sv'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(36): 'gc_outputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(39): 'id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(44): 'id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(48): 'fetch_metadata_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(51): 'decode_packet_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(54): 'rs_addr_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(57): 'phys_addr_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(60): 'issue_packet_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(65): 'wb_packet_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(66): 'commit_packet_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(69): 'retire_packet_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(70): 'id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(71): 'id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(75): 'LOG2_MAX_IDS' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(75): range must be bounded by constant expressions
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(95): 'LOG2_MAX_IDS' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(96): 'LOG2_MAX_IDS' is not declared
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(36): 'gc_outputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(39): 'id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(44): 'id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(48): 'fetch_metadata_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(51): 'decode_packet_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(54): 'rs_addr_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(57): 'phys_addr_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(60): 'issue_packet_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(65): 'wb_packet_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(66): 'commit_packet_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(69): 'retire_packet_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(70): 'id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(71): 'id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(75): 'LOG2_MAX_IDS' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(75): range must be bounded by constant expressions
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(95): 'LOG2_MAX_IDS' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/instruction_metadata_and_id_management.sv(96): 'LOG2_MAX_IDS' is not declared
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(37): 'phys_addr_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(42): 'phys_addr_t' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(70): module 'register_bank' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(37): 'phys_addr_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(42): 'phys_addr_t' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_bank.sv(70): module 'register_bank' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(28): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(29): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(38): 'gc_outputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(40): 'ASIDLEN' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(40): range must be bounded by constant expressions
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(170): module 'tlb_lut_ram' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(28): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(29): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(38): 'gc_outputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(40): 'ASIDLEN' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(40): range must be bounded by constant expressions
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/tlb_lut_ram.sv(170): module 'tlb_lut_ram' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/icache.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/icache.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/icache.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/icache.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/icache.sv(311): module 'icache' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/icache.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/icache.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/icache.sv(311): module 'icache' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(36): 'gc_outputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(38): 'load_store_inputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(58): 'wb_packet_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(61): 'id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(146): 'LS_H_fn3' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(146): 'L_HU_fn3' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(147): 'LS_W_fn3' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(163): 'STORE_AMO_FAULT' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(163): 'LOAD_FAULT' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(166): 'STORE_AMO_ADDR_MISSALIGNED' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(166): 'LOAD_ADDR_MISSALIGNED' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(178): 'LOAD_ADDR_MISSALIGNED' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(178): 'LOAD_FAULT' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(200): 'LS_B_fn3' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(201): 'LS_H_fn3' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(410): 'LS_B_fn3' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(411): 'LS_H_fn3' is not declared
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(36): 'gc_outputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(38): 'load_store_inputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(58): 'wb_packet_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(61): 'id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(146): 'LS_H_fn3' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(146): 'L_HU_fn3' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(147): 'LS_W_fn3' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(163): 'STORE_AMO_FAULT' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(163): 'LOAD_FAULT' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(166): 'STORE_AMO_ADDR_MISSALIGNED' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(166): 'LOAD_ADDR_MISSALIGNED' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(178): 'LOAD_ADDR_MISSALIGNED' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(178): 'LOAD_FAULT' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(200): 'LS_B_fn3' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(201): 'LS_H_fn3' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(410): 'LS_B_fn3' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/load_store_unit.sv(411): 'LS_H_fn3' is not declared
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(38): 'gc_outputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(43): 'id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(47): 'fetch_metadata_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(277): 'INST_ACCESS_FAULT' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(285): 'JAL_T' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(285): 'JALR_T' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(285): 'BRANCH_T' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(302): module 'fetch' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(38): 'gc_outputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(43): 'id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(47): 'fetch_metadata_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(277): 'INST_ACCESS_FAULT' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(285): 'JAL_T' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(285): 'JALR_T' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(285): 'BRANCH_T' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/fetch.sv(302): module 'fetch' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(28): 'csr_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(125): 'MACHINE_PRIVILEGE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(126): 'SUPERVISOR_PRIVILEGE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(127): 'USER_PRIVILEGE' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(207): module 'mmu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(28): 'csr_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(125): 'MACHINE_PRIVILEGE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(126): 'SUPERVISOR_PRIVILEGE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(127): 'USER_PRIVILEGE' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/mmu.sv(207): module 'mmu' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(36): 'gc_outputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(43): 'issue_packet_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(47): 'retire_packet_t' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(217): module 'renamer' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(36): 'gc_outputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(43): 'issue_packet_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(47): 'retire_packet_t' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/renamer.sv(217): module 'renamer' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(28): 'csr_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(40): 'gc_inputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(57): 'retire_packet_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(58): 'id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(59): 'id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(69): 'gc_outputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(74): 'LOG2_MAX_IDS' is not declared
+[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(74): range must be bounded by constant expressions
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(302): module 'gc_unit' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(28): 'csr_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(40): 'gc_inputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(57): 'retire_packet_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(58): 'id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(59): 'id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(69): 'gc_outputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(74): 'LOG2_MAX_IDS' is not declared
+	[ERROR (VERI-1952)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(74): range must be bounded by constant expressions
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/gc_unit.sv(302): module 'gc_unit' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_fifo.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_fifo.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_fifo.sv(31): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_fifo.sv(32): 'taiga_types' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_fifo.sv(141): module 'taiga_fifo' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_fifo.sv(31): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_fifo.sv(32): 'taiga_types' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/taiga_fifo.sv(141): module 'taiga_fifo' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(36): 'gc_outputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(39): 'phys_addr_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(41): 'phys_addr_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(49): 'commit_packet_t' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(144): module 'register_file' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(36): 'gc_outputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(39): 'phys_addr_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(41): 'phys_addr_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(49): 'commit_packet_t' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_file.sv(144): module 'register_file' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(26): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(27): 'taiga_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(43): 'data_access_shared_inputs_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(46): 'amo_details_t' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(404): module 'dcache' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(26): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(27): 'taiga_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(43): 'data_access_shared_inputs_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(46): 'amo_details_t' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/dcache.sv(404): module 'dcache' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/intel -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/lutrams -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/core/xilinx -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/debug_module -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/l2_arbiter -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/local_memory -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5/test_benches/verilator -incdir /home/rk6650/VeriTriples/malik2627research/ip/cva5_bram /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_free_list.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_free_list.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_free_list.sv(31): 'riscv_types' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_free_list.sv(32): 'taiga_types' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_free_list.sv(94): module 'register_free_list' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_free_list.sv(31): 'riscv_types' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_free_list.sv(32): 'taiga_types' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/register_free_list.sv(94): module 'register_free_list' ignored due to previous errors
+1
+% 
+% 
+%             if {[catch {elaborate -top priority_encoder} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "priority_encoder".
+[INFO (HIER-8002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/priority_encoder.sv(62): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/esa-tu-darmstadt_TaPaFuzz/ip/cva5/core/priority_encoder.sv(28): compiling module 'priority_encoder'
+INFO (INL208): Elaboration synthesis summary:
+  Number of synthesized netlists          1 (0 packages)
+  Single run mode                         On
+  Pipeline                                On (1 pipelined netlists)
+  Late hierarchical reference connection  On
+  Number of analyzed Verilog modules      12 (1 synthesized)
+  Number of analyzed VHDL entities        0 (0 synthesized)
+INFO (INL003): Clearing all state information (assumes, stopats, and so forth).
+[<embedded>] %         
+[<embedded>] %         clock -infer
+WARNING (WCK018): The attempt to automatically extract the clock failed. Use:
+    "clock signalName" to declare a primary clock,
+    "clock -none" for a free-running clock environment,
+    "clock -analyze" to help set up the clock environment properly.
+[<embedded>] %         clock -list
+------------
+ No user-defined clocks : 
+------------
+Rated : 
+------------
+
+[<embedded>] %         reset -list
+[<embedded>] %         prove -all -time_limit 30s
+Ncustom1: Custom engine code is hT3Ng7hPPfiYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSl+CwjiTMAQA
+AMcustom2: Custom engine code is hT3Ng7hP/feYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSmmqwm7g9AQA
+
+==============================================================
+SUMMARY
+==============================================================
+           Properties Considered              : 0
+                 assertions                   : 0
+                  - proven                    : 0
+                  - bounded_proven (user)     : 0
+                  - bounded_proven (auto)     : 0
+                  - marked_proven             : 0
+                  - cex                       : 0
+                  - ar_cex                    : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+                 covers                       : 0
+                  - unreachable               : 0
+                  - bounded_unreachable (user): 0
+                  - covered                   : 0
+                  - ar_covered                : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+no_properties
+[<embedded>] %         report -all -out jasper_runs_6.24/esa-tu-darmstadt_TaPaFuzz/misc/results.rpt
+ERROR (ESW087): No such switch "-out".
+
+ERROR: problem encountered at line 47 in file /home/rk6650/VeriTriples/malik2627research/jasper_runs_6.24/esa-tu-darmstadt_TaPaFuzz/misc/run.tcl
+
+[<embedded>] % INFO (IPL005): Received request to exit from the console.
+INFO: Waiting for proof threads to stop...
+INFO: Proof threads stopped.
+INFO (IPL018): The peak resident set memory use for this session was 0.419 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 1.
+INFO (IPL016): Exiting the analysis session with status 1.

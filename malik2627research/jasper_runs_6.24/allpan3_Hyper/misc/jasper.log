@@ -1,0 +1,389 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/isa_pkg.v }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/isa_pkg.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(26): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(27): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(28): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(29): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(33): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(47): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(48): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(49): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(50): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(51): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(52): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(53): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(57): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(58): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(61): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(62): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(63): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(64): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(65): 'hpu_config' is not declared
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(26): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(27): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(28): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(29): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(33): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(47): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(48): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(49): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(50): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(51): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(52): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(53): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(57): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(58): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(61): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(62): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(63): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(64): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/hpu_pkg.v(65): 'hpu_config' is not declared
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v(12): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v(14): 'hpu_config' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v(23): 'hpu_config' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v(123): package 'tl_pkg' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v(12): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v(14): 'hpu_config' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v(23): 'hpu_config' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/include/tl_pkg.v(123): package 'tl_pkg' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/src/main/resources/vsrc/rocc_pkg.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/src/main/resources/vsrc/rocc_pkg.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v'
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(70): parameter 'HPUConfigBufferNumBanks' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(72): parameter 'HPUConfigBufferNumWords' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(78): parameter 'HPUConfigBufferWordWidth' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(88): parameter 'HPUConfigNumSimComputeLanes' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(90): parameter 'HPUConfigNumIntRegs' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(92): parameter 'HPUConfigIntRegWidth' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(95): parameter 'HPUConfigHVAggFIFODepth' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(97): parameter 'HPUConfigFuncQueueDepth' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(99): parameter 'HPUConfigDMQueueDepth' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(103): parameter 'HPUConfigLockIDRange' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(116): parameter 'HPUConfigXLEN' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(133): parameter 'HPUConfigInputDataWidth' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(134): parameter 'HPUConfigOutputDataWidth' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(138): parameter 'HPUConfigVABits' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(140): parameter 'HPUConfigPageOffsetBits' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(142): parameter 'HPUConfigVPNBits' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(144): parameter 'HPUConfigPPNBits' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(146): parameter 'HPUConfigPABits' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(153): parameter 'HPUConfigDMAMaxBytes' declared inside package 'hpu_config' shall be treated as localparam
+[WARN (VERI-2418)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/config/hpu_riscv_config_pkg.v(156): parameter 'HPUConfigSystemBusWidth' declared inside package 'hpu_config' shall be treated as localparam
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh'
+[WARN (VERI-1223)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(21): constant expression cannot contain a hierarchical identifier
+[WARN (VERI-1223)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(22): constant expression cannot contain a hierarchical identifier
+[WARN (VERI-1223)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(23): constant expression cannot contain a hierarchical identifier
+[WARN (VERI-1223)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(24): constant expression cannot contain a hierarchical identifier
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(25): 'hpu' is not declared
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(32): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/verif_common.vh'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/verif_common.vh(17): syntax error near 'always'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/verif_common.vh(17): SystemVerilog 2005 keyword always used in incorrect context
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(25): 'hpu' is not declared
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/verif_common.vh(17): syntax error near 'always'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/verif_common.vh(17): SystemVerilog 2005 keyword always used in incorrect context
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/verif_common.vh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/verif_common.vh'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(13): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(14): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(15): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(16): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(17): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(18): 'hpu' is not declared
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(50): cannot open include file 'inst_decode.vh'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(107): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(107): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(127): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(127): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(178): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(182): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(183): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(188): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(189): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(190): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(192): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(213): 'hpu' is not declared
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(13): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(14): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(15): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(16): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(17): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(18): 'hpu' is not declared
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(50): cannot open include file 'inst_decode.vh'
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(107): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(107): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(127): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(127): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(178): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(182): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(183): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(188): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(189): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(190): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(192): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/issue_stage_ctrl.v(213): 'hpu' is not declared
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/common_cells/clog2_nonneg.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/common_cells/clog2_nonneg.v'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/common_cells/clog2_nonneg.v(14): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/common_cells/clog2_nonneg.v(40): module 'clog2_nonneg' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/common_cells/clog2_nonneg.v(14): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/common_cells/clog2_nonneg.v(40): module 'clog2_nonneg' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/common_cells/fifo.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/common_cells/fifo.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed_pipelined.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed_pipelined.v'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed_pipelined.v(10): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed_pipelined.v(11): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed_pipelined.v(125): module 'popcount_signed_pipelined' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed_pipelined.v(10): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed_pipelined.v(11): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed_pipelined.v(125): module 'popcount_signed_pipelined' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed.v'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed.v(9): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed.v(10): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed.v(57): module 'popcount_signed' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed.v(9): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed.v(10): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/popcount_signed.v(57): module 'popcount_signed' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(8): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(9): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(10): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(11): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(12): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(27): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(35): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(37): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(60): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(68): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(82): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(85): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(98): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(114): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(149): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(149): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(150): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(150): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(151): 'hpu' is not declared
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(8): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(9): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(10): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(11): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(12): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(27): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(35): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(37): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(60): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(68): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(82): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(85): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(98): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(114): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(149): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(149): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(150): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(150): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/functional_pipeline/mem_stage_ctrl.v(151): 'hpu' is not declared
+1
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(28): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(28): 'hpu' is not declared
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(29): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(30): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(31): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(32): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(33): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(34): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(35): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(36): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(37): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(38): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(39): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(40): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(41): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(42): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(43): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(44): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(102): 'hpu' is not declared
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(28): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(28): 'hpu' is not declared
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(29): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(30): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(31): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(32): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(33): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(34): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(35): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(36): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(37): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(38): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(39): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(40): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(41): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(42): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(43): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(44): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/frontend/decoder.v(102): 'hpu' is not declared
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(9): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(53): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(117): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(122): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(129): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(130): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(157): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(160): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(162): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(27): 'mem_ctrl_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(28): 'mem_ctrl_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(29): 'mem_owner_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(33): 'lock_id_t' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(216): module 'banked_buffer' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(9): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(53): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(117): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(122): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(129): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(130): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(157): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(160): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(162): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(27): 'mem_ctrl_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(28): 'mem_ctrl_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(29): 'mem_owner_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(33): 'lock_id_t' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/banked_buffer.v(216): module 'banked_buffer' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src/main/resources/vsrc -incdir /home/rk6650/VeriTriples/malik2627research/verif -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/common_cells -incdir /home/rk6650/VeriTriples/malik2627research/verilog/config -incdir /home/rk6650/VeriTriples/malik2627research/verilog/data_movement -incdir /home/rk6650/VeriTriples/malik2627research/verilog/frontend -incdir /home/rk6650/VeriTriples/malik2627research/verilog/functional_pipeline -incdir /home/rk6650/VeriTriples/malik2627research/verilog/include -incdir /home/rk6650/VeriTriples/malik2627research/verilog/io -incdir /home/rk6650/VeriTriples/malik2627research/verilog/memory_subsystem -incdir /home/rk6650/VeriTriples/malik2627research/verilog/scr -incdir /home/rk6650/VeriTriples/malik2627research/verilog/tilelink /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(14): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(36): 'hpu' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(23): 'lock_id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(24): 'lock_id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(25): 'lock_pool_status_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(64): 'lock_id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(64): 'MAX_LOCK_ID' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(64): 'lock_id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(64): 'lock_id_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(86): 'lock_id_t' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(112): module 'lock_pool_banked' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(14): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(36): 'hpu' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(23): 'lock_id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(24): 'lock_id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(25): 'lock_pool_status_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(64): 'lock_id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(64): 'MAX_LOCK_ID' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(64): 'lock_id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(64): 'lock_id_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(86): 'lock_id_t' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verilog/memory_subsystem/lock_pool_banked.v(112): module 'lock_pool_banked' ignored due to previous errors
+1
+% 
+% 
+%             if {[catch {elaborate -top issue_stage_ctrl} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "issue_stage_ctrl".
+[WARN (VERI-1223)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(21): constant expression cannot contain a hierarchical identifier
+[WARN (VERI-1223)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(22): constant expression cannot contain a hierarchical identifier
+[WARN (VERI-1223)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(23): constant expression cannot contain a hierarchical identifier
+[WARN (VERI-1223)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/allpan3_Hyper/verif/hpu_common.vh(24): constant expression cannot contain a hierarchical identifier
+[ERROR (VERI-9029)] Module issue_stage_ctrl has not been analyzed yet
+[ERROR (VDB-9017)] Module issue_stage_ctrl could not be elaborated
+Summary of errors detected:
+	[ERROR (VERI-9029)] Module issue_stage_ctrl has not been analyzed yet
+	[ERROR (VDB-9017)] Module issue_stage_ctrl could not be elaborated
+ELAB ERROR: ERROR (ENL034): 2 errors detected in the design file(s).
+
+% INFO (IPL005): Received request to exit from the console.
+INFO (IPL018): The peak resident set memory use for this session was 0.418 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 0.
+INFO (IPL016): Exiting the analysis session with status 0.

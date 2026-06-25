@@ -36,6 +36,65 @@ def classify_requirement(text):
 
     return tags
 
+def load_module_dataset(dataset_path):
+    with open(dataset_path) as f:
+        return json.load(f)
+
+
+def extract_interrupt_requirements(ip_intent):
+
+    reqs = []
+
+    for intr in ip_intent.get(
+        "interrupts",
+        []
+    ):
+
+        reqs.append({
+
+            "req_id":
+                f"interrupt:{intr['name']}",
+
+            "origin":
+                "interrupt",
+
+            "name":
+                intr["name"],
+
+            "text":
+                intr["desc"]
+        })
+
+    return reqs
+
+def get_module_assertions(module):
+
+    return module.get(
+        "assertions",
+        []
+    )
+
+def analyze_module_assertions(module):
+
+    results = []
+
+    for assertion in module.get(
+        "assertions",
+        []
+    ):
+
+        results.append({
+
+            "assertion":
+                assertion,
+
+            "features":
+                extract_assertion_features(
+                    assertion
+                )
+        })
+
+    return results
 
 def extract_requirements(ip_intent):
 
@@ -72,6 +131,32 @@ def extract_requirements(ip_intent):
             "tags": classify_requirement(
                 reg["desc"]
             )
+        })
+
+    return reqs
+
+def extract_interrupt_requirements(ip_intent):
+
+    reqs = []
+
+    for intr in ip_intent.get(
+        "interrupts",
+        []
+    ):
+
+        reqs.append({
+
+            "req_id":
+                f"interrupt:{intr['name']}",
+
+            "origin":
+                "interrupt",
+
+            "name":
+                intr["name"],
+
+            "text":
+                intr["desc"]
         })
 
     return reqs
@@ -318,26 +403,32 @@ def compute_requirement_coverage(
 
 def main():
 
-    docs = load_intent_files(
-        "intent"
+    modules = load_module_dataset(
+        "opentitan_dataset.json"
     )
 
-    results = []
+    for module in modules:
 
-    for doc in docs:
+        module_name = module[
+            "module_name"
+        ]
 
         requirements = (
             extract_all_requirements(
-                doc["ip_intent"]
+                module["ip_intent"]
             )
         )
 
-        # assertions loaded later
+        assertion_data = (
+            analyze_module_assertions(
+                module
+            )
+        )
 
         links = (
             link_requirements_to_assertions(
                 requirements,
-                assertions
+                assertion_data
             )
         )
 
@@ -348,13 +439,10 @@ def main():
             )
         )
 
-        results.append({
+        print(
+            module_name,
+            coverage
+        )
 
-            "ip":
-                doc["ip_name"],
-
-            "coverage":
-                coverage
-        })
-
-    save_results(results)
+if __name__ == "__main__":
+    main()

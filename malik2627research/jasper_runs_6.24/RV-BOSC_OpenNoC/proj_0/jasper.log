@@ -1,0 +1,359 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(22): cannot open include file 'chie_defines.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(23): cannot open include file 'hnf_defines.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(24): cannot open include file 'hnf_param.v'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(116): use of undefined macro 'CHIE_REQ_FLIT_RANGE'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(119): use of undefined macro 'CHIE_RSP_FLIT_RANGE'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(122): use of undefined macro 'CHIE_DAT_FLIT_RANGE'
+[ERROR (VERI-1897)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(134): dynamic range is not allowed in net declaration
+[ERROR (VERI-1897)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(137): dynamic range is not allowed in net declaration
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(140): use of undefined macro 'HNF_SNP_FLIT_RANGE'
+[ERROR (VERI-1897)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(140): dynamic range is not allowed in net declaration
+[ERROR (VERI-1897)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(143): dynamic range is not allowed in net declaration
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(150): use of undefined macro 'CHIE_REQ_FLIT_ADDR_WIDTH'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(151): use of undefined macro 'CHIE_DAT_FLIT_WIDTH'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(151): syntax error near '*'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(153): use of undefined macro 'LOC_INDEX_WIDTH'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(154): use of undefined macro 'LOC_WAY_NUM'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(155): use of undefined macro 'CACHE_LINE_WIDTH'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(162): use of undefined macro 'LOC_CLINE_WIDTH'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(164): use of undefined macro 'SF_INDEX_WIDTH'
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(22): cannot open include file 'chie_defines.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(23): cannot open include file 'hnf_defines.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(24): cannot open include file 'hnf_param.v'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(116): use of undefined macro 'CHIE_REQ_FLIT_RANGE'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(119): use of undefined macro 'CHIE_RSP_FLIT_RANGE'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(122): use of undefined macro 'CHIE_DAT_FLIT_RANGE'
+	[ERROR (VERI-1897)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(134): dynamic range is not allowed in net declaration
+	[ERROR (VERI-1897)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(137): dynamic range is not allowed in net declaration
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(140): use of undefined macro 'HNF_SNP_FLIT_RANGE'
+	[ERROR (VERI-1897)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(140): dynamic range is not allowed in net declaration
+	[ERROR (VERI-1897)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(143): dynamic range is not allowed in net declaration
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(150): use of undefined macro 'CHIE_REQ_FLIT_ADDR_WIDTH'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(151): use of undefined macro 'CHIE_DAT_FLIT_WIDTH'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(151): syntax error near '*'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(153): use of undefined macro 'LOC_INDEX_WIDTH'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(154): use of undefined macro 'LOC_WAY_NUM'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(155): use of undefined macro 'CACHE_LINE_WIDTH'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(162): use of undefined macro 'LOC_CLINE_WIDTH'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_hnf.sv(164): use of undefined macro 'SF_INDEX_WIDTH'
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(17): cannot open include file 'rni_param.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(18): cannot open include file 'rni_defines.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(19): cannot open include file 'axi4_defines.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(20): cannot open include file 'chie_defines.v'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(97): use of undefined macro 'CHIE_REQ_FLIT_RANGE'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(98): use of undefined macro 'CHIE_RSP_FLIT_RANGE'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(99): use of undefined macro 'CHIE_DAT_FLIT_RANGE'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(109): use of undefined macro 'CHIE_REQ_FLIT_TXNID_WIDTH'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(309): use of undefined macro 'CHIE_DAT_FLIT_OPCODE_RANGE'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(309): syntax error near ']'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(309): use of undefined macro 'CHIE_DATLCRDRETURN'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(309): syntax error near ')'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(313): use of undefined macro 'CHIE_RSP_FLIT_OPCODE_RANGE'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(313): syntax error near ']'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(313): use of undefined macro 'CHIE_RSPLCRDRETURN'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(313): syntax error near ')'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(317): use of undefined macro 'CHIE_REQ_FLIT_OPCODE_RANGE'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(317): syntax error near ']'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(317): use of undefined macro 'CHIE_REQLCRDRETURN'
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(17): cannot open include file 'rni_param.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(18): cannot open include file 'rni_defines.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(19): cannot open include file 'axi4_defines.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(20): cannot open include file 'chie_defines.v'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(97): use of undefined macro 'CHIE_REQ_FLIT_RANGE'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(98): use of undefined macro 'CHIE_RSP_FLIT_RANGE'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(99): use of undefined macro 'CHIE_DAT_FLIT_RANGE'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(109): use of undefined macro 'CHIE_REQ_FLIT_TXNID_WIDTH'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(309): use of undefined macro 'CHIE_DAT_FLIT_OPCODE_RANGE'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(309): syntax error near ']'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(309): use of undefined macro 'CHIE_DATLCRDRETURN'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(309): syntax error near ')'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(313): use of undefined macro 'CHIE_RSP_FLIT_OPCODE_RANGE'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(313): syntax error near ']'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(313): use of undefined macro 'CHIE_RSPLCRDRETURN'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(313): syntax error near ')'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(317): use of undefined macro 'CHIE_REQ_FLIT_OPCODE_RANGE'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(317): syntax error near ']'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/tb/tb_rni.sv(317): use of undefined macro 'CHIE_REQLCRDRETURN'
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(20): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(21): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(22): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(23): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(24): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(29): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(408): module 'chi_ring_node' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(20): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(21): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(22): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(23): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(24): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(29): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/ring_generator/chi_ring_node.sv(408): module 'chi_ring_node' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(18): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(19): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(20): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(21): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(22): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(502): module 'chi_xp_node' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(18): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(19): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(20): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(21): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(22): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/tools/mesh_generator/chi_xp_node.sv(502): module 'chi_xp_node' ignored due to previous errors
+1
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v(17): cannot open include file 'chie_defines.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v(18): cannot open include file 'hnf_defines.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v(19): cannot open include file 'hnf_param.v'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v(74): module 'hnf_sram_mask' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v(17): cannot open include file 'chie_defines.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v(18): cannot open include file 'hnf_defines.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v(19): cannot open include file 'hnf_param.v'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/hnf/hnf_sram_mask.v(74): module 'hnf_sram_mask' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/poll_function.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/poll_function.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/sync_fifo.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/sync_fifo.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/chi_ring_channel.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/chi_ring_channel.v'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/chi_ring_channel.v(22): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/chi_ring_channel.v(661): module 'chi_ring_channel' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/chi_ring_channel.v(22): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/chi_ring_channel.v(661): module 'chi_ring_channel' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/assert_checker.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/assert_checker.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(17): cannot open include file 'rni_param.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(18): cannot open include file 'rni_defines.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(19): cannot open include file 'axi4_defines.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(20): cannot open include file 'chie_defines.v'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(131): module 'rni_bcount_ctl' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(17): cannot open include file 'rni_param.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(18): cannot open include file 'rni_defines.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(19): cannot open include file 'axi4_defines.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(20): cannot open include file 'chie_defines.v'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_bcount_ctl.v(131): module 'rni_bcount_ctl' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(17): cannot open include file 'rni_defines.v'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(52): use of undefined macro 'LL_STATE_WIDTH'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(85): use of undefined macro 'LL_STOP'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(85): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(86): syntax error near ')'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(86): use of undefined macro 'LL_ACTIVATE'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(89): use of undefined macro 'LL_RUN'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(90): use of undefined macro 'LL_DEACTIVATE'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(90): syntax error near ')'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(119): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(120): syntax error near ')'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(124): syntax error near ')'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(142): syntax error near ')'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(144): module 'rni_link_handshake' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(17): cannot open include file 'rni_defines.v'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(52): use of undefined macro 'LL_STATE_WIDTH'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(85): use of undefined macro 'LL_STOP'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(85): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(86): syntax error near ')'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(86): use of undefined macro 'LL_ACTIVATE'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(89): use of undefined macro 'LL_RUN'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(90): use of undefined macro 'LL_DEACTIVATE'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(90): syntax error near ')'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(119): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(120): syntax error near ')'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(124): syntax error near ')'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(142): syntax error near ')'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_link_handshake.v(144): module 'rni_link_handshake' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(17): cannot open include file 'hnf_defines.v'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(103): use of undefined macro 'CACHE_BLOCK_OFFSET'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(103): syntax error near ']'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(151): syntax error near ']'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(151): syntax error near ']'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(152): syntax error near '='
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(155): syntax error near '='
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(158): syntax error near 'end'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(158): SystemVerilog 2005 keyword end used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(166): syntax error near 'end'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(166): SystemVerilog 2005 keyword end used in incorrect context
+[WARN (VERI-2365)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(161): generate block is allowed only inside loop and conditional generate in SystemVerilog mode
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(168): module 'hnf_biq' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(17): cannot open include file 'hnf_defines.v'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(103): use of undefined macro 'CACHE_BLOCK_OFFSET'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(103): syntax error near ']'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(151): syntax error near ']'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(151): syntax error near ']'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(152): syntax error near '='
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(155): syntax error near '='
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(158): syntax error near 'end'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(158): SystemVerilog 2005 keyword end used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(166): syntax error near 'end'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(166): SystemVerilog 2005 keyword end used in incorrect context
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/hnf_biq.v(168): module 'hnf_biq' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/xp_sel_bit_from_vec.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/xp_sel_bit_from_vec.v'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/xp_sel_bit_from_vec.v(19): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/xp_sel_bit_from_vec.v(86): module 'xp_sel_bit_from_vec' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/xp_sel_bit_from_vec.v(19): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/xp_sel_bit_from_vec.v(86): module 'xp_sel_bit_from_vec' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/chi_xp_channel.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/chi_xp_channel.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_lcrd_hdlr.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_lcrd_hdlr.v'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/misc -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/hnf -incdir /home/rk6650/VeriTriples/malik2627research/rtl/src/rni -incdir /home/rk6650/VeriTriples/malik2627research/rtl/tb -incdir /home/rk6650/VeriTriples/malik2627research/tools/mesh_generator -incdir /home/rk6650/VeriTriples/malik2627research/tools/ring_generator /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/assert_checker.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/assert_checker.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/assert_checker.sv(74): overwriting previous definition of module 'assert_checker'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/misc/assert_checker.sv(74): previous definition of design element 'assert_checker' is here
+0
+% 
+% 
+%             if {[catch {elaborate -top rni_lcrd_hdlr} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "rni_lcrd_hdlr".
+[INFO (HIER-8002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_lcrd_hdlr.v(138): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/RV-BOSC_OpenNoC/rtl/src/rni/rni_lcrd_hdlr.v(17): compiling module 'rni_lcrd_hdlr'
+INFO (INL208): Elaboration synthesis summary:
+  Number of synthesized netlists          1 (0 packages)
+  Single run mode                         On
+  Pipeline                                On (1 pipelined netlists)
+  Late hierarchical reference connection  On
+  Number of analyzed Verilog modules      5 (1 synthesized)
+  Number of analyzed VHDL entities        0 (0 synthesized)
+INFO (INL003): Clearing all state information (assumes, stopats, and so forth).
+[<embedded>] %         
+[<embedded>] %         clock -infer
+INFO (ICK007): The tool has inferred "clk" as a primary clock.
+WARNING (WCK024): All inferred clocks were declared with both factor and phase equal to 1.
+clk
+[<embedded>] %         clock -list
+User-defined clocks:
+------------
+0:	clk clk 1 1
+------------
+Rated : 
+------------
+
+clk
+[<embedded>] %         reset -list
+[<embedded>] %         prove -all -time_limit 30s
+Ncustom1: Custom engine code is hT3Ng7hPPfiYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSl+CwjiTMAQA
+AMcustom2: Custom engine code is hT3Ng7hP/feYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSmmqwm7g9AQA
+
+==============================================================
+SUMMARY
+==============================================================
+           Properties Considered              : 0
+                 assertions                   : 0
+                  - proven                    : 0
+                  - bounded_proven (user)     : 0
+                  - bounded_proven (auto)     : 0
+                  - marked_proven             : 0
+                  - cex                       : 0
+                  - ar_cex                    : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+                 covers                       : 0
+                  - unreachable               : 0
+                  - bounded_unreachable (user): 0
+                  - covered                   : 0
+                  - ar_covered                : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+no_properties
+[<embedded>] %         report -all -out jasper_runs_6.24/RV-BOSC_OpenNoC/proj_0/results.rpt
+ERROR (ESW087): No such switch "-out".
+
+ERROR: problem encountered at line 32 in file /home/rk6650/VeriTriples/malik2627research/jasper_runs_6.24/RV-BOSC_OpenNoC/proj_0/run.tcl
+
+[<embedded>] % INFO (IPL005): Received request to exit from the console.
+INFO: Waiting for proof threads to stop...
+INFO: Proof threads stopped.
+INFO (IPL018): The peak resident set memory use for this session was 0.414 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 1.
+INFO (IPL016): Exiting the analysis session with status 1.

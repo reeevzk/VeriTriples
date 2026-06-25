@@ -1,0 +1,407 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/include/riscv_uop_pkg.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/include/riscv_uop_pkg.sv'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/bpu.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/bpu.v'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/bpu.v(33): use of undefined macro 'N'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/bpu.v(128): module 'bpu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/bpu.v(33): use of undefined macro 'N'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/bpu.v(128): module 'bpu' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/parameters.vh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/parameters.vh'
+[WARN (VERI-1295)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/parameters.vh(132): macro 'RESERVED_10' redefined
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(18): cannot open include file 'rtl/parameters.vh'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(19): cannot open include file 'rtl/alu.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(20): cannot open include file 'rtl/branch_decision.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(21): cannot open include file 'rtl/forwarding_unit.v'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(92): 'o_pc' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(102): 'o_pc' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(172): module 'Execute' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(18): cannot open include file 'rtl/parameters.vh'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(19): cannot open include file 'rtl/alu.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(20): cannot open include file 'rtl/branch_decision.v'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(21): cannot open include file 'rtl/forwarding_unit.v'
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(92): 'o_pc' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(102): 'o_pc' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Execute.v(172): module 'Execute' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(8): net type must be explicitly specified for 'i_alu_valid' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(10): net type must be explicitly specified for 'i_alu_result' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(13): net type must be explicitly specified for 'i_lsu_valid' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(15): net type must be explicitly specified for 'i_lsu_load_data' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(18): net type must be explicitly specified for 'i_flush' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(21): net type must be explicitly specified for 'i_stall' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(83): module 'retire' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(8): net type must be explicitly specified for 'i_alu_valid' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(10): net type must be explicitly specified for 'i_alu_result' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(13): net type must be explicitly specified for 'i_lsu_valid' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(15): net type must be explicitly specified for 'i_lsu_load_data' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(18): net type must be explicitly specified for 'i_flush' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(21): net type must be explicitly specified for 'i_stall' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/retire.sv(83): module 'retire' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/branch_jump_decision.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/branch_jump_decision.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/branch_jump_decision.v(25): cannot open include file 'rtl/parameters.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/branch_jump_decision.v(119): module 'branch_jump_decision' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/branch_jump_decision.v(25): cannot open include file 'rtl/parameters.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/branch_jump_decision.v(119): module 'branch_jump_decision' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(11): net type must be explicitly specified for 'i_stall' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(12): net type must be explicitly specified for 'i_flush' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(74): module 'alu_stage' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(11): net type must be explicitly specified for 'i_stall' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(12): net type must be explicitly specified for 'i_flush' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu_stage.sv(74): module 'alu_stage' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(8): net type must be explicitly specified for 'i_if_valid' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(9): net type must be explicitly specified for 'i_if_pc' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(10): net type must be explicitly specified for 'i_if_instr' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(13): net type must be explicitly specified for 'i_stall' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(14): net type must be explicitly specified for 'i_flush' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(297): module 'decode_stage' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(8): net type must be explicitly specified for 'i_if_valid' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(9): net type must be explicitly specified for 'i_if_pc' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(10): net type must be explicitly specified for 'i_if_instr' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(13): net type must be explicitly specified for 'i_stall' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(14): net type must be explicitly specified for 'i_flush' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/decode.sv(297): module 'decode_stage' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(7): net type must be explicitly specified for 'i_dec_valid' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(9): net type must be explicitly specified for 'i_dec_pc' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(11): net type must be explicitly specified for 'i_stall' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(12): net type must be explicitly specified for 'i_flush' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(14): net type must be explicitly specified for 'i_wb_en' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(15): net type must be explicitly specified for 'i_wb_rd' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(16): net type must be explicitly specified for 'i_wb_data' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(18): net type must be explicitly specified for 'i_alu_fwd_writes_rd' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(19): net type must be explicitly specified for 'i_alu_fwd_rd' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(20): net type must be explicitly specified for 'i_alu_fwd_data' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(22): net type must be explicitly specified for 'i_retire_fwd_writes_rd' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(23): net type must be explicitly specified for 'i_retire_fwd_rd' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(24): net type must be explicitly specified for 'i_retire_fwd_data' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(26): net type must be explicitly specified for 'i_lsu_fwd_data_valid' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(27): net type must be explicitly specified for 'i_lsu_fwd_rd' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(28): net type must be explicitly specified for 'i_lsu_fwd_data' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(274): module 'issue_stage' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(7): net type must be explicitly specified for 'i_dec_valid' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(9): net type must be explicitly specified for 'i_dec_pc' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(11): net type must be explicitly specified for 'i_stall' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(12): net type must be explicitly specified for 'i_flush' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(14): net type must be explicitly specified for 'i_wb_en' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(15): net type must be explicitly specified for 'i_wb_rd' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(16): net type must be explicitly specified for 'i_wb_data' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(18): net type must be explicitly specified for 'i_alu_fwd_writes_rd' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(19): net type must be explicitly specified for 'i_alu_fwd_rd' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(20): net type must be explicitly specified for 'i_alu_fwd_data' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(22): net type must be explicitly specified for 'i_retire_fwd_writes_rd' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(23): net type must be explicitly specified for 'i_retire_fwd_rd' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(24): net type must be explicitly specified for 'i_retire_fwd_data' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(26): net type must be explicitly specified for 'i_lsu_fwd_data_valid' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(27): net type must be explicitly specified for 'i_lsu_fwd_rd' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(28): net type must be explicitly specified for 'i_lsu_fwd_data' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/issue.sv(274): module 'issue_stage' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/reg_file.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/reg_file.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/reg_file.v(25): cannot open include file 'rtl/parameters.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/reg_file.v(155): module 'reg_file' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/reg_file.v(25): cannot open include file 'rtl/parameters.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/reg_file.v(155): module 'reg_file' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/control_unit.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/control_unit.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/control_unit.v(25): cannot open include file 'rtl/parameters.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/control_unit.v(106): module 'control_unit' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/control_unit.v(25): cannot open include file 'rtl/parameters.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/control_unit.v(106): module 'control_unit' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(2): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(3): net type must be explicitly specified for 'reset' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(4): net type must be explicitly specified for 'stall' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(5): net type must be explicitly specified for 'flush' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(6): net type must be explicitly specified for 'pc_in' when default_nettype is none
+[ERROR (VERI-1419)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(11): illegal operand for operator ||
+[ERROR (VERI-1419)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(14): illegal operand for operator !
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(20): module 'if_stage' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(2): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(3): net type must be explicitly specified for 'reset' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(4): net type must be explicitly specified for 'stall' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(5): net type must be explicitly specified for 'flush' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(6): net type must be explicitly specified for 'pc_in' when default_nettype is none
+	[ERROR (VERI-1419)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(11): illegal operand for operator ||
+	[ERROR (VERI-1419)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(14): illegal operand for operator !
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/ex_if.v(20): module 'if_stage' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(2): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(3): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(4): net type must be explicitly specified for 'i_re' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(5): net type must be explicitly specified for 'i_wr' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(6): net type must be explicitly specified for 'i_rs1' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(7): net type must be explicitly specified for 'i_rs2' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(8): net type must be explicitly specified for 'i_rd' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(9): net type must be explicitly specified for 'i_write_data' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(39): module 'ARF' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(2): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(3): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(4): net type must be explicitly specified for 'i_re' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(5): net type must be explicitly specified for 'i_wr' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(6): net type must be explicitly specified for 'i_rs1' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(7): net type must be explicitly specified for 'i_rs2' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(8): net type must be explicitly specified for 'i_rd' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(9): net type must be explicitly specified for 'i_write_data' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ARF.sv(39): module 'ARF' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/forwarding_unit.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/forwarding_unit.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/forwarding_unit.v(3): cannot open include file 'rtl/parameters.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/forwarding_unit.v(109): module 'forwarding_unit' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/forwarding_unit.v(3): cannot open include file 'rtl/parameters.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/forwarding_unit.v(109): module 'forwarding_unit' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv(4): net type must be explicitly specified for 'i_op1' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv(5): net type must be explicitly specified for 'i_op2' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv(6): net type must be explicitly specified for 'i_alu_op' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv(37): module 'alu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv(4): net type must be explicitly specified for 'i_op1' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv(5): net type must be explicitly specified for 'i_op2' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv(6): net type must be explicitly specified for 'i_alu_op' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/alu.sv(37): module 'alu' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Fetch.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Fetch.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Decode.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Decode.v'
+[ERROR (VERI-1100)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Decode.v(153): procedural assignment to a non-register 'o_boj_pc' is not permitted
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Decode.v(194): module 'Decode' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1100)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Decode.v(153): procedural assignment to a non-register 'o_boj_pc' is not permitted
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/Decode.v(194): module 'Decode' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/IF.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/IF.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/IF.v(25): cannot open include file 'rtl/parameters.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/IF.v(110): module 'IF' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/IF.v(25): cannot open include file 'rtl/parameters.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/IF.v(110): module 'IF' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/lsu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/lsu.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/lsu.sv(2): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/lsu.sv(3): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/lsu.sv(170): module 'lsu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/lsu.sv(2): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/lsu.sv(3): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/lsu.sv(170): module 'lsu' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(6): net type must be explicitly specified for 'i_stall' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(7): net type must be explicitly specified for 'i_flush' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(8): net type must be explicitly specified for 'i_redirect_pc' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(113): module 'if_stage' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(6): net type must be explicitly specified for 'i_stall' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(7): net type must be explicitly specified for 'i_flush' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(8): net type must be explicitly specified for 'i_redirect_pc' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(113): module 'if_stage' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/imm_gen.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/imm_gen.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/imm_gen.v(25): cannot open include file 'rtl/parameters.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/imm_gen.v(90): module 'imm_gen' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/imm_gen.v(25): cannot open include file 'rtl/parameters.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/imm_gen.v(90): module 'imm_gen' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(34): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(35): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(37): net type must be explicitly specified for 'i_is_branch_pred' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(38): net type must be explicitly specified for 'i_branch_pc_pred' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(39): net type must be explicitly specified for 'i_offset_pc_pred' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(43): net type must be explicitly specified for 'i_branch_pc_update' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(44): net type must be explicitly specified for 'i_taken_update' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(45): net type must be explicitly specified for 'i_update_valid' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(46): net type must be explicitly specified for 'i_update_target_pc' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(148): module 'bpu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(34): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(35): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(37): net type must be explicitly specified for 'i_is_branch_pred' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(38): net type must be explicitly specified for 'i_branch_pc_pred' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(39): net type must be explicitly specified for 'i_offset_pc_pred' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(43): net type must be explicitly specified for 'i_branch_pc_update' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(44): net type must be explicitly specified for 'i_taken_update' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(45): net type must be explicitly specified for 'i_update_valid' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(46): net type must be explicitly specified for 'i_update_target_pc' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(148): module 'bpu' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/alu.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/alu.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/alu.v(25): cannot open include file 'rtl/parameters.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/alu.v(73): module 'alu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/alu.v(25): cannot open include file 'rtl/parameters.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/legacy/alu.v(73): module 'alu' ignored due to previous errors
+1
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(6): net type must be explicitly specified for 'i_stall' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(7): net type must be explicitly specified for 'i_flush' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(8): net type must be explicitly specified for 'i_redirect_pc' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(113): module 'if_stage' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(4): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(5): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(6): net type must be explicitly specified for 'i_stall' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(7): net type must be explicitly specified for 'i_flush' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(8): net type must be explicitly specified for 'i_redirect_pc' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/ifetch.sv(113): module 'if_stage' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/include -incdir /home/rk6650/VeriTriples/malik2627research/rtl/interfaces -incdir /home/rk6650/VeriTriples/malik2627research/rtl/legacy -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pipeline -incdir /home/rk6650/VeriTriples/malik2627research/test_bench/legacy/Fetch /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(34): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(35): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(37): net type must be explicitly specified for 'i_is_branch_pred' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(38): net type must be explicitly specified for 'i_branch_pc_pred' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(39): net type must be explicitly specified for 'i_offset_pc_pred' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(43): net type must be explicitly specified for 'i_branch_pc_update' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(44): net type must be explicitly specified for 'i_taken_update' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(45): net type must be explicitly specified for 'i_update_valid' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(46): net type must be explicitly specified for 'i_update_target_pc' when default_nettype is none
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(148): module 'bpu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(34): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(35): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(37): net type must be explicitly specified for 'i_is_branch_pred' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(38): net type must be explicitly specified for 'i_branch_pc_pred' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(39): net type must be explicitly specified for 'i_offset_pc_pred' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(43): net type must be explicitly specified for 'i_branch_pc_update' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(44): net type must be explicitly specified for 'i_taken_update' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(45): net type must be explicitly specified for 'i_update_valid' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(46): net type must be explicitly specified for 'i_update_target_pc' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/SudeepJoshi22_DHRUT-V/rtl/pipeline/bpu.sv(148): module 'bpu' ignored due to previous errors
+1
+% 
+% 
+%             if {[catch {elaborate -top lsu} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "lsu".
+[ERROR (VERI-9029)] Module lsu has not been analyzed yet
+[ERROR (VDB-9017)] Module lsu could not be elaborated
+Summary of errors detected:
+	[ERROR (VERI-9029)] Module lsu has not been analyzed yet
+	[ERROR (VDB-9017)] Module lsu could not be elaborated
+ELAB ERROR: ERROR (ENL034): 2 errors detected in the design file(s).
+
+% INFO (IPL005): Received request to exit from the console.
+INFO (IPL018): The peak resident set memory use for this session was 0.415 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 0.
+INFO (IPL016): Exiting the analysis session with status 0.

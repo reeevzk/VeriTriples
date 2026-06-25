@@ -1,0 +1,321 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(6): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(23): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(28): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(76): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(84): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(93): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(101): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(110): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(120): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(129): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(140): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(148): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(157): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(163): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(164): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(165): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(166): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(167): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(168): 'lx32_branch_pkg' is not declared
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(6): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(23): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(28): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(76): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(84): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(93): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(101): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(110): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(120): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(129): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(140): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(148): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(157): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(163): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(164): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(165): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(166): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(167): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/control_unit.sv(168): 'lx32_branch_pkg' is not declared
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv(14): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv(15): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv(44): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv(49): module 'control_unit_sva' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv(14): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv(15): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv(44): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/control_unit_sva.sv(49): module 'control_unit_sva' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/register_file.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/register_file.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/interrupt_controller.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/interrupt_controller.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/usb_hid_bridge.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/usb_hid_bridge.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/pipeline_hazard_sva.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/pipeline_hazard_sva.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/dma_controller_sva.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/dma_controller_sva.sv'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/dma_controller_sva.sv(12): cannot open include file 'dma_controller.sv'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/dma_controller_sva.sv(170): module 'dma_controller_sva' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/dma_controller_sva.sv(12): cannot open include file 'dma_controller.sv'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/dma_controller_sva.sv(170): module 'dma_controller_sva' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(62): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(63): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(64): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(65): 'lx32_mmio_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(252): 'opcode_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(443): 'SENSOR_CTRL_BASE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(444): 'SENSOR_CTRL_END' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(445): 'DMA_CTRL_BASE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(446): 'DMA_CTRL_END' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(447): 'RT_CTRL_BASE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(448): 'RT_CTRL_END' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(449): 'GPIO_BASE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(450): 'GPIO_END' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(451): 'INTC_BASE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(452): 'INTC_END' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(496): module 'lx32_system' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(62): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(63): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(64): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(65): 'lx32_mmio_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(252): 'opcode_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(443): 'SENSOR_CTRL_BASE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(444): 'SENSOR_CTRL_END' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(445): 'DMA_CTRL_BASE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(446): 'DMA_CTRL_END' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(447): 'RT_CTRL_BASE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(448): 'RT_CTRL_END' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(449): 'GPIO_BASE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(450): 'GPIO_END' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(451): 'INTC_BASE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(452): 'INTC_END' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_system.sv(496): module 'lx32_system' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/reg_generic.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/reg_generic.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/rapid_trigger.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/rapid_trigger.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(50): 'lx32_mmio_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(51): 'lx32_mmio_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(123): 'SENSOR_DATA_BASE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(124): 'SENSOR_DATA_BASE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(124): 'SENSOR_BUF_HALF' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(155): module 'sensor_controller' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(50): 'lx32_mmio_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(51): 'lx32_mmio_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(123): 'SENSOR_DATA_BASE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(124): 'SENSOR_DATA_BASE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(124): 'SENSOR_BUF_HALF' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/sensor_controller.sv(155): module 'sensor_controller' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(15): 'lx32_decode_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(16): 'lx32_isa_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(17): 'lx32_arch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(38): 'opcode_t' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(52): 'OP_OP_IMM' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(53): 'OP_LOAD' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(54): 'OP_JALR' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(59): 'OP_STORE' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(64): 'OP_BRANCH' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(69): 'OP_LUI' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(70): 'OP_AUIPC' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(75): 'OP_JAL' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(88): module 'imm_gen' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(15): 'lx32_decode_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(16): 'lx32_isa_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(17): 'lx32_arch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(38): 'opcode_t' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(52): 'OP_OP_IMM' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(53): 'OP_LOAD' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(54): 'OP_JALR' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(59): 'OP_STORE' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(64): 'OP_BRANCH' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(69): 'OP_LUI' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(70): 'OP_AUIPC' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(75): 'OP_JAL' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/imm_gen.sv(88): module 'imm_gen' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/register_file_sva.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/register_file_sva.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_soc.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_soc.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_soc.sv(26): 'lx32_mmio_pkg' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_soc.sv(66): module 'lx32_soc' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_soc.sv(26): 'lx32_mmio_pkg' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lx32_soc.sv(66): module 'lx32_soc' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/rapid_trigger_sva.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/rapid_trigger_sva.sv'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/rapid_trigger_sva.sv(15): cannot open include file 'rapid_trigger.sv'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/rapid_trigger_sva.sv(16): cannot open include file 'sensor_controller.sv'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/rapid_trigger_sva.sv(128): module 'rapid_trigger_sva' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/rapid_trigger_sva.sv(15): cannot open include file 'rapid_trigger.sv'
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/rapid_trigger_sva.sv(16): cannot open include file 'sensor_controller.sv'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/rapid_trigger_sva.sv(128): module 'rapid_trigger_sva' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/dma_controller.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/dma_controller.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(7): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(39): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(40): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(45): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(46): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(52): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(53): 'lx32_branch_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(7): 'branch_op_e' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(65): module 'branch_unit' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(7): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(39): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(40): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(45): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(46): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(52): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(53): 'lx32_branch_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(7): 'branch_op_e' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/branch_unit.sv(65): module 'branch_unit' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(6): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(47): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(48): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(53): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(54): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(55): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(62): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(67): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(75): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(76): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(77): 'lx32_alu_pkg' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(6): 'alu_op_e' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(82): module 'alu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(6): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(47): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(48): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(53): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(54): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(55): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(62): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(67): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(75): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(76): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(77): 'lx32_alu_pkg' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(6): 'alu_op_e' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/alu.sv(82): module 'alu' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lsu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/lsu.sv'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/rapid_trigger.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/rapid_trigger.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/rapid_trigger.sv(213): overwriting previous definition of module 'rapid_trigger'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/rapid_trigger.sv(213): previous definition of design element 'rapid_trigger' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/core -incdir /home/rk6650/VeriTriples/malik2627research/tb/core -incdir /home/rk6650/VeriTriples/malik2627research/tools/lx32_formal/sva /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/dma_controller.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/dma_controller.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/dma_controller.sv(214): overwriting previous definition of module 'dma_controller'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/dma_controller.sv(214): previous definition of design element 'dma_controller' is here
+0
+% 
+% 
+%             if {[catch {elaborate -top register_file_sva} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "register_file_sva".
+[INFO (HIER-8002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/register_file_sva.sv(53): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/reg_generic.sv(1): compiling module 'reg_generic:(WIDTH=32)'
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/rtl/core/register_file.sv(1): compiling module 'register_file'
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/register_file_sva.sv(1): compiling module 'register_file_sva'
+[WARN (VERI-1060)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/register_file_sva.sv(33): 'initial' construct ignored
+[ERROR (VERI-2072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/register_file_sva.sv(14): unknown system function call 'anyseq' not supported
+[INFO (VERI-1073)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/register_file_sva.sv(1): module 'register_file_sva' remains a black box due to errors in its contents
+[ERROR (VDB-9017)] Module register_file_sva could not be elaborated
+Summary of errors detected:
+	[ERROR (VERI-2072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/cachel2_Pulsar/tools/lx32_formal/sva/register_file_sva.sv(14): unknown system function call 'anyseq' not supported
+	[ERROR (VDB-9017)] Module register_file_sva could not be elaborated
+ELAB ERROR: ERROR (ENL034): 2 errors detected in the design file(s).
+
+% INFO (IPL005): Received request to exit from the console.
+INFO (IPL018): The peak resident set memory use for this session was 0.428 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 0.
+INFO (IPL016): Exiting the analysis session with status 0.

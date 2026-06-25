@@ -1,0 +1,381 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_fp_alu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_fp_alu.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(55): use of undefined macro 'RDC_OP_W'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(646): use of undefined macro 'RDC_ADD'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(646): syntax error near ';'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(653): use of undefined macro 'RDC_AND'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(653): syntax error near ';'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(660): use of undefined macro 'RDC_OR'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(660): syntax error near ';'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(667): use of undefined macro 'RDC_XOR'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(667): syntax error near ';'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(708): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(712): syntax error near 'begin'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(712): SystemVerilog 2005 keyword begin used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(720): syntax error near 'begin'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(720): SystemVerilog 2005 keyword begin used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(761): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(765): syntax error near 'begin'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(765): SystemVerilog 2005 keyword begin used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(773): syntax error near 'begin'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(773): SystemVerilog 2005 keyword begin used in incorrect context
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(55): use of undefined macro 'RDC_OP_W'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(646): use of undefined macro 'RDC_ADD'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(646): syntax error near ';'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(653): use of undefined macro 'RDC_AND'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(653): syntax error near ';'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(660): use of undefined macro 'RDC_OR'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(660): syntax error near ';'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(667): use of undefined macro 'RDC_XOR'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(667): syntax error near ';'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(708): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(712): syntax error near 'begin'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(712): SystemVerilog 2005 keyword begin used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(720): syntax error near 'begin'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(720): SystemVerilog 2005 keyword begin used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(761): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(765): syntax error near 'begin'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(765): SystemVerilog 2005 keyword begin used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(773): syntax error near 'begin'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/v_int_alu.sv(773): SystemVerilog 2005 keyword begin used in incorrect context
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrat.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrat.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrf.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrf.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(208): use of undefined macro 'SZ_8'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(208): syntax error near ':'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(209): use of undefined macro 'SZ_16'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(209): syntax error near ':'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(210): use of undefined macro 'SZ_32'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(210): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(265): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(266): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(267): syntax error near ':'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(298): use of undefined macro 'MEM_SZ_RANGE_HI'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(298): syntax error near ':'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(298): use of undefined macro 'MEM_SZ_RANGE_LO'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(311): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(312): syntax error near ':'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(313): syntax error near ':'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(23): 'memory_remapped_v_instr' is not declared
+[ERROR (VERI-1020)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(209): default case should appear only once
+[ERROR (VERI-1020)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(210): default case should appear only once
+[ERROR (VERI-1020)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(211): default case should appear only once
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(208): use of undefined macro 'SZ_8'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(208): syntax error near ':'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(209): use of undefined macro 'SZ_16'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(209): syntax error near ':'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(210): use of undefined macro 'SZ_32'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(210): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(265): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(266): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(267): syntax error near ':'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(298): use of undefined macro 'MEM_SZ_RANGE_HI'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(298): syntax error near ':'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(298): use of undefined macro 'MEM_SZ_RANGE_LO'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(311): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(312): syntax error near ':'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(313): syntax error near ':'
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(23): 'memory_remapped_v_instr' is not declared
+	[ERROR (VERI-1020)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(209): default case should appear only once
+	[ERROR (VERI-1020)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(210): default case should appear only once
+	[ERROR (VERI-1020)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_tp_eng.sv(211): default case should appear only once
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/eb_two_slot.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/eb_two_slot.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/ld_st_buffer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/ld_st_buffer.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_overflow.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_overflow.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/eb_buff_generic.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/eb_buff_generic.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/main_memory.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/main_memory.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/lru.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/lru.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/sram.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/sram.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/eb_one_slot.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/eb_one_slot.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vld_st_buffer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vld_st_buffer.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/rr_arbiter.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/rr_arbiter.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(53): use of undefined macro 'MEM_FU'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(53): syntax error near ';'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(56): use of undefined macro 'LD_BIT'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(56): syntax error near ']'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(20): 'to_vector' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(24): 'remapped_v_instr' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(28): 'memory_remapped_v_instr' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(218): module 'vrrm' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(53): use of undefined macro 'MEM_FU'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(53): syntax error near ';'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(56): use of undefined macro 'LD_BIT'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(56): syntax error near ']'
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(20): 'to_vector' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(24): 'remapped_v_instr' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(28): 'memory_remapped_v_instr' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vrrm.sv(218): module 'vrrm' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_flush.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_flush.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/wait_buffer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/wait_buffer.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_initialized.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_initialized.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/onehot_detect.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/onehot_detect.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(56): 'vector_mem_req' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(72): 'ex_update' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(75): 'vector_mem_resp' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(927): module 'data_cache' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(56): 'vector_mem_req' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(72): 'ex_update' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(75): 'vector_mem_resp' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(927): module 'data_cache' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv(21): 'remapped_v_instr' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv(25): 'to_vector_exec' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv(26): 'to_vector_exec_info' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv(428): module 'vis' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv(21): 'remapped_v_instr' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv(25): 'to_vector_exec' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv(26): 'to_vector_exec_info' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vis.sv(428): module 'vis' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex_pipe.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex_pipe.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex_pipe.sv(7): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmacros.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vdata_operation.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vdata_operation.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/lru_two.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/lru_two.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_ld_eng.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_ld_eng.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_ld_eng.sv(23): 'memory_remapped_v_instr' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_ld_eng.sv(581): module 'vmu_ld_eng' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_ld_eng.sv(23): 'memory_remapped_v_instr' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_ld_eng.sv(581): module 'vmu_ld_eng' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/and_or_mux.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/and_or_mux.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_operation.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_operation.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_dual_ported.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_dual_ported.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_duth.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_duth.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv(31): 'to_vector' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv(35): 'vector_mem_req' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv(39): 'vector_mem_resp' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv(384): module 'vector_top' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv(31): 'to_vector' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv(35): 'vector_mem_req' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv(39): 'vector_mem_resp' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vector_top.sv(384): module 'vector_top' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv(24): 'memory_remapped_v_instr' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv(28): 'vector_mem_req' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv(32): 'vector_mem_resp' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv(439): module 'vmu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv(24): 'memory_remapped_v_instr' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv(28): 'vector_mem_req' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv(32): 'vector_mem_resp' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu.sv(439): module 'vmu' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex.sv(27): 'to_vector_exec' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex.sv(28): 'to_vector_exec_info' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex.sv(266): module 'vex' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex.sv(27): 'to_vector_exec' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex.sv(28): 'to_vector_exec_info' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vex.sv(266): module 'vex' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/arbiter.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/arbiter.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_st_eng.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_st_eng.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_st_eng.sv(23): 'memory_remapped_v_instr' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_st_eng.sv(399): module 'vmu_st_eng' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_st_eng.sv(23): 'memory_remapped_v_instr' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vmu_st_eng.sv(399): module 'vmu_st_eng' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/lru_more.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/lru_more.sv'
+[WARN (VERI-1320)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/lru_more.sv(89): concatenation with unsized literal; will interpret as 32 bits
+[WARN (VERI-1320)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/lru_more.sv(89): concatenation with unsized literal; will interpret as 32 bits
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vdata_operation.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vdata_operation.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vdata_operation.sv(83): overwriting previous definition of module 'vdata_operation'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vdata_operation.sv(83): previous definition of design element 'vdata_operation' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/ld_st_buffer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/ld_st_buffer.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/ld_st_buffer.sv(282): overwriting previous definition of module 'ld_st_buffer'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/ld_st_buffer.sv(282): previous definition of design element 'ld_st_buffer' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_overflow.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_overflow.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_overflow.sv(109): overwriting previous definition of module 'fifo_overflow'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_overflow.sv(109): previous definition of design element 'fifo_overflow' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vld_st_buffer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vld_st_buffer.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vld_st_buffer.sv(221): overwriting previous definition of module 'vld_st_buffer'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector/vld_st_buffer.sv(221): previous definition of design element 'vld_st_buffer' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_flush.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_flush.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_flush.sv(106): overwriting previous definition of module 'fifo_flush'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_flush.sv(106): previous definition of design element 'fifo_flush' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/wait_buffer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/wait_buffer.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/wait_buffer.sv(308): overwriting previous definition of module 'wait_buffer'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/wait_buffer.sv(308): previous definition of design element 'wait_buffer' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_initialized.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_initialized.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_initialized.sv(107): overwriting previous definition of module 'fifo_initialized'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_initialized.sv(107): previous definition of design element 'fifo_initialized' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(56): 'vector_mem_req' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(72): 'ex_update' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(75): 'vector_mem_resp' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(927): module 'data_cache' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(56): 'vector_mem_req' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(72): 'ex_update' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(75): 'vector_mem_resp' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/data_cache.sv(927): module 'data_cache' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_dual_ported.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_dual_ported.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_dual_ported.sv(155): overwriting previous definition of module 'fifo_dual_ported'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_dual_ported.sv(155): previous definition of design element 'fifo_dual_ported' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/vector_simulator/decoder_results -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/rtl/shared -incdir /home/rk6650/VeriTriples/malik2627research/rtl/vector -incdir /home/rk6650/VeriTriples/malik2627research/vector_simulator /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_duth.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_duth.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_duth.sv(99): overwriting previous definition of module 'fifo_duth'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/ic-lab-duth_RISC-V-Vector/rtl/shared/fifo_duth.sv(99): previous definition of design element 'fifo_duth' is here
+0
+% 
+% 
+%             if {[catch {elaborate -top vrrm} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "vrrm".
+[ERROR (VERI-9029)] Module vrrm has not been analyzed yet
+[ERROR (VDB-9017)] Module vrrm could not be elaborated
+Summary of errors detected:
+	[ERROR (VERI-9029)] Module vrrm has not been analyzed yet
+	[ERROR (VDB-9017)] Module vrrm could not be elaborated
+ELAB ERROR: ERROR (ENL034): 2 errors detected in the design file(s).
+
+% INFO (IPL005): Received request to exit from the console.
+INFO (IPL018): The peak resident set memory use for this session was 0.419 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 0.
+INFO (IPL016): Exiting the analysis session with status 0.

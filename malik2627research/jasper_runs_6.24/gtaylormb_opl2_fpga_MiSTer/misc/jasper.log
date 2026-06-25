@@ -1,0 +1,154 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/opl2_pkg.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/opl2_pkg.sv'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/afifo.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/afifo.v'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/opl2_exp_lut.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/opl2_exp_lut.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/mem_single_bank.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/mem_single_bank.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/mem_single_bank_reset.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/mem_single_bank_reset.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/pipeline_sr.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/pipeline_sr.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/reset_sync.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/reset_sync.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/opl2_log_sine_lut.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/opl2_log_sine_lut.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/edge_detector.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/edge_detector.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/clk_div.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/clk_div.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/synchronizer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/synchronizer.sv'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/control_operators.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/control_operators.sv'
+0
+% 
+% 
+%             if {[catch {elaborate -top pipeline_sr} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "pipeline_sr".
+[INFO (HIER-8002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/pipeline_sr.sv(58): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/pipeline_sr.sv(44): compiling module 'pipeline_sr'
+[WARN (VERI-1959)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/gtaylormb_opl2_fpga_MiSTer/src/pipeline_sr.sv(55): left shift count >= width of value
+INFO (INL208): Elaboration synthesis summary:
+  Number of synthesized netlists          1 (0 packages)
+  Single run mode                         On
+  Pipeline                                On (1 pipelined netlists)
+  Late hierarchical reference connection  On
+  Number of analyzed Verilog modules      12 (1 synthesized)
+  Number of analyzed VHDL entities        0 (0 synthesized)
+INFO (INL003): Clearing all state information (assumes, stopats, and so forth).
+[<embedded>] %         
+[<embedded>] %         clock -infer
+INFO (ICK007): The tool has inferred "clk" as a primary clock.
+WARNING (WCK024): All inferred clocks were declared with both factor and phase equal to 1.
+clk
+[<embedded>] %         clock -list
+User-defined clocks:
+------------
+0:	clk clk 1 1
+------------
+Rated : 
+------------
+
+clk
+[<embedded>] %         reset -list
+[<embedded>] %         prove -all -time_limit 30s
+Ncustom1: Custom engine code is hT3Ng7hPPfiYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSl+CwjiTMAQA
+AMcustom2: Custom engine code is hT3Ng7hP/feYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSmmqwm7g9AQA
+
+==============================================================
+SUMMARY
+==============================================================
+           Properties Considered              : 0
+                 assertions                   : 0
+                  - proven                    : 0
+                  - bounded_proven (user)     : 0
+                  - bounded_proven (auto)     : 0
+                  - marked_proven             : 0
+                  - cex                       : 0
+                  - ar_cex                    : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+                 covers                       : 0
+                  - unreachable               : 0
+                  - bounded_unreachable (user): 0
+                  - covered                   : 0
+                  - ar_covered                : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+no_properties
+[<embedded>] %         report -all -out jasper_runs_6.24/gtaylormb_opl2_fpga_MiSTer/misc/results.rpt
+ERROR (ESW087): No such switch "-out".
+
+ERROR: problem encountered at line 29 in file /home/rk6650/VeriTriples/malik2627research/jasper_runs_6.24/gtaylormb_opl2_fpga_MiSTer/misc/run.tcl
+
+[<embedded>] % INFO (IPL005): Received request to exit from the console.
+INFO: Waiting for proof threads to stop...
+INFO: Proof threads stopped.
+INFO (IPL018): The peak resident set memory use for this session was 0.416 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 1.
+INFO (IPL016): Exiting the analysis session with status 1.

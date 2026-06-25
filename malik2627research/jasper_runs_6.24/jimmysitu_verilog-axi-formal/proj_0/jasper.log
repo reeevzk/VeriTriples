@@ -1,0 +1,282 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v'
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(244): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(245): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(246): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(254): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(255): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(256): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(257): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(258): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(268): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(346): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(347): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(348): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(352): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(353): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(354): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(400): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(401): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(74): syntax error near ''b'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(80): syntax error near 'end'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(80): SystemVerilog 2005 keyword end used in incorrect context
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(43): parameter 'LEVELS' becomes localparam in 'f_priority_encoder' with formal parameter declaration list
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(44): parameter 'W' becomes localparam in 'f_priority_encoder' with formal parameter declaration list
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(68): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[ERROR (VERI-1188)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(76): 'input_unencoded' is not a constant
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(79): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(87): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(94): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(98): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(101): module 'f_priority_encoder' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(74): syntax error near ''b'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(80): syntax error near 'end'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(80): SystemVerilog 2005 keyword end used in incorrect context
+	[ERROR (VERI-1188)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(76): 'input_unencoded' is not a constant
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(101): module 'f_priority_encoder' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v'
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(244): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(245): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(246): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(254): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(255): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(256): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(257): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(258): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(268): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(317): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(318): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(388): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(389): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(390): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(395): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(396): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(397): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v'
+[ERROR (VERI-9011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(117): block id 'prf_vld_req' is already declared
+[INFO (VERI-1967)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(106): previous declaration of 'prf_vld_req' is from here
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(80): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(208): module 'f_arbiter' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-9011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(117): block id 'prf_vld_req' is already declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(208): module 'f_arbiter' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v'
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(66): parameter 'VALID_ADDR_WIDTH' becomes localparam in 'f_axil_ram' with formal parameter declaration list
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(67): parameter 'WORD_WIDTH' becomes localparam in 'f_axil_ram' with formal parameter declaration list
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(68): parameter 'WORD_SIZE' becomes localparam in 'f_axil_ram' with formal parameter declaration list
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(144): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v'
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(244): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(245): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(246): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(254): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(255): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(256): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(257): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(258): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(268): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(346): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(347): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(348): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(352): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(353): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(354): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(400): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(401): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(455): overwriting previous definition of module 'f_axil_master'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(455): previous definition of design element 'f_axil_master' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(74): syntax error near ''b'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(80): syntax error near 'end'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(80): SystemVerilog 2005 keyword end used in incorrect context
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(43): parameter 'LEVELS' becomes localparam in 'f_priority_encoder' with formal parameter declaration list
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(44): parameter 'W' becomes localparam in 'f_priority_encoder' with formal parameter declaration list
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(68): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[ERROR (VERI-1188)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(76): 'input_unencoded' is not a constant
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(79): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(87): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(94): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(98): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(101): module 'f_priority_encoder' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(74): syntax error near ''b'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(80): syntax error near 'end'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(80): SystemVerilog 2005 keyword end used in incorrect context
+	[ERROR (VERI-1188)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(76): 'input_unencoded' is not a constant
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_priority_encoder.v(101): module 'f_priority_encoder' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v'
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(244): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(245): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(246): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(254): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(255): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(256): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(257): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(258): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(268): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(317): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(318): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(388): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(389): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(390): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(395): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(396): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(397): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(456): overwriting previous definition of module 'f_axil_slave'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(456): previous definition of design element 'f_axil_slave' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v(251): overwriting previous definition of module 'f_axil_register_rd'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v(251): previous definition of design element 'f_axil_register_rd' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v'
+[ERROR (VERI-9011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(117): block id 'prf_vld_req' is already declared
+[INFO (VERI-1967)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(106): previous declaration of 'prf_vld_req' is from here
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(80): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(208): module 'f_arbiter' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-9011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(117): block id 'prf_vld_req' is already declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_arbiter.v(208): module 'f_arbiter' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register.v(456): overwriting previous definition of module 'f_axil_register'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register.v(456): previous definition of design element 'f_axil_register' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/formal /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v'
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(66): parameter 'VALID_ADDR_WIDTH' becomes localparam in 'f_axil_ram' with formal parameter declaration list
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(67): parameter 'WORD_WIDTH' becomes localparam in 'f_axil_ram' with formal parameter declaration list
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(68): parameter 'WORD_SIZE' becomes localparam in 'f_axil_ram' with formal parameter declaration list
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(144): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(235): overwriting previous definition of module 'f_axil_ram'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_ram.v(235): previous definition of design element 'f_axil_ram' is here
+0
+% 
+% 
+%             if {[catch {elaborate -top f_axil_register_rd} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "f_axil_register_rd".
+[INFO (HIER-8002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v(251): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(31): compiling module 'f_axil_slave:(STRB_WIDTH=4,F_OSTD_MAX=16,F_DELAY_MAX=16,F_OPT_READ_ONLY=1'b1)'
+[WARN (VERI-1060)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(93): 'initial' construct ignored
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(105): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(107): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(120): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(122): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(135): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(137): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(148): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(159): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(170): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(181): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(192): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(203): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(216): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_slave.v(229): expression size 32 truncated to fit in target size 4
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(31): compiling module 'f_axil_master:(STRB_WIDTH=4,F_OSTD_MAX=16,F_DELAY_MAX=16,F_OPT_READ_ONLY=1'b1)'
+[WARN (VERI-1060)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(93): 'initial' construct ignored
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(105): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(107): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(120): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(122): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(135): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(137): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(148): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(159): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(170): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(181): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(192): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(203): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(216): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_master.v(229): expression size 32 truncated to fit in target size 4
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v(30): compiling module 'f_axil_register_rd'
+[WARN (VERI-1060)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v(96): 'initial' construct ignored
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v(115): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v(116): expression size 32 truncated to fit in target size 4
+[WARN (VERI-1063)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/jimmysitu_verilog-axi-formal/formal/f_axil_register_rd.v(169): instantiating unknown module 'axil_register_rd'
+ERROR (ENL058): Unable to elaborate module/entity "axil_register_rd" because this module/entity is missing or it contains errors.
+    Re-analyze it or use "-bbox_m axil_register_rd" if you want to black box this module/entity.
+WARNING (WNL059): If you are analyzing with "-mfcu" or "-sfcu" and "-L", try using "elaborate -L libname", "set_analyze_libunboundsearch" or "analyze +libunboundsearch"
+[ERROR (VDB-9017)] Module f_axil_register_rd could not be elaborated
+Summary of errors detected:
+	ERROR (ENL058): Unable to elaborate module/entity "axil_register_rd" because this module/entity is missing or it contains errors.
+    Re-analyze it or use "-bbox_m axil_register_rd" if you want to black box this module/entity.
+	[ERROR (VDB-9017)] Module f_axil_register_rd could not be elaborated
+ELAB ERROR: ERROR (ENL034): 2 errors detected in the design file(s).
+
+% INFO (IPL005): Received request to exit from the console.
+INFO (IPL018): The peak resident set memory use for this session was 0.418 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 0.
+INFO (IPL016): Exiting the analysis session with status 0.

@@ -1,0 +1,226 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(65): syntax error near 'property'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(65): SystemVerilog 2005 keyword property used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(75): syntax error near ')'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(84): syntax error near 'property'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(84): SystemVerilog 2005 keyword property used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(105): syntax error near ')'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(112): syntax error near 'end'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(112): SystemVerilog 2005 keyword end used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(124): syntax error near 'property'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(124): SystemVerilog 2005 keyword property used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(134): syntax error near ')'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(141): syntax error near 'end'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(141): SystemVerilog 2005 keyword end used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(158): syntax error near 'property'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(158): SystemVerilog 2005 keyword property used in incorrect context
+[WARN (VERI-1770)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(165): empty item in case item list violates IEEE 1364 syntax
+[WARN (VERI-1770)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(165): empty item in case item list violates IEEE 1364 syntax
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(173): syntax error near 'end'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(173): SystemVerilog 2005 keyword end used in incorrect context
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(199): syntax error near 'property'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(199): SystemVerilog 2005 keyword property used in incorrect context
+[WARN (VERI-1770)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(206): empty item in case item list violates IEEE 1364 syntax
+[WARN (VERI-1770)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(206): empty item in case item list violates IEEE 1364 syntax
+[INFO (VMSG-1000)] Too many errors. Further error messages will be suppressed.
+Summary of errors detected:
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(65): syntax error near 'property'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(65): SystemVerilog 2005 keyword property used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(75): syntax error near ')'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(84): syntax error near 'property'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(84): SystemVerilog 2005 keyword property used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(105): syntax error near ')'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(112): syntax error near 'end'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(112): SystemVerilog 2005 keyword end used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(124): syntax error near 'property'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(124): SystemVerilog 2005 keyword property used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(134): syntax error near ')'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(141): syntax error near 'end'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(141): SystemVerilog 2005 keyword end used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(158): syntax error near 'property'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(158): SystemVerilog 2005 keyword property used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(173): syntax error near 'end'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(173): SystemVerilog 2005 keyword end used in incorrect context
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(199): syntax error near 'property'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/checker_lib.vh(199): SystemVerilog 2005 keyword property used in incorrect context
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/implies_nexttime.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/implies_nexttime.v'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/nonconsecutive_test/nonconsecutive.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/nonconsecutive_test/nonconsecutive.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/nonconsecutive_test/nonconsecutive.v(2): cannot open include file 'checker_lib.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/nonconsecutive_test/nonconsecutive.v(120): module 'nonconsecutive' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/nonconsecutive_test/nonconsecutive.v(2): cannot open include file 'checker_lib.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/nonconsecutive_test/nonconsecutive.v(120): module 'nonconsecutive' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(3): syntax error near 'clk'
+[ERROR (VERI-1413)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(12): module instantiations in compilation scope are not allowed
+[ERROR (VERI-1413)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(14): clocking declarations in compilation scope are not allowed
+[ERROR (VERI-1691)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(19): assert/assume/cover property statement in root scope violates IEEE 1800 syntax
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(21): syntax error near 'assign'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(21): SystemVerilog 2005 keyword assign used in incorrect context
+Summary of errors detected:
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(3): syntax error near 'clk'
+	[ERROR (VERI-1413)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(12): module instantiations in compilation scope are not allowed
+	[ERROR (VERI-1413)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(14): clocking declarations in compilation scope are not allowed
+	[ERROR (VERI-1691)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(19): assert/assume/cover property statement in root scope violates IEEE 1800 syntax
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(21): syntax error near 'assign'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(21): SystemVerilog 2005 keyword assign used in incorrect context
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/athenb.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/athenb.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/athenb.v(2): cannot open include file 'checker_lib.vh'
+[ERROR (VERI-1026)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/athenb.v(22): `endif without `if
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/athenb.v(23): module 'athenb' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/athenb.v(2): cannot open include file 'checker_lib.vh'
+	[ERROR (VERI-1026)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/athenb.v(22): `endif without `if
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/a_then_b/athenb.v(23): module 'athenb' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/non_overlapping/non_overlapping.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/non_overlapping/non_overlapping.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/non_overlapping/non_overlapping.v(2): cannot open include file 'checker_lib.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/non_overlapping/non_overlapping.v(18): module 'non_overlapping' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/non_overlapping/non_overlapping.v(2): cannot open include file 'checker_lib.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/non_overlapping/non_overlapping.v(18): module 'non_overlapping' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/toggling/toggling.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/toggling/toggling.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/toggling/toggling.v(2): cannot open include file 'checker_lib.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/toggling/toggling.v(21): module 'toggling' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/toggling/toggling.v(2): cannot open include file 'checker_lib.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/toggling/toggling.v(21): module 'toggling' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/counter/counter.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/counter/counter.v'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/counter/counter.v(2): cannot open include file 'checker_lib.vh'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/counter/counter.v(39): module 'counter' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/counter/counter.v(2): cannot open include file 'checker_lib.vh'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/synthesizable_checkers/examples/counter/counter.v(39): module 'counter' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(2): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(3): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(4): net type must be explicitly specified for 'phase_incr' when default_nettype is none
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(32): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(37): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(40): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(41): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(42): module 'phase_accum_clk_div' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(2): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(3): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(4): net type must be explicitly specified for 'phase_incr' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(42): module 'phase_accum_clk_div' ignored due to previous errors
+1
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(3): syntax error near 'clk'
+[ERROR (VERI-1116)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(12): 'cache_chk' is already declared
+[INFO (VERI-1967)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(2): previous declaration of 'cache_chk' is from here
+[ERROR (VERI-1413)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(12): module instantiations in compilation scope are not allowed
+[ERROR (VERI-1413)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(14): clocking declarations in compilation scope are not allowed
+[ERROR (VERI-9011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(19): block id 'asm0' is already declared
+[INFO (VERI-1967)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(19): previous declaration of 'asm0' is from here
+[ERROR (VERI-1691)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(19): assert/assume/cover property statement in root scope violates IEEE 1800 syntax
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(21): syntax error near 'assign'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(21): SystemVerilog 2005 keyword assign used in incorrect context
+Summary of errors detected:
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(3): syntax error near 'clk'
+	[ERROR (VERI-1116)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(12): 'cache_chk' is already declared
+	[ERROR (VERI-1413)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(12): module instantiations in compilation scope are not allowed
+	[ERROR (VERI-1413)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(14): clocking declarations in compilation scope are not allowed
+	[ERROR (VERI-9011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(19): block id 'asm0' is already declared
+	[ERROR (VERI-1691)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(19): assert/assume/cover property statement in root scope violates IEEE 1800 syntax
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(21): syntax error near 'assign'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/cache/cache.sv(21): SystemVerilog 2005 keyword assign used in incorrect context
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/ip/cache -incdir /home/rk6650/VeriTriples/malik2627research/ip/phase_accumulator_clock_divider -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/a_then_b -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/counter -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/non_overlapping -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/nonconsecutive_test -incdir /home/rk6650/VeriTriples/malik2627research/synthesizable_checkers/examples/toggling /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv'
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(2): net type must be explicitly specified for 'clk' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(3): net type must be explicitly specified for 'rst_n' when default_nettype is none
+[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(4): net type must be explicitly specified for 'phase_incr' when default_nettype is none
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(32): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(37): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(40): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(41): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(42): module 'phase_accum_clk_div' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(2): net type must be explicitly specified for 'clk' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(3): net type must be explicitly specified for 'rst_n' when default_nettype is none
+	[ERROR (VERI-1906)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(4): net type must be explicitly specified for 'phase_incr' when default_nettype is none
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/dh73_Prop-eller/ip/phase_accumulator_clock_divider/phase_acc_clk_div.sv(42): module 'phase_accum_clk_div' ignored due to previous errors
+1
+% 
+% 
+%             if {[catch {elaborate -top nonconsecutive} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "nonconsecutive".
+[ERROR (VERI-9029)] Module nonconsecutive has not been analyzed yet
+[ERROR (VDB-9017)] Module nonconsecutive could not be elaborated
+Summary of errors detected:
+	[ERROR (VERI-9029)] Module nonconsecutive has not been analyzed yet
+	[ERROR (VDB-9017)] Module nonconsecutive could not be elaborated
+ELAB ERROR: ERROR (ENL034): 2 errors detected in the design file(s).
+
+% INFO (IPL005): Received request to exit from the console.
+INFO (IPL018): The peak resident set memory use for this session was 0.415 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 0.
+INFO (IPL016): Exiting the analysis session with status 0.

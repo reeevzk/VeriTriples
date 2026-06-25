@@ -1,0 +1,593 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv(6): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv(85): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv(93): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv(371): module 'dcache_test' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv(85): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv(93): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/dcache_test.sv(371): module 'dcache_test' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/ISA.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/ISA.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/map_table_sva.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/map_table_sva.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/map_table_sva.svh(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/map_table_sva.svh(18): 'execute2complete' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/map_table_sva.svh(217): module 'mt_sva' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/map_table_sva.svh(18): 'execute2complete' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/map_table_sva.svh(217): module 'mt_sva' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.svh(4): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.svh(4): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set copy.svh }
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/stage_id_p4_sva.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/stage_id_p4_sva.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_chk.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_chk.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_chk.svh(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_chk.svh(25): 'execute2complete' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_chk.svh(450): module 'rs_chk' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_chk.svh(25): 'execute2complete' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_chk.svh(450): module 'rs_chk' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(9): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(10): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(18): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(19): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(190): module 'fifo_sva' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(9): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(10): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(18): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(19): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/fifo_sva.svh(190): module 'fifo_sva' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/sys_defs.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(309): range is not allowed in a prefix
+[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(310): range is not allowed in a prefix
+[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(318): range is not allowed in a prefix
+[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(319): range is not allowed in a prefix
+[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(327): range is not allowed in a prefix
+[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(328): range is not allowed in a prefix
+[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(336): range is not allowed in a prefix
+[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(337): range is not allowed in a prefix
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(537): module 'rs_sva' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(309): range is not allowed in a prefix
+	[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(310): range is not allowed in a prefix
+	[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(318): range is not allowed in a prefix
+	[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(319): range is not allowed in a prefix
+	[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(327): range is not allowed in a prefix
+	[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(328): range is not allowed in a prefix
+	[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(336): range is not allowed in a prefix
+	[ERROR (VERI-1363)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(337): range is not allowed in a prefix
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rs_sva.svh(537): module 'rs_sva' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/ISA.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/ISA.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rob_sva.svh }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rob_sva.svh'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rob_sva.svh(18): 'execute2complete' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rob_sva.svh(255): module 'rob_sva' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rob_sva.svh(18): 'execute2complete' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test/rob_sva.svh(255): module 'rob_sva' ignored due to previous errors
+1
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/pht.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/pht.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/pht.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_ex.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_ex.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_ex.sv(13): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/sys_defs.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_ex.sv(14): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/ISA.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_id.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_id.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_id.sv(11): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/sys_defs.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_id.sv(12): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/ISA.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/memDP.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/memDP.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv(13): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv(14): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv(15): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/ISA.svh'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv(79): overwriting previous definition of module 'alu'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_ex.sv(43): previous definition of design element 'alu' is here
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv(406): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv(968): module 'stage_ex_p4' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv(406): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.sv(968): module 'stage_ex_p4' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dispatch.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dispatch.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dispatch.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/prf.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/prf.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/prf.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_mem.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_mem.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_mem.sv(13): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mem.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mem.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mem.sv(12): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mem.sv(100): use of undefined macro 'CLOCK_PERIOD'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mem.sv(139): module 'mem' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mem.sv(100): use of undefined macro 'CLOCK_PERIOD'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mem.sv(139): module 'mem' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/free_list.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/free_list.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/free_list.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/btb.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/btb.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/btb.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/btb.sv(24): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/../test/btb_sva.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/retire.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/retire.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/retire.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/misprediction.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/misprediction.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/victim.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/victim.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/victim.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/regfile.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/regfile.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/regfile.sv(10): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(2): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(26): parameter initial value cannot be omitted in this mode of Verilog
+[WARN (VERI-1756)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(169): elaboration system task error violates IEEE 1800 (2005) syntax
+[WARN (VERI-1756)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(170): elaboration system task fatal violates IEEE 1800 (2005) syntax
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(202): module 'mult' ignored due to previous errors
+[WARN (VERI-1199)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(219): parameter 'SHIFT' becomes localparam in 'mult_stage' with formal parameter declaration list
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(302): module 'mult_stage' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(26): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(202): module 'mult' ignored due to previous errors
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/mult.sv(302): module 'mult_stage' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(2): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.svh'
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(211): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(211): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(379): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(501): module 'sq' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(211): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(211): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(379): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sq.sv(501): module 'sq' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/icache.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/icache.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/icache.sv(10): analyzing included file 'verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_wb.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_wb.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/stage_wb.sv(14): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/stage_id_p4.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/stage_id_p4.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/stage_id_p4.sv(4): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/stage_id_p4.sv(5): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/ISA.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(2): cannot open include file 'dcache_nblock_set.svh'
+[ERROR (VERI-1116)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(9): 'CACHE_LOC' is already declared
+[INFO (VERI-1967)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.svh(173): previous declaration of 'CACHE_LOC' is from here
+[ERROR (VERI-1116)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(11): 'cache_locate' is already declared
+[INFO (VERI-1967)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.svh(175): previous declaration of 'cache_locate' is from here
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(93): 'RES_MASK' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(114): 'OP_FILL_EVICT_MAIN' is not declared
+[ERROR (VERI-1011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(117): cannot index into non-array type reg for 'OP_RES_MASK'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(119): module 'decode_fill' ignored due to previous errors
+[WARN (VERI-2190)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(119): extra semicolon in $unit (global) scope
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(130): 'RES_MASK' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(140): 'OP_LOAD_MHIT' is not declared
+[ERROR (VERI-1011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(142): cannot index into non-array type reg for 'OP_RES_MASK'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(144): module 'decode_load' ignored due to previous errors
+[WARN (VERI-2190)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(144): extra semicolon in $unit (global) scope
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(154): 'RES_MASK' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(164): 'OP_STOR_MHIT' is not declared
+[ERROR (VERI-1011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(166): cannot index into non-array type reg for 'OP_RES_MASK'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(168): module 'decode_stor' ignored due to previous errors
+[WARN (VERI-2190)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(168): extra semicolon in $unit (global) scope
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(275): 'RES_MSHR' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(317): module 'dcache_basic' ignored due to previous errors
+[WARN (VERI-2190)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(317): extra semicolon in $unit (global) scope
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(574): syntax error near 'always_comb'
+[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(574): SystemVerilog 2005 keyword always_comb used in incorrect context
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(2): cannot open include file 'dcache_nblock_set.svh'
+	[ERROR (VERI-1116)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(9): 'CACHE_LOC' is already declared
+	[ERROR (VERI-1116)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(11): 'cache_locate' is already declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(93): 'RES_MASK' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(114): 'OP_FILL_EVICT_MAIN' is not declared
+	[ERROR (VERI-1011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(117): cannot index into non-array type reg for 'OP_RES_MASK'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(119): module 'decode_fill' ignored due to previous errors
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(130): 'RES_MASK' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(140): 'OP_LOAD_MHIT' is not declared
+	[ERROR (VERI-1011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(142): cannot index into non-array type reg for 'OP_RES_MASK'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(144): module 'decode_load' ignored due to previous errors
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(154): 'RES_MASK' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(164): 'OP_STOR_MHIT' is not declared
+	[ERROR (VERI-1011)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(166): cannot index into non-array type reg for 'OP_RES_MASK'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(168): module 'decode_stor' ignored due to previous errors
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(275): 'RES_MSHR' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(317): module 'dcache_basic' ignored due to previous errors
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(574): syntax error near 'always_comb'
+	[ERROR (VERI-2344)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_nblock_set.sv(574): SystemVerilog 2005 keyword always_comb used in incorrect context
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lq.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lq.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lq.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lq.sv(151): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lq.sv(176): module 'lq' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lq.sv(151): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lq.sv(176): module 'lq' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/fifo.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/fifo.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/fifo.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rob.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rob.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rob.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/interfaces.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/interfaces.sv'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/interfaces.sv(2): syntax error near '-'
+Summary of errors detected:
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/interfaces.sv(2): syntax error near '-'
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/fetch.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/fetch.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/fetch.sv(11): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(76): analyzing included file 'verilog/sys_defs.svh'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(79): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(79): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(152): module 'psel_gen' ignored due to previous errors
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(179): module 'wand_sel' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(79): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(79): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(152): module 'psel_gen' ignored due to previous errors
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/psel_gen.sv(179): module 'wand_sel' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/icache2.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/icache2.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/icache2.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/icache.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/icache.svh(4): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rs.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rs.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rs.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rs.sv(96): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rs.sv(339): module 'rs' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rs.sv(96): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/rs.sv(339): module 'rs' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/correlated_predictor.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/correlated_predictor.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/correlated_predictor.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/cpu.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/cpu.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/cpu.sv(11): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/sys_defs.svh'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/cpu.sv(97): 'Imem_command' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/cpu.sv(344): module 'cpu' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/cpu.sv(97): 'Imem_command' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3/cpu.sv(344): module 'cpu' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/prediction_buffer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/prediction_buffer.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/prediction_buffer.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lod_ex.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lod_ex.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lod_ex.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/lod_ex.sv(2): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/execute.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/global_history_register.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/global_history_register.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/global_history_register.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(5): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(6): cannot open include file 'FIFO_sva.svh'
+[WARN (VERI-9025)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(8): Empty Port in Module Declaration
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(36): use of undefined macro 'INSTANCE'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(36): syntax error near '('
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(38): syntax error near '.'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(100): syntax error near 'rd_en'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(104): syntax error near 'rd_en'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(108): syntax error near 'wr_en'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(112): syntax error near 'wr_en'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(129): module 'FIFO_fv' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(6): cannot open include file 'FIFO_sva.svh'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(36): use of undefined macro 'INSTANCE'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(36): syntax error near '('
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(38): syntax error near '.'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(100): syntax error near 'rd_en'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(104): syntax error near 'rd_en'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(108): syntax error near 'wr_en'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(112): syntax error near 'wr_en'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(129): module 'FIFO_fv' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/gshare.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/gshare.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/gshare.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(4): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(30): module 'flop' ignored due to previous errors
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(33): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(85): module 'skid' ignored due to previous errors
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(93): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(159): module 'ppln_skid' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(4): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(30): module 'flop' ignored due to previous errors
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(33): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(85): module 'skid' ignored due to previous errors
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(93): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/skid_buffer.sv(159): module 'ppln_skid' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/btq.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/btq.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/btq.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(2): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.svh'
+[WARN (VERI-2190)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(186): extra semicolon in $unit (global) scope
+[WARN (VERI-2190)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(260): extra semicolon in $unit (global) scope
+[WARN (VERI-2190)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(337): extra semicolon in $unit (global) scope
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(362): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(454): module 'refill_engine' ignored due to previous errors
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(527): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(533): an enum variable may only be assigned the same enum typed variable or one of its values
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(692): module 'dcache_block' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(362): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(454): module 'refill_engine' ignored due to previous errors
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(527): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1348)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(533): an enum variable may only be assigned the same enum typed variable or one of its values
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/dcache_block_direct.sv(692): module 'dcache_block' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/arch_map.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/arch_map.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/map_table.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/map_table.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/map_table.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/branch_history_table.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/branch_history_table.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/branch_history_table.sv(1): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/memDP.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/memDP.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/memDP.sv(132): overwriting previous definition of module 'memDP'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/memDP.sv(132): previous definition of design element 'memDP' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/test -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog -incdir /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/p3 -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/test -incdir /home/rk6650/VeriTriples/malik2627research/verilog -incdir /home/rk6650/VeriTriples/malik2627research/verilog/p3 /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv'
+[INFO (VERI-1328)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(5): analyzing included file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/sys_defs.svh'
+[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(6): cannot open include file 'FIFO_sva.svh'
+[WARN (VERI-9025)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(8): Empty Port in Module Declaration
+[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(36): use of undefined macro 'INSTANCE'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(36): syntax error near '('
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(38): syntax error near '.'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(100): syntax error near 'rd_en'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(104): syntax error near 'rd_en'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(108): syntax error near 'wr_en'
+[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(112): syntax error near 'wr_en'
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(129): module 'FIFO_fv' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1245)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(6): cannot open include file 'FIFO_sva.svh'
+	[ERROR (VERI-1158)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(36): use of undefined macro 'INSTANCE'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(36): syntax error near '('
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(38): syntax error near '.'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(100): syntax error near 'rd_en'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(104): syntax error near 'rd_en'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(108): syntax error near 'wr_en'
+	[ERROR (VERI-1137)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(112): syntax error near 'wr_en'
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/FIFO_fv.sv(129): module 'FIFO_fv' ignored due to previous errors
+1
+% 
+% 
+%             if {[catch {elaborate -top tournament_predictor} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "tournament_predictor".
+[INFO (HIER-8002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv(85): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/global_history_register.sv(3): compiling module 'global_history_register'
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/pht.sv(4): compiling module 'pht'
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/pht.sv(41): expression size 32 truncated to fit in target size 2
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/pht.sv(43): expression size 32 truncated to fit in target size 2
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/pht.sv(49): expression size 32 truncated to fit in target size 2
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/pht.sv(51): expression size 32 truncated to fit in target size 2
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/gshare.sv(4): compiling module 'gshare'
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/gshare.sv(70): expression size 32 truncated to fit in target size 8
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/gshare.sv(71): expression size 32 truncated to fit in target size 8
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/branch_history_table.sv(3): compiling module 'branch_history_table'
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/branch_history_table.sv(30): expression size 32 truncated to fit in target size 8
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/branch_history_table.sv(31): expression size 32 truncated to fit in target size 8
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/correlated_predictor.sv(3): compiling module 'correlated_predictor'
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv(3): compiling module 'tournament_predictor'
+[WARN (VERI-1330)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv(37): actual bit length 1 differs from formal bit length 18 for port 'pred_2_fetch'
+[WARN (VERI-1330)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv(46): actual bit length 2 differs from formal bit length 18 for port 'pred_out'
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv(78): expression size 32 truncated to fit in target size 2
+[WARN (VERI-1209)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv(80): expression size 32 truncated to fit in target size 2
+[WARN (VDB-1002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/Justin08784_eecs470-p4/verilog/tournament.sv(20): net 'gshare_pred[1]' does not have a driver
+INFO (INL208): Elaboration synthesis summary:
+  Number of synthesized netlists          8 (2 packages)
+  Single run mode                         On
+  Pipeline                                On (6 pipelined netlists)
+  Late hierarchical reference connection  On
+  Number of analyzed Verilog modules      45 (8 synthesized)
+  Number of analyzed VHDL entities        0 (0 synthesized)
+INFO (INL003): Clearing all state information (assumes, stopats, and so forth).
+[<embedded>] %         
+[<embedded>] %         clock -infer
+INFO (ICK007): The tool has inferred "clock" as a primary clock.
+WARNING (WCK024): All inferred clocks were declared with both factor and phase equal to 1.
+clock
+[<embedded>] %         clock -list
+User-defined clocks:
+------------
+0:	clock clock 1 1
+------------
+Rated : 
+------------
+
+clock
+[<embedded>] %         reset -list
+[<embedded>] %         prove -all -time_limit 30s
+Ncustom1: Custom engine code is hT3Ng7hPPfiYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSl+CwjiTMAQA
+AMcustom2: Custom engine code is hT3Ng7hP/feYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSmmqwm7g9AQA
+
+==============================================================
+SUMMARY
+==============================================================
+           Properties Considered              : 0
+                 assertions                   : 0
+                  - proven                    : 0
+                  - bounded_proven (user)     : 0
+                  - bounded_proven (auto)     : 0
+                  - marked_proven             : 0
+                  - cex                       : 0
+                  - ar_cex                    : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+                 covers                       : 0
+                  - unreachable               : 0
+                  - bounded_unreachable (user): 0
+                  - covered                   : 0
+                  - ar_covered                : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+no_properties
+[<embedded>] %         report -all -out jasper_runs_6.24/Justin08784_eecs470-p4/proj_0/results.rpt
+ERROR (ESW087): No such switch "-out".
+
+ERROR: problem encountered at line 76 in file /home/rk6650/VeriTriples/malik2627research/jasper_runs_6.24/Justin08784_eecs470-p4/proj_0/run.tcl
+
+[<embedded>] % INFO (IPL005): Received request to exit from the console.
+INFO: Waiting for proof threads to stop...
+INFO: Proof threads stopped.
+INFO (IPL018): The peak resident set memory use for this session was 0.416 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 1.
+INFO (IPL016): Exiting the analysis session with status 1.

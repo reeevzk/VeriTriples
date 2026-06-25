@@ -18,7 +18,27 @@ MODULE_RE = re.compile(
     r"^\s*module\s+([a-zA-Z_][a-zA-Z0-9_]*)",
     re.MULTILINE
 )
+
+#later should omit ASSERT_RE
 ASSERT_RE = re.compile(r"`ASSERT[A-Z_]*\s*\((.*?)\)", re.DOTALL)
+ASSERT_MACRO_RE = re.compile(
+    r'`(?P<macro>'
+    r'ASSERT_KNOWN_IF'
+    r'|ASSERT_KNOWN'
+    r'|ASSERT_NEVER_KNOWN'
+    r'|ASSERT_NEVER'
+    r'|ASSERT_IF'
+    r'|ASSERT_INIT_NET'
+    r'|ASSERT_INIT'
+    r'|ASSERT_FINAL'
+    r'|ASSERT_ERROR_TRIGGER_ALERT'
+    r'|ASSUME_FPV'
+    r'|ASSUME'
+    r'|COVER'
+    r'|ASSERT'           # keep generic ASSERT last so named ones match first
+    r')\s*\((?P<args>[^;]+?)\)',
+    re.MULTILINE | re.DOTALL
+)
 
 # to extract in-file info
 _BLOCK_COMMENT = re.compile(r"/\*.*?\*/", re.DOTALL)
@@ -85,22 +105,59 @@ def discover_ips(opentitan_root):
         if p.is_dir()
     )
 
+def parse_macro_assert(macro_name: str, args_raw: str, lineno: int) -> dict:
+    """Split macro args into structured fields where possible."""
+    # Strip comments from args
+    args_clean = re.sub(r'//[^\n]*', '', args_raw).strip()
+    parts = [a.strip() for a in re.split(r',(?![^()]*\))', args_clean)]
+
+    result = {
+        "kind":  "macro",
+        "macro": macro_name,
+        "line":  lineno,
+        "raw":   f"`{macro_name}({args_raw.strip()})",
+    }
+
+    # Most OpenTitan assert macros follow: (NAME, EXPRESSION [, CLK, RST])
+    if len(parts) >= 1:
+        result["name"]       = parts[0]
+    if len(parts) >= 2:
+        result["expression"] = parts[1]
+    if len(parts) >= 3:
+        result["clock"]      = parts[2]
+    if len(parts) >= 4:
+        result["reset"]      = parts[3]
+
+    return result
+
+def collect_macro_assertions(sv_path: Path) -> list[dict]:
+    """Regex scan for backtick assert macros — catches what pyslang misses."""
+    text = sv_path.read_text(errors="replace")
+    results = []
+    for m in ASSERT_MACRO_RE.finditer(text):
+        lineno = text[: m.start()].count("\n") + 1
+        results.append(parse_macro_assert(m.group("macro"), m.group("args"), lineno))
+    return results
+
 def collect_assertions(sv_file):
+    ast_assertions  = collect_ast_assertions(sv_file)
+    macro_assertions = collect_macro_assertions(sv_file)
+    return ast_assertions + macro_assertions
+
+def collect_ast_assertions(sv_file: Path) -> list[dict]:
+        # Tokens are leaf objects with no 'kind' or 'to_json' — skip them
     tree = SyntaxTree.fromFile(str(sv_file))
     assertions = []
 
     def visit(node):
-        # Tokens are leaf objects with no 'kind' or 'to_json' — skip them
         if not hasattr(node, "to_json"):
             return True
-
         k = str(node.kind)
         if "Assert" in k:
             try:
                 assertions.append(node.to_json())
             except Exception:
                 assertions.append({"raw": str(node), "kind": k})
-
         return True
 
     tree.root.visit(visit)
@@ -167,6 +224,88 @@ def extract_signals(tree):
 
     return signals
 
+def classify_signal(signal_name):
+    name = signal_name.lower()
+
+    if name.endswith("_i"):
+        return "input"
+
+    if name.endswith("_o"):
+        return "output"
+
+    if name.endswith("_q"):
+        return "register"
+
+    if name.endswith("_d"):
+        return "next_state"
+
+    if "valid" in name:
+        return "valid"
+
+    if "ready" in name:
+        return "ready"
+
+    if "req" in name:
+        return "request"
+
+    if "rsp" in name:
+        return "response"
+
+    if "intr" in name:
+        return "interrupt"
+
+    if "alert" in name:
+        return "alert"
+
+    return "other"
+
+def extract_signal_roles(tree):
+    roles = []
+
+    for sig in extract_signals(tree):
+        try:
+
+            name = sig["declarators"][0]["name"]
+
+            roles.append({
+                "signal": name,
+                "role": classify_signal(name)
+            })
+
+        except Exception:
+            pass
+
+    return roles
+
+def extract_always_blocks(tree):
+    blocks = []
+
+    def visit(node):
+
+        name = type(node).__name__
+
+        if (
+            "AlwaysFF" in name
+            or "AlwaysComb" in name
+            or "Always" in name
+        ):
+
+            try:
+
+                blocks.append({
+                    "type": name,
+                    "text": str(node)[:500]
+                })
+
+            except Exception:
+                pass
+
+        return True
+
+    tree.root.visit(visit)
+
+    return blocks
+
 def extract_assigns(tree):
 
     assigns = []
@@ -185,6 +324,34 @@ def extract_assigns(tree):
     tree.root.visit(visit)
 
     return assigns
+
+
+def extract_interface(tree):
+    signals = json.dumps(
+        extract_signals(tree)
+    ).lower()
+
+    interfaces = []
+
+    if "valid" in signals and "ready" in signals:
+
+        interfaces.append({
+            "type": "ready_valid"
+        })
+
+    if "req" in signals and "rsp" in signals:
+
+        interfaces.append({
+            "type": "req_rsp"
+        })
+
+    if "tl_h" in signals:
+
+        interfaces.append({
+            "type": "tlul"
+        })
+
+    return interfaces
 #                                                   #
 # intent loading, comment extraction, dataset constr.
 
@@ -243,7 +410,7 @@ def load_module_intent(sv_path: Path) -> dict:
     }
 
 
-# ── 3. Build and save the intent sidecar ──────────────────────────────────────
+# generates intent folders
 
 def build_and_save_intent(ip_dir: Path, ip_name: str, output_dir: Path) -> dict:
     """
@@ -260,7 +427,10 @@ def build_and_save_intent(ip_dir: Path, ip_name: str, output_dir: Path) -> dict:
         if classify_sv_file(sv_file) != "rtl":
             continue
         rel = str(sv_file.relative_to(ip_dir))
-        module_intents[rel] = load_module_intent(sv_file)
+        module_intents[rel] = {
+            **load_module_intent(sv_file),
+            "assertions": collect_assertions(sv_file)
+        }
 
     intent_doc = {
         "ip_name": ip_name,
@@ -279,8 +449,20 @@ def build_and_save_intent(ip_dir: Path, ip_name: str, output_dir: Path) -> dict:
 # ── 4. Merge into collect_ip ───────────────────────────────────────────────────
 
 def collect_ip(ip_dir: Path, ip_name: str, output_dir: Path) -> list[dict]:
-    intent_doc = build_and_save_intent(ip_dir, ip_name, output_dir)
+    intent_doc = {
+    "ip_name": ip_name,
+    "ip_intent": load_ip_intent(ip_dir, ip_name),
+    "module_intents": {}
+    }
+
+    for sv_file in sorted(ip_dir.rglob("*.sv")):
+        if classify_sv_file(sv_file) != "rtl":
+            continue
+
+        rel = str(sv_file.relative_to(ip_dir))
+        intent_doc["module_intents"][rel] = load_module_intent(sv_file)
     ip_intent = intent_doc["ip_intent"]
+    field_summary = extract_register_field_summary(ip_intent)
     module_intents = intent_doc["module_intents"]
 
     module_dataset = []
@@ -311,9 +493,14 @@ def collect_ip(ip_dir: Path, ip_name: str, output_dir: Path) -> list[dict]:
                     "ports": ports,
                     "assigns": extract_assigns(tree),
                     "signals": extract_signals(tree),
+                    "signal_roles": extract_signal_roles(tree),
+                    "interfaces": extract_interface(tree),
+                    "field_summary": field_summary,
+                    "fsms": extract_fsms(tree),
+                    "always_blocks": extract_always_blocks(tree),
                     # attach both layers of intent
                     "module_intent": module_intents.get(_rel, {}),
-                    "ip_intent": ip_intent,
+                    "ip_intent": ip_intent
                 })
             return True
 
@@ -321,7 +508,95 @@ def collect_ip(ip_dir: Path, ip_name: str, output_dir: Path) -> list[dict]:
 
     return module_dataset
 
+def extract_register_field_summary(ip_intent):
+    fields = []
+
+    for reg in ip_intent.get("registers", []):
+        for field in reg.get(
+            "fields",
+            []
+        ):
+
+            fields.append({
+
+                "register": reg["name"],
+
+                "field": field["name"],
+
+                "desc": field["desc"]
+            })
+
+    return fields
+
 # must handle cases for multireg/window entries later
+def flatten_registers(registers: list, ip_name: str) -> list:
+    """Expand multireg/window entries alongside normal registers."""
+    result = []
+    for r in registers:
+        if not isinstance(r, dict):
+            continue
+
+        # Normal register
+        if "name" in r:
+            result.append({
+                "intent_id": f"{ip_name}.reg.{r['name']}",
+                "name": r["name"],
+                "desc": r.get("desc", ""),
+                "kind": "register",
+                "field_count": len(r.get("fields", [])),
+                "fields": [
+                    {
+                        "intent_id": f"{ip_name}.reg.{r['name']}.{f.get('name')}",
+                        "name": f.get("name"),
+                        "desc": f.get("desc", ""),
+                        "bits": f.get("bits"),
+                        "swaccess": f.get("swaccess"),
+                        "hwaccess": f.get("hwaccess"),
+                    }
+                    for f in r.get("fields", [])
+                ],
+            })
+
+        # Multireg — contains a repeated register definition
+        elif "multireg" in r:
+            mr = r["multireg"]
+            name = mr.get("name", "UNKNOWN")
+            result.append({
+                "intent_id": f"{ip_name}.reg.{name}",
+                "name": name,
+                "desc": mr.get("desc", ""),
+                "kind": "multireg",
+                "count": mr.get("count"),
+                "fields": [
+                    {
+                        "intent_id": f"{ip_name}.reg.{name}.{f.get('name')}",
+                        "name": f.get("name"),
+                        "desc": f.get("desc", ""),
+                        "bits": f.get("bits"),
+                        "swaccess": f.get("swaccess"),
+                        "hwaccess": f.get("hwaccess"),
+                    }
+                    for f in mr.get("fields", [])
+                ],
+            })
+
+        # Window — a memory-mapped region, no fields
+        elif "window" in r:
+            w = r["window"]
+            name = w.get("name", "UNKNOWN")
+            result.append({
+                "intent_id": f"{ip_name}.reg.{name}",
+                "name": name,
+                "desc": w.get("desc", ""),
+                "kind": "window",
+                "items": w.get("items"),
+                "swaccess": w.get("swaccess"),
+                "fields": [],
+            })
+
+    return result
+
+
 def load_ip_intent(ip_dir, ip_name):
     hjson_path = Path(ip_dir) / "data" / f"{ip_name}.hjson"
     data = hjson.loads(hjson_path.read_text())
@@ -344,41 +619,14 @@ def load_ip_intent(ip_dir, ip_name):
             if isinstance(p, dict) and "name" in p
         ],
         "interrupts": [
-            {
-            "intent_id":
-            f"{ip_name}.interrupt.{i['name']}",
-            "name": i["name"],
-            "desc": i.get("desc", "")
-            }
+            {"intent_id": f"{ip_name}.interrupt.{i['name']}", "name": i["name"], "desc": i.get("desc", "")}
             for i in data.get("interrupt_list", [])
         ],
         "alerts": [
-            {"intent_id":
-        f"{ip_name}.alert.{a['name']}", "name": a["name"], "desc": a.get("desc", "")}
+            {"intent_id": f"{ip_name}.alert.{a['name']}", "name": a["name"], "desc": a.get("desc", "")}
             for a in data.get("alert_list", [])
         ],
-        "registers": [
-            {
-                "intent_id":
-                f"{ip_name}.reg.{r['name']}",
-                "name": r["name"],
-                "desc": r.get("desc", ""),
-                "fields": [
-                    {
-                        "intent_id":
-                        f"{ip_name}.reg.{r['name']}.{f.get('name')}",
-                        "name": f.get("name"),
-                        "desc": f.get("desc", ""),
-                        "bits": f.get("bits"),
-                        "swaccess": f.get("swaccess"),
-                        "hwaccess": f.get("hwaccess"),
-                    }
-                    for f in r.get("fields", [])
-                ],
-            }
-            for r in data.get("registers", [])
-            if isinstance(r, dict) and "name" in r
-        ],
+        "registers": flatten_registers(data.get("registers", []), ip_name),
     }
 
 def build_ip_dataset(ip_name, opentitan_root):
@@ -387,7 +635,11 @@ def build_ip_dataset(ip_name, opentitan_root):
         ip_name
     )
 
-    structure = collect_ip(ip_dir)
+    structure = collect_ip(
+        ip_dir,
+        ip_name,
+        Path("intent")
+    )
 
     docs = collect_docs(ip_dir)
 
@@ -412,7 +664,7 @@ def extract_instantiations(tree):
         if type(node).__name__ == "HierarchyInstantiationSyntax":
 
             try:
-                instances.append(str(node))
+                instances.append({"instance": str(node)})
 
             except Exception:
                 pass
@@ -432,6 +684,47 @@ def get_module_name(node):
         except:
             return "unknown"
 
+def extract_fsms(tree):
+    fsms = []
+
+    states = defaultdict(set)
+
+    def visit(node):
+
+        try:
+            text = str(node)
+
+            m = re.search(
+                r'(\w+_q)\s*<=\s*(\w+)',
+                text
+            )
+
+            if m:
+                state_reg = m.group(1)
+                next_state = m.group(2)
+
+                if re.match(
+                    r'[A-Z][A-Z0-9_]*',
+                    next_state
+                ):
+                    states[state_reg].add(
+                        next_state
+                    )
+
+        except Exception:
+            pass
+
+        return True
+
+    tree.root.visit(visit)
+
+    return [
+        {
+            "state_reg": reg,
+            "states": sorted(list(vals))
+        }
+        for reg, vals in states.items()
+    ]
 
 def main():
     opentitan_root = ensure_opentitan()
@@ -449,11 +742,23 @@ def main():
         print(f"Processing IP: {ip_name}")
         try:
             modules = collect_ip(ip_dir, ip_name, output_dir)
+
+            per_ip_file = output_dir / f"{ip_name}.intent.json"
+            per_ip_file.write_text(
+                json.dumps(modules, indent=2)
+            )
             all_modules.extend(modules)
         except FileNotFoundError as e:
             # some IPs have no hjson (e.g. vendored or auto-generated ones)
             print(f"  Skipping {ip_name}: {e}")
             continue
+
+    print(
+    "Total assertions:", sum(
+        len(m["assertions"])
+        for m in all_modules
+    )
+    )   
 
     with open("opentitan_dataset.json", "w") as f:
         json.dump(all_modules, f, indent=2)

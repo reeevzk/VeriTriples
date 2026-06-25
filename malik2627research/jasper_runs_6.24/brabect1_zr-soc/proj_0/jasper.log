@@ -1,0 +1,280 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/tb_verilator.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/tb_verilator.sv'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_pwm8_core.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_pwm8_core.v'
+[WARN (VERI-1875)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_pwm8_core.v(65): identifier 'PWMS_WIDTH' is used before its declaration
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/uart_rx.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/uart_rx.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gnrl_icbs.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gnrl_icbs.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_qspi_physical.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_qspi_physical.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_flash_qspi_top.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_flash_qspi_top.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gnrl_pipe_stage.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gnrl_pipe_stage.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_hclkgen_regs.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_hclkgen_regs.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/fpga/arty-a7/rtl/arty_a7_shell.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/fpga/arty-a7/rtl/arty_a7_shell.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_flash_qspi.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_flash_qspi.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_tlfragmenter_qspi_1.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_tlfragmenter_qspi_1.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_qspi_fifo.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_qspi_fifo.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_queue_1.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_queue_1.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv'
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(100): 'dm' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(101): 'dm' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(367): 'dm' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(370): 'dm' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(373): 'dm' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(380): 'dm' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(381): 'dm' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(436): 'dm' is not declared
+[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(439): 'dm' is not declared
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(617): module 'zr_coreplex' ignored due to previous errors
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(623): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(624): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(625): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(679): module 'dp_ram' ignored due to previous errors
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(683): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(684): parameter initial value cannot be omitted in this mode of Verilog
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(738): module 'cpu2icb' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(100): 'dm' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(101): 'dm' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(367): 'dm' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(370): 'dm' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(373): 'dm' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(380): 'dm' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(381): 'dm' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(436): 'dm' is not declared
+	[ERROR (VERI-1128)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(439): 'dm' is not declared
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(617): module 'zr_coreplex' ignored due to previous errors
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(623): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(624): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(625): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(679): module 'dp_ram' ignored due to previous errors
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(683): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1817)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(684): parameter initial value cannot be omitted in this mode of Verilog
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_coreplex.sv(738): module 'cpu2icb' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_uart.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_uart.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_tlwidthwidget_qspi.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_tlwidthwidget_qspi.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_repeater_6.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_repeater_6.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_pwm8_top.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_pwm8_top.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_qspi_arbiter.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_qspi_arbiter.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_pwm8.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_pwm8.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/fifo_v2.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/fifo_v2.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/spi_model.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/spi_model.sv'
+[ERROR (VERI-1647)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/spi_model.sv(112): variable 'cnt_bit_mask' is written by both continuous and procedural assignments
+[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/spi_model.sv(172): module 'spi_model' ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-1647)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/spi_model.sv(112): variable 'cnt_bit_mask' is written by both continuous and procedural assignments
+	[ERROR (VERI-1072)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/spi_model.sv(172): module 'spi_model' ignored due to previous errors
+1
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/pulp_clock_mux2.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/pulp_clock_mux2.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/dmi_arbiter.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/dmi_arbiter.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_uart_top.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_uart_top.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_icb1to16_bus.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_icb1to16_bus.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/fifo_v3.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/fifo_v3.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/e203_subsys_perips.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/e203_subsys_perips.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/uart_model.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/verilator/uart_model.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_spi_flashmap.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_spi_flashmap.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_uarttx.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_uarttx.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_qspi_media.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_qspi_media.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_soc.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/zr_soc.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/cluster_clock_inverter.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/cluster_clock_inverter.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/icb2debug_bus.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/icb2debug_bus.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gpio_top.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gpio_top.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gnrl_fifo.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gnrl_fifo.sv'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gpio.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gpio.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/prim_clock_gating.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/prim_clock_gating.sv'
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/rtl -incdir /home/rk6650/VeriTriples/malik2627research/fpga/arty-a7/verif/src -incdir /home/rk6650/VeriTriples/malik2627research/rtl -incdir /home/rk6650/VeriTriples/malik2627research/rtl/perips -incdir /home/rk6650/VeriTriples/malik2627research/rtl/pulp -incdir /home/rk6650/VeriTriples/malik2627research/verilator /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/fifo_v3.sv }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/fifo_v3.sv'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/fifo_v3.sv(153): overwriting previous definition of module 'fifo_v3'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/pulp/fifo_v3.sv(153): previous definition of design element 'fifo_v3' is here
+0
+% 
+% 
+%             if {[catch {elaborate -top sirv_gpio_top} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "sirv_gpio_top".
+[INFO (HIER-8002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gpio_top.v(1391): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gpio.v(29): compiling module 'sirv_gpio'
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/brabect1_zr-soc/rtl/perips/sirv_gpio_top.v(35): compiling module 'sirv_gpio_top'
+INFO (INL208): Elaboration synthesis summary:
+  Number of synthesized netlists          2 (0 packages)
+  Single run mode                         On
+  Pipeline                                On (2 pipelined netlists)
+  Late hierarchical reference connection  On
+  Number of analyzed Verilog modules      44 (2 synthesized)
+  Number of analyzed VHDL entities        0 (0 synthesized)
+INFO (INL003): Clearing all state information (assumes, stopats, and so forth).
+[<embedded>] %         
+[<embedded>] %         clock -infer
+INFO (ICK007): The tool has inferred "clk" as a primary clock.
+WARNING (WCK024): All inferred clocks were declared with both factor and phase equal to 1.
+clk
+[<embedded>] %         clock -list
+User-defined clocks:
+------------
+0:	clk clk 1 1
+------------
+Rated : 
+------------
+
+clk
+[<embedded>] %         reset -list
+[<embedded>] %         prove -all -time_limit 30s
+Ncustom1: Custom engine code is hT3Ng7hPPfiYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSl+CwjiTMAQA
+AMcustom2: Custom engine code is hT3Ng7hP/feYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSmmqwm7g9AQA
+
+==============================================================
+SUMMARY
+==============================================================
+           Properties Considered              : 0
+                 assertions                   : 0
+                  - proven                    : 0
+                  - bounded_proven (user)     : 0
+                  - bounded_proven (auto)     : 0
+                  - marked_proven             : 0
+                  - cex                       : 0
+                  - ar_cex                    : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+                 covers                       : 0
+                  - unreachable               : 0
+                  - bounded_unreachable (user): 0
+                  - covered                   : 0
+                  - ar_covered                : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+no_properties
+[<embedded>] %         report -all -out jasper_runs_6.24/brabect1_zr-soc/proj_0/results.rpt
+ERROR (ESW087): No such switch "-out".
+
+ERROR: problem encountered at line 56 in file /home/rk6650/VeriTriples/malik2627research/jasper_runs_6.24/brabect1_zr-soc/proj_0/run.tcl
+
+[<embedded>] % INFO (IPL005): Received request to exit from the console.
+INFO: Waiting for proof threads to stop...
+INFO: Proof threads stopped.
+INFO (IPL018): The peak resident set memory use for this session was 0.420 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 1.
+INFO (IPL016): Exiting the analysis session with status 1.

@@ -1,0 +1,271 @@
+JasperGold Apps 2021.03 FCS 64 bits 2021.03.23 02:50:43 UTC
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2021 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc. 
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+JasperGold Apps Analysis Session - /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out license "jasper_fao".
+INFO: reading configuration file "/home/rk6650/.config/jasper/jaspergold.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/wrapper.v }
+[-- (VERI-1482)] Analyzing Verilog file '/usr/licensed/cadence-20210126/jasper_2021.03/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/wrapper.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/wrapper.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/wrapper.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/wrapper.v(34): overwriting previous definition of module 'wrapper'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/wrapper.v(31): previous definition of design element 'wrapper' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/mult_nbits.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/mult_nbits.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/fsm.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/fsm.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/or_gate.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/or_gate.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/top_level.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/top_level.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/alu.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/alu.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/wrapper.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/wrapper.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/wrapper.v(34): overwriting previous definition of module 'wrapper'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/wrapper.v(34): previous definition of design element 'wrapper' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/full_adder_nbits.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/full_adder_nbits.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/dff_nbits.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/dff_nbits.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/dff_nbits.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/dff_nbits.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/dff_nbits.v(25): overwriting previous definition of module 'dff_nbits'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/dff_nbits.v(19): previous definition of design element 'dff_nbits' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/half_adder.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/half_adder.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/full_adder.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/full_adder.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/alu.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/alu.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/alu.v(59): overwriting previous definition of module 'alu'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/alu.v(65): previous definition of design element 'alu' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(59): overwriting previous definition of module 'alu'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/alu.v(59): previous definition of design element 'alu' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(78): overwriting previous definition of module 'dff_nbits'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/dff_nbits.v(25): previous definition of design element 'dff_nbits' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(216): overwriting previous definition of module 'fsm'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/fsm.v(156): previous definition of design element 'fsm' is here
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(328): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(330): overwriting previous definition of module 'top_level'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/top_level.v(69): previous definition of design element 'top_level' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(359): overwriting previous definition of module 'wrapper'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/wrapper.v(34): previous definition of design element 'wrapper' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/fsm.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/fsm.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/fsm.v(172): overwriting previous definition of module 'fsm'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(216): previous definition of design element 'fsm' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(59): overwriting previous definition of module 'alu'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(59): previous definition of design element 'alu' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(78): overwriting previous definition of module 'dff_nbits'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(78): previous definition of design element 'dff_nbits' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(216): overwriting previous definition of module 'fsm'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/fsm.v(172): previous definition of design element 'fsm' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(323): overwriting previous definition of module 'top_level'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(330): previous definition of design element 'top_level' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(354): overwriting previous definition of module 'wrapper'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(359): previous definition of design element 'wrapper' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/alu.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/alu.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/alu.v(59): overwriting previous definition of module 'alu'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(59): previous definition of design element 'alu' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/fsm.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/fsm.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/fsm.v(138): overwriting previous definition of module 'fsm'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(216): previous definition of design element 'fsm' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/dff_nbits.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/dff_nbits.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/dff_nbits.v(22): overwriting previous definition of module 'dff_nbits'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(78): previous definition of design element 'dff_nbits' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/alu_alternative.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/alu_alternative.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/out/wrapper_gen_fault.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/out/wrapper_gen_fault.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/out/wrapper_gen_fault.v(661): overwriting previous definition of module 'wrapper'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(354): previous definition of design element 'wrapper' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/alu.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/alu.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/alu.v(56): overwriting previous definition of module 'alu'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/alu.v(59): previous definition of design element 'alu' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/comp.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/comp.v'
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/fsm.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/fsm.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/fsm.v(169): overwriting previous definition of module 'fsm'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/fsm.v(138): previous definition of design element 'fsm' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/top_level.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/top_level.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/top_level.v(67): overwriting previous definition of module 'top_level'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/wrapper_gen.v(323): previous definition of design element 'top_level' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/top_level.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/top_level.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/top_level.v(72): overwriting previous definition of module 'top_level'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/top_level.v(67): previous definition of design element 'top_level' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/dff_nbits.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/dff_nbits.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/dff_nbits.v(25): overwriting previous definition of module 'dff_nbits'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/dff_nbits.v(22): previous definition of design element 'dff_nbits' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/top_level.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/top_level.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/top_level.v(107): overwriting previous definition of module 'top_level'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/top_level.v(72): previous definition of design element 'top_level' is here
+0
+% 
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/wrapper.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/wrapper.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/wrapper.v(34): overwriting previous definition of module 'wrapper'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/out/wrapper_gen_fault.v(661): previous definition of design element 'wrapper' is here
+0
+% catch { analyze -sv -incdir /home/rk6650/VeriTriples/malik2627research -incdir /home/rk6650/VeriTriples/malik2627research/SRC/BENCH -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL -incdir /home/rk6650/VeriTriples/malik2627research/SRC/RTL/others -incdir /home/rk6650/VeriTriples/malik2627research/others -incdir /home/rk6650/VeriTriples/malik2627research/yosys/out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/src -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/generated -incdir /home/rk6650/VeriTriples/malik2627research/yosys/work_out/src /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v }
+[-- (VERI-1482)] Analyzing Verilog file '/home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v'
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(59): overwriting previous definition of module 'alu'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/alu.v(56): previous definition of design element 'alu' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(78): overwriting previous definition of module 'dff_nbits'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/others/dff_nbits.v(25): previous definition of design element 'dff_nbits' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(216): overwriting previous definition of module 'fsm'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/fsm.v(169): previous definition of design element 'fsm' is here
+[WARN (VERI-1763)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(328): the sva directive is not sensitive to clock. The directive will be sampled on the posedge of the fastest clock.
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(330): overwriting previous definition of module 'top_level'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/generated/top_level.v(107): previous definition of design element 'top_level' is here
+[WARN (VERI-1206)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/src/wrapper_gen.v(359): overwriting previous definition of module 'wrapper'
+[INFO (VERI-2142)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/yosys/work_out/src/wrapper.v(34): previous definition of design element 'wrapper' is here
+0
+% 
+% 
+%             if {[catch {elaborate -top or_gate} err]} {
+            puts "ELAB ERROR: $err"
+            exit
+            }
+INFO (ISW003): Top module name is "or_gate".
+[INFO (HIER-8002)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/or_gate.v(16): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] /home/rk6650/VeriTriples/malik2627research/repos_6.24/MBleaux_Calculator_Verilog/SRC/RTL/others/or_gate.v(11): compiling module 'or_gate'
+INFO (INL208): Elaboration synthesis summary:
+  Number of synthesized netlists          1 (0 packages)
+  Single run mode                         On
+  Pipeline                                On (1 pipelined netlists)
+  Late hierarchical reference connection  On
+  Number of analyzed Verilog modules      12 (1 synthesized)
+  Number of analyzed VHDL entities        0 (0 synthesized)
+INFO (INL003): Clearing all state information (assumes, stopats, and so forth).
+[<embedded>] %         
+[<embedded>] %         clock -infer
+WARNING (WCK018): The attempt to automatically extract the clock failed. Use:
+    "clock signalName" to declare a primary clock,
+    "clock -none" for a free-running clock environment,
+    "clock -analyze" to help set up the clock environment properly.
+[<embedded>] %         clock -list
+------------
+ No user-defined clocks : 
+------------
+Rated : 
+------------
+
+[<embedded>] %         reset -list
+[<embedded>] %         prove -all -time_limit 30s
+Ncustom1: Custom engine code is hT3Ng7hPPfiYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSl+CwjiTMAQA
+AMcustom2: Custom engine code is hT3Ng7hP/feYQOTDZ3qhYOwGAM51eA+J/FjkM5shLioAsqhgLR4Ft+O1BuKG6ilQ83B9tLXSmmqwm7g9AQA
+
+==============================================================
+SUMMARY
+==============================================================
+           Properties Considered              : 0
+                 assertions                   : 0
+                  - proven                    : 0
+                  - bounded_proven (user)     : 0
+                  - bounded_proven (auto)     : 0
+                  - marked_proven             : 0
+                  - cex                       : 0
+                  - ar_cex                    : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+                 covers                       : 0
+                  - unreachable               : 0
+                  - bounded_unreachable (user): 0
+                  - covered                   : 0
+                  - ar_covered                : 0
+                  - undetermined              : 0
+                  - unknown                   : 0
+                  - error                     : 0
+no_properties
+[<embedded>] %         report -all -out jasper_runs_6.24/MBleaux_Calculator_Verilog/misc/results.rpt
+ERROR (ESW087): No such switch "-out".
+
+ERROR: problem encountered at line 46 in file /home/rk6650/VeriTriples/malik2627research/jasper_runs_6.24/MBleaux_Calculator_Verilog/misc/run.tcl
+
+[<embedded>] % INFO (IPL005): Received request to exit from the console.
+INFO: Waiting for proof threads to stop...
+INFO: Proof threads stopped.
+INFO (IPL018): The peak resident set memory use for this session was 0.412 GB.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL015): The Tcl-thread exited with status 1.
+INFO (IPL016): Exiting the analysis session with status 1.
