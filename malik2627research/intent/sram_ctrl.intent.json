@@ -1,183 +1,450 @@
-{
-  "ip_name": "sram_ctrl",
-  "ip_intent": {
-    "ip_name": "sram_ctrl",
-    "one_line_desc": "Interfacing on-chip SRAM blocks with system bus, supports lightweight scrambling, integrity and secure wipe",
-    "one_paragraph_desc": "SRAM Controller instantiates on-chip SRAM and makes it accessible through the TileLink on-chip interconnect.\nSRAM Controller includes a lightweight scrambling mechanism based on the PRINCE cipher to reduce the attack surface on the confidentiality and integrity of data stored in the SRAM.\nFor end-to-end data integrity protection, SRAM Controller stores the integrity bits alongside data words in memory and raises an alert if it detects an integrity fault.\nSRAM Controller contains an LFSR-based initialization mechanism that overwrites the entire SRAM with pseudorandom data.",
-    "clocking": [
+[
+  {
+    "module_name": "sram_ctrl",
+    "file": "rtl/sram_ctrl.sv",
+    "ports": [],
+    "signals": [],
+    "signal_roles": [],
+    "assigns": [],
+    "always_blocks": [],
+    "fsms": [],
+    "instantiations": [
       {
-        "clock": "clk_i",
-        "reset": "rst_ni",
-        "primary": true
+        "instance": "\n    // Arbitrate between all simultaneously valid error log requests.\n    prim_racl_error_arb #(\n      .N ( 2 )\n    ) u_prim_err_arb (\n      .clk_i,\n      .rst_ni,\n      .error_log_i ( racl_error   ),\n      .error_log_o ( racl_error_o )\n    );"
       },
       {
-        "clock": "clk_otp_i",
-        "reset": "rst_otp_ni",
-        "primary": false
+        "instance": "\n  prim_sec_anchor_buf #(\n    .Width(TotalAnchorWidth)\n  ) u_seed_anchor (\n    .in_i({RndCnstSramKey,\n           RndCnstSramNonce}),\n    .out_o({cnst_sram_key,\n            cnst_sram_nonce})\n  );"
+      },
+      {
+        "instance": "\n  // SEC_CM: CTRL.CONFIG.REGWEN\n  // SEC_CM: EXEC.CONFIG.REGWEN\n  // SEC_CM: READBACK.CONFIG.REGWEN\n  sram_ctrl_regs_reg_top #(\n    .EnableRacl       ( EnableRacl           ),\n    .RaclErrorRsp     ( RaclErrorRsp         ),\n    .RaclPolicySelVec ( RaclPolicySelVecRegs )\n  ) u_reg_regs (\n    .clk_i,\n    .rst_ni,\n    .tl_i             ( regs_tl_i          ),\n    .tl_o             ( regs_tl_o          ),\n    .reg2hw,\n    .hw2reg,\n    // RACL interface\n    .racl_policies_i  ( racl_policies_i    ),\n    .racl_error_o     ( racl_error[0]      ),\n    // SEC_CM: BUS.INTEGRITY\n    .intg_err_o       ( bus_integ_error[0] )\n   );"
+      },
+      {
+        "instance": "\n  prim_alert_sender #(\n    .AsyncOn(AlertAsyncOn[0]),\n    .SkewCycles(AlertSkewCycles),\n    .IsFatal(1)\n  ) u_prim_alert_sender_parity (\n    .clk_i,\n    .rst_ni,\n    .alert_test_i  ( alert_test    ),\n    .alert_req_i   ( alert_req     ),\n    .alert_ack_o   (               ),\n    .alert_state_o (               ),\n    .alert_rx_i    ( alert_rx_i[0] ),\n    .alert_tx_o    ( alert_tx_o[0] )\n  );"
+      },
+      {
+        "instance": "\n  prim_lc_sync #(\n    .NumCopies (2)\n  ) u_prim_lc_sync (\n    .clk_i,\n    .rst_ni,\n    .lc_en_i (lc_escalate_en_i),\n    .lc_en_o (escalate_en)\n  );"
+      },
+      {
+        "instance": "\n  // We employ two redundant counters to guard against FI attacks.\n  // If any of the two is glitched and the two counter states do not agree,\n  // we trigger an alert.\n  // SEC_CM: INIT.CTR.REDUN\n  prim_count #(\n    .Width(AddrWidth)\n  ) u_prim_count (\n    .clk_i,\n    .rst_ni,\n    .clr_i(init_trig),\n    .set_i(1'b0),\n    .set_cnt_i('0),\n    .incr_en_i(init_req),\n    .decr_en_i(1'b0),\n    .step_i(AddrWidth'(1)),\n    .commit_i(1'b1),\n    .cnt_o(init_cnt),\n    .cnt_after_commit_o(),\n    .err_o(init_error)\n  );"
+      },
+      {
+        "instance": "\n  prim_sync_reqack_data #(\n    .Width($bits(otp_ctrl_pkg::sram_otp_key_rsp_t)-1),\n    .DataSrc2Dst(1'b0)\n  ) u_prim_sync_reqack_data (\n    .clk_src_i  ( clk_i              ),\n    .rst_src_ni ( rst_ni             ),\n    .clk_dst_i  ( clk_otp_i          ),\n    .rst_dst_ni ( rst_otp_ni         ),\n    .req_chk_i  ( 1'b1               ),\n    .src_req_i  ( key_req_pending_q  ),\n    .src_ack_o  ( key_ack            ),\n    .dst_req_o  ( sram_otp_key_o.req ),\n    .dst_ack_i  ( sram_otp_key_i.ack ),\n    .data_i     ( {sram_otp_key_i.key,\n                   sram_otp_key_i.nonce,\n                   sram_otp_key_i.seed_valid} ),\n    .data_o     ( {key_d,\n                   nonce_d,\n                   key_seed_valid} )\n  );"
+      },
+      {
+        "instance": "\n    prim_lc_sync #(\n      .NumCopies (1)\n    ) u_prim_lc_sync_hw_debug_en (\n      .clk_i,\n      .rst_ni,\n      .lc_en_i (lc_hw_debug_en_i),\n      .lc_en_o ({lc_hw_debug_en})\n    );"
+      },
+      {
+        "instance": "\n    prim_mubi8_sync #(\n      .NumCopies (1)\n    ) u_prim_mubi8_sync_otp_en_sram_ifetch (\n      .clk_i,\n      .rst_ni,\n      .mubi_i(otp_en_sram_ifetch_i),\n      .mubi_o({otp_en_sram_ifetch})\n    );"
+      },
+      {
+        "instance": "\n  prim_lfsr #(\n    .LfsrDw      ( LfsrWidth       ),\n    .EntropyDw   ( LfsrWidth       ),\n    .StateOutDw  ( LfsrOutWidth    ),\n    .DefaultSeed ( RndCnstLfsrSeed ),\n    .StatePermEn ( 1'b1            ),\n    .StatePerm   ( RndCnstLfsrPerm )\n  ) u_lfsr (\n    .clk_i,\n    .rst_ni,\n    .lfsr_en_i(init_req),\n    .seed_en_i(init_trig),\n    .seed_i(nonce_q[NonceWidth +: LfsrWidth]),\n    .entropy_i('0),\n    .state_o(lfsr_out)\n  );"
+      },
+      {
+        "instance": "\n  tlul_data_integ_enc u_tlul_data_integ_enc (\n    .data_i(lfsr_out),\n    .data_intg_o(lfsr_out_integ)\n  );"
+      },
+      {
+        "instance": "\n  // SEC_CM: RAM_TL_LC_GATE.FSM.SPARSE\n  tlul_lc_gate #(\n    .NumGatesPerDirection(2),\n    .Outstanding(Outstanding)\n  ) u_tlul_lc_gate (\n    .clk_i,\n    .rst_ni,\n    .tl_h2d_i(ram_tl_i),\n    .tl_d2h_o(ram_tl_o),\n    .tl_h2d_o(ram_tl_in_gated),\n    .tl_d2h_i(ram_tl_out_gated),\n    .flush_req_i('0),\n    .flush_ack_o(),\n    .resp_pending_o(tl_gate_resp_pending),\n    .lc_en_i (lc_tlul_gate_en),\n    .err_o   (bus_integ_error[2])\n  );"
+      },
+      {
+        "instance": "\n  tlul_adapter_sram_racl #(\n    .SramAw(AddrWidth),\n    .SramDw(DataWidth - tlul_pkg::DataIntgWidth),\n    .Outstanding(Outstanding),\n    .ByteAccess(1),\n    .CmdIntgCheck(1),\n    .EnableRspIntgGen(1),\n    .EnableDataIntgGen(0),\n    .EnableDataIntgPt(1), // SEC_CM: MEM.INTEGRITY\n    .SecFifoPtr      (1), // SEC_CM: TLUL_FIFO.CTR.REDUN\n    .EnableReadback  (1), // SEC_CM: MEM.READBACK\n    .EnableRacl(EnableRacl),\n    .RaclErrorRsp(RaclErrorRsp),\n    .RaclPolicySelNumRanges(RaclPolicySelNumRangesRam)\n  ) u_tlul_adapter_sram_racl (\n    .clk_i,\n    .rst_ni,\n    .tl_i                       (ram_tl_in_gated),\n    .tl_o                       (ram_tl_out_gated),\n    .en_ifetch_i                (en_ifetch),\n    .req_o                      (tlul_req),\n    .req_type_o                 (),\n    .gnt_i                      (tlul_gnt),\n    .we_o                       (tlul_we),\n    .addr_o                     (tlul_addr),\n    .wdata_o                    (tlul_wdata),\n    .wmask_o                    (tlul_wmask),\n    // SEC_CM: BUS.INTEGRITY\n    .intg_error_o               (bus_integ_error[1]),\n    .user_rsvd_o                (),\n    .rdata_i                    (sram_rdata),\n    .rvalid_i                   (sram_rvalid),\n    .rerror_i                   (sram_rerror),\n    .compound_txn_in_progress_o (sram_compound_txn_in_progress),\n    .readback_en_i              (reg_readback_en),\n    .readback_error_o           (readback_error),\n    .wr_collision_i             (sram_wr_collision),\n    .write_pending_i            (sram_wpending),\n    // RACL interface\n    .racl_policies_i            (racl_policies_i),\n    .racl_error_o               (racl_error[1]),\n    .racl_policy_sel_ranges_i   (racl_policy_sel_ranges_ram_i)\n  );"
+      },
+      {
+        "instance": "\n    prim_secded_inv_39_32_dec u_dec (\n      .data_i     (sram_rdata_scr),\n      .data_o     (dec_data),\n      .syndrome_o (),\n      .err_o      (ecc_error)\n    );"
+      },
+      {
+        "instance": "\n    prim_secded_inv_39_32_enc u_enc (\n      .data_i(dec_data),\n      .data_o(ecc_enc_data)\n    );"
+      },
+      {
+        "instance": "\n    prim_flop #(\n      .Width(1)\n    ) u_flop_uncorr_error (\n      .clk_i,\n      .rst_ni,\n      .d_i(ecc_error[1]),\n      .q_o(uncorrectable_error_q)\n    );"
+      },
+      {
+        "instance": "\n    prim_flop #(\n      .Width(1)\n    ) u_flop_rvalid (\n      .clk_i,\n      .rst_ni,\n      .d_i(sram_rvalid_scr),\n      .q_o(sram_rvalid)\n    );"
+      },
+      {
+        "instance": "\n    prim_flop #(\n      .Width(DataWidth)\n    ) u_flop_enc_data (\n      .clk_i,\n      .rst_ni,\n      .d_i(ecc_enc_data),\n      .q_o(sram_rdata)\n    );"
+      },
+      {
+        "instance": "\n  // SEC_CM: MEM.SCRAMBLE, ADDR.SCRAMBLE, PRIM_RAM.CTRL.MUBI\n  prim_ram_1p_scr #(\n    .Width(DataWidth),\n    .Depth(Depth),\n    .InstDepth(InstDepth),\n    .EnableParity(0),\n    .DataBitsPerMask(DataWidth),\n    .NumPrinceRoundsHalf(NumPrinceRoundsHalf)\n  ) u_prim_ram_1p_scr (\n    .clk_i,\n    .rst_ni,\n    .key_valid_i      (key_valid),\n    .key_i            (key_q),\n    .nonce_i          (nonce_q[NonceWidth-1:0]),\n    .req_i            (sram_req),\n    .intg_error_i     (sram_intg_error),\n    .gnt_o            (sram_gnt),\n    .write_i          (sram_we),\n    .addr_i           (sram_addr),\n    .wdata_i          (sram_wdata),\n    .wmask_i          (sram_wmask),\n    .rdata_o          (sram_rdata_scr),\n    .rvalid_o         (sram_rvalid_scr),\n    .rerror_o         (sram_rerror_scr),\n    .raddr_o          (sram_rerror_addr_scr),\n    .cfg_i,\n    .cfg_rsp_o,\n    .wr_collision_o   (sram_wr_collision),\n    .write_pending_o  (sram_wpending),\n    .alert_o          (sram_alert)\n  );"
       }
     ],
-    "bus_interfaces": [
+    "interfaces": [],
+    "assertions": [
       {
-        "protocol": "tlul",
-        "direction": "device"
+        "kind": "macro",
+        "macro": "ASSERT_INIT",
+        "line": 99,
+        "raw": "`ASSERT_INIT(NumRamInstSameAsComputed_A,\n               NumRamInst == prim_util_pkg::ceil_div(MemSizeRam, InstSize)",
+        "name": "NumRamInstSameAsComputed_A",
+        "expression": "NumRamInst == prim_util_pkg::ceil_div(MemSizeRam",
+        "clock": "InstSize"
       },
       {
-        "protocol": "tlul",
-        "direction": "device"
+        "kind": "macro",
+        "macro": "ASSERT_INIT",
+        "line": 102,
+        "raw": "`ASSERT_INIT(NonceWidthsLessThanSource_A, NonceWidth + LfsrWidth <= otp_ctrl_pkg::SramNonceWidth)",
+        "name": "NonceWidthsLessThanSource_A",
+        "expression": "NonceWidth + LfsrWidth <= otp_ctrl_pkg::SramNonceWidth"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSERT_KNOWN",
+        "line": 721,
+        "raw": "`ASSERT_KNOWN(RegsTlOutKnown_A,  regs_tl_o)",
+        "name": "RegsTlOutKnown_A",
+        "expression": "regs_tl_o"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSERT_KNOWN",
+        "line": 722,
+        "raw": "`ASSERT_KNOWN(RamTlOutKnown_A,   ram_tl_o.d_valid)",
+        "name": "RamTlOutKnown_A",
+        "expression": "ram_tl_o.d_valid"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSERT_KNOWN_IF",
+        "line": 723,
+        "raw": "`ASSERT_KNOWN_IF(RamTlOutPayLoadKnown_A, ram_tl_o, ram_tl_o.d_valid)",
+        "name": "RamTlOutPayLoadKnown_A",
+        "expression": "ram_tl_o",
+        "clock": "ram_tl_o.d_valid"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSERT_KNOWN",
+        "line": 724,
+        "raw": "`ASSERT_KNOWN(AlertOutKnown_A,   alert_tx_o)",
+        "name": "AlertOutKnown_A",
+        "expression": "alert_tx_o"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSERT_KNOWN",
+        "line": 725,
+        "raw": "`ASSERT_KNOWN(SramOtpKeyKnown_A, sram_otp_key_o)",
+        "name": "SramOtpKeyKnown_A",
+        "expression": "sram_otp_key_o"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSERT_KNOWN",
+        "line": 726,
+        "raw": "`ASSERT_KNOWN(RaclErrorValidKnown_A, racl_error_o.valid)",
+        "name": "RaclErrorValidKnown_A",
+        "expression": "racl_error_o.valid"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSERT_KNOWN",
+        "line": 727,
+        "raw": "`ASSERT_KNOWN(SramRerrorKnown_A, sram_rerror_o)",
+        "name": "SramRerrorKnown_A",
+        "expression": "sram_rerror_o"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSERT",
+        "line": 768,
+        "raw": "`ASSERT(TlulGntIsCorrect_A, tlul_req |-> (sram_gnt & ~init_req)",
+        "name": "TlulGntIsCorrect_A",
+        "expression": "tlul_req |-> (sram_gnt & ~init_req"
       }
     ],
-    "param_list": [
-      {
-        "name": "RndCnstSramKey",
-        "desc": "Compile-time random reset value for SRAM scrambling key.",
-        "default": null
+    "module_intent": {
+      "module_intent": {
+        "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSRAM controller.",
+        "params": [
+          {
+            "name": "MemSizeRam",
+            "default": "32'h1000",
+            "desc": ""
+          },
+          {
+            "name": "InstSize",
+            "default": "MemSizeRam",
+            "desc": ""
+          },
+          {
+            "name": "NumRamInst",
+            "default": "1",
+            "desc": ""
+          },
+          {
+            "name": "AlertAsyncOn",
+            "default": "{NumAlerts{1'b1}}",
+            "desc": ""
+          },
+          {
+            "name": "AlertSkewCycles",
+            "default": "1",
+            "desc": ""
+          },
+          {
+            "name": "InstrExec",
+            "default": "1",
+            "desc": ""
+          },
+          {
+            "name": "NumPrinceRoundsHalf",
+            "default": "3",
+            "desc": ""
+          },
+          {
+            "name": "Outstanding",
+            "default": "2",
+            "desc": ""
+          },
+          {
+            "name": "EccCorrection",
+            "default": "0",
+            "desc": ""
+          },
+          {
+            "name": "EnableRacl",
+            "default": "1'b0",
+            "desc": ""
+          },
+          {
+            "name": "RaclErrorRsp",
+            "default": "EnableRacl",
+            "desc": ""
+          },
+          {
+            "name": "RaclPolicySelNumRangesRam",
+            "default": "1",
+            "desc": ""
+          },
+          {
+            "name": "RndCnstSramKey",
+            "default": "RndCnstSramKeyDefault",
+            "desc": ""
+          },
+          {
+            "name": "RndCnstSramNonce",
+            "default": "RndCnstSramNonceDefault",
+            "desc": ""
+          },
+          {
+            "name": "RndCnstLfsrSeed",
+            "default": "RndCnstLfsrSeedDefault",
+            "desc": ""
+          },
+          {
+            "name": "RndCnstLfsrPerm",
+            "default": "RndCnstLfsrPermDefault",
+            "desc": ""
+          }
+        ]
       },
-      {
-        "name": "RndCnstSramNonce",
-        "desc": "Compile-time random reset value for SRAM scrambling nonce.",
-        "default": null
-      },
-      {
-        "name": "RndCnstLfsrSeed",
-        "desc": "Compile-time random bits for initial LFSR seed",
-        "default": null
-      },
-      {
-        "name": "RndCnstLfsrPerm",
-        "desc": "Compile-time random permutation for LFSR output",
-        "default": null
-      },
-      {
-        "name": "MemSizeRam",
-        "desc": "Memory size of the RAM (in bytes).",
-        "default": "0x1000"
-      },
-      {
-        "name": "InstSize",
-        "desc": "Memory size of a single RAM tile (in bytes).",
-        "default": "4096"
-      },
-      {
-        "name": "NumRamInst",
-        "desc": "Number of internal RAM instances. Must be the same as ceil(MemSizeRam / InstSize) .",
-        "default": "1"
-      },
-      {
-        "name": "InstrExec",
-        "desc": "Support execution from SRAM",
-        "default": "1"
-      },
-      {
-        "name": "NumPrinceRoundsHalf",
-        "desc": "Number of PRINCE half rounds for the SRAM scrambling feature",
-        "default": "3"
-      },
-      {
-        "name": "Outstanding",
-        "desc": "Number of outstanding TLUL transactions",
-        "default": "2"
-      },
-      {
-        "name": "EccCorrection",
-        "desc": "Enable single-bit error correction and error logging",
-        "default": "0"
-      }
-    ],
-    "interrupts": [],
-    "alerts": [
-      {
-        "intent_id": "sram_ctrl.alert.fatal_error",
-        "name": "fatal_error",
-        "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected,\nor if the initialization mechanism has reached an invalid state."
-      }
-    ],
-    "registers": []
-  },
-  "module_intents": {
-    "rtl/sram_ctrl.sv": {
-      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nSRAM controller.",
-      "params": [
+      "assertions": [
         {
-          "name": "MemSizeRam",
-          "default": "32'h1000",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_INIT",
+          "line": 99,
+          "raw": "`ASSERT_INIT(NumRamInstSameAsComputed_A,\n               NumRamInst == prim_util_pkg::ceil_div(MemSizeRam, InstSize)",
+          "name": "NumRamInstSameAsComputed_A",
+          "expression": "NumRamInst == prim_util_pkg::ceil_div(MemSizeRam",
+          "clock": "InstSize"
         },
         {
-          "name": "InstSize",
-          "default": "MemSizeRam",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_INIT",
+          "line": 102,
+          "raw": "`ASSERT_INIT(NonceWidthsLessThanSource_A, NonceWidth + LfsrWidth <= otp_ctrl_pkg::SramNonceWidth)",
+          "name": "NonceWidthsLessThanSource_A",
+          "expression": "NonceWidth + LfsrWidth <= otp_ctrl_pkg::SramNonceWidth"
         },
         {
-          "name": "NumRamInst",
-          "default": "1",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_KNOWN",
+          "line": 721,
+          "raw": "`ASSERT_KNOWN(RegsTlOutKnown_A,  regs_tl_o)",
+          "name": "RegsTlOutKnown_A",
+          "expression": "regs_tl_o"
         },
         {
-          "name": "AlertAsyncOn",
-          "default": "{NumAlerts{1'b1}}",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_KNOWN",
+          "line": 722,
+          "raw": "`ASSERT_KNOWN(RamTlOutKnown_A,   ram_tl_o.d_valid)",
+          "name": "RamTlOutKnown_A",
+          "expression": "ram_tl_o.d_valid"
         },
         {
-          "name": "AlertSkewCycles",
-          "default": "1",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_KNOWN_IF",
+          "line": 723,
+          "raw": "`ASSERT_KNOWN_IF(RamTlOutPayLoadKnown_A, ram_tl_o, ram_tl_o.d_valid)",
+          "name": "RamTlOutPayLoadKnown_A",
+          "expression": "ram_tl_o",
+          "clock": "ram_tl_o.d_valid"
         },
         {
-          "name": "InstrExec",
-          "default": "1",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_KNOWN",
+          "line": 724,
+          "raw": "`ASSERT_KNOWN(AlertOutKnown_A,   alert_tx_o)",
+          "name": "AlertOutKnown_A",
+          "expression": "alert_tx_o"
         },
         {
-          "name": "NumPrinceRoundsHalf",
-          "default": "3",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_KNOWN",
+          "line": 725,
+          "raw": "`ASSERT_KNOWN(SramOtpKeyKnown_A, sram_otp_key_o)",
+          "name": "SramOtpKeyKnown_A",
+          "expression": "sram_otp_key_o"
         },
         {
-          "name": "Outstanding",
-          "default": "2",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_KNOWN",
+          "line": 726,
+          "raw": "`ASSERT_KNOWN(RaclErrorValidKnown_A, racl_error_o.valid)",
+          "name": "RaclErrorValidKnown_A",
+          "expression": "racl_error_o.valid"
         },
         {
-          "name": "EccCorrection",
-          "default": "0",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT_KNOWN",
+          "line": 727,
+          "raw": "`ASSERT_KNOWN(SramRerrorKnown_A, sram_rerror_o)",
+          "name": "SramRerrorKnown_A",
+          "expression": "sram_rerror_o"
         },
         {
-          "name": "EnableRacl",
-          "default": "1'b0",
-          "desc": ""
+          "kind": "macro",
+          "macro": "ASSERT",
+          "line": 768,
+          "raw": "`ASSERT(TlulGntIsCorrect_A, tlul_req |-> (sram_gnt & ~init_req)",
+          "name": "TlulGntIsCorrect_A",
+          "expression": "tlul_req |-> (sram_gnt & ~init_req"
+        }
+      ]
+    },
+    "ip_intent": {
+      "ip_name": "sram_ctrl",
+      "one_line_desc": "Interfacing on-chip SRAM blocks with system bus, supports lightweight scrambling, integrity and secure wipe",
+      "one_paragraph_desc": "SRAM Controller instantiates on-chip SRAM and makes it accessible through the TileLink on-chip interconnect.\nSRAM Controller includes a lightweight scrambling mechanism based on the PRINCE cipher to reduce the attack surface on the confidentiality and integrity of data stored in the SRAM.\nFor end-to-end data integrity protection, SRAM Controller stores the integrity bits alongside data words in memory and raises an alert if it detects an integrity fault.\nSRAM Controller contains an LFSR-based initialization mechanism that overwrites the entire SRAM with pseudorandom data.",
+      "clocking": [
+        {
+          "clock": "clk_i",
+          "reset": "rst_ni",
+          "primary": true
         },
         {
-          "name": "RaclErrorRsp",
-          "default": "EnableRacl",
-          "desc": ""
+          "clock": "clk_otp_i",
+          "reset": "rst_otp_ni",
+          "primary": false
+        }
+      ],
+      "bus_interfaces": [
+        {
+          "protocol": "tlul",
+          "direction": "device"
         },
         {
-          "name": "RaclPolicySelNumRangesRam",
-          "default": "1",
-          "desc": ""
-        },
+          "protocol": "tlul",
+          "direction": "device"
+        }
+      ],
+      "param_list": [
         {
           "name": "RndCnstSramKey",
-          "default": "RndCnstSramKeyDefault",
-          "desc": ""
+          "desc": "Compile-time random reset value for SRAM scrambling key.",
+          "default": null
         },
         {
           "name": "RndCnstSramNonce",
-          "default": "RndCnstSramNonceDefault",
-          "desc": ""
+          "desc": "Compile-time random reset value for SRAM scrambling nonce.",
+          "default": null
         },
         {
           "name": "RndCnstLfsrSeed",
-          "default": "RndCnstLfsrSeedDefault",
-          "desc": ""
+          "desc": "Compile-time random bits for initial LFSR seed",
+          "default": null
         },
         {
           "name": "RndCnstLfsrPerm",
-          "default": "RndCnstLfsrPermDefault",
-          "desc": ""
+          "desc": "Compile-time random permutation for LFSR output",
+          "default": null
+        },
+        {
+          "name": "MemSizeRam",
+          "desc": "Memory size of the RAM (in bytes).",
+          "default": "0x1000"
+        },
+        {
+          "name": "InstSize",
+          "desc": "Memory size of a single RAM tile (in bytes).",
+          "default": "4096"
+        },
+        {
+          "name": "NumRamInst",
+          "desc": "Number of internal RAM instances. Must be the same as ceil(MemSizeRam / InstSize) .",
+          "default": "1"
+        },
+        {
+          "name": "InstrExec",
+          "desc": "Support execution from SRAM",
+          "default": "1"
+        },
+        {
+          "name": "NumPrinceRoundsHalf",
+          "desc": "Number of PRINCE half rounds for the SRAM scrambling feature",
+          "default": "3"
+        },
+        {
+          "name": "Outstanding",
+          "desc": "Number of outstanding TLUL transactions",
+          "default": "2"
+        },
+        {
+          "name": "EccCorrection",
+          "desc": "Enable single-bit error correction and error logging",
+          "default": "0"
         }
-      ]
-    }
+      ],
+      "interrupts": [],
+      "alerts": [
+        {
+          "intent_id": "sram_ctrl.alert.fatal_error",
+          "name": "fatal_error",
+          "desc": "This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected,\nor if the initialization mechanism has reached an invalid state."
+        }
+      ],
+      "registers": []
+    },
+    "doc_intent": [
+      {
+        "file": "README.md",
+        "text": "# SRAM Controller Technical Specification\n<!-- BEGIN CMDGEN util/mdbook_regression_links.py --hjson hw/ip/sram_ctrl/data/sram_ctrl.hjson --top earlgrey -->\n| Regression | Version | [Stages](https://opentitan.org/book/doc/project_governance/development_stages.html) | Results |\n|-|-|-|-|\n [`sram_ctrl_main`](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/dashboard.html) | 1.1.0 | D3, V2S | ![](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/badge/sram_ctrl_main/test.svg) ![](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/badge/sram_ctrl_main/passing.svg) ![](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/badge/sram_ctrl_main/functional.svg) ![](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/badge/sram_ctrl_main/code.svg) |\n [`sram_ctrl_ret`](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/dashboard.html) | 1.1.0 | D3, V2S | ![](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/badge/sram_ctrl_ret/test.svg) ![](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/badge/sram_ctrl_ret/passing.svg) ![](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/badge/sram_ctrl_ret/functional.svg) ![](https://dashboard.reports.lowrisc.org/opentitan/earlgrey/badge/sram_ctrl_ret/code.svg) |\n\nThis IP has been taped out in Earl Grey 1.0.0. The corresponding documentation and regression results can be found [here](https://opentitan.org/earlgrey_1.0.0/book/hw/ip/sram_ctrl/index.html).\n\n<!-- END CMDGEN -->\n\n# Overview\n\nThis document specifies the functionality of the SRAM memory controller.\nThe SRAM controller is a module that is a peripheral on the chip interconnect bus, and thus follows the [Comportability Specification](../../../doc/contributing/hw/comportability/README.md).\n\n\nThe SRAM controller contains the SRAM data and address scrambling device and provides CSRs for requesting the scrambling keys and triggering the hardware initialization feature.\n\n## Features\n\n- [Lightweight scrambling mechanism](../prim/doc/prim_ram_1p_scr.md#custom-substitution-permutation-network) based on the PRINCE cipher.\n- Key request logic for the lightweight memory and address scrambling device.\n- Alert sender and checking logic for detecting bus integrity failures.\n- LFSR-based memory initialization feature.\n- Access controls to allow / disallow code execution from SRAM.\n- Security hardening when integrity error has been detected.\n- Optional memory readback mode for detecting memory integrity errors.\n"
+      },
+      {
+        "file": "doc/checklist.md",
+        "text": "# SRAM_CTRL Checklist\n\nThis checklist is for [Hardware Stage](../../../../doc/project_governance/development_stages.md) transitions for the [SRAM_CTRL peripheral.](../README.md)\nAll checklist items refer to the content in the [Checklist.](../../../../doc/project_governance/checklist/README.md)\n\n## Design Checklist\n\n### D1\n\nType          | Item                  | Resolution  | Note/Collaterals\n--------------|-----------------------|-------------|------------------\nDocumentation | [SPEC_COMPLETE][]     | Done        | [SRAM_CTRL Design Spec](../README.md)\nDocumentation | [CSR_DEFINED][]       | Done        |\nRTL           | [CLKRST_CONNECTED][]  | Done        |\nRTL           | [IP_TOP][]            | Done        |\nRTL           | [IP_INSTANTIABLE][]   | Done        |\nRTL           | [MEM_INSTANCED_80][]  | Done        |\nRTL           | [FUNC_IMPLEMENTED][]  | Done        |\nRTL           | [ASSERT_KNOWN_ADDED][]| Done        |\nCode Quality  | [LINT_SETUP][]        | Done        |\n\n[SPEC_COMPLETE]:      ../../../../doc/project_governance/checklist/README.md#spec_complete\n[CSR_DEFINED]:        ../../../../doc/project_governance/checklist/README.md#csr_defined\n[CLKRST_CONNECTED]:   ../../../../doc/project_governance/checklist/README.md#clkrst_connected\n[IP_TOP]:             ../../../../doc/project_governance/checklist/README.md#ip_top\n[IP_INSTANTIABLE]:    ../../../../doc/project_governance/checklist/README.md#ip_instantiable\n[MEM_INSTANCED_80]:   ../../../../doc/project_governance/checklist/README.md#mem_instanced_80\n[FUNC_IMPLEMENTED]:   ../../../../doc/project_governance/checklist/README.md#func_implemented\n[ASSERT_KNOWN_ADDED]: ../../../../doc/project_governance/checklist/README.md#assert_known_added\n[LINT_SETUP]:         ../../../../doc/project_governance/checklist/README.md#lint_setup\n\n### D2\n\nType          | Item                      | Resolution  | Note/Collaterals\n--------------|---------------------------|-------------|------------------\nDocumentation | [NEW_FEATURES][]          | Done        |\nDocumentation | [BLOCK_DIAGRAM][]         | Done        |\nDocumentation | [DOC_INTERFACE][]         | Done        |\nDocumentation | [DOC_INTEGRATION_GUIDE][] | Waived      | This checklist item has been added retrospectively.\nDocumentation | [MISSING_FUNC][]          | Done        |\nDocumentation | [FEATURE_FROZEN][]        | Done        |\nRTL           | [FEATURE_COMPLETE][]      | Done        |\nRTL           | [PORT_FROZEN][]           | Done        |\nRTL           | [ARCHITECTURE_FROZEN][]   | Done        |\nRTL           | [REVIEW_TODO][]           | Done        |\nRTL           | [STYLE_X][]               | Done        |\nRTL           | [CDC_SYNCMACRO][]         | Done        |\nCode Quality  | [LINT_PASS][]             | Done        |\nCode Quality  | [CDC_SETUP][]             | Waived      | No block-level flow available - waived to top-level signoff.\nCode Quality  | [RDC_SETUP][]             | Waived      | No block-level flow available - waived to top-level signoff.\nCode Quality  | [AREA_CHECK][]            | Done        |\nCode Quality  | [TIMING_CHECK][]          | Done        |\nSecurity      | [SEC_CM_DOCUMENTED][]     | Done        |\n\n[NEW_FEATURES]:          ../../../../doc/project_governance/checklist/README.md#new_features\n[BLOCK_DIAGRAM]:         ../../../../doc/project_governance/checklist/README.md#block_diagram\n[DOC_INTERFACE]:         ../../../../doc/project_governance/checklist/README.md#doc_interface\n[DOC_INTEGRATION_GUIDE]: ../../../../doc/project_governance/checklist/README.md#doc_integration_guide\n[MISSING_FUNC]:          ../../../../doc/project_governance/checklist/README.md#missing_func\n[FEATURE_FROZEN]:        ../../../../doc/project_governance/checklist/README.md#feature_frozen\n[FEATURE_COMPLETE]:      ../../../../doc/project_governance/checklist/README.md#feature_complete\n[PORT_FROZEN]:           ../../../../doc/project_governance/checklist/README.md#port_frozen\n[ARCHITECTURE_FROZEN]:   ../../../../doc/project_governance/checklist/README.md#architecture_frozen\n[REVIEW_TODO]:           ../../../../doc/project_governance/checklist/README.md#review_todo\n[STYLE_X]:               ../../../../doc/project_governance/checklist/README.md#style_x\n[CDC_SYNCMACRO]:         ../../../../doc/project_governance/checklist/README.md#cdc_syncmacro\n[LINT_PASS]:             ../../../../doc/project_governance/checklist/README.md#lint_pass\n[CDC_SETUP]:             ../../../../doc/project_governance/checklist/README.md#cdc_setup\n[RDC_SETUP]:             ../../../../doc/project_governance/checklist/README.md#rdc_setup\n[AREA_CHECK]:            ../../../../doc/project_governance/checklist/README.md#area_check\n[TIMING_CHECK]:          ../../../../doc/project_governance/checklist/README.md#timing_check\n[SEC_CM_DOCUMENTED]:     ../../../../doc/project_governance/checklist/README.md#sec_cm_documented\n\n### D2S\n\n Type         | Item                         | Resolution  | Note/Collaterals\n--------------|------------------------------|-------------|------------------\nSecurity      | [SEC_CM_ASSETS_LISTED][]     | Done        |\nSecurity      | [SEC_CM_IMPLEMENTED][]       | Done        |\nSecurity      | [SEC_CM_RND_CNST][]          | Done        |\nSecurity      | [SEC_CM_NON_RESET_FLOPS][]   | Done        |\nSecurity      | [SEC_CM_SHADOW_REGS][]       | Done        |\nSecurity      | [SEC_CM_RTL_REVIEWED][]      | Done        |\nSecurity      | [SEC_CM_COUNCIL_REVIEWED][]  | Done        |\n\n[SEC_CM_ASSETS_LISTED]:    ../../../../doc/project_governance/checklist/README.md#sec_cm_assets_listed\n[SEC_CM_IMPLEMENTED]:      ../../../../doc/project_governance/checklist/README.md#sec_cm_implemented\n[SEC_CM_RND_CNST]:         ../../../../doc/project_governance/checklist/README.md#sec_cm_rnd_cnst\n[SEC_CM_NON_RESET_FLOPS]:  ../../../../doc/project_governance/checklist/README.md#sec_cm_non_reset_flops\n[SEC_CM_SHADOW_REGS]:      ../../../../doc/project_governance/checklist/README.md#sec_cm_shadow_regs\n[SEC_CM_RTL_REVIEWED]:     ../../../../doc/project_governance/checklist/README.md#sec_cm_rtl_reviewed\n[SEC_CM_COUNCIL_REVIEWED]: ../../../../doc/project_governance/checklist/README.md#sec_cm_council_reviewed\n\n### D3\n\n Type         | Item                    | Resolution  | Note/Collaterals\n--------------|-------------------------|-------------|------------------\nDocumentation | [NEW_FEATURES_D3][]     | Done        |\nRTL           | [TODO_COMPLETE][]       | Done        |\nCode Quality  | [LINT_COMPLETE][]       | Done        |\nCode Quality  | [CDC_COMPLETE][]        | Waived      | No block-level flow available - waived to top-level signoff.\nCode Quality  | [RDC_COMPLETE][]        | Waived      | No block-level flow available - waived to top-level signoff.\nReview        | [REVIEW_RTL][]          | Done        |\nReview        | [REVIEW_DELETED_FF][]   | Waived      | No block-level flow available - waived to top-level signoff.\nReview        | [REVIEW_SW_CHANGE][]    | Done        |\nReview        | [REVIEW_SW_ERRATA][]    | Done        |\nReview        | Reviewer(s)             | Done        | msf@ weicai@ tjaychen@ gac@\nReview        | Signoff date            | Done        | 2022-07-15\n\n[NEW_FEATURES_D3]:      ../../../../doc/project_governance/checklist/README.md#new_features_d3\n[TODO_COMPLETE]:        ../../../../doc/project_governance/checklist/README.md#todo_complete\n[LINT_COMPLETE]:        ../../../../doc/project_governance/checklist/README.md#lint_complete\n[CDC_COMPLETE]:         ../../../../doc/project_governance/checklist/README.md#cdc_complete\n[RDC_COMPLETE]:         ../../../../doc/project_governance/checklist/README.md#rdc_complete\n[REVIEW_RTL]:           ../../../../doc/project_governance/checklist/README.md#review_rtl\n[REVIEW_DELETED_FF]:    ../../../../doc/project_governance/checklist/README.md#review_deleted_ff\n[REVIEW_SW_CHANGE]:     ../../../../doc/project_governance/checklist/README.md#review_sw_change\n[REVIEW_SW_ERRATA]:     ../../../../doc/project_governance/checklist/README.md#review_sw_errata\n\n## Verification Checklist\n\n### V1\n\n Type         | Item                                  | Resolution  | Note/Collaterals\n--------------|---------------------------------------|-------------|------------------\nDocumentation | [DV_DOC_DRAFT_COMPLETED][]            | Done        |\nDocumentation | [TESTPLAN_COMPLETED][]                | Done        |\nTestbench     | [TB_TOP_CREATED][]                    | Done        |\nTestbench     | [PRELIMINARY_ASSERTION_CHECKS_ADDED][]| Done        |\nTestbench     | [SIM_TB_ENV_CREATED][]                | Done        |\nTestbench     | [SIM_RAL_MODEL_GEN_AUTOMATED][]       | Done        |\nTestbench     | [CSR_CHECK_GEN_AUTOMATED][]           | Done        |\nTestbench     | [TB_GEN_AUTOMATED][]                  | N/A         |\nTests         | [SIM_SMOKE_TEST_PASSING][]            | Done        |\nTests         | [SIM_CSR_MEM_TEST_SUITE_PASSING][]    | Done        |\nTests         | [FPV_MAIN_ASSERTIONS_PROVEN][]        | N/A         |\nTool Setup    | [SIM_ALT_TOOL_SETUP][]                | Done        |\nRegression    | [SIM_SMOKE_REGRESSION_SETUP][]        | Done        |\nRegression    | [SIM_NIGHTLY_REGRESSION_SETUP][]      | Done        |\nRegression    | [FPV_REGRESSION_SETUP][]              | Done        |\nCoverage      | [SIM_COVERAGE_MODEL_ADDED][]          | Done        |\nCode Quality  | [TB_LINT_SETUP][]                     | Done        |\nIntegration   | [PRE_VERIFIED_SUB_MODULES_V1][]       | Done        |\nReview        | [DESIGN_SPEC_REVIEWED][]              | Done        |\nReview        | [TESTPLAN_REVIEWED][]                 | Done        |\nReview        | [STD_TEST_CATEGORIES_PLANNED][]       | Done        | Exception (Security/Power/Debug)\nReview        | [V2_CHECKLIST_SCOPED][]               | Done        |\n\n[DV_DOC_DRAFT_COMPLETED]:             ../../../../doc/project_governance/checklist/README.md#dv_doc_draft_completed\n[TESTPLAN_COMPLETED]:                 ../../../../doc/project_governance/checklist/README.md#testplan_completed\n[TB_TOP_CREATED]:                     ../../../../doc/project_governance/checklist/README.md#tb_top_created\n[PRELIMINARY_ASSERTION_CHECKS_ADDED]: ../../../../doc/project_governance/checklist/README.md#preliminary_assertion_checks_added\n[SIM_TB_ENV_CREATED]:                 ../../../../doc/project_governance/checklist/README.md#sim_tb_env_created\n[SIM_RAL_MODEL_GEN_AUTOMATED]:        ../../../../doc/project_governance/checklist/README.md#sim_ral_model_gen_automated\n[CSR_CHECK_GEN_AUTOMATED]:            ../../../../doc/project_governance/checklist/README.md#csr_check_gen_automated\n[TB_GEN_AUTOMATED]:                   ../../../../doc/project_governance/checklist/README.md#tb_gen_automated\n[SIM_SMOKE_TEST_PASSING]:             ../../../../doc/project_governance/checklist/README.md#sim_smoke_test_passing\n[SIM_CSR_MEM_TEST_SUITE_PASSING]:     ../../../../doc/project_governance/checklist/README.md#sim_csr_mem_test_suite_passing\n[FPV_MAIN_ASSERTIONS_PROVEN]:         ../../../../doc/project_governance/checklist/README.md#fpv_main_assertions_proven\n[SIM_ALT_TOOL_SETUP]:                 ../../../../doc/project_governance/checklist/README.md#sim_alt_tool_setup\n[SIM_SMOKE_REGRESSION_SETUP]:         ../../../../doc/project_governance/checklist/README.md#sim_smoke_regression_setup\n[SIM_NIGHTLY_REGRESSION_SETUP]:       ../../../../doc/project_governance/checklist/README.md#sim_nightly_regression_setup\n[FPV_REGRESSION_SETUP]:               ../../../../doc/project_governance/checklist/README.md#fpv_regression_setup\n[SIM_COVERAGE_MODEL_ADDED]:           ../../../../doc/project_governance/checklist/README.md#sim_coverage_model_added\n[TB_LINT_SETUP]:                      ../../../../doc/project_governance/checklist/README.md#tb_lint_setup\n[PRE_VERIFIED_SUB_MODULES_V1]:        ../../../../doc/project_governance/checklist/README.md#pre_verified_sub_modules_v1\n[DESIGN_SPEC_REVIEWED]:               ../../../../doc/project_governance/checklist/README.md#design_spec_reviewed\n[TESTPLAN_REVIEWED]:                  ../../../../doc/project_governance/checklist/README.md#testplan_reviewed\n[STD_TEST_CATEGORIES_PLANNED]:        ../../../../doc/project_governance/checklist/README.md#std_test_categories_planned\n[V2_CHECKLIST_SCOPED]:                ../../../../doc/project_governance/checklist/README.md#v2_checklist_scoped\n\n### V2\n\n Type         | Item                                    | Resolution  | Note/Collaterals\n--------------|-----------------------------------------|-------------|------------------\nDocumentation | [DESIGN_DELTAS_CAPTURED_V2][]           | Done        |\nDocumentation | [DV_DOC_COMPLETED][]                    | Done        |\nTestbench     | [FUNCTIONAL_COVERAGE_IMPLEMENTED][]     | Done        |\nTestbench     | [ALL_INTERFACES_EXERCISED][]            | Done        |\nTestbench     | [ALL_ASSERTION_CHECKS_ADDED][]          | Done        |\nTestbench     | [SIM_TB_ENV_COMPLETED][]                | Done        |\nTests         | [SIM_ALL_TESTS_PASSING][]               | Done        |\nTests         | [FPV_ALL_ASSERTIONS_WRITTEN][]          | N/A         |\nTests         | [FPV_ALL_ASSUMPTIONS_REVIEWED][]        | N/A         |\nTests         | [SIM_FW_SIMULATED][]                    | Done        |\nRegression    | [SIM_NIGHTLY_REGRESSION_V2][]           | Done        |\nCoverage      | [SIM_CODE_COVERAGE_V2][]                | Done        |\nCoverage      | [SIM_FUNCTIONAL_COVERAGE_V2][]          | Done        |\nCoverage      | [FPV_CODE_COVERAGE_V2][]                | N/A         |\nCoverage      | [FPV_COI_COVERAGE_V2][]                 | N/A         |\nIntegration   | [PRE_VERIFIED_SUB_MODULES_V2][]         | Done        | prim_prince and prim_lfsr are verified in separated TBs\nIssues        | [NO_HIGH_PRIORITY_ISSUES_PENDING][]     | Done        |\nIssues        | [ALL_LOW_PRIORITY_ISSUES_ROOT_CAUSED][] | Done        |\nReview        | [DV_DOC_TESTPLAN_REVIEWED][]            | Done        |\nReview        | [V3_CHECKLIST_SCOPED][]                 | Done        |\n\n[DESIGN_DELTAS_CAPTURED_V2]:          ../../../../doc/project_governance/checklist/README.md#design_deltas_captured_v2\n[DV_DOC_COMPLETED]:                   ../../../../doc/project_governance/checklist/README.md#dv_doc_completed\n[FUNCTIONAL_COVERAGE_IMPLEMENTED]:    ../../../../doc/project_governance/checklist/README.md#functional_coverage_implemented\n[ALL_INTERFACES_EXERCISED]:           ../../../../doc/project_governance/checklist/README.md#all_interfaces_exercised\n[ALL_ASSERTION_CHECKS_ADDED]:         ../../../../doc/project_governance/checklist/README.md#all_assertion_checks_added\n[SIM_TB_ENV_COMPLETED]:               ../../../../doc/project_governance/checklist/README.md#sim_tb_env_completed\n[SIM_ALL_TESTS_PASSING]:              ../../../../doc/project_governance/checklist/README.md#sim_all_tests_passing\n[FPV_ALL_ASSERTIONS_WRITTEN]:         ../../../../doc/project_governance/checklist/README.md#fpv_all_assertions_written\n[FPV_ALL_ASSUMPTIONS_REVIEWED]:       ../../../../doc/project_governance/checklist/README.md#fpv_all_assumptions_reviewed\n[SIM_FW_SIMULATED]:                   ../../../../doc/project_governance/checklist/README.md#sim_fw_simulated\n[SIM_NIGHTLY_REGRESSION_V2]:          ../../../../doc/project_governance/checklist/README.md#sim_nightly_regression_v2\n[SIM_CODE_COVERAGE_V2]:               ../../../../doc/project_governance/checklist/README.md#sim_code_coverage_v2\n[SIM_FUNCTIONAL_COVERAGE_V2]:         ../../../../doc/project_governance/checklist/README.md#sim_functional_coverage_v2\n[FPV_CODE_COVERAGE_V2]:               ../../../../doc/project_governance/checklist/README.md#fpv_code_coverage_v2\n[FPV_COI_COVERAGE_V2]:                ../../../../doc/project_governance/checklist/README.md#fpv_coi_coverage_v2\n[PRE_VERIFIED_SUB_MODULES_V2]:        ../../../../doc/project_governance/checklist/README.md#pre_verified_sub_modules_v2\n[NO_HIGH_PRIORITY_ISSUES_PENDING]:    ../../../../doc/project_governance/checklist/README.md#no_high_priority_issues_pending\n[ALL_LOW_PRIORITY_ISSUES_ROOT_CAUSED]:../../../../doc/project_governance/checklist/README.md#all_low_priority_issues_root_caused\n[DV_DOC_TESTPLAN_REVIEWED]:           ../../../../doc/project_governance/checklist/README.md#dv_doc_testplan_reviewed\n[V3_CHECKLIST_SCOPED]:                ../../../../doc/project_governance/checklist/README.md#v3_checklist_scoped\n\n### V2S\n\n Type         | Item                                    | Resolution  | Note/Collaterals\n--------------|-----------------------------------------|-------------|------------------\nDocumentation | [SEC_CM_TESTPLAN_COMPLETED][]           | Done        |\nTests         | [FPV_SEC_CM_VERIFIED][]                 | Done        | Sub-module prim_count is proven in FPV\nTests         | [SIM_SEC_CM_VERIFIED][]                 | Done        |\nCoverage      | [SIM_COVERAGE_REVIEWED][]               | Done        |\nReview        | [SEC_CM_DV_REVIEWED][]                  | Done        |\n\n[SEC_CM_TESTPLAN_COMPLETED]:          ../../../../doc/project_governance/checklist/README.md#sec_cm_testplan_completed\n[FPV_SEC_CM_VERIFIED]:                ../../../../doc/project_governance/checklist/README.md#fpv_sec_cm_verified\n[SIM_SEC_CM_VERIFIED]:                ../../../../doc/project_governance/checklist/README.md#sim_sec_cm_verified\n[SIM_COVERAGE_REVIEWED]:              ../../../../doc/project_governance/checklist/README.md#sim_coverage_reviewed\n[SEC_CM_DV_REVIEWED]:                 ../../../../doc/project_governance/checklist/README.md#sec_cm_dv_reviewed\n\n### V3\n\n Type         | Item                              | Resolution  | Note/Collaterals\n--------------|-----------------------------------|-------------|------------------\nDocumentation | [DESIGN_DELTAS_CAPTURED_V3][]     | Not Started |\nTests         | [X_PROP_ANALYSIS_COMPLETED][]     | Not Started |\nTests         | [FPV_ASSERTIONS_PROVEN_AT_V3][]   | Not Started |\nRegression    | [SIM_NIGHTLY_REGRESSION_AT_V3][]  | Not Started |\nCoverage      | [SIM_CODE_COVERAGE_AT_100][]      | Not Started |\nCoverage      | [SIM_FUNCTIONAL_COVERAGE_AT_100][]| Not Started |\nCoverage      | [FPV_CODE_COVERAGE_AT_100][]      | Not Started |\nCoverage      | [FPV_COI_COVERAGE_AT_100][]       | Not Started |\nCode Quality  | [ALL_TODOS_RESOLVED][]            | Not Started |\nCode Quality  | [NO_TOOL_WARNINGS_THROWN][]       | Not Started |\nCode Quality  | [TB_LINT_COMPLETE][]              | Not Started |\nIntegration   | [PRE_VERIFIED_SUB_MODULES_V3][]   | Not Started |\nIssues        | [NO_ISSUES_PENDING][]             | Not Started |\nReview        | Reviewer(s)                       | Not Started |\nReview        | Signoff date                      | Not Started |\n\n[DESIGN_DELTAS_CAPTURED_V3]:     ../../../../doc/project_governance/checklist/README.md#design_deltas_captured_v3\n[X_PROP_ANALYSIS_COMPLETED]:     ../../../../doc/project_governance/checklist/README.md#x_prop_analysis_completed\n[FPV_ASSERTIONS_PROVEN_AT_V3]:   ../../../../doc/project_governance/checklist/README.md#fpv_assertions_proven_at_v3\n[SIM_NIGHTLY_REGRESSION_AT_V3]:  ../../../../doc/project_governance/checklist/README.md#sim_nightly_regression_at_v3\n[SIM_CODE_COVERAGE_AT_100]:      ../../../../doc/project_governance/checklist/README.md#sim_code_coverage_at_100\n[SIM_FUNCTIONAL_COVERAGE_AT_100]:../../../../doc/project_governance/checklist/README.md#sim_functional_coverage_at_100\n[FPV_CODE_COVERAGE_AT_100]:      ../../../../doc/project_governance/checklist/README.md#fpv_code_coverage_at_100\n[FPV_COI_COVERAGE_AT_100]:       ../../../../doc/project_governance/checklist/README.md#fpv_coi_coverage_at_100\n[ALL_TODOS_RESOLVED]:            ../../../../doc/project_governance/checklist/README.md#all_todos_resolved\n[NO_TOOL_WARNINGS_THROWN]:       ../../../../doc/project_governance/checklist/README.md#no_tool_warnings_thrown\n[TB_LINT_COMPLETE]:              ../../../../doc/project_governance/checklist/README.md#tb_lint_complete\n[PRE_VERIFIED_SUB_MODULES_V3]:   ../../../../doc/project_governance/checklist/README.md#pre_verified_sub_modules_v3\n[NO_ISSUES_PENDING]:             ../../../../doc/project_governance/checklist/README.md#no_issues_pending\n"
+      },
+      {
+        "file": "doc/interfaces.md",
+        "text": "# Hardware Interfaces\n\n## Parameters\n\nThe following table lists the instantiation parameters of the SRAM controller.\n\nParameter                   | Default               | Top Earlgrey      | Description\n----------------------------|-----------------------|-------------------|---------------\n`AlertAsyncOn`              | 1'b1                  | 1'b1              |\n`InstrExec`                 | 1                     | 1                 | Enables the execute from SRAM feature.\n`MemSizeRam`                | 4096                  | (multiple values) | Number of 32bit words in the SRAM (can be overridden by `topgen`).\n`RndCnstSramKey`            | (see RTL)             | (see RTL)         | Compile-time random default constant for scrambling key.\n`RndCnstSramNonce`          | (see RTL)             | (see RTL)         | Compile-time random default constant for scrambling nonce.\n`RndCnstLfsrSeed`           | (see RTL)             | (see RTL)         | Compile-time random default constant for LFSR seed.\n`RndCnstLfsrPerm`           | (see RTL)             | (see RTL)         | Compile-time random default constant for LFSR permutation.\n\n## Signals\n\n<!-- BEGIN CMDGEN util/regtool.py --interfaces ./hw/ip/sram_ctrl/data/sram_ctrl.hjson -->\nReferring to the [Comportable guideline for peripheral device functionality](https://opentitan.org/book/doc/contributing/hw/comportability), the module **`sram_ctrl`** has the following hardware interfaces defined\n- Primary Clock: **`clk_i`**\n- Other Clocks: **`clk_otp_i`**\n- Bus Device Interfaces (TL-UL): **`regs_tl`**, **`ram_tl`**\n- Bus Host Interfaces (TL-UL): *none*\n- Peripheral Pins for Chip IO: *none*\n- Interrupts: *none*\n\n## [Inter-Module Signals](https://opentitan.org/book/doc/contributing/hw/comportability/index.html#inter-signal-handling)\n\n| Port Name          | Package::Struct                 | Type    | Act   | Width      | Description                                                                                                                          |\n|:-------------------|:--------------------------------|:--------|:------|:-----------|:-------------------------------------------------------------------------------------------------------------------------------------|\n| sram_otp_key       | otp_ctrl_pkg::sram_otp_key      | req_rsp | req   | 1          |                                                                                                                                      |\n| cfg                | prim_ram_1p_pkg::ram_1p_cfg     | uni     | rcv   | NumRamInst |                                                                                                                                      |\n| cfg_rsp            | prim_ram_1p_pkg::ram_1p_cfg_rsp | uni     | req   | NumRamInst |                                                                                                                                      |\n| lc_escalate_en     | lc_ctrl_pkg::lc_tx              | uni     | rcv   | 1          |                                                                                                                                      |\n| lc_hw_debug_en     | lc_ctrl_pkg::lc_tx              | uni     | rcv   | 1          |                                                                                                                                      |\n| otp_en_sram_ifetch | prim_mubi_pkg::mubi8            | uni     | rcv   | 1          |                                                                                                                                      |\n| racl_policies      | top_racl_pkg::racl_policy_vec   | uni     | rcv   | 1          | Incoming RACL policy vector from a racl_ctrl instance. The policy selection vector (parameter) selects the policy for each register. |\n| racl_error         | top_racl_pkg::racl_error_log    | uni     | req   | 1          | RACL error log information of this module.                                                                                           |\n| sram_rerror        | sram_ctrl_pkg::sram_error_t     | uni     | req   | 1          | SRAM read error indicating correctable and uncorrectable ECC errors.                                                                 |\n| regs_tl            | tlul_pkg::tl                    | req_rsp | rsp   | 1          |                                                                                                                                      |\n| ram_tl             | tlul_pkg::tl                    | req_rsp | rsp   | 1          |                                                                                                                                      |\n\n## Security Alerts\n\n| Alert Name   | Description                                                                                                                                        |\n|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|\n| fatal_error  | This fatal alert is triggered when a fatal TL-UL bus integrity fault is detected, or if the initialization mechanism has reached an invalid state. |\n\n## Security Countermeasures\n\n| Countermeasure ID                      | Description                                                                                                                                                                 |\n|:---------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| SRAM_CTRL.BUS.INTEGRITY                | End-to-end bus integrity scheme.                                                                                                                                            |\n| SRAM_CTRL.CTRL.CONFIG.REGWEN           | The SRAM control register is protected by a REGWEN.                                                                                                                         |\n| SRAM_CTRL.EXEC.CONFIG.REGWEN           | The SRAM execution enable register is protected by a REGWEN.                                                                                                                |\n| SRAM_CTRL.READBACK.CONFIG.REGWEN       | The SRAM readback enable register is protected by a REGWEN.                                                                                                                 |\n| SRAM_CTRL.EXEC.CONFIG.MUBI             | The SRAM execution enable register is multibit encoded.                                                                                                                     |\n| SRAM_CTRL.EXEC.INTERSIG.MUBI           | The SRAM execution enable signal coming from OTP is multibit encoded.                                                                                                       |\n| SRAM_CTRL.LC_ESCALATE_EN.INTERSIG.MUBI | The life cycle escalation enable signal is multibit encoded.                                                                                                                |\n| SRAM_CTRL.LC_HW_DEBUG_EN.INTERSIG.MUBI | The life cycle hardware debug enable signal is multibit encoded.                                                                                                            |\n| SRAM_CTRL.PRIM_RAM.CTRL.MUBI           | The control signals inside prim_ram are multibit encoded.                                                                                                                   |\n| SRAM_CTRL.MEM.INTEGRITY                | End-to-end data/memory integrity scheme.                                                                                                                                    |\n| SRAM_CTRL.MEM.READBACK                 | Each read and write is checked with a readback.                                                                                                                             |\n| SRAM_CTRL.MEM.SCRAMBLE                 | Data is scrambled with a keyed reduced-round PRINCE cipher in CTR mode.                                                                                                     |\n| SRAM_CTRL.ADDR.SCRAMBLE                | Address is scrambled with a keyed lightweight permutation/diffusion function.                                                                                               |\n| SRAM_CTRL.INSTR.BUS.LC_GATED           | Prevent code execution from SRAM in non-test lifecycle states.                                                                                                              |\n| SRAM_CTRL.RAM_TL_LC_GATE.FSM.SPARSE    | The control FSM inside the TL-UL gating primitive is sparsely encoded.                                                                                                      |\n| SRAM_CTRL.KEY.GLOBAL_ESC               | Scrambling key and nonce are reset to a fixed value upon escalation, and bus transactions going to the memory will be blocked.                                              |\n| SRAM_CTRL.KEY.LOCAL_ESC                | Scrambling key and nonce are reset to a fixed value upon local escalation due to bus integrity or counter errors, and bus transactions going to the memory will be blocked. |\n| SRAM_CTRL.INIT.CTR.REDUN               | The initialization counter is duplicated.                                                                                                                                   |\n| SRAM_CTRL.SCRAMBLE.KEY.SIDELOAD        | The scrambling key is sideloaded from OTP and thus unreadable by SW.                                                                                                        |\n| SRAM_CTRL.TLUL_FIFO.CTR.REDUN          | The TL-UL response FIFO pointers are implemented with duplicate counters.                                                                                                   |\n\n\n<!-- END CMDGEN -->\n\nThe table below lists other SRAM controller signals.\n\nSignal                     | Direction        | Type                               | Description\n---------------------------|------------------|------------------------------------|---------------\n`lc_hw_debug_en_i`         | `input`          | `lc_ctrl_pkg::lc_tx_t`             | Multibit life cycle hardware debug enable signal coming from life cycle controller, asserted when the hardware debug mechanisms are enabled in the system.\n`lc_escalate_en_i`         | `input`          | `lc_ctrl_pkg::lc_tx_t`             | Multibit life cycle escalation enable signal coming from life cycle controller, asserted if an escalation has occurred.\n`sram_otp_key_o`           | `output`         | `otp_ctrl_pkg::sram_otp_key_req_t` | Key derivation request going to the key derivation interface of the OTP controller.\n`sram_otp_key_i`           | `input`          | `otp_ctrl_pkg::sram_otp_key_rsp_t` | Ephemeral scrambling key coming back from the key derivation interface of the OTP controller.\n`otp_en_sram_ifetch_i`     | `input`          | `otp_ctrl_pkg::mubi8_t`            | Multibit value coming from the OTP HW_CFG partition EN_SRAM_IFETCH, set to kMuBi8True in order to enable the [`EXEC`](../data/sram_ctrl.hjson#exec) CSR. For example, see earlgrey's [OTP Field Descriptions](../../../top_earlgrey/ip_autogen/otp_ctrl/doc/programmers_guide.md#otp-field-descriptions))\n`cfg_i`                    | `input`          | `logic [CfgWidth-1:0]`             | Attributes for physical memory macro.\n\n### Interfaces to OTP and the SRAM Scrambling Primitive\n\nThe interface to the key derivation interface inside the OTP controller follows a simple req / ack protocol, where the SRAM controller first requests an updated ephemeral key by asserting the `sram_otp_key_i.req`.\nThe OTP controller then fetches entropy from CSRNG and derives an ephemeral key using the SRAM_DATA_KEY_SEED and the PRESENT scrambling data path as described in the earlgrey's [OTP controller spec](../../../top_earlgrey/ip_autogen/otp_ctrl/README.md#scrambling-datapath) for example.\nFinally, the OTP controller returns a fresh ephemeral key via the response channels (`sram_otp_key_o[*]`, `otbn_otp_key_o`), which complete the req / ack handshake.\nThe key and nonce are made available to the scrambling primitive in the subsequent cycle.\nThe wave diagram below illustrates this process.\n\n```wavejson\n{signal: [\n  {name: 'clk_otp_i',                 wave: 'p...........'},\n  {name: 'sram_otp_key_o.req',        wave: '0.|1.|..0|..'},\n  {name: 'sram_otp_key_i.ack',        wave: '0.|..|.10|..'},\n  {name: 'sram_otp_key_i.nonce',      wave: '0.|..|.30|..'},\n  {name: 'sram_otp_key_i.key',        wave: '0.|..|.30|..'},\n  {name: 'sram_otp_key_i.seed_valid', wave: '0.|..|.10|..'},\n  {},\n  {name: 'clk_i',                     wave: 'p...........'},\n  {name: 'key_valid_q',               wave: '10|..|...|1.'},\n  {name: 'key_q',                     wave: '4.|..|...|3.'},\n  {name: 'nonce_q',                   wave: '4.|..|...|3.'},\n  {name: 'key_seed_valid_q',          wave: '4.|..|...|3.'},\n]}\n```\n\nIf the key seeds have not yet been provisioned in OTP, the keys are derived from all-zero constants, and the `*.seed_valid` signal will be set to 0 in the response.\nIt should be noted that this mechanism requires the CSRNG and entropy distribution network to be operational, and a key derivation request will block if they are not.\n\nNote that the req/ack protocol runs on `clk_otp_i`.\nThe SRAM controller synchronizes the data over via a req/ack handshake primitive `prim_sync_reqack.sv` primitive as shown below.\n\n![OTP Key Req Ack](../../../top_earlgrey/ip_autogen/otp_ctrl/doc/otp_ctrl_key_req_ack.svg)\n\nNote that the key and nonce output signals on the OTP controller side are guaranteed to remain stable for at least 62 OTP clock cycles after the `ack` signal is pulsed high, because the derivation of a 64bit half-key takes at least two passes through the 31-cycle PRESENT primitive.\nHence, if the SRAM controller clock `clk_i` is faster or in the same order of magnitude as `clk_otp_i`, the data can be directly sampled upon assertion of `src_ack_o`.\nIf the SRAM controller runs on a significantly slower clock than OTP, an additional register (as indicated with dashed grey lines in the figure) has to be added.\n\n### Global and Local Escalation\n\nIf `lc_escalate_en_i` is set to any different value than `lc_ctrl_pkg::Off`, the current scrambling keys are discarded and reset to `RndCnstSramKey` and `RndCnstSramNonce` in the subsequent cycle.\nAny subsequent memory request to `prim_ram_1p_scr` will then be blocked as well.\nThis mechanism is part of the [life cycle](../../lc_ctrl/README.md) state scrapping and secret wiping countermeasure triggered by the alert handler (global escalation).\n\nNote that if any local bus integrity or counter errors are detected, the SRAM controller will locally escalate without assertion of `lc_escalate_en_i`.\nThe behavior of local escalation is identical to global escalation via `lc_escalate_en_i`.\n"
+      },
+      {
+        "file": "doc/programmers_guide.md",
+        "text": "# Programmer's Guide\n\n## Initialization\n\nThe memory inside the SRAM controller can be used right away after a system reset.\nHowever, since the scrambling key defaults to a predefined value, it is recommended that SW performs the following initialization steps as early in the boot process as possible.\n\n1. Request an updated ephemeral scrambling key from OTP by writing 0x1 to [`CTRL.RENEW_SCR_KEY`](registers.md#ctrl).\n   SW should spin on [`STATUS.SCR_KEY_VALID`](registers.md#status) to wait until the new key has been obtained.\n   While this is not strictly needed since memory accesses to the SRAM will be stalled until the updated key has been obtained, the PC value upon a watchdog crash will be more informative when using a spin wait.\n\n2. (optional) Initialize the memory with pseudo random data by writing 0x1 to [`CTRL.INIT`](registers.md#ctrl)\n   SW should spin on [`STATUS.INIT_DONE`](registers.md#status) to wait until the memory has been initialized.\n   While this is not strictly needed since memory accesses to the SRAM will be stalled until the initialization is done, the PC value upon a watchdog crash will be more informative when using a spin wait.\n\n3. (optional) Check the [`STATUS.SCR_KEY_SEED_VALID`](registers.md#status) bit:\n    - In case the scrambling key seeds have been fully provisioned to OTP, this bit should be set to 0x1. A value of 0x0 indicates that the OTP could be malfunctioning or has been tampered with.\n    - If the scrambling seeds have not yet been provisioned to OTP, this bit is set to 0x0. The scrambling key will in that case still be ephemeral, but the key seed mixed in as part of the key derivation process will be set to a predefined netlist constant.\n\n4. (optional) Lock down write access to [`CTRL`](registers.md#ctrl) by writing to [`CTRL_REGWEN`](registers.md#ctrl_regwen) if future key renewals and initializations should be disallowed until the next system reset.\n\nNote that before (re-)requesting an updated SRAM key it is imperative to make sure that:\n- The memory contents are not needed anymore. Requesting a key implicitly wipes all data in the SRAM.\n- The CSRNG and the entropy distribution network have been initialized. The key derivation mechanism in OTP needs to request a chunk of fresh entropy, and that request will block until the entropy distribution network responds.\n\nIt should also be noted that data and address scrambling is never entirely disabled - even when the default scrambling key is used.\n\n## Device Interface Functions (DIFs)\n\n- [Device Interface Functions](../../../../sw/device/lib/dif/dif_sram_ctrl.h)\n"
+      },
+      {
+        "file": "doc/registers.md",
+        "text": "# Registers\n\n<!-- BEGIN CMDGEN util/regtool.py -d ./hw/ip/sram_ctrl/data/sram_ctrl.hjson -->\n## Summary\n\n| Name                                            | Offset   |   Length | Description                                  |\n|:------------------------------------------------|:---------|---------:|:---------------------------------------------|\n| sram_ctrl.[`ALERT_TEST`](#alert_test)           | 0x0      |        4 | Alert Test Register                          |\n| sram_ctrl.[`STATUS`](#status)                   | 0x4      |        4 | SRAM status register.                        |\n| sram_ctrl.[`EXEC_REGWEN`](#exec_regwen)         | 0x8      |        4 | Lock register for execution enable register. |\n| sram_ctrl.[`EXEC`](#exec)                       | 0xc      |        4 | Sram execution enable.                       |\n| sram_ctrl.[`CTRL_REGWEN`](#ctrl_regwen)         | 0x10     |        4 | Lock register for control register.          |\n| sram_ctrl.[`CTRL`](#ctrl)                       | 0x14     |        4 | SRAM ctrl register.                          |\n| sram_ctrl.[`SCR_KEY_ROTATED`](#scr_key_rotated) | 0x18     |        4 | Clearable SRAM key request status.           |\n| sram_ctrl.[`READBACK_REGWEN`](#readback_regwen) | 0x1c     |        4 | Lock register for readback enable register.  |\n| sram_ctrl.[`READBACK`](#readback)               | 0x20     |        4 | readback enable.                             |\n\n## ALERT_TEST\nAlert Test Register\n- Offset: `0x0`\n- Reset default: `0x0`\n- Reset mask: `0x1`\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"fatal_error\", \"bits\": 1, \"attr\": [\"wo\"], \"rotate\": -90}, {\"bits\": 31}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 130}}\n```\n\n|  Bits  |  Type  |  Reset  | Name        | Description                                      |\n|:------:|:------:|:-------:|:------------|:-------------------------------------------------|\n|  31:1  |        |         |             | Reserved                                         |\n|   0    |   wo   |   0x0   | fatal_error | Write 1 to trigger one alert event of this kind. |\n\n## STATUS\nSRAM status register.\n- Offset: `0x4`\n- Reset default: `0x0`\n- Reset mask: `0xff`\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"BUS_INTEG_ERROR\", \"bits\": 1, \"attr\": [\"ro\"], \"rotate\": -90}, {\"name\": \"INIT_ERROR\", \"bits\": 1, \"attr\": [\"ro\"], \"rotate\": -90}, {\"name\": \"ESCALATED\", \"bits\": 1, \"attr\": [\"ro\"], \"rotate\": -90}, {\"name\": \"SCR_KEY_VALID\", \"bits\": 1, \"attr\": [\"ro\"], \"rotate\": -90}, {\"name\": \"SCR_KEY_SEED_VALID\", \"bits\": 1, \"attr\": [\"ro\"], \"rotate\": -90}, {\"name\": \"INIT_DONE\", \"bits\": 1, \"attr\": [\"ro\"], \"rotate\": -90}, {\"name\": \"READBACK_ERROR\", \"bits\": 1, \"attr\": [\"ro\"], \"rotate\": -90}, {\"name\": \"SRAM_ALERT\", \"bits\": 1, \"attr\": [\"ro\"], \"rotate\": -90}, {\"bits\": 24}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 200}}\n```\n\n|  Bits  |  Type  |  Reset  | Name                                              |\n|:------:|:------:|:-------:|:--------------------------------------------------|\n|  31:8  |        |         | Reserved                                          |\n|   7    |   ro   |   0x0   | [SRAM_ALERT](#status--sram_alert)                 |\n|   6    |   ro   |   0x0   | [READBACK_ERROR](#status--readback_error)         |\n|   5    |   ro   |   0x0   | [INIT_DONE](#status--init_done)                   |\n|   4    |   ro   |   0x0   | [SCR_KEY_SEED_VALID](#status--scr_key_seed_valid) |\n|   3    |   ro   |   0x0   | [SCR_KEY_VALID](#status--scr_key_valid)           |\n|   2    |   ro   |   0x0   | [ESCALATED](#status--escalated)                   |\n|   1    |   ro   |   0x0   | [INIT_ERROR](#status--init_error)                 |\n|   0    |   ro   |   0x0   | [BUS_INTEG_ERROR](#status--bus_integ_error)       |\n\n### STATUS . SRAM_ALERT\nThis bit is set to 1 if a multi bit encoding error has been detected inside the RAM modules.\nThis error triggers a fatal_error alert.\nThis condition is terminal.\n\n### STATUS . READBACK_ERROR\nThis bit is set to 1 if a SRAM readback check failed.\nThis error triggers a fatal_error alert.\nThis condition is terminal.\n\n### STATUS . INIT_DONE\nSet to 1 if the hardware initialization triggered via [`CTRL.INIT`](#ctrl) has completed.\n\n### STATUS . SCR_KEY_SEED_VALID\nSet to 1 if the scrambling key has been derived from a valid key seed in OTP.\nIf [`STATUS.SCR_KEY_VALID`](#status) is set to 1, [`STATUS.SCR_KEY_SEED_VALID`](#status) should be 1\nexcept for cases where the scrambling key seeds have not yet been provisioned to\nOTP. In such a case, the scrambling key is still ephemeral (i.e., it is derived\nusing entropy from CSRNG), but a default all-zero value is used as the key seed.\n\n### STATUS . SCR_KEY_VALID\nSet to 1 if a new scrambling key has been successfully obtained from OTP.\nNote that if this is set to 0, the SRAM contents are still scrambled, but a\ndefault all-zero key and nonce are used to do so.\n\n### STATUS . ESCALATED\nSet to 1 if the sram controller has received an escalate request.\nIf this is set to 1, the scrambling keys have been reset to the default values\nand all subsequent memory requests will be blocked.\nThis condition is terminal.\n\n### STATUS . INIT_ERROR\nThis bit is set to 1 if a the initialization counter has reached an invalid state.\nThis error triggers a fatal_error alert.\nThis condition is terminal.\n\n### STATUS . BUS_INTEG_ERROR\nThis bit is set to 1 if a fatal bus integrity fault is detected.\nThis error triggers a fatal_error alert.\nThis condition is terminal.\n\n## EXEC_REGWEN\nLock register for execution enable register.\n- Offset: `0x8`\n- Reset default: `0x1`\n- Reset mask: `0x1`\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"EXEC_REGWEN\", \"bits\": 1, \"attr\": [\"rw0c\"], \"rotate\": -90}, {\"bits\": 31}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 130}}\n```\n\n|  Bits  |  Type  |  Reset  | Name        | Description                                                       |\n|:------:|:------:|:-------:|:------------|:------------------------------------------------------------------|\n|  31:1  |        |         |             | Reserved                                                          |\n|   0    |  rw0c  |   0x1   | EXEC_REGWEN | When cleared to zero, [`EXEC`](#exec) can not be written anymore. |\n\n## EXEC\nSram execution enable.\n- Offset: `0xc`\n- Reset default: `0x9`\n- Reset mask: `0xf`\n- Register enable: [`EXEC_REGWEN`](#exec_regwen)\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"EN\", \"bits\": 4, \"attr\": [\"rw\"], \"rotate\": 0}, {\"bits\": 28}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 80}}\n```\n\n|  Bits  |  Type  |  Reset  | Name            |\n|:------:|:------:|:-------:|:----------------|\n|  31:4  |        |         | Reserved        |\n|  3:0   |   rw   |   0x9   | [EN](#exec--en) |\n\n### EXEC . EN\nThis register only has any effect if the value of the incoming\notp_en_sram_ifetch_i signal is set to kMultiBitBool8True (in\nEarlgrey, this comes from the OTP HW_CFG1 partition).\n\nIf so, execution from SRAM requires this register to contain\nkMultiBitBool4True.\n\nIf otp_en_sram_ifetch_i is not kMultiBitBool8True, execution\nfrom SRAM is instead controlled by a signal from lc_ctrl. See\n\"Theory of Operation\" for more details.\n\n## CTRL_REGWEN\nLock register for control register.\n- Offset: `0x10`\n- Reset default: `0x1`\n- Reset mask: `0x1`\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"CTRL_REGWEN\", \"bits\": 1, \"attr\": [\"rw0c\"], \"rotate\": -90}, {\"bits\": 31}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 130}}\n```\n\n|  Bits  |  Type  |  Reset  | Name        | Description                                                       |\n|:------:|:------:|:-------:|:------------|:------------------------------------------------------------------|\n|  31:1  |        |         |             | Reserved                                                          |\n|   0    |  rw0c  |   0x1   | CTRL_REGWEN | When cleared to zero, [`CTRL`](#ctrl) can not be written anymore. |\n\n## CTRL\nSRAM ctrl register.\n- Offset: `0x14`\n- Reset default: `0x0`\n- Reset mask: `0x3`\n- Register enable: [`CTRL_REGWEN`](#ctrl_regwen)\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"RENEW_SCR_KEY\", \"bits\": 1, \"attr\": [\"wo\"], \"rotate\": -90}, {\"name\": \"INIT\", \"bits\": 1, \"attr\": [\"wo\"], \"rotate\": -90}, {\"bits\": 30}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 150}}\n```\n\n|  Bits  |  Type  |  Reset  | Name                                  |\n|:------:|:------:|:-------:|:--------------------------------------|\n|  31:2  |        |         | Reserved                              |\n|   1    |   wo   |   0x0   | [INIT](#ctrl--init)                   |\n|   0    |   wo   |   0x0   | [RENEW_SCR_KEY](#ctrl--renew_scr_key) |\n\n### CTRL . INIT\nWrite 1 to request memory init.\nThe init mechanism uses an LFSR that is seeded with a part of the nonce supplied when requesting a scrambling key.\nOnce seeded, the memory is initialized with pseudo-random data pulled from the LFSR.\nNote that [`CTRL.RENEW_SCR_KEY`](#ctrl) takes priority when writing 1 to both [`CTRL.RENEW_SCR_KEY`](#ctrl) and [`CTRL.INIT`](#ctrl) with the same write transaction.\nThis means that the key request will complete first, followed by SRAM initialization. Note that writing 1 to this register while\nan init request is already pending has no effect.\n\n### CTRL . RENEW_SCR_KEY\nWrite 1 to request a new scrambling key from OTP. After writing to this register, SRAM transactions will\nbe blocked until [`STATUS.SCR_KEY_VALID`](#status) has been set to 1. If [`STATUS.SCR_KEY_VALID`](#status) was already 1\nbefore triggering a key renewal, hardware will automatically clear that status bit such that software\ncan poll its status. Note that requesting a new scrambling key takes ~200 OTP cycles, which translates\nto ~800 CPU cycles (OTP runs at 24MHz, CPU runs at 100MHz). Note that writing 1 to this register while\na key request or a memory initialization request is already pending has no effect.\n\n## SCR_KEY_ROTATED\nClearable SRAM key request status.\n- Offset: `0x18`\n- Reset default: `0x9`\n- Reset mask: `0xf`\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"SUCCESS\", \"bits\": 4, \"attr\": [\"rw1c\"], \"rotate\": -90}, {\"bits\": 28}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 90}}\n```\n\n|  Bits  |  Type  |  Reset  | Name                                 |\n|:------:|:------:|:-------:|:-------------------------------------|\n|  31:4  |        |         | Reserved                             |\n|  3:0   |  rw1c  |   0x9   | [SUCCESS](#scr_key_rotated--success) |\n\n### SCR_KEY_ROTATED . SUCCESS\nThis status register is similar to [`SCR_KEY_VALID`](#scr_key_valid) with the difference that the status is multibit encoded,\nSW clearable and sticky (i.e., HW does not auto-clear the register except during escalation). That way,\nSW can use this for a hardened acknowledgement mechanism where it clears the register before requesting a key.\n\nkMultiBitBool4True indicates that a valid scrambling key has been obtained from OTP.\nWrite kMultiBitBool4True to clear.\n\n## READBACK_REGWEN\nLock register for readback enable register.\n- Offset: `0x1c`\n- Reset default: `0x1`\n- Reset mask: `0x1`\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"READBACK_REGWEN\", \"bits\": 1, \"attr\": [\"rw0c\"], \"rotate\": -90}, {\"bits\": 31}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 170}}\n```\n\n|  Bits  |  Type  |  Reset  | Name            | Description                                                               |\n|:------:|:------:|:-------:|:----------------|:--------------------------------------------------------------------------|\n|  31:1  |        |         |                 | Reserved                                                                  |\n|   0    |  rw0c  |   0x1   | READBACK_REGWEN | When cleared to zero, [`READBACK`](#readback) can not be written anymore. |\n\n## READBACK\nreadback enable.\n- Offset: `0x20`\n- Reset default: `0x9`\n- Reset mask: `0xf`\n- Register enable: [`READBACK_REGWEN`](#readback_regwen)\n\n### Fields\n\n```wavejson\n{\"reg\": [{\"name\": \"EN\", \"bits\": 4, \"attr\": [\"rw\"], \"rotate\": 0}, {\"bits\": 28}], \"config\": {\"lanes\": 1, \"fontsize\": 10, \"vspace\": 80}}\n```\n\n|  Bits  |  Type  |  Reset  | Name                |\n|:------:|:------:|:-------:|:--------------------|\n|  31:4  |        |         | Reserved            |\n|  3:0   |   rw   |   0x9   | [EN](#readback--en) |\n\n### READBACK . EN\nWrite kMultiBitBool4True to this field to enable the readback security feature for the SRAM.\nA readback of each memory write or read request will be performed and a comparison happens.\nAny other value than kMultiBitBool4False written to this field is interpreted as kMultiBitBool4True.\n\n\n<!-- END CMDGEN -->\n"
+      },
+      {
+        "file": "doc/theory_of_operation.md",
+        "text": "# Theory of Operation\n\n## Block Diagram\n\n![SRAM Controller Block Diagram](../doc/sram_ctrl_blockdiag.svg)\n\nAs shown in the block diagram above, the SRAM controller contains a TL-UL adapter, an initialization LFSR, the CSR node, key request logic and an instance of `prim_ram_1p_scr` that implements the actual scrambling mechanism.\n\nThe SRAM controller supports the system-wide end-to-end bus integrity scheme and thus stores the data integrity bits alongside each data word in the memory.\nThis means that both the 32 data bits and the 7 integrity bits are passed through the scrambling device.\n\nSub-word write operations therefore perform a read-modify-write operation in order to ensure consistency of the integrity bits.\nHence, the throughput of sub-word write operations is three times lower than for full-word write operations.\nNote however that the throughput of read operations is the same for full- and sub-word read operations.\n\nThe scrambling mechanism is always enabled and the `sram_ctrl` provides the scrambling device with a predefined scrambling key and nonce when it comes out of reset.\nIt is the task of SW to request an updated scrambling key and nonce via the CSRs as described in the [Programmer's Guide](programmers_guide.md) below.\n\nFor SW convenience, the SRAM controller also provides an LFSR-based memory initialization feature that can overwrite the entire memory with pseudorandom data.\nSimilarly to the scrambling key, it is the task of SW to request memory initialization via the CSRs as described in the [Programmer's Guide](programmers_guide.md) below.\n\nNote that TL-UL accesses to the memory that occur while a key request or hardware initialization is pending will be blocked until the request has completed.\n\nThe individual mechanisms are explained in more detail in the subsections below.\n\n## Scrambling Primitive\n\nAs explained in [`prim_ram_1p_scr`](../../prim/doc/prim_ram_1p_scr.md) the scrambling mechanism employs a reduced-round PRINCE block cipher in CTR mode to scramble the data.\n\nIn order to break the linear address space, the CTR mode is augmented with an S&P network to non-linearly remap the SRAM address as shown in the block diagram above. The S&P network employed is similar to the one employed in PRESENT and is explained in more detail [here](../../prim/doc/prim_ram_1p_scr.md#custom-substitution-permutation-network).\n\n### Integrity Error Handling\n\nWhen an integrity error is encountered, the `sram_ctrl` will latch the integrity error and send out a `fatal_bus_integ_error` until the next reset (the generation of the integrity error is determined by system integration).\nIn addition, the latched error condition is fed into the `prim_ram_1p_scr` primitive via a dedicated input, causing the scrambling primitive to do the following:\n*  Reverse the nonce used during the address and CTR scrambling.\n*  Disallow any transaction (read or write) on the actual memory macro.\n\nThis behavior, combined with other top level defenses, forms a multi-layered defense when integrity errors are seen in the system.\n\n### LFSR Initialization Feature\n\nSince the scrambling device uses a block cipher in CTR mode, it is undesirable from a security perspective to initialize the memory with all zeros.\nDoing so would reveal the XOR keystream.\nTo avoid this, the `sram_ctrl` contains an LFSR-based initialization mechanism that overwrites the entire memory with pseudorandom data.\n\nInitialization can be triggered via the [`CTRL.INIT`](registers.md#ctrl) CSR.\nWhen initialization is triggered, the LFSR is first re-seeded with the nonce that has been fetched, together with the scrambling key.\nThen the memory is initialized with pseudorandom data pulled from the LFSR.\nFor each pseudorandom 32bit word, the initialization mechanism computes the corresponding integrity bits and writes both the data and integrity bits (39bit total) through the scrambling device using the most recently obtained scrambling key.\n\nIf SW triggers the scrambling key update and LFSR initialization at the same time (i.e., with the same CSR write operation), the LFSR initialization will be stalled until an updated scrambling key has been obtained.\n\nThere is no limit on how often the initialization feature can be called, and hence it can also be used as a cheap SRAM wiping mechanism at runtime.\nNote however that the PRNG sequence does not have strong security guarantees, since it is produced using an LFSR.\n\n### Code Execution from SRAM\n\nThe SRAM controller contains an access control mechanism for filtering instruction fetches from the processor.\nAs illustrated below, an OTP switch EN_SRAM_IFETCH (for example, see earlgrey's [OTP memory map](../../../top_earlgrey/ip_autogen/otp_ctrl/README.md#direct-access-memory-map)) allows to either tie code execution from SRAM to the life cycle state via the HW_DEBUG_EN function (see [life cycle docs](../../lc_ctrl/README.md#hw_debug_en)), or it can be enabled / disabled via the [`EXEC`](registers.md#exec) CSR.\n\n![SRAM Code Execution](../doc/sram_ctrl_sram_execution.svg)\n\nThe different configuration options are listed in the table below:\n\n\n EN_SRAM_IFETCH (OTP)   | HW_DEBUG_EN (Life Cycle) | EXEC CSR               | Execution Enabled\n------------------------|--------------------------|------------------------|--------------------\n == kMultiBitBool8True  | -                        | == kMultiBitBool4True  | Yes\n == kMultiBitBool8True  | -                        | != kMultiBitBool4True  | No\n != kMultiBitBool8True  | ON                       | -                      | Yes\n != kMultiBitBool8True  | OFF                      | -                      | No\n\nNote that the execute from SRAM feature may only be enabled on certain SRAM controller instances in the top-level design.\nIf the feature is turned off via the `InstrExec` parameter, the execute from SRAM feature is permanently disabled, and the status of the OTP switch, the life cycle state and the value of the EXEC register are irrelevant.\n\nAs an example, the `top_earlgrey` design only enables this feature on the main SRAM, and permanently disables it on the retention SRAM.\n\n### Read and Write Sequencing\n\nFor timing reasons, the scrambling primitive instantiates a register halfway in the PRINCE block cipher.\nThis means that the keystream block becomes available in the second request cycle, which naturally aligns with read operations since the SRAM memory latency is 1 clock cycle.\n\nHowever, write operations have to be deferred by 1 cycle in order to be able to reuse the same PRINCE primitive.\nThis can lead to read/write conflicts when a write operation is immediately followed by a read operation, and we solve that issue by introducing two write data holding registers (highlighted with green and orange in the block diagram above).\nThe register highlighted with green is the unscrambled data holding register, which is used for forwarding unwritten write data in case the conflicting read operation goes to the same address as the pending write operation.\nThe register highlighted with orange is the scrambled data holding register, which holds the scrambled data until the conflicting read operation(s) have completed.\n\nNote that this arrangement still allows full read/write throughput as illustrated in the alternating R/W sequence below.\n\n![SRAM Controller Sequencing](../doc/sram_ctrl_sequencing.svg)\n\nHowever, due to the end-to-end bus integrity scheme, sub-word write accesses currently require a read-modify-write operation in order to recompute the integrity bits for the entire word, as illustrated in the diagram below.\n\n![SRAM Controller Sub-word Write](../doc/sram_ctrl_sub_word_write.svg)\n\nSub-word write accesses are therefore 3x slower than full-word write accesses.\nRead accesses however always take 1 cycle, no matter whether the access is a full-word or sub-word read operation.\n\nNote that this has been implemented in this way to not overly complicate the design, and since it is assumed that sub-word write operations happen relatively infrequently.\nFor full write throughput, a more elaborate write buffering scheme would be required.\n\n### ECC Error Handling and Correction\n\nThis memory utilizes a SECDED ECC code stored alongside the data in the underlying memory primitive to enhance data integrity.\nError correction for single-bit errors can be enabled by setting the top-level parameter `EccCorrection` to 1.\nWhen enabled and a correctable single-bit error is detected, the memory automatically corrects the data before providing it.\nIf an uncorrectable multi-bit error is detected, the data is not corrected.\nInstead, the invalid data word is returned to the requester, which must then implement its own error handling or escalation strategy.\n\nRegardless of whether an error is correctable or not, the `sram_rerror_o` output port signals its detection.\nThis output also indicates whether the error was corrected (if correction is enabled) and provides the memory location where the error occurred.\nThis information is valuable for system-level Reliability, Availability, and Serviceability (RAS) monitoring and management.\n\n#### Important Considerations\n\n* Activating the single-bit correction mechanism slightly reduces the overall probability of detecting multi-bit errors compared to detection-only mode.\n* The correction process involves internal decoding and re-encoding steps, during which unencoded, non-redundant data exists temporarily on internal wires.\n* Dedicated DV support for this specific correction feature is not yet available.\n* By default, the `EccCorrection` feature is disabled.\n"
+      },
+      {
+        "file": "dv/README.md",
+        "text": "# SRAM_CTRL DV document\n\n## Goals\n* **DV**\n  * Verify all SRAM_CTRL IP features by running dynamic simulations with a SV/UVM based testbench\n  * Develop and run all tests based on the [testplan](#testplan) below towards closing code and functional coverage on the IP and all of its sub-modules, except [Pre-verified sub-modules](#pre-verified-sub-modules).\n* **FPV**\n  * Verify TileLink device protocol compliance with an SVA based testbench\n\n## Pre-verified sub-modules\nThe following sub-modules are pre-verified:\n* [prim_prince](https://reports.opentitan.org/hw/ip/prim/dv/prim_prince/latest/report.html)\n* [prim_lfsr](https://reports.opentitan.org/hw/ip/prim/dv/prim_lfsr/latest/report.html)\n\nOnly toggle coverage on the IOs of these sub-modules is enabled for coverage collection.\n\n## Current status\n* [Design & verification stage](../../../README.md)\n  * [HW development stages](../../../../doc/project_governance/development_stages.md)\n* [Simulation results for SRAM](https://reports.opentitan.org/hw/ip/sram_ctrl_main/dv/latest/report.html)\n* [Simulation results for retention SRAM](https://reports.opentitan.org/hw/ip/sram_ctrl_ret/dv/latest/report.html)\n\n## Design features\nFor detailed information on SRAM_CTRL design features, please see the [SRAM_CTRL HWIP technical specification](../README.md).\n\n## Testbench architecture\nSRAM_CTRL testbench has been constructed based on the [CIP testbench architecture](../../../dv/sv/cip_lib/README.md).\nNote that there are 2 separate TLUL interfaces exposed to the rest of the OpenTitan system - one for CSR accesses, and one for accessing memory directly.\nThis is because the \"full\" DUT consists of the actual SRAM memory controller (which contains the CSR file) connected to a scrambling RAM primitive, with a TLUL adapter module to convert TL requests on the memory TL interface into SRAM format for the RAM primitive.\n\n### Block diagram\n![Block diagram](./doc/tb.svg)\n\n### Top level testbench\nTop level testbench is located at `hw/ip/sram_ctrl/dv/tb/tb.sv`. It instantiates the SRAM_CTRL DUT module `hw/ip/sram_ctrl/rtl/sram_ctrl.sv`.\nIn addition, it instantiates the following interfaces, connects them to the DUT and sets their handle into `uvm_config_db`:\n* [Clock and reset interface](../../../dv/sv/common_ifs/README.md)\n* [TileLink host interface](../../../dv/sv/tl_agent/README.md)\n* SRAM_CTRL IOs\n* Interrupts ([`pins_if`](../../../dv/sv/common_ifs/README.md))\n* Alerts ([`alert_esc_if`](../../../dv/sv/alert_esc_agent/README.md))\n\n### Common DV utility components\nThe following utilities provide generic helper tasks and functions to perform activities that are common across the project:\n* [dv_utils_pkg](../../../dv/sv/dv_utils/README.md)\n* [csr_utils_pkg](../../../dv/sv/csr_utils/README.md)\n\n### Compile-time configurations\nTwo compile-time configurations are tested:\n* `sram_ctrl_main` - this configuration uses a 15-bit wide address space to emulate the main SRAM used in the full design and enables parameter `INSTR_EXEC` to allow TLUL instruction fetching when some runtime conditions are met.\n* `sram_ctrl_ret` - this configuration uses a 10-bit-wide address space to emulate the retention SRAM used in the full design and turns off parameter `INSTR_EXEC` to disable TLUL instruction fetching altogether.\n\n\nA macro-define `SRAM_WORD_ADDR_WIDTH` is defined as a build option in `hw/ip/sram_ctrl/dv/sram_ctrl_base_sim_cfg.hjson`, which is used to set the correct compile-time settings for each configuration.\n\n### Global types & methods\nAll common types and methods defined at the package level can be found in\n`sram_ctrl_env_pkg`. Some of them in use are:\n```systemverilog\n// number of bits in a full KDI transactions\nparameter int KDI_DATA_SIZE = 1 + otp_ctrl_pkg::SramKeyWidth + otp_ctrl_pkg::SramNonceWidth;\n\n// a completed KDI transaction takes 3 cycles to be fully synchronized into the\n// SRAM clock domain\nparameter int KDI_PROPAGATION_CYCLES = 3;\n\n// a LC escalation request needs 3 cycles to be fully propagated through the DUT\nparameter int LC_ESCALATION_PROPAGATION_CYCLES = 3;\n\ntypedef enum bit {\n  SramCtrlRenewScrKey = 0,\n  SramCtrlInit        = 1\n} sram_ctrl_e;\n\ntypedef enum bit [2:0] {\n  SramCtrlError           = 0,\n  SramCtrlEscalated       = 1,\n  SramCtrlScrKeyValid     = 2,\n  SramCtrlScrKeySeedValid = 3,\n  SramCtrlInitDone        = 4\n} sram_ctrl_status_e;\n```\n### TL_agent\nSRAM_CTRL testbench instantiates (already handled in CIP base env) [tl_agent](../../../dv/sv/tl_agent/README.md)\nwhich provides the ability to drive and independently monitor random traffic via TL host interface into SRAM_CTRL device.\n\n### Alert agents\nThe SRAM_CTRL testbench instantiates 2 [alert agents](../../../dv/sv/alert_esc_agent/README.md) for:\n* fatal_intg_error - signals a transmission integrity error\n* fatal_parity_error - signals an internal parity error in the memory primitive\n\nThe alert agents provide the ability to independently drive and monitor both alert handshakes.\n\n### SRAM_CTRL_LC_IF\nThe SRAM_CTRL IP has a simple sideband interface to the LC_CTRL to receive escalation requests.\nThis interface initializes the escalation bus and utilizes a simple task to drive escalation requests.\n\n### SRAM_CTRL_EXEC_IF\nThe SRAM_CTRL IP has an interface to enable instruction execution from SRAM - allowing the Icache to fetch instruction data from the SRAM for the CPU.\nThis interface contains the necessary Lifecycle and OTP structs to enable and disable this functionality.\n\n### UVM RAL Model\nThe SRAM_CTRL RAL model is created with the [`ralgen`](../../../dv/tools/ralgen/README.md) FuseSoC generator script automatically when the simulation is at the build stage.\n\nIt can be created manually by invoking [`regtool`](../../../../util/reggen/doc/setup_and_use.md):\n\nBesides default RAL that provides the access to CSRs, there is another RAL for SRAM memory.\nThis RAL is in `sram_ctrl_prim_ral_pkg.sv`, it is added manually and enabled with all the common CSR and memory tests, such as mem_walk, tl_errors, tl_intg_err, etc.\n\n### Reference models\nThere are 3 DV reference models used in this testbench.\n- The SRAM_CTRL testbench uses a SystemVerilog golden model for its address and data scrambling to ensure that internal encryption and decryption perform correctly.\nThis golden model, [`sram_scrambler_pkg`](../../../dv/sv/mem_bkdr_util/README.md) is tightly integrated with the mem_bkdr_util for ease of use such that we can choose to enable encryption on any backdoor access.\n- The frontdoor check [`mem_model`](../../../dv/sv/mem_model/README.md) is also enabled in cip_base_scoreboard.\nThe model is invoked at the end of the transaction as follows:\n  - If it\u2019s write, store the data on the address in the memory array.\n  - If it\u2019s read and the address has been written, compare read value with stored value.\n  - If it\u2019s read and the address has NOT been written, skip checking.\n\nThere are some limitations in the frontdoor check as follows:\n  1. Can\u2019t check ECC if encoding and decoding match.\n  2. Can\u2019t check the read value if the address hasn't been written after init or after key request.\n  3. Can\u2019t check the write value if the address isn\u2019t read after the write.\n  4. Not aware of any B2B hazard (such as RAW).\n\n- The backdoor check [`mem_bkdr_scb`](../../../dv/sv/mem_bkdr_scb/README.md) is used to ensure frontdoor access matches with the backdoor expected value.\nThe [`sram_scrambler_pkg`](../../../dv/sv/mem_bkdr_util/README.md) is invoked in [`mem_bkdr_scb`](../../../dv/sv/mem_bkdr_scb/README.md)\nThis backdoor check covers all the limitations of frontdoor check.\nThere is a limitation as follows, which can be covered by frontdoor check.\n  - Can\u2019t check when memory is modified unintentionally after the access is completed.\n\n### Stimulus strategy\n#### Test sequences\nAll test sequences reside in `hw/ip/sram_ctrl/dv/env/seq_lib`.\nThe `sram_ctrl_base_vseq` virtual sequence is extended from `cip_base_vseq` and serves as a starting point.\nAll test sequences are extended from `sram_ctrl_base_vseq`.\nIt provides commonly used handles, variables, functions and tasks that the test sequences can simple use / call.\nSome of the most commonly used tasks / functions are as follows:\n* do_rand_ops: This task sends an arbitrary number of random TL transactions to the memory primitive.\n* do_stress_ops: This task sends an arbitrary number of random TL transactions to the same word in memory,\n  to stress the memory's data forwarding functionalities.\n\n#### Functional coverage\nTo ensure high quality constrained random stimulus, it is necessary to develop a functional coverage model.\nThe following covergroups have been developed to prove that the test intent has been adequately met:\n* b2b_access_types_cg (imported from mem_bkdr_scb): Cover that all combinations of b2b read/write scenario (R/R, R/W, W/R, W/W) with or without using the same address.\n* subword_access_cg: Cover all kinds of partial accesses.\n\n### Self-checking strategy\n#### Scoreboard\nThe `sram_ctrl_scoreboard` is primarily used for end to end checking.\nIt creates the following analysis ports to retrieve the data monitored by corresponding interface agents:\n* tl_a_chan_fifo: TL address channel for CSR accesses\n* tl_d_chan_fifo: TL data channel for CSR accesses\n* alert_fifos: Alert handshakes\n* sram_tl_a_chan_fifo: TL address channel for memory accesses\n* sram_tl_d_chan_fifo: TL data channel for memory accesses\n* kdi_fifo: For key refresh operations from OTP_CTRL\n\nAll CSR accesses made to the SRAM_CTRL register file are tracked and predicted by the scoreboard.\n\nVerifying memory accesses is somewhat involved, and makes heavy use of the [`mem_bkdr_util`](../../../dv/sv/mem_bkdr_util/README.md).\n\nAt a high level, whenever a TL access is made to memory, all relevant information is stored in an `sram_trans_t` struct.\n\nRefer to section \"Reference models\" for the SRAM memory checking.\n\nThe testbench will also sporadically trigger the DUT to issue a request for a new key and nonce from the OTP controller.\nAfter receiving the fresh key and nonce from the KDI agent, those new values will then be used\nfor all encryption/decryption accesses using the memory backdoor interface.\n\nIf a lifecycle escalation request is issued during SRAM operation, the scoreboard will detect it and then check that no further memory requests are accepted.\nThe testbench will then issue a system-level reset, as a lifecycle escalation is a terminal state.\n\nTo check that the SRAM's executable configurations are functioning correct is relatively more straightforward.\nFirst, it's important to note that all incoming TL memory transactions are tagged as either `InstrType` or `DataType`, indicating whether the transaction is fetching an instruction word or a data word.\nIf the scoreboard detects that an incoming transaction is tagged as `InstrType`, we first check that the SRAM is properly configured in executable mode to accept `InstrType` transactions.\nIf the DUT is configured correctly the scoreboard will let the memory transaction finish being checked, otherwise the scoreboard will discard that transaction - this approach makes it easy to check whether the design is behaving correctly as well.\n\n#### Assertions\n* TLUL assertions: The `tb/sram_ctrl_bind.sv` binds the `tlul_assert` [assertions](../../tlul/doc/TlulProtocolChecker.md) to the IP to ensure TileLink interface protocol compliance.\n* Unknown checks on DUT outputs: The RTL has assertions to ensure all outputs are initialized to known values after coming out of reset.\n\n## Building and running tests\nThe [dvsim](https://github.com/lowRISC/dvsim) tool is used for building and running our tests and regressions.\nPlease take a look at the link for detailed information on the usage, capabilities, features and known issues.\nHere's how to run a smoke test:\n```console\n$ dvsim $REPO_TOP/hw/ip/sram_ctrl/dv/sram_ctrl_${VARIANT}_sim_cfg.hjson -i sram_ctrl_smoke\n```\nIn this run command, $VARIANT can be `main` or `ret`.\n\n## Testplan\n[Testplan](../data/sram_ctrl_testplan.hjson)\n"
+      }
+    ]
   }
-}
+]

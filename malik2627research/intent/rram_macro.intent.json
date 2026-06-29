@@ -1,83 +1,152 @@
-{
-  "ip_name": "rram_macro",
-  "ip_intent": {
-    "ip_name": "rram_macro",
-    "one_line_desc": "Open-source emulation model of the RRAM macro",
-    "one_paragraph_desc": "Open-source emulation model of the RRAM macro.\nIt supports a large data array and a small info array that are both emulated with prim_ram_1p.\nIt supports read and write commands.\nEach read command returns 128b of data stored at a specific address in the RRAM.\nThe write command writes 128b of data to a store buffer which is emulated with a FIFO and writes\nthe content of the FIFO to the RRAM data or info array once the wr_last signal is set.",
-    "clocking": [
+[
+  {
+    "module_name": "rram_macro",
+    "file": "rtl/rram_macro.sv",
+    "ports": [],
+    "signals": [],
+    "signal_roles": [],
+    "assigns": [],
+    "always_blocks": [],
+    "fsms": [],
+    "instantiations": [
       {
-        "clock": "clk_i",
-        "reset": "rst_ni",
-        "primary": true
+        "instance": "\n  rram_macro_prim_reg_top u_reg_prim (\n    .clk_i,\n    .rst_ni,\n    .tl_i      (prim_tl_i),\n    .tl_o      (prim_tl_o),\n    .reg2hw    (reg2hw),\n    .hw2reg    (hw2reg),\n    .intg_err_o(intg_err)\n  );"
+      },
+      {
+        "instance": "\n  // LFSR to generate random delays for each operation\n  prim_lfsr #(\n    .StateOutDw(12),\n    .LfsrDw(14)\n  ) u_lfsr (\n    .clk_i,\n    .rst_ni,\n    .seed_en_i('0),\n    .seed_i   ('0),\n    .lfsr_en_i(lfsr_en_q),\n    .entropy_i('0),\n    .state_o  (rand_val)\n  );"
+      },
+      {
+        "instance": " // always_comb\n  // Store buffer to store page offset + write data. The store buffer can hold up to MaxWrWords\n  prim_fifo_sync #(\n    .Width(StoreBufWidth),\n    .Pass(1'b0),\n    .Depth(MaxWrWords)\n  ) u_store_buf_fifo (\n    .clk_i,\n    .rst_ni,\n    .clr_i   (1'b0),\n    .wvalid_i(store_buf_fifo_wvalid),\n    .wready_o(),\n    .wdata_i (store_buf_fifo_wdata),\n    .full_o  (store_buf_fifo_full),\n    .depth_o (),\n    .rvalid_o(store_buf_fifo_rvalid),\n    .rready_i(store_buf_fifo_rready),\n    .rdata_o ({store_buf_fifo_offset, store_buf_fifo_data}),\n    .err_o   ()\n  );"
+      },
+      {
+        "instance": "\n  prim_ram_1p #(\n    .Width(DataWidth),\n    .Depth(TotalPages*WordsPerPage),\n    .DataBitsPerMask(DataWidth)\n  ) u_data_array (\n    .clk_i,\n    .rst_ni,\n    .req_i    (data_mem_req),\n    .write_i  (data_mem_wr),\n    .addr_i   (data_mem_addr),\n    .wdata_i  (data_mem_wdata),\n    .wmask_i  ({DataWidth{1'b1}}),\n    .rdata_o  (data_mem_rdata),\n    .cfg_i    ('0),\n    .cfg_rsp_o()\n  );"
+      },
+      {
+        "instance": "\n  prim_ram_1p #(\n    .Width(DataWidth),\n    .Depth(TotalInfoPages*WordsPerPage),\n    .DataBitsPerMask(DataWidth)\n  ) u_info_array (\n    .clk_i,\n    .rst_ni,\n    .req_i    (info_mem_req),\n    .write_i  (info_mem_wr),\n    .addr_i   (info_mem_addr),\n    .wdata_i  (info_mem_wdata),\n    .wmask_i  ({DataWidth{1'b1}}),\n    .rdata_o  (info_mem_rdata),\n    .cfg_i    ('0),\n    .cfg_rsp_o()\n  );"
       }
     ],
-    "bus_interfaces": [
+    "interfaces": [],
+    "assertions": [
       {
-        "protocol": "tlul",
-        "direction": "device"
+        "kind": "macro",
+        "macro": "ASSUME_FPV",
+        "line": 478,
+        "raw": "`ASSUME_FPV(MacroFsmCheck_ATriggerAfterAlertInit_S,\n      $stable(rst_ni)",
+        "name": "MacroFsmCheck_ATriggerAfterAlertInit_S",
+        "expression": "$stable(rst_ni"
+      },
+      {
+        "kind": "macro",
+        "macro": "ASSUME_FPV",
+        "line": 484,
+        "raw": "`ASSUME_FPV(PrimRegWeOneHotCheck_ATriggerAfterAlertInit_S,\n      $stable(rst_ni)",
+        "name": "PrimRegWeOneHotCheck_ATriggerAfterAlertInit_S",
+        "expression": "$stable(rst_ni"
       }
     ],
-    "param_list": [
-      {
-        "name": "TotalPages",
-        "desc": "Total number of data pages",
-        "default": "4096"
+    "module_intent": {
+      "module_intent": {
+        "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nOpen-source RRAM macro",
+        "params": [
+          {
+            "name": "TotalPages",
+            "default": "4096",
+            "desc": ""
+          },
+          {
+            "name": "DataWidth",
+            "default": "128",
+            "desc": ""
+          },
+          {
+            "name": "WordsPerPage",
+            "default": "32",
+            "desc": ""
+          },
+          {
+            "name": "TotalInfoPages",
+            "default": "8",
+            "desc": ""
+          },
+          {
+            "name": "MaxWrWords",
+            "default": "32",
+            "desc": "Maximum number of words per write"
+          }
+        ]
       },
-      {
-        "name": "DataWidth",
-        "desc": "RRAM word data width",
-        "default": "128"
-      },
-      {
-        "name": "WordsPerPage",
-        "desc": "Number of words per page",
-        "default": "32"
-      },
-      {
-        "name": "TotalInfoPages",
-        "desc": "Total number of info pages",
-        "default": "8"
-      },
-      {
-        "name": "MaxWrWords",
-        "desc": "Maximum number of words per write",
-        "default": "32"
-      }
-    ],
-    "interrupts": [],
-    "alerts": [],
-    "registers": []
-  },
-  "module_intents": {
-    "rtl/rram_macro.sv": {
-      "doc_comment": "Copyright lowRISC contributors (OpenTitan project).\nLicensed under the Apache License, Version 2.0, see LICENSE for details.\nSPDX-License-Identifier: Apache-2.0\n\nOpen-source RRAM macro",
-      "params": [
+      "assertions": [
+        {
+          "kind": "macro",
+          "macro": "ASSUME_FPV",
+          "line": 478,
+          "raw": "`ASSUME_FPV(MacroFsmCheck_ATriggerAfterAlertInit_S,\n      $stable(rst_ni)",
+          "name": "MacroFsmCheck_ATriggerAfterAlertInit_S",
+          "expression": "$stable(rst_ni"
+        },
+        {
+          "kind": "macro",
+          "macro": "ASSUME_FPV",
+          "line": 484,
+          "raw": "`ASSUME_FPV(PrimRegWeOneHotCheck_ATriggerAfterAlertInit_S,\n      $stable(rst_ni)",
+          "name": "PrimRegWeOneHotCheck_ATriggerAfterAlertInit_S",
+          "expression": "$stable(rst_ni"
+        }
+      ]
+    },
+    "ip_intent": {
+      "ip_name": "rram_macro",
+      "one_line_desc": "Open-source emulation model of the RRAM macro",
+      "one_paragraph_desc": "Open-source emulation model of the RRAM macro.\nIt supports a large data array and a small info array that are both emulated with prim_ram_1p.\nIt supports read and write commands.\nEach read command returns 128b of data stored at a specific address in the RRAM.\nThe write command writes 128b of data to a store buffer which is emulated with a FIFO and writes\nthe content of the FIFO to the RRAM data or info array once the wr_last signal is set.",
+      "clocking": [
+        {
+          "clock": "clk_i",
+          "reset": "rst_ni",
+          "primary": true
+        }
+      ],
+      "bus_interfaces": [
+        {
+          "protocol": "tlul",
+          "direction": "device"
+        }
+      ],
+      "param_list": [
         {
           "name": "TotalPages",
-          "default": "4096",
-          "desc": ""
+          "desc": "Total number of data pages",
+          "default": "4096"
         },
         {
           "name": "DataWidth",
-          "default": "128",
-          "desc": ""
+          "desc": "RRAM word data width",
+          "default": "128"
         },
         {
           "name": "WordsPerPage",
-          "default": "32",
-          "desc": ""
+          "desc": "Number of words per page",
+          "default": "32"
         },
         {
           "name": "TotalInfoPages",
-          "default": "8",
-          "desc": ""
+          "desc": "Total number of info pages",
+          "default": "8"
         },
         {
           "name": "MaxWrWords",
-          "default": "32",
-          "desc": "Maximum number of words per write"
+          "desc": "Maximum number of words per write",
+          "default": "32"
         }
-      ]
-    }
+      ],
+      "interrupts": [],
+      "alerts": [],
+      "registers": []
+    },
+    "doc_intent": [
+      {
+        "file": "README.md",
+        "text": "# RRAM macro HWIP Technical Specification\n\n# Overview\n\nThis document specifies the RRAM macro hardware IP functionality.\nThe RRAM macro is a comportable IP that emulates a real RRAM macro.\nThis block is expected to be used in conjunction with the RRAM controller and cannot be used standalone.\n\n## Features\n\nThe RRAM macro supports read and write commands to the RRAM.\nIn the open-source version, the RRAM is emulated with prim_ram_1p modules.\nIn the closed-source version, the real RRAM is instantiated and additional signals for production testing and scan isolation are connected.\nThe macro contains a CSR block for vendor specific operations which is not used in the open-source version.\n\n## Simulation\n\nA pre-dv environment exists that allows to perform basic read and write transactions to the RRAM macro.\nIt can be started with dvsim:\n\n`./util/dvsim/dvsim.py hw/ip/rram_macro/pre_dv/rram_macro_sim_cfg.hjson -i smoke`\n"
+      }
+    ]
   }
-}
+]

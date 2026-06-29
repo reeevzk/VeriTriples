@@ -6,6 +6,7 @@ from pathlib import Path
 import subprocess
 import hjson
 import pyslang
+import shutil
 from pyslang.syntax import SyntaxTree
 import networkx as nx
 from collections import defaultdict
@@ -192,35 +193,61 @@ def extract_modules(tree):
 
     return modules
 
-# thin AST layer for ports
-def extract_ports(tree):
-    """Return a list of port string representations from a parsed SyntaxTree."""
+#no more ast
+def extract_ports(module_node):
     ports = []
 
-    def visit(node):
-        if "Port" in type(node).__name__:
-            ports.append(str(node))
-        return True
+    port_list = module_node.header.ports # adjust depending on pyslang structure
 
-    tree.root.visit(visit)   
-    return ports            
+    for port in port_list:
+        # 1. Skip if not a real declared port
+        if port.kind != "VariablePortHeader":
+            continue
 
-def extract_signals(tree):
+        direction = port.direction.text  # input/output/inout
 
+        # 2. Extract ONLY the real type/name, ignore trivia completely
+        dtype = getattr(port, "dataType", None)
+
+        name = getattr(port, "name", None)
+
+        # pyslang sometimes stores identifier inside nested structure
+        if hasattr(port, "declarators"):
+            for d in port.declarators:
+                ports.append({
+                    "direction": direction,
+                    "name": d.name.text if hasattr(d.name, "text") else str(d.name),
+                    "type": dtype.kind if dtype else "implicit"
+                })
+        else:
+            # fallback: skip malformed ports entirely
+            continue
+
+    return ports
+
+def extract_signals(module_node):
     signals = []
 
-    def visit(node):
+    for item in getattr(module_node, "items", []):
+        if item.kind != "DataDeclaration":
+            continue
 
-        if type(node).__name__ == "DataDeclarationSyntax":
+        # skip malformed nodes early
+        if not hasattr(item, "declarators"):
+            continue
 
-            try:
-                signals.append(node.to_json())
-            except:
-                pass
+        dtype = getattr(item.type, "kind", "unknown")
 
-        return True
+        # extract clean signal names only
+        for d in item.declarators:
+            name = getattr(d.name, "text", None)
+            if not name:
+                continue
 
-    tree.root.visit(visit)
+            signals.append({
+                "name": name,
+                "type": dtype
+            })
 
     return signals
 
@@ -306,22 +333,23 @@ def extract_always_blocks(tree):
 
     return blocks
 
-def extract_assigns(tree):
-
+def extract_assigns(module_node):
     assigns = []
 
-    def visit(node):
+    for stmt in getattr(module_node, "items", []):
+        if str(getattr(stmt, "kind", "")) != "AssignmentStatement":
+            continue
 
-        if type(node).__name__ == "ContinuousAssignSyntax":
+        lhs = getattr(stmt, "left", None) or getattr(stmt, "lhs", None)
+        rhs = getattr(stmt, "right", None) or getattr(stmt, "rhs", None)
 
-            try:
-                assigns.append(str(node))
-            except:
-                pass
+        if lhs is None or rhs is None:
+            continue
 
-        return True
-
-    tree.root.visit(visit)
+        assigns.append({
+            "lhs": getattr(lhs, "toString", lambda: str(lhs))(),
+            "rhs": getattr(rhs, "toString", lambda: str(rhs))()
+        })
 
     return assigns
 
@@ -412,14 +440,15 @@ def load_module_intent(sv_path: Path) -> dict:
 
 # generates intent folders
 
+"""
 def build_and_save_intent(ip_dir: Path, ip_name: str, output_dir: Path) -> dict:
-    """
+    
     Builds a two-layer intent document:
       - ip_intent:      from the hjson
       - module_intents: one entry per .sv RTL file
 
     Saves to  <output_dir>/<ip_name>.intent.json  and also returns the dict.
-    """
+    
     ip_intent = load_ip_intent(ip_dir, ip_name)
 
     module_intents = {}
@@ -444,64 +473,94 @@ def build_and_save_intent(ip_dir: Path, ip_name: str, output_dir: Path) -> dict:
     print(f"Saved intent → {out_path}")
 
     return intent_doc
+"""
 
+def build_intent_layers(ip_dir: Path, ip_name: str):
+    ip_intent = load_ip_intent(ip_dir, ip_name)
 
-# ── 4. Merge into collect_ip ───────────────────────────────────────────────────
+    # -------------------------
+    # DOC INTENT (structured)
+    # -------------------------
+    docs = []
+    for md in ip_dir.rglob("*.md"):
+        docs.append({
+            "file": str(md.relative_to(ip_dir)),
+            "text": md.read_text(errors="ignore")
+        })
 
-def collect_ip(ip_dir: Path, ip_name: str, output_dir: Path) -> list[dict]:
-    intent_doc = {
-    "ip_name": ip_name,
-    "ip_intent": load_ip_intent(ip_dir, ip_name),
-    "module_intents": {}
-    }
+    # -------------------------
+    # RTL MODULE INTENT (COMMENT + PARAM ONLY)
+    # -------------------------
+    module_intents = {}
 
     for sv_file in sorted(ip_dir.rglob("*.sv")):
+        if not sv_file.exists():
+            continue
         if classify_sv_file(sv_file) != "rtl":
             continue
 
         rel = str(sv_file.relative_to(ip_dir))
-        intent_doc["module_intents"][rel] = load_module_intent(sv_file)
-    ip_intent = intent_doc["ip_intent"]
-    field_summary = extract_register_field_summary(ip_intent)
-    module_intents = intent_doc["module_intents"]
+
+        module_intents[rel] = {
+            "module_intent": load_module_intent(sv_file),  # comments + params only
+            "assertions": collect_assertions(sv_file)      # KEEP EXACTLY AS IS
+        }
+
+    return {
+        "ip_name": ip_name,
+
+        "rtl_intent": module_intents,   # renamed from module_intents
+
+        "spec_intent": ip_intent,       # HJSON
+
+        "doc_intent": docs              # Markdown raw for now
+    }
+
+# ── 4. Merge into collect_ip ───────────────────────────────────────────────────
+
+def collect_ip(ip_dir: Path, ip_name: str, output_dir: Path = None):
+
+    layers = build_intent_layers(ip_dir, ip_name)
 
     module_dataset = []
 
-    for p in ip_dir.rglob("*.sv"):
-        if classify_sv_file(p) != "rtl":
+    for sv_file in sorted(ip_dir.rglob("*.sv")):
+        if not sv_file.exists():
+            continue
+        if classify_sv_file(sv_file) != "rtl":
             continue
 
-        tree = SyntaxTree.fromFile(str(p))
-        raw_assertions = collect_assertions(p)
-        assertions = [
-            {
-                "assertion_id": f"{p.stem}.assert.{i}",
-                "raw": a
-            }
-            for i, a in enumerate(raw_assertions)
-        ]
-        ports = extract_ports(tree)
-        rel = str(p.relative_to(ip_dir))
+        tree = SyntaxTree.fromFile(str(sv_file))
+        rel = str(sv_file.relative_to(ip_dir))
 
-        def visit(node, _p=p, _rel=rel):
+        assertions = collect_assertions(sv_file)
+
+        def visit(node):
             if type(node).__name__ == "ModuleDeclarationSyntax":
+
                 module_dataset.append({
+                    # ---------------- RTL STRUCTURE ----------------
                     "module_name": get_module_name(node),
-                    "instantiations": extract_instantiations(tree),
-                    "file": _rel,
-                    "assertions": assertions,
-                    "ports": ports,
-                    "assigns": extract_assigns(tree),
-                    "signals": extract_signals(tree),
+                    "file": rel,
+
+                    "ports": extract_ports(node),
+                    "signals": extract_signals(node),
                     "signal_roles": extract_signal_roles(tree),
-                    "interfaces": extract_interface(tree),
-                    "field_summary": field_summary,
-                    "fsms": extract_fsms(tree),
+                    "assigns": extract_assigns(tree),
                     "always_blocks": extract_always_blocks(tree),
-                    # attach both layers of intent
-                    "module_intent": module_intents.get(_rel, {}),
-                    "ip_intent": ip_intent
+                    "fsms": extract_fsms(tree),
+                    "instantiations": extract_instantiations(tree),
+                    "interfaces": extract_interface(tree),
+
+                    # ---------------- FV GROUND TRUTH ----------------
+                    "assertions": assertions,
+
+                    # ---------------- INTENT LAYERS ----------------
+                    "module_intent": layers["rtl_intent"].get(rel, {}),
+                    "ip_intent": layers["spec_intent"],
+                    "doc_intent": layers["doc_intent"]
                 })
+
             return True
 
         tree.root.visit(visit)
@@ -684,32 +743,41 @@ def get_module_name(node):
         except:
             return "unknown"
 
-def extract_fsms(tree):
-    fsms = []
 
-    states = defaultdict(set)
+# now extracts for states and transitions
+def extract_fsms(tree):
+    fsms = defaultdict(lambda: {
+        "transitions": defaultdict(set),
+        "raw_hits": []
+    })
 
     def visit(node):
-
         try:
             text = str(node)
 
+            # Match: state_q <= NEXT_STATE
             m = re.search(
                 r'(\w+_q)\s*<=\s*(\w+)',
                 text
             )
 
-            if m:
-                state_reg = m.group(1)
-                next_state = m.group(2)
+            if not m:
+                return True
 
-                if re.match(
-                    r'[A-Z][A-Z0-9_]*',
-                    next_state
-                ):
-                    states[state_reg].add(
-                        next_state
-                    )
+            state_reg = m.group(1)
+            next_state = m.group(2)
+
+            # filter obvious constants / non-state tokens
+            if not re.match(r'^[A-Z][A-Z0-9_]*$', next_state):
+                return True
+
+            fsms[state_reg]["transitions"][state_reg].add(next_state)
+
+            fsms[state_reg]["raw_hits"].append({
+                "from": state_reg,
+                "to": next_state,
+                "snippet": text[:200]
+            })
 
         except Exception:
             pass
@@ -718,20 +786,44 @@ def extract_fsms(tree):
 
     tree.root.visit(visit)
 
-    return [
-        {
-            "state_reg": reg,
-            "states": sorted(list(vals))
-        }
-        for reg, vals in states.items()
-    ]
+    # -------------------------
+    # normalize output format
+    # -------------------------
+    result = []
+
+    for state_reg, data in fsms.items():
+        result.append({
+            "state_reg": state_reg,
+            "states": sorted(
+                list({
+                    s
+                    for targets in data["transitions"].values()
+                    for s in targets
+                })
+            ),
+            "transitions": {
+                src: sorted(list(dst))
+                for src, dst in data["transitions"].items()
+            },
+            "evidence": data["raw_hits"][:10]  # cap noise
+        })
+
+    return result
+
+def clear_output_dir(output_dir: Path):
+    if output_dir.exists():
+        shutil.rmtree(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
 def main():
     opentitan_root = ensure_opentitan()
 
     ips = discover_ips(opentitan_root)
     all_modules = []
-    output_dir = Path("intent")  # sidecar .intent.json files go here
+    output_dir = Path.cwd() / "intent"
+    # print(f"DEBUG: Writing to {output_dir.resolve()}")
+    output_dir.mkdir(parents=True, exist_ok=True)  # sidecar .intent.json files go here
+    clear_output_dir(output_dir)
 
     for ip_name in ips:
         ip_dir = get_ip_root(opentitan_root, ip_name)
