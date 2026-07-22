@@ -30,19 +30,54 @@ def node_text(node, source_text):
 
 # classic AST visitor pattern to extract rules from scoreboard
 
-class RuleExtractor:
+from pathlib import Path
+import json
+import pyslang
+from pyslang.syntax import SyntaxTree
+
+# finding any scoreboard files in the OpenTitan repo
+
+def find_scoreboards(root):
+    root = Path(root)
+
+    for path in root.rglob("*_scoreboard.sv"): # standard naming conv.
+
+        # only analyze IP-local scoreboards
+        if "hw/ip" not in str(path).replace("\\", "/"):
+            continue
+
+        yield path
+
+
+def node_text(node, source_text):
+    try:
+        rng = node.sourceRange
+        return source_text[rng.start.offset:rng.end.offset]
+    except Exception:
+        try:
+            return node.toString()
+        except Exception:
+            return ""
+
+
+# classic AST visitor pattern to extract rules from scoreboard
+
+class GraphExtractor:
     SEVERITY_MACROS = ("uvm_fatal", "uvm_error", "uvm_warning", "uvm_info")
     CHECK_MACROS = ("DV_CHECK", "DV_CHECK_EQ", "DV_CHECK_NE", "DV_CHECK_FATAL")
 
     def __init__(self, source_text):
         self.source_text = source_text
-        self.rules = []
+        self.graph = {
+            "nodes": [],
+            "edges": [],
+        }
         # stack of dicts: {"end": offset, "kind": "class"/"function", "name": str}
         self.scope_stack = []
         # track which if-nodes we've already consumed as an else-if link,
         # so the flat visit doesn't double-process them as top-level ifs
-        self._consumed_elseif_ids = set()
-
+        self._seen_if_ranges = []
+        self.condition_stack = []
     # ---------- text / range helpers ----------
 
     def node_text(self, node):
@@ -66,13 +101,14 @@ class RuleExtractor:
 
     # ---------- scope tracking (flat-visit workaround) ----------
 
-    def _update_scope_stack(self, node):
-        start, _ = self._range(node)
-        if start is None:
-            return
-        while self.scope_stack and self.scope_stack[-1]["end"] < start:
+    def _update_scope_stack(self, offset):
+        while self.scope_stack and self.scope_stack[-1]["end"] < offset:
             self.scope_stack.pop()
 
+    def _update_parent_stack(self, offset):
+        while self.parent_stack and self.parent_stack[-1]["end"] < offset:
+            self.parent_stack.pop()
+    
     def _push_scope_if_applicable(self, node, typename):
         if "ClassDeclarationSyntax" in typename:
             _, end = self._range(node)
@@ -112,202 +148,180 @@ class RuleExtractor:
                 return entry["name"]
         return None
 
-    # ---------- macro name / severity ----------
+    
+    def add_node(self, node_type, text, node):
 
-    def _macro_name(self, node):
-        try:
-            return node.directive.value
-        except Exception:
-            return self.node_text(node)
+        start,end = self._range(node)
 
-    def _severity_from_macro_name(self, name):
-        for sev in ("fatal", "error", "warning", "info"):
-            if f"uvm_{sev}" in name:
-                return sev
-        return None
+        node_id = len(self.graph["nodes"])
 
-    def _check_kind_from_macro_name(self, name):
-        for kind in self.CHECK_MACROS:
-            if kind in name:
-                return kind
-        return None
+        self.graph["nodes"].append({
+            "id": node_id,
+            "type": node_type,
+            "text": text,
+            "class": self._current_class(),
+            "function": self._current_function(),
+            "start": start,
+            "end": end
+        })
 
-    def _is_macro_usage(self, node):
+        return node_id
+    
+    def add_edge(self, src, dst, edge_type, branch=None):
+
+        self.graph["edges"].append({
+            "src": src,
+            "dst": dst,
+            "type": edge_type,
+            "branch": branch
+        })
+    
+    def is_action(self, node):
         typename = type(node).__name__
-        return "Macro" in typename  # tighten to your exact MacroUsageSyntax name if narrower
 
-    def _find_direct_macros(self, branch_node):
-        """
-        Find macro invocations that belong directly to this branch, NOT ones
-        inside a nested IfStatementSyntax (per bug #8 from before). We do this
-        by running a bounded sub-visit and rejecting any macro whose offset
-        falls inside a nested if found in the same branch.
-        """
-        if branch_node is None:
-            return []
+        if typename not in (
+            "ExpressionStatementSyntax",
+            "InvocationExpressionSyntax",
+            "VoidCastedCallStatementSyntax",
+        ):
+            return False
 
-        nested_if_ranges = []
-        macros = []
+        text = self.node_text(node)
 
-        def collector(n):
-            typename = type(n).__name__
-            if "ConditionalStatementSyntax" in typename and n is not branch_node:
-                s, e = self._range(n)
-                if s is not None:
-                    nested_if_ranges.append((s, e))
-            elif self._is_macro_usage(n):
-                s, e = self._range(n)
-                macros.append((s, e, n))
-
-        branch_node.visit(f=collector)
-
-        direct = []
-        for s, e, n in macros:
-            if s is None:
-                direct.append(n)
-                continue
-            inside_nested = any(ns <= s and e <= ne for ns, ne in nested_if_ranges)
-            if not inside_nested:
-                direct.append(n)
-        return direct
-
-    def _direct_macro_severity(self, branch_node):
-        """Returns (severity_or_checkkind, action_text, is_check_macro) for the
-        first direct macro found in priority order fatal > error > warning > info,
-        checked among SEVERITY_MACROS, then falls back to CHECK_MACROS."""
-        macros = self._find_direct_macros(branch_node)
-        if not macros:
-            return None, None
-
-        found = {}  # sev -> action text
-        found_check = None
-        for m in macros:
-            mname = self._macro_name(m)
-            sev = self._severity_from_macro_name(mname)
-            if sev and sev not in found:
-                found[sev] = self.node_text(m)
-                continue
-            if found_check is None:
-                ck = self._check_kind_from_macro_name(mname)
-                if ck:
-                    found_check = (ck, self.node_text(m))
-
-        for sev in ("fatal", "error", "warning", "info"):
-            if sev in found:
-                return sev, found[sev]
-
-        if found_check:
-            return found_check[0], found_check[1]
-
-        return None, None
-
-    # ---------- if handling ----------
-
-    def handle_if(self, node):
-        cond_text = self.node_text(node.condition)
-
-        sev, action = self._direct_macro_severity(node.ifTrue)
-        if sev:
-            self._add_rule(cond_text, action, sev, branch="then")
-
-        if node.ifFalse is not None:
-            false_typename = type(node.ifFalse).__name__
-            if "ConditionalStatementSyntax" in false_typename:
-                # else-if: mark so the flat visit doesn't treat it as an
-                # unrelated top-level if later, and recurse manually with
-                # accumulated negation so downstream SVA has full chain context
-                self._consumed_elseif_ids.add(id(node.ifFalse))
-                self._handle_elseif_chain(node.ifFalse, [f"!({cond_text})"])
-            else:
-                sev, action = self._direct_macro_severity(node.ifFalse)
-                if sev:
-                    self._add_rule(f"!({cond_text})", action, sev, branch="else")
-
-    def _handle_elseif_chain(self, node, negated_prior):
-        # node is itself an IfStatementSyntax reached via an else branch
-        cond_text = self.node_text(node.condition)
-        full_trigger = " && ".join(negated_prior + [cond_text])
-
-        sev, action = self._direct_macro_severity(node.ifTrue)
-        if sev:
-            self._add_rule(full_trigger, action, sev, branch="elseif")
-
-        if node.ifFalse is not None:
-            false_typename = type(node.ifFalse).__name__
-            if "ConditionalStatementSyntax" in false_typename:
-                self._consumed_elseif_ids.add(id(node.ifFalse))
-                self._handle_elseif_chain(
-                    node.ifFalse, negated_prior + [f"!({cond_text})"]
-                )
-            else:
-                sev, action = self._direct_macro_severity(node.ifFalse)
-                if sev:
-                    neg_trigger = " && ".join(
-                        negated_prior + [f"!({cond_text})"]
-                    )
-                    self._add_rule(neg_trigger, action, sev, branch="else")
-
-    # ---------- bare macro handling ----------
-
-    def handle_bare_macro(self, node):
-        mname = self._macro_name(node)
-        sev = self._severity_from_macro_name(mname)
-        if sev:
-            self._add_rule(None, self.node_text(node), sev, branch="unconditional")
-            return
-        ck = self._check_kind_from_macro_name(mname)
-        if ck:
-            self._add_rule(None, self.node_text(node), ck, branch="unconditional")
-
-    # ---------- rule sink ----------
-
-    def _add_rule(self, cond, action, severity, branch):
-        self.rules.append(
-            {
-                "class": self._current_class(),
-                "function": self._current_function(),
-                "trigger": cond,
-                "action": action,
-                "severity": severity,
-                "branch": branch,
-            }
+        return (
+            "`uvm_" in text or
+            "DV_CHECK" in text or
+            ".sample(" in text or
+            ".predict(" in text or
+            ".compare(" in text
         )
 
-    # ---------- entry point ----------
+    """
+    def walk(self, node, parent=None):
 
-    def extract(self, root_node):
-        def callback(n):
-            self._update_scope_stack(n)
-            typename = type(n).__name__
-            self._push_scope_if_applicable(n, typename)
+        if node is None:
+            return
 
-            if "ConditionalStatementSyntax" in typename:
-                if id(n) in self._consumed_elseif_ids:
-                    return  # already handled as part of an else-if chain
-                self.handle_if(n)
-            elif self._is_macro_usage(n):
-                # skip macros that are direct children of an if-branch we
-                # already processed via handle_if / _handle_elseif_chain —
-                # otherwise they'd double-count as "bare" macros too.
-                if not self._inside_any_if(n):
-                    self.handle_bare_macro(n)
+        self._update_scope_stack(node)
+        self._push_scope_if_applicable(node, type(node).__name__)
 
-            if "ConditionalStatementSyntax" in type(n).__name__:
-                print("\n=== ConditionalStatementSyntax attrs ===")
-                for attr in dir(n):
-                    if attr.startswith("_"):
-                        continue
-                    try:
-                        val = getattr(n, attr)
-                    except Exception:
-                        continue
-                    if callable(val):
-                        continue
-                    print(f"{attr}: {type(val).__name__}")
-        root_node.visit(f=callback)
-        return self.rules
+        typename = type(node).__name__
 
-    def _inside_any_if(self, macro_node):
+        #
+        # Function
+        #
+        if typename == "FunctionDeclarationSyntax":
+
+            fn = self.add_node(
+                "function",
+                self._current_function() or "anonymous",
+                node
+            )
+
+            for item in node.items:
+                self.walk(item, fn)
+
+            return
+
+        #
+        # Block
+        #
+        if typename == "BlockStatementSyntax":
+
+            for item in node.items:
+                self.walk(item, parent)
+
+            return
+
+        #
+        # IF
+        #
+        if typename == "ConditionalStatementSyntax":
+
+            cond = self.add_node(
+                "condition",
+                self.node_text(node.predicate),
+                node
+            )
+
+            if parent is not None:
+                self.add_edge(parent, cond, "contains")
+
+            #
+            # TRUE branch
+            #
+
+            self.walk(node.statement, cond)
+
+            #
+            # FALSE branch
+            #
+
+            if node.elseClause is not None:
+                self.walk(node.elseClause, cond)
+
+            return
+
+        #
+        # CASE
+        #
+        if typename == "CaseStatementSyntax":
+
+            case = self.add_node(
+                "case",
+                self.node_text(node.expr),
+                node
+            )
+
+            if parent is not None:
+                self.add_edge(parent, case, "contains")
+
+            for item in node.items:
+                self.walk(item, case)
+
+            return
+
+        #
+        # DEFAULT
+        #
+        if typename == "DefaultCaseItemSyntax":
+
+            default = self.add_node(
+                "default",
+                "default",
+                node
+            )
+
+            if parent is not None:
+                self.add_edge(parent, default, "contains")
+
+            self.walk(node.clause, default)
+
+            return
+
+        #
+        # Verification action
+        #
+
+        if self.is_action(node):
+
+            action = self.add_node(
+                "action",
+                self.node_text(node),
+                node
+            )
+
+            if parent is not None:
+                self.add_edge(parent, action, "contains")
+
+        #
+        # Generic recursion
+        #
+
+        node.visit(lambda child: self.walk(child, parent))
+    """
+
+    def inside_any_if(self, macro_node):
         # crude but effective: since we don't have parent pointers, re-derive
         # "is this macro inside some if-statement" by checking offset containment
         # against all if-statements seen so far. Cheap enough at this scale;
@@ -320,58 +334,103 @@ class RuleExtractor:
             if ns <= s and e <= ne:
                 return True
         return False
+    
+    def extract(self, root):
+
+        def callback(node):
+
+            if not hasattr(node, "sourceRange"):
+                return
+            typename = type(node).__name__
+
+            offset = node.sourceRange.start.offset
+            self._update_parent_stack(offset)
+
+            #
+            # ENTER IF
+            #
+            if typename == "ConditionalStatementSyntax":
+
+                cond = self.add_node(
+                    "condition",
+                    self.node_text(node.predicate),
+                    node
+                )
+
+                if self.condition_stack:
+                    parent = self.condition_stack[-1]
+                    self.add_edge(
+                        parent["id"],
+                        cond_id,
+                        "contains",
+                        parent["branch"]
+                    )
+
+                self.condition_stack.append({
+                    "id": cond_id,
+                    "end": node.sourceRange.end.offset,
+                    "branch": "then"
+                })
+
+            #
+            # ENTER ELSE
+            #
+            elif typename == "ElseClauseSyntax":
+
+                print("ENTER ELSE")
+                print(self.node_text(node))
+
+                if self.parent_stack:
+                    self.parent_stack[-1]["branch"] = "else"
+
+                print("STACK UPDATE:", self.parent_stack)
+                print()
+
+            #
+            # ACTION
+            #
+            elif self.is_action(node):
+
+                action = self.add_node(
+                    "action",
+                    self.node_text(node),
+                    node
+                )
+
+                if self.condition_stack:
+                    parent = self.condition_stack[-1]["id"]
+                    self.add_edge(
+                        parent,
+                        action_id,
+                        "contains",
+                        self.condition_stack[-1]["branch"]
+                    )
 
 
-def debug_macro_text(node):
+        root.visit(f=callback)
 
-    count = 0
+        return self.graph
+
+"""
+def debug_macro_text(root, source_text):
 
     def callback(n):
-        nonlocal count
-
-        typename = type(n).__name__
-
-        # Only inspect the statement types we're interested in
-        if typename not in (
-            "ExpressionStatementSyntax",
-            "VoidCastedCallStatementSyntax",
-        ):
-            return
-
         try:
-            text = n.toString()
+            rng = n.sourceRange
+            text = source_text[rng.start.offset:rng.end.offset]
         except Exception:
             return
 
-        # Only print statements containing the macros we're hunting
-        if any(x in text for x in (
-            "uvm_error",
-            "uvm_fatal",
-            "DV_CHECK",
-            "DV_ASSERT",
-        )):
+        if (
+            "`uvm_" in text or
+            "DV_CHECK" in text or
+            "DV_ASSERT" in text
+        ):
             print("\n====================")
-            print("NODE:", typename)
-            print("TEXT:")
+            print(type(n).__name__)
             print(text)
 
-            count += 1
-            if count >= 200:
-                return
-
-    node.visit(f=callback)
-
-"""
-def debug_tokens(path):
-
-    tree = SyntaxTree.fromFile(str(path))
-
-    for token in tree.tokens:
-        text = str(token)
-
-        if "uvm" in text:
-            print("FOUND TOKEN:", text)
-
+    root.visit(f=callback)
 """
 # one sb at a time
 
@@ -379,10 +438,27 @@ def parse_scoreboard(path):
 
     tree = SyntaxTree.fromFile(str(path))
     root = tree.root
-    debug_macro_text(root)
     source_text = Path(path).read_text()
-    extractor = RuleExtractor(source_text)
-    return extractor.extract(root)
+     # debug_macro_text(root, source_text)
+    extractor = GraphExtractor(source_text)
+
+    graph = extractor.extract(root)
+
+    print("\n========== GRAPH ==========")
+
+    for node in graph["nodes"]:
+        print(
+            node["id"],
+            node["type"],
+            node["text"][:80].replace("\n", " ")
+        )
+
+    print("\n---------- EDGES ----------")
+
+    for edge in graph["edges"]:
+        print(edge)
+
+    return graph
 
 # main
 
